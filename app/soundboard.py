@@ -114,8 +114,10 @@ class SoundboardApp(tk.Tk):
         self.lbl_cue_id.config(text=f"{c['id']}  •  Page {c['page']}  •  {c['category']}")
         self.lbl_name.config(text=c["name"])
         self.lbl_meta.config(
-            text=f"Scene: {c['scene']}  |  Priority: {c['priority']}  |  "
-                 f"Fade: {c['fade']}  |  Vol: {c['volume']}  |  Loop: {c['loop']}"
+            text=f"Asset: {c['asset_id']}  |  {c.get('playback_mode', '')}  |  "
+                 f"Scene: {c['scene']}  |  Priority: {c['priority']}  |  "
+                 f"Fade: {c['fade']}  |  Cue Vol: {c['volume']}  |  "
+                 f"Asset Vol: {c.get('suggested_volume', '')}  |  Loop: {c['loop']}"
         )
         self.lbl_trigger.config(text=c["trigger"])
         if nxt:
@@ -126,7 +128,10 @@ class SoundboardApp(tk.Tk):
 
     def play_cue(self):
         c = self.cues[self.index]
-        self.status.config(text=f"PLAY queued (no audio yet): {c['id']} — {c['name']}")
+        self.status.config(
+            text=f"PLAY queued (no audio yet): {c['id']} — {c['name']} "
+                 f"[{c.get('asset_id')}] {c.get('asset_filename', '')}"
+        )
 
     def next_cue(self):
         if self.index < len(self.cues) - 1:
