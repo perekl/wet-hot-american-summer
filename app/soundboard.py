@@ -71,6 +71,8 @@ class SoundboardApp(tk.Tk):
         self._ignore_mismatch_for: str | None = None
         self._script_sync_lock = False
         self.script_editor: ScriptEditor | None = None
+        self._paned_split_done = False
+        self._paned_split_retries = 0
 
         self._build_ui()
         self._maximize_window()
@@ -89,13 +91,39 @@ class SoundboardApp(tk.Tk):
             w = self.winfo_screenwidth()
             h = self.winfo_screenheight()
             self.geometry(f"{w}x{h}")
+        self._paned_split_done = False
+        self._paned_split_retries = 0
         self.after_idle(self._set_paned_50_50)
+        self.after(100, self._set_paned_50_50)
+        self.after(300, self._set_paned_50_50)
 
-    def _set_paned_50_50(self):
+    def _set_paned_50_50(self, _event=None):
+        if self._paned_split_done:
+            return
         self.update_idletasks()
         width = self.paned.winfo_width()
-        if width > 2:
-            self.paned.sashpos(0, width // 2)
+        if width <= 100:
+            width = self.winfo_width()
+        if width <= 100:
+            if self._paned_split_retries < 40:
+                self._paned_split_retries += 1
+                self.after(50, self._set_paned_50_50)
+            return
+
+        minsize = 280
+        target = width // 2
+        target = max(minsize, min(width - minsize, target))
+        try:
+            self.paned.sashpos(0, target)
+            self._paned_split_done = True
+        except tk.TclError:
+            if self._paned_split_retries < 40:
+                self._paned_split_retries += 1
+                self.after(50, self._set_paned_50_50)
+
+    def _on_paned_configure(self, event):
+        if event.widget is self.paned and not self._paned_split_done:
+            self._set_paned_50_50()
 
     def _init_player(self) -> VLCPlaybackEngine | None:
         try:
@@ -132,10 +160,11 @@ class SoundboardApp(tk.Tk):
         self.paned.pack(fill=tk.BOTH, expand=True)
 
         controls = tk.Frame(self.paned, bg="#1a1a2e")
-        self.paned.add(controls, minsize=280)
+        self.paned.add(controls, minsize=280, stretch="always")
 
         script_host = tk.Frame(self.paned, bg="#0a0a12")
-        self.paned.add(script_host, minsize=280)
+        self.paned.add(script_host, minsize=280, stretch="always")
+        self.paned.bind("<Configure>", self._on_paned_configure)
 
         tk.Label(
             controls, text="WET HOT AMERICAN SUMMER", font=tkfont.Font(size=16, weight="bold"),
