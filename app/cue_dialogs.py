@@ -22,6 +22,22 @@ LABEL_FG = "#a0a0b0"
 ENTRY_FG = "white"
 
 
+def asset_display_label(asset_id: str, asset: dict) -> str:
+    name = (asset.get("name") or "").strip()
+    if name:
+        return f"{asset_id} — {name}"
+    return asset_id
+
+
+def build_asset_lookups(assets_by_id: dict[str, dict]) -> tuple[dict[str, str], dict[str, str], list[str]]:
+    display_by_id = {
+        aid: asset_display_label(aid, asset)
+        for aid, asset in sorted(assets_by_id.items())
+    }
+    id_by_display = {label: aid for aid, label in display_by_id.items()}
+    return display_by_id, id_by_display, list(display_by_id.values())
+
+
 class CueFormDialog(tk.Toplevel):
     def __init__(
         self,
@@ -38,11 +54,17 @@ class CueFormDialog(tk.Toplevel):
         self.result: dict | None = None
         self.project = project
         self.assets_by_id = project.assets_by_id
+        self._asset_display_by_id, self._asset_id_by_display, self._asset_display_values = (
+            build_asset_lookups(self.assets_by_id)
+        )
         self.is_new = is_new
         initial = dict(initial or {})
 
         if is_new and not initial.get("id"):
             initial["id"] = project._next_cue_id()
+
+        initial_asset = initial.get("asset_id", "")
+        initial_expected = initial.get("expected_background_asset_id", "") or ""
 
         container = tk.Frame(self, bg=DIALOG_BG)
         container.pack(fill=tk.BOTH, expand=True)
@@ -51,7 +73,7 @@ class CueFormDialog(tk.Toplevel):
         scrollbar = tk.Scrollbar(container, orient=tk.VERTICAL, command=canvas.yview)
         body = tk.Frame(canvas, bg=DIALOG_BG, padx=16, pady=12)
         body.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
-        canvas.create_window((0, 0), window=body, anchor="nw", width=440)
+        canvas.create_window((0, 0), window=body, anchor="nw", width=520)
         canvas.configure(yscrollcommand=scrollbar.set)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
@@ -61,9 +83,9 @@ class CueFormDialog(tk.Toplevel):
             "name": tk.StringVar(value=initial.get("name", "")),
             "cue_type": tk.StringVar(value=initial.get("cue_type", "FOREGROUND")),
             "category": tk.StringVar(value=initial.get("category", "SFX")),
-            "asset_id": tk.StringVar(value=initial.get("asset_id", "")),
+            "asset_id": tk.StringVar(value=self._display_for_asset(initial_asset)),
             "expected_background_asset_id": tk.StringVar(
-                value=initial.get("expected_background_asset_id", "") or ""
+                value=self._display_for_asset(initial_expected)
             ),
             "page": tk.StringVar(value=str(initial.get("page", 1))),
             "scene": tk.StringVar(value=initial.get("scene", "")),
@@ -101,8 +123,8 @@ class CueFormDialog(tk.Toplevel):
 
         self.transient(parent)
         self.grab_set()
-        self.geometry("500x560")
-        self.minsize(480, 400)
+        self.geometry("560x560")
+        self.minsize(520, 400)
         self._on_asset_change()
 
     def _entry(self, parent, key: str, *, width: int = 40, readonly: bool = False) -> tk.Entry:
@@ -115,23 +137,47 @@ class CueFormDialog(tk.Toplevel):
         )
         return ent
 
-    def _combo(self, parent, key: str, values: list[str], *, width: int = 36) -> ttk.Combobox:
-        return ttk.Combobox(parent, textvariable=self.vars[key], values=values, width=width)
+    def _combo(self, parent, key: str, values: list[str], *, width: int = 36, readonly: bool = False) -> ttk.Combobox:
+        combo = ttk.Combobox(parent, textvariable=self.vars[key], values=values, width=width)
+        if readonly:
+            combo.configure(state="readonly")
+        return combo
+
+    def _display_for_asset(self, asset_id: str) -> str:
+        if not asset_id:
+            return ""
+        return self._asset_display_by_id.get(asset_id, asset_id)
+
+    def _resolve_asset_id(self, value: str) -> str:
+        value = value.strip()
+        if not value:
+            return ""
+        if value in self._asset_id_by_display:
+            return self._asset_id_by_display[value]
+        if value in self.assets_by_id:
+            return value
+        if " — " in value:
+            candidate = value.split(" — ", 1)[0].strip()
+            if candidate in self.assets_by_id:
+                return candidate
+        return value
 
     def _fields(self, parent):
-        asset_ids = sorted(self.assets_by_id.keys())
-        bg_assets = [
-            aid for aid, a in sorted(self.assets_by_id.items())
-            if a.get("playback_mode") in ("Loop", "Silence") or a.get("category") == "Ambience"
+        bg_displays = [
+            self._asset_display_by_id[aid]
+            for aid, asset in sorted(self.assets_by_id.items())
+            if asset.get("playback_mode") in ("Loop", "Silence") or asset.get("category") == "Ambience"
         ]
 
         yield "Cue ID", "id", self._entry(parent, "id", width=20, readonly=True)
         yield "Cue Name", "name", self._entry(parent, "name")
         yield "Cue Type", "cue_type", self._combo(parent, "cue_type", CUE_TYPES, width=18)
         yield "Category", "category", self._combo(parent, "category", CATEGORIES, width=18)
-        yield "Asset ID", "asset_id", self._combo(parent, "asset_id", asset_ids)
+        yield "Asset", "asset_id", self._combo(
+            parent, "asset_id", self._asset_display_values, width=48, readonly=True,
+        )
         yield "Expected Background", "expected_background_asset_id", self._combo(
-            parent, "expected_background_asset_id", [""] + bg_assets
+            parent, "expected_background_asset_id", [""] + bg_displays, width=48, readonly=True,
         )
         yield "Script Page", "page", self._entry(parent, "page", width=10)
         yield "Scene", "scene", self._entry(parent, "scene")
@@ -145,7 +191,7 @@ class CueFormDialog(tk.Toplevel):
         yield "Notes", "notes", self._entry(parent, "notes")
 
     def _on_asset_change(self, *_args):
-        asset = self.assets_by_id.get(self.vars["asset_id"].get().strip(), {})
+        asset = self.assets_by_id.get(self._resolve_asset_id(self.vars["asset_id"].get()), {})
         if not asset:
             return
         if self.is_new or not self.vars["name"].get().strip():
@@ -163,8 +209,9 @@ class CueFormDialog(tk.Toplevel):
         if not self.vars["name"].get().strip():
             messagebox.showerror("Cue", "Cue name is required", parent=self)
             return
-        asset_id = self.vars["asset_id"].get().strip()
+        asset_id = self._resolve_asset_id(self.vars["asset_id"].get())
         asset = self.assets_by_id.get(asset_id, {})
+        expected_id = self._resolve_asset_id(self.vars["expected_background_asset_id"].get())
         try:
             volume = int(self.vars["volume"].get())
         except ValueError:
@@ -180,7 +227,7 @@ class CueFormDialog(tk.Toplevel):
             "cue_type": self.vars["cue_type"].get(),
             "category": self.vars["category"].get(),
             "asset_id": asset_id,
-            "expected_background_asset_id": self.vars["expected_background_asset_id"].get().strip() or None,
+            "expected_background_asset_id": expected_id or None,
             "page": page,
             "scene": self.vars["scene"].get().strip(),
             "priority": self.vars["priority"].get(),
@@ -236,7 +283,7 @@ class ExpectedBackgroundDialog(tk.Toplevel):
         self.listbox.insert(tk.END, "(none)")
         self._asset_ids = [""]
         for aid, asset in bg_assets:
-            label = f"{aid} — {asset.get('name', '')}"
+            label = asset_display_label(aid, asset)
             self.listbox.insert(tk.END, label)
             self._asset_ids.append(aid)
 
