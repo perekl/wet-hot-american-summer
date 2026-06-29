@@ -1,1 +1,0 @@
-# wet-hot-american-summer
