@@ -56,6 +56,7 @@ class ScriptPanel(tk.Frame):
     ):
         super().__init__(parent, bg="#0a0a12")
         self.cues = cues
+        self.cues_by_id = {c["id"]: c for c in cues}
         self.foreground_cues = [c for c in cues if cue_type(c) == "FOREGROUND"]
         self.background_cues = [c for c in cues if cue_type(c) == "BACKGROUND"]
         self.page_index = build_page_index(cues)
@@ -65,6 +66,7 @@ class ScriptPanel(tk.Frame):
         self._scroll_job: str | None = None
         self._active_fg_id: str | None = None
         self._active_bg_id: str | None = None
+        self._pending_center_cue_id: str | None = None
 
         self.pdf_path = pdf_path or resolve_screenplay_pdf()
         self.doc: fitz.Document | None = None
@@ -97,6 +99,8 @@ class ScriptPanel(tk.Frame):
         for label, color in (("FX", FX_COLOR), ("BG", BG_COLOR), ("BG STOP", BG_STOP_COLOR)):
             tk.Label(legend, text=f"■ {label}", fg=color, bg="#0a0a12",
                      font=tkfont.Font(size=9)).pack(side=tk.LEFT, padx=6)
+        tk.Label(legend, text="Click highlights to select cue", fg="#8090a8", bg="#0a0a12",
+                 font=tkfont.Font(size=9)).pack(side=tk.LEFT, padx=(8, 0))
 
         body = tk.Frame(self, bg="#0a0a12")
         body.pack(fill=tk.BOTH, expand=True)
@@ -135,20 +139,26 @@ class ScriptPanel(tk.Frame):
 
     def _on_scrollbar(self, *args):
         self.canvas.yview(*args)
-        self._schedule_page_notify()
+        if not self._sync_lock:
+            self._schedule_page_notify()
 
     def _on_mousewheel(self, event):
         if event.num == 5 or getattr(event, "delta", 0) < 0:
             self.canvas.yview_scroll(3, "units")
         else:
             self.canvas.yview_scroll(-3, "units")
-        self._schedule_page_notify()
+        if not self._sync_lock:
+            self._schedule_page_notify()
         return "break"
 
     def _on_resize(self, _event=None):
-        if self.doc:
-            self._layout_pages()
-            self._render_visible_pages()
+        if not self.doc:
+            return
+        center_id = self._pending_center_cue_id or self._active_fg_id
+        self._layout_pages()
+        if center_id and center_id in self.cues_by_id:
+            self._scroll_y_to_center(self._cue_anchor_y(self.cues_by_id[center_id]))
+        self._render_visible_pages()
 
     def _schedule_page_notify(self):
         if self._scroll_job:
@@ -192,6 +202,55 @@ class ScriptPanel(tk.Frame):
             last = self.page_count - 1
         return first, min(last + 2, self.page_count)
 
+    def _page_scale(self, page_idx: int) -> float:
+        canvas_width = max(self.canvas.winfo_width(), 400)
+        page = self.doc[page_idx]
+        scale = (canvas_width - MARGIN_BADGE_WIDTH - 24) / page.rect.width
+        return min(scale, self.zoom)
+
+    def _trigger_anchor_y(self, cue: dict, page_idx: int, y0: float) -> float | None:
+        page = self.doc[page_idx]
+        scale = self._page_scale(page_idx)
+        for snippet in search_snippets(cue.get("trigger", "")):
+            try:
+                rects = page.search_for(snippet)
+            except Exception:
+                rects = []
+            if rects:
+                rect = rects[0]
+                return y0 + (rect.y0 + rect.y1) / 2 * scale
+        return None
+
+    def _cue_anchor_y(self, cue: dict) -> float:
+        page = int(cue["page"])
+        idx = page - 1
+        if idx < 0 or idx >= len(self.page_tops):
+            return 0.0
+        y0 = self.page_tops[idx]
+        anchor = self._trigger_anchor_y(cue, idx, y0)
+        if anchor is not None:
+            return anchor
+
+        page_cues = self.page_index.get(page, [])
+        badge_y = y0 + 6
+        for item in page_cues:
+            h = 18
+            if item["id"] == cue["id"]:
+                return badge_y + h / 2
+            badge_y += h + 4
+        return y0 + self.page_heights[idx] / 2
+
+    def _scroll_y_to_center(self, anchor_y: float) -> None:
+        if not self.page_tops:
+            return
+        total = self.page_tops[-1] + self.page_heights[-1]
+        view_h = max(self.canvas.winfo_height(), 200)
+        target_top = anchor_y - view_h / 2
+        scrollable = max(total - view_h, 1)
+        target_top = max(0, min(target_top, scrollable))
+        fraction = target_top / scrollable
+        self.canvas.yview_moveto(fraction)
+
     def _render_visible_pages(self):
         if not self.doc:
             return
@@ -205,8 +264,7 @@ class ScriptPanel(tk.Frame):
         for page_idx in range(first, last):
             page_num = page_idx + 1
             page = self.doc[page_idx]
-            scale = (canvas_width - MARGIN_BADGE_WIDTH - 24) / page.rect.width
-            scale = min(scale, self.zoom)
+            scale = self._page_scale(page_idx)
             matrix = fitz.Matrix(scale, scale)
             pix = page.get_pixmap(matrix=matrix, alpha=False)
             image = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
@@ -218,6 +276,7 @@ class ScriptPanel(tk.Frame):
             img_id = self.canvas.create_image(x0, y0, anchor="nw", image=photo)
             items = [img_id]
             items.extend(self._draw_margin_badges(page_num, page_idx, y0))
+            items.extend(self._draw_page_cue_hit_areas(page_num, x0, y0, pix.width))
             items.extend(self._draw_trigger_highlights(page, page_num, page_idx, x0, y0, scale))
             self._page_items[page_idx] = items
 
@@ -260,9 +319,30 @@ class ScriptPanel(tk.Frame):
                 tags=("cue_badge", cue["id"], cue_type(cue)),
             )
             for item in (rect, text):
-                self.canvas.tag_bind(item, "<Button-1>", lambda e, c=cue: self._cue_click(c))
+                self._bind_cue_clickable(item, cue)
             items.extend([rect, text])
             y += h + 4
+        return items
+
+    def _draw_page_cue_hit_areas(
+        self, page_num: int, x0: int, y0: int, content_width: int
+    ) -> list[int]:
+        """Clickable bands over annotated cue strips at the top of each page."""
+        items: list[int] = []
+        cues = self.page_index.get(page_num, [])
+        if not cues:
+            return items
+        y = y0 + 22
+        band_h = 14
+        for cue in cues:
+            item = self.canvas.create_rectangle(
+                x0, y, x0 + content_width, y + band_h,
+                fill="", outline="", width=0,
+                tags=("cue_strip_hit", cue["id"], cue_type(cue)),
+            )
+            self._bind_cue_clickable(item, cue)
+            items.append(item)
+            y += band_h + 3
         return items
 
     def _draw_trigger_highlights(
@@ -280,20 +360,48 @@ class ScriptPanel(tk.Frame):
                 if not rects:
                     continue
                 for rect in rects[:2]:
-                    rx0 = x0 + rect.x0 * scale
-                    ry0 = y0 + rect.y0 * scale
-                    rx1 = x0 + rect.x1 * scale
-                    ry1 = y0 + rect.y1 * scale
-                    stipple = "" if active else "gray50"
-                    item = self.canvas.create_rectangle(
-                        rx0, ry0, rx1, ry1,
-                        outline=color, width=3 if active else 1,
-                        stipple=stipple,
-                        tags=("cue_highlight", cue["id"]),
-                    )
-                    items.append(item)
+                    pad = 2
+                    rx0 = x0 + rect.x0 * scale - pad
+                    ry0 = y0 + rect.y0 * scale - pad
+                    rx1 = x0 + rect.x1 * scale + pad
+                    ry1 = y0 + rect.y1 * scale + pad
+                    if active:
+                        # Active: light tint + solid border (text stays readable)
+                        tint = self.canvas.create_rectangle(
+                            rx0, ry0, rx1, ry1,
+                            outline="",
+                            fill=color,
+                            stipple="gray12",
+                            tags=("cue_highlight", cue["id"], cue_type(cue)),
+                        )
+                        border = self.canvas.create_rectangle(
+                            rx0, ry0, rx1, ry1,
+                            outline=color,
+                            fill="",
+                            width=2,
+                            tags=("cue_highlight", cue["id"], cue_type(cue)),
+                        )
+                        for item in (tint, border):
+                            self._bind_cue_clickable(item, cue)
+                        items.extend([tint, border])
+                    else:
+                        item = self.canvas.create_rectangle(
+                            rx0, ry0, rx1, ry1,
+                            outline=color,
+                            fill="",
+                            width=1,
+                            dash=(3, 2),
+                            tags=("cue_highlight", cue["id"], cue_type(cue)),
+                        )
+                        self._bind_cue_clickable(item, cue)
+                        items.append(item)
                 break
         return items
+
+    def _bind_cue_clickable(self, item_id: int, cue: dict) -> None:
+        self.canvas.tag_bind(item_id, "<Button-1>", lambda e, c=cue: self._cue_click(c))
+        self.canvas.tag_bind(item_id, "<Enter>", lambda e: self.canvas.config(cursor="hand2"))
+        self.canvas.tag_bind(item_id, "<Leave>", lambda e: self.canvas.config(cursor=""))
 
     def _cue_click(self, cue: dict):
         if self.on_cue_clicked:
@@ -314,21 +422,54 @@ class ScriptPanel(tk.Frame):
         if self.on_page_visible:
             self.on_page_visible(page)
 
+    def scroll_to_cue(
+        self,
+        cue: dict,
+        *,
+        fg_id: str | None = None,
+        bg_id: str | None = None,
+    ) -> None:
+        """Center the viewport on a specific cue without reverse-syncing queues."""
+        if not self.doc or not self.page_tops:
+            return
+        self._sync_lock = True
+        if fg_id is not None:
+            self._active_fg_id = fg_id
+        if bg_id is not None:
+            self._active_bg_id = bg_id
+        self._pending_center_cue_id = cue["id"]
+
+        if self._scroll_job:
+            self.after_cancel(self._scroll_job)
+            self._scroll_job = None
+
+        anchor_y = self._cue_anchor_y(cue)
+        self._scroll_y_to_center(anchor_y)
+        self._render_visible_pages()
+
     def scroll_to_page(self, page: int, *, fg_id: str | None = None, bg_id: str | None = None):
+        """Legacy: scroll to first cue on page, centered."""
         if not self.doc or not self.page_tops:
             return
         page = max(1, min(page, self.page_count))
+        cues = self.page_index.get(page, [])
+        if cues:
+            self.scroll_to_cue(cues[0], fg_id=fg_id, bg_id=bg_id)
+            return
+        self._sync_lock = True
         self._active_fg_id = fg_id
         self._active_bg_id = bg_id
         idx = page - 1
-        target = self.page_tops[idx]
-        total = self.page_tops[-1] + self.page_heights[-1]
-        fraction = target / total if total else 0
-        self.canvas.yview_moveto(max(0, fraction - 0.02))
+        self._scroll_y_to_center(self.page_tops[idx] + self.page_heights[idx] / 2)
         self._render_visible_pages()
-        self._schedule_page_notify()
+
+    def release_sync_lock(self) -> None:
+        self._sync_lock = False
+        self._pending_center_cue_id = None
 
     def set_active_cues(self, *, fg_id: str | None = None, bg_id: str | None = None):
+        if self._sync_lock:
+            return
         self._active_fg_id = fg_id
         self._active_bg_id = bg_id
         self._render_visible_pages()

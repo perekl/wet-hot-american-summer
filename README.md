@@ -11,27 +11,32 @@ assets/
   generated/         # Screenplay extract, silence markers, generated refs
 
 data/
-  master_cues.xlsx           # Master cue spreadsheet (all cues, chronological)
+  master_cues.xlsx           # Master cue spreadsheet (auto-updated by soundboard)
   master_sound_assets.xlsx   # Unique sound assets referenced by cues
   licensed_music.xlsx        # Licensed music clearance guide
-  cues.json                  # JSON export for the soundboard app
+  cues.json                  # Cue data for the soundboard app
+  script.json                # Editable screenplay + cue placements (primary doc)
   assets.json                # JSON export of sound asset library
 
 docs/
   CueBook.docx               # Professional cue book (one cue per entry)
   CueBook.pdf                # PDF cue book for printing
-  AnnotatedScreenplay.pdf    # Screenplay with FX/BG cue markers (for soundboard)
+  AnnotatedScreenplay.pdf    # Read-only PDF reference with cue markers
   StageManagerBook.docx      # Large-format live-run cue book
 
 app/
-  soundboard.py              # Fullscreen soundboard + script panel
-  script_panel.py            # PDF script viewer with cue highlights
-  cue_script_index.py        # Page/cue indexing for script sync
+  soundboard.py              # Fullscreen soundboard + screenplay editor
+  script_editor.py           # Editable screenplay view with inline cues
+  script_model.py            # script.json project model
+  cue_persistence.py         # Auto-save to cues.json + master_cues.xlsx
+  cue_dialogs.py             # Create/edit cue dialogs
 
 tools/
   cues_data.py               # Screenplay-derived master cue database
   background_cues.py         # Background/foreground classification + expected beds
-  generate_production_kit.py # Regenerates all deliverables from cues_data.py
+  screenplay_parser.py       # Parse screenplay text into paragraphs
+  import_screenplay.py       # Import PDF/extract into data/script.json
+  generate_production_kit.py # Regenerates deliverables from cues_data.py
 ```
 
 ## How Cues Relate to Sound Assets
@@ -46,6 +51,7 @@ Each row in `data/master_sound_assets.xlsx` is a **unique audio file** the produ
 | Asset ID | Canonical reusable sound file (`AST-001` …) |
 | Cue Type | `BACKGROUND` (persistent bed) or `FOREGROUND` (one-shot / music / beat) |
 | Expected Background Asset | Optional — which background bed *should* be active for this cue |
+| Paragraph ID | Script paragraph where the cue is placed (`PAR-00042` …) |
 | Script Page | Screenplay page reference |
 | Trigger Dialogue | Exact line or stage direction that fires the cue |
 | Category | Music, Ambience, SFX, Transition, Silence, Comedy |
@@ -86,7 +92,7 @@ python tools/generate_production_kit.py   # also builds docs/AnnotatedScreenplay
 python app/soundboard.py
 ```
 
-The app opens **fullscreen** with a **script panel** on the right and sound controls on the left.
+The app opens **fullscreen** with an **editable screenplay** on the right and sound controls on the left.
 
 **Effects controls (keyboard):**
 - **GO / Enter** — fire the current effect cue
@@ -109,32 +115,45 @@ The app maintains two independent cue queues loaded from `cues.json`:
 
 Keyboard shortcuts apply **only to the effects queue**. Background is operated entirely via mouse clicks so the operator can run beds and hits independently during a live read.
 
-### Script Panel (read-along PDF)
+### Editable Screenplay (`data/script.json`)
 
-The right-hand panel shows the screenplay with cue markers:
+The screenplay is the **primary project document**. The PDF is import/reference only.
 
-| Color | Meaning |
+`data/script.json` contains structured paragraphs and cue placements:
+
+| Field | Purpose |
 |-------|---------|
-| **Pink** | Effect cue (`FX`) |
-| **Blue** | Background start (`BG`) |
-| **Orange** | Background stop / silence (`BG STOP`) |
+| `paragraphs` | Screenplay text blocks with page, scene, type, speaker |
+| `placements` | Which cue appears after which paragraph |
 
-**Sync behavior:**
-- Scrolling the script updates the effects and background queue positions to match the visible page
-- **Space / Enter / arrows** on effects also scroll the script to that cue’s page
-- Background **PREV / GO / NEXT** scroll the script to the selected background cue
-- Click a cue badge in the script margin to jump that queue to the cue
+**Cue markers** appear inline after paragraphs:
 
-**PDF sources** (first match wins):
-1. `WHAS_SCREENPLAY_PDF` environment variable
-2. `docs/Wet Hot American Summer_v2.pdf` (original screenplay)
-3. `docs/AnnotatedScreenplay.pdf` (generated from `assets/generated/screenplay_extract.txt`)
+| Color | Type |
+|-------|------|
+| **Pink** | Effect (`FX`) |
+| **Blue** | Background (`BG`) |
+| **Orange** | Background stop (`BG STOP`) |
+| **Purple** | Music (`MUSIC`) |
 
-Regenerate the annotated PDF anytime:
+**Editing in the app:**
+- **Click** a cue marker — select cue and sync soundboard
+- **Double-click** — edit cue (name, type, asset, notes, etc.)
+- **Right-click** cue or paragraph — add / duplicate / delete / move cues
+- **Drag** a cue marker to another paragraph — updates placement automatically
+- **Search** — find dialogue, character, scene, cue ID, asset, or page
+
+All edits auto-save to `data/cues.json` and `data/master_cues.xlsx`. No manual JSON editing required.
+
+**Import screenplay** (first-time setup or refresh from PDF):
 
 ```bash
-python tools/generate_annotated_screenplay.py
+python tools/import_screenplay.py
+python tools/import_screenplay.py --pdf "docs/Wet Hot American Summer_v2.pdf"
 ```
+
+`docs/AnnotatedScreenplay.pdf` remains available as a read-only reference.
+
+**Sync:** selecting a cue in the soundboard scrolls the screenplay to center that cue; clicking a cue in the screenplay updates the soundboard selection.
 
 ### Background Cue System
 
