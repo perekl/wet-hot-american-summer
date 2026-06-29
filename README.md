@@ -72,16 +72,24 @@ This rebuilds all spreadsheets, Word/PDF cue books, and JSON exports. Assets are
 
 ## Soundboard Application
 
-The tkinter app reads `data/cues.json` and provides live cue navigation during the table read.
+The tkinter app reads `data/cues.json` and plays cues via **python-vlc** (requires [VLC](https://www.videolan.org/vlc/) installed on the system).
 
 ```bash
+pip install python-vlc
 python app/soundboard.py
 ```
 
 **Controls:**
-- **PLAY** — queues current cue (audio playback not yet implemented)
+- **PLAY / Enter** — play current cue
 - **NEXT / PREVIOUS** — step through cues in screenplay order
 - **Spacebar** — advance to next cue
+- **ESC** — stop all playback
+
+**Playback behavior:**
+- **Ambience** loops on a dedicated bed; starting a new ambience stops the previous one
+- **SFX / transitions** fire as one-shots (overlap ambience)
+- **Music** plays on a separate channel; loops when the cue `loop` field is `Yes`
+- **Silence** cues stop the ambience bed
 
 **Display:** current cue name, trigger dialogue, script page, and upcoming cue.
 

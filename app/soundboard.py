@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Wet Hot American Summer — live table-read soundboard (cue navigation only)."""
+"""Wet Hot American Summer — live table-read soundboard."""
 
 from __future__ import annotations
 
@@ -14,8 +14,12 @@ except ImportError:
     print("tkinter is required", file=sys.stderr)
     sys.exit(1)
 
-ROOT = Path(__file__).resolve().parent.parent
+APP_DIR = Path(__file__).resolve().parent
+ROOT = APP_DIR.parent
 CUES_PATH = ROOT / "data" / "cues.json"
+
+sys.path.insert(0, str(APP_DIR))
+from playback import VLCPlaybackEngine  # noqa: E402
 
 
 class SoundboardApp(tk.Tk):
@@ -27,10 +31,19 @@ class SoundboardApp(tk.Tk):
 
         self.cues = self._load_cues()
         self.index = 0
+        self.player = self._init_player()
 
         self._build_ui()
         self._bind_keys()
         self._refresh()
+        self.protocol("WM_DELETE_WINDOW", self._on_close)
+
+    def _init_player(self) -> VLCPlaybackEngine | None:
+        try:
+            return VLCPlaybackEngine(ROOT)
+        except ImportError as exc:
+            print(exc, file=sys.stderr)
+            return None
 
     def _load_cues(self) -> list[dict]:
         if not CUES_PATH.exists():
@@ -102,10 +115,19 @@ class SoundboardApp(tk.Tk):
         self.status.pack(pady=(0, 12))
 
     def _bind_keys(self):
-        self.bind("<space>", lambda e: self.next_cue())
+        self.bind("<space>", self._on_space)
         self.bind("<Left>", lambda e: self.prev_cue())
         self.bind("<Right>", lambda e: self.next_cue())
         self.bind("<Return>", lambda e: self.play_cue())
+        self.bind("<Escape>", self._on_escape)
+
+    def _on_space(self, _event=None):
+        self.next_cue()
+        return "break"
+
+    def _on_escape(self, _event=None):
+        self.stop_all()
+        return "break"
 
     def _refresh(self):
         c = self.cues[self.index]
@@ -128,10 +150,20 @@ class SoundboardApp(tk.Tk):
 
     def play_cue(self):
         c = self.cues[self.index]
+        if not self.player:
+            self.status.config(text="Playback unavailable — install python-vlc and VLC")
+            return
+        ok, message = self.player.play_cue(c)
+        prefix = "▶" if ok else "⚠"
         self.status.config(
-            text=f"PLAY queued (no audio yet): {c['id']} — {c['name']} "
-                 f"[{c.get('asset_id')}] {c.get('asset_filename', '')}"
+            text=f"{prefix} {c['id']} — {message}  [{c.get('asset_id')}]"
         )
+
+    def stop_all(self):
+        if self.player:
+            self.player.stop_all()
+        c = self.cues[self.index]
+        self.status.config(text=f"■ Stopped all playback (ESC) — cue {c['id']}")
 
     def next_cue(self):
         if self.index < len(self.cues) - 1:
@@ -142,6 +174,11 @@ class SoundboardApp(tk.Tk):
         if self.index > 0:
             self.index -= 1
             self._refresh()
+
+    def _on_close(self):
+        if self.player:
+            self.player.stop_all()
+        self.destroy()
 
 
 def main():
