@@ -86,6 +86,7 @@ class ScriptEditor(tk.Frame):
         self._rebuild_in_progress = False
         self._pending_scroll_para: str | None = None
         self._last_rendered_page = 0
+        self._mousewheel_active = False
 
         self._build_ui()
         self._show_loading()
@@ -122,6 +123,7 @@ class ScriptEditor(tk.Frame):
 
         body = tk.Frame(self, bg="#0a0a12")
         body.pack(fill=tk.BOTH, expand=True)
+        self._scroll_body = body
 
         self.canvas = tk.Canvas(body, bg="#12121c", highlightthickness=0)
         self.vscroll = tk.Scrollbar(body, orient=tk.VERTICAL, command=self._on_scroll)
@@ -134,16 +136,49 @@ class ScriptEditor(tk.Frame):
 
         self.inner.bind("<Configure>", self._on_inner_configure)
         self.canvas.bind("<Configure>", self._on_canvas_configure)
-        self.canvas.bind("<MouseWheel>", self._on_mousewheel)
-        self.canvas.bind("<Button-4>", self._on_mousewheel)
-        self.canvas.bind("<Button-5>", self._on_mousewheel)
         self.canvas.bind("<Button-3>", self._on_canvas_context)
+
+        for widget in (self, header, search_row, body, self.canvas, self.inner):
+            widget.bind("<Enter>", self._activate_mousewheel)
+            widget.bind("<Leave>", self._deactivate_mousewheel)
+        if self._mousewheel_active:
+            return
+        self._mousewheel_active = True
+        self.bind_all("<MouseWheel>", self._on_mousewheel, add="+")
+        self.bind_all("<Button-4>", self._on_mousewheel, add="+")
+        self.bind_all("<Button-5>", self._on_mousewheel, add="+")
+
+    def _deactivate_mousewheel(self, event):
+        x, y = self.winfo_pointerx(), self.winfo_pointery()
+        widget = self.winfo_containing(x, y)
+        while widget is not None:
+            if widget == self:
+                return
+            widget = widget.master
+        self._drop_mousewheel()
+
+    def _drop_mousewheel(self):
+        if not self._mousewheel_active:
+            return
+        self._mousewheel_active = False
+        self.unbind_all("<MouseWheel>")
+        self.unbind_all("<Button-4>")
+        self.unbind_all("<Button-5>")
+
+    def _update_scrollregion(self):
+        self.inner.update_idletasks()
+        width = max(self.inner.winfo_reqwidth(), self.canvas.winfo_width(), 1)
+        height = max(self.inner.winfo_reqheight(), 1)
+        self.canvas.configure(scrollregion=(0, 0, width, height))
 
     def _on_canvas_configure(self, event):
         self.canvas.itemconfig(self.canvas_window, width=event.width)
 
     def _on_inner_configure(self, event=None):
-        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        if event is not None:
+            self.canvas.configure(scrollregion=(0, 0, event.width, max(event.height, 1)))
+        else:
+            self._update_scrollregion()
 
     def _on_scroll(self, *args):
         self.canvas.yview(*args)
@@ -151,10 +186,16 @@ class ScriptEditor(tk.Frame):
             self._schedule_scroll_notify()
 
     def _on_mousewheel(self, event):
-        if event.num == 5 or getattr(event, "delta", 0) < 0:
+        if event.num == 5:
             self.canvas.yview_scroll(3, "units")
-        else:
+        elif event.num == 4:
             self.canvas.yview_scroll(-3, "units")
+        else:
+            delta = event.delta
+            if delta == 0:
+                return "break"
+            steps = max(1, abs(delta) // 120)
+            self.canvas.yview_scroll(-steps if delta > 0 else steps, "units")
         if not self._sync_lock:
             self._schedule_scroll_notify()
         return "break"
@@ -210,7 +251,7 @@ class ScriptEditor(tk.Frame):
         self._rebuild_index = end
 
         self.inner.update_idletasks()
-        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        self._update_scrollregion()
 
         if self._rebuild_index < len(paras):
             self.after(1, lambda: self._schedule_rebuild_batch(gen))
@@ -686,4 +727,4 @@ class ScriptEditor(tk.Frame):
         self._apply_cue_highlight()
 
     def close(self):
-        pass
+        self._drop_mousewheel()
