@@ -82,11 +82,26 @@ pip install python-vlc
 python app/soundboard.py
 ```
 
-**Controls:**
-- **GO / Enter** — fire the current cue
-- **NEXT / PREVIOUS** — step through cues in screenplay order
-- **Spacebar** — advance to next cue (does not auto-play)
-- **ESC** — stop all playback (background + foreground)
+**Effects controls (keyboard):**
+- **GO / Enter** — fire the current effect cue
+- **NEXT / PREVIOUS** or arrow keys — step through the **effects queue** only
+- **Spacebar** — advance to next effect (does not auto-play)
+- **ESC** — stop all playback (background + effects)
+
+**Background controls (mouse only):**
+- **PREV / GO / NEXT** in the Background panel — step through and fire the **background queue** separately
+- **Play**, **Pause**, **Stop**, **Fade Out**, **Switch to Expected**, volume slider
+
+### Separate Queues
+
+The app maintains two independent cue queues loaded from `cues.json`:
+
+| Queue | Count | Contents |
+|-------|-------|----------|
+| **Effects** | 163 foreground cues | SFX, music, transitions, comedy, dramatic silence beats |
+| **Background** | 76 background cues | Ambience loops and bed-clearing silence cues |
+
+Keyboard shortcuts apply **only to the effects queue**. Background is operated entirely via mouse clicks so the operator can run beds and hits independently during a live read.
 
 ### Background Cue System
 
@@ -96,7 +111,7 @@ The soundboard separates **persistent background beds** from **foreground** soun
 - Ambience loops (campfire, mess hall crowd, lake, radio station, etc.)
 - Background **Silence** cues that fade out or clear the bed (e.g., pre-show hold, “drop crowd bed”)
 
-When **GO** is pressed on a background cue:
+When **GO** is pressed on a background cue (Background panel, mouse only):
 1. Fade out any current background
 2. Start the new background (or silence)
 3. Update the **Background** panel
@@ -112,9 +127,9 @@ The background continues until another background cue changes it.
 
 Every foreground cue may include an optional `expected_background_asset_id` in `cues.json` (and **Expected Background Asset** in `master_cues.xlsx`). This field is **informational only** — it describes which background should currently be active for the scene. It is not a command.
 
-When the selected cue’s expected background does not match what is playing:
-- A **yellow warning banner** appears on the cue panel
-- Pressing **GO** opens a **Background Out of Sync** dialog with **Switch Background** or **Ignore**
+When the selected effect’s expected background does not match what is playing:
+- A **yellow warning banner** appears on the effects panel
+- Pressing **GO** (Enter) opens a **Background Out of Sync** dialog with **Switch Background** or **Ignore**
 - Nothing happens automatically; the operator decides
 
 When they match, a **green checkmark** confirms sync.
@@ -122,13 +137,12 @@ When they match, a **green checkmark** confirms sync.
 ### Background Panel
 
 A persistent panel at the top of the soundboard shows:
-- Current background name
-- Playing / Paused / Stopped
-- Elapsed time
-- **Play**, **Pause**, **Stop**, **Fade Out**, **Switch** (to expected background for current cue)
+- **Background queue** position with PREV / GO / NEXT (mouse only)
+- Currently **playing** background name, status, and elapsed time
+- **Play**, **Pause**, **Stop**, **Fade Out**, **Switch to Expected** (matches current effect’s expected bed)
 - Volume slider
 
-**Display:** current cue name, trigger dialogue, script page, expected background, sync status, and upcoming cue.
+**Display:** current effect name, trigger dialogue, script page, expected background, sync status, and upcoming effect.
 
 ## Sourcing Royalty-Free Assets
 
