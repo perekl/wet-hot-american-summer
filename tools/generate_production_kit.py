@@ -22,6 +22,7 @@ from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, Tabl
 from asset_library import CANONICAL_ASSETS, resolve_asset_key, suggested_volume_for_mode
 from background_cues import enrich_background_fields
 from cues_data import CUES, LICENSED_MUSIC
+from generate_annotated_screenplay import generate_annotated_screenplay
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -305,6 +306,9 @@ def main():
     write_cue_book_pdf(DOCS / "CueBook.pdf", cues)
 
     write_json_exports(cues, assets)
+
+    annotated = generate_annotated_screenplay()
+    print(f"Annotated screenplay: {annotated}")
 
     reuse = len(cues) / len(assets)
     print(f"Generated {len(cues)} cues, {len(assets)} reusable assets ({reuse:.1f}x reuse), "

@@ -20,10 +20,13 @@ data/
 docs/
   CueBook.docx               # Professional cue book (one cue per entry)
   CueBook.pdf                # PDF cue book for printing
+  AnnotatedScreenplay.pdf    # Screenplay with FX/BG cue markers (for soundboard)
   StageManagerBook.docx      # Large-format live-run cue book
 
 app/
-  soundboard.py              # Windows/macOS/Linux tkinter cue navigator
+  soundboard.py              # Fullscreen soundboard + script panel
+  script_panel.py            # PDF script viewer with cue highlights
+  cue_script_index.py        # Page/cue indexing for script sync
 
 tools/
   cues_data.py               # Screenplay-derived master cue database
@@ -78,9 +81,12 @@ This rebuilds all spreadsheets, Word/PDF cue books, and JSON exports. Assets are
 The tkinter app reads `data/cues.json` and plays cues via **python-vlc** (requires [VLC](https://www.videolan.org/vlc/) installed on the system).
 
 ```bash
-pip install python-vlc
+pip install -r requirements.txt
+python tools/generate_production_kit.py   # also builds docs/AnnotatedScreenplay.pdf
 python app/soundboard.py
 ```
+
+The app opens **fullscreen** with a **script panel** on the right and sound controls on the left.
 
 **Effects controls (keyboard):**
 - **GO / Enter** — fire the current effect cue
@@ -102,6 +108,33 @@ The app maintains two independent cue queues loaded from `cues.json`:
 | **Background** | 76 background cues | Ambience loops and bed-clearing silence cues |
 
 Keyboard shortcuts apply **only to the effects queue**. Background is operated entirely via mouse clicks so the operator can run beds and hits independently during a live read.
+
+### Script Panel (read-along PDF)
+
+The right-hand panel shows the screenplay with cue markers:
+
+| Color | Meaning |
+|-------|---------|
+| **Pink** | Effect cue (`FX`) |
+| **Blue** | Background start (`BG`) |
+| **Orange** | Background stop / silence (`BG STOP`) |
+
+**Sync behavior:**
+- Scrolling the script updates the effects and background queue positions to match the visible page
+- **Space / Enter / arrows** on effects also scroll the script to that cue’s page
+- Background **PREV / GO / NEXT** scroll the script to the selected background cue
+- Click a cue badge in the script margin to jump that queue to the cue
+
+**PDF sources** (first match wins):
+1. `WHAS_SCREENPLAY_PDF` environment variable
+2. `docs/Wet Hot American Summer_v2.pdf` (original screenplay)
+3. `docs/AnnotatedScreenplay.pdf` (generated from `assets/generated/screenplay_extract.txt`)
+
+Regenerate the annotated PDF anytime:
+
+```bash
+python tools/generate_annotated_screenplay.py
+```
 
 ### Background Cue System
 
