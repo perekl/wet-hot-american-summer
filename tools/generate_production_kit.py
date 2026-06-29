@@ -23,13 +23,14 @@ from asset_library import CANONICAL_ASSETS, resolve_asset_key, suggested_volume_
 from background_cues import enrich_background_fields
 from cues_data import CUES, LICENSED_MUSIC
 from generate_annotated_screenplay import generate_annotated_screenplay
+from import_screenplay import import_screenplay
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 DOCS = ROOT / "docs"
 
 CUE_COLS = [
-    "Cue ID", "Asset ID", "Cue Type", "Expected Background Asset",
+    "Cue ID", "Asset ID", "Cue Type", "Expected Background Asset", "Paragraph ID",
     "Script Page", "Scene", "Trigger Dialogue", "Cue Name",
     "Category", "Priority", "Duration", "Loop", "Fade", "Volume", "Notes",
 ]
@@ -309,6 +310,12 @@ def main():
 
     annotated = generate_annotated_screenplay()
     print(f"Annotated screenplay: {annotated}")
+
+    try:
+        script_path = import_screenplay()
+        print(f"Editable screenplay: {script_path}")
+    except FileNotFoundError as exc:
+        print(f"Screenplay import skipped: {exc}")
 
     reuse = len(cues) / len(assets)
     print(f"Generated {len(cues)} cues, {len(assets)} reusable assets ({reuse:.1f}x reuse), "

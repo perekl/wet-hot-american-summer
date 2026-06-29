@@ -1,0 +1,471 @@
+"""Editable screenplay view replacing the PDF panel."""
+
+from __future__ import annotations
+
+import tkinter as tk
+from tkinter import font as tkfont, messagebox
+
+from cue_dialogs import ask_edit_cue, ask_new_cue
+from script_model import ScriptProject, _marker_kind
+
+FX_COLOR = "#e94560"
+BG_COLOR = "#4a90d9"
+BG_STOP_COLOR = "#f5a623"
+MUSIC_COLOR = "#b57edc"
+PARA_SELECT_BG = "#1e3a5f"
+PAGE_COLOR = "#8090a8"
+SCENE_COLOR = "#a0d2ff"
+
+
+def _cue_type(cue: dict) -> str:
+    if cue.get("cue_type"):
+        return cue["cue_type"]
+    if cue.get("category") == "Ambience":
+        return "BACKGROUND"
+    return "FOREGROUND"
+
+
+def _marker_color(cue: dict) -> str:
+    kind = _marker_kind(cue)
+    if kind == "BG":
+        return BG_COLOR
+    if kind == "BG_STOP":
+        return BG_STOP_COLOR
+    if kind == "MUSIC":
+        return MUSIC_COLOR
+    return FX_COLOR
+
+
+def _marker_label(cue: dict) -> str:
+    num = cue["id"].split("-")[-1]
+    kind = _marker_kind(cue)
+    if kind == "BG_STOP":
+        return f"[BG STOP-{num}] {cue['name']}"
+    if kind == "MUSIC":
+        return f"[MUSIC-{num}] {cue['name']}"
+    if kind == "BG":
+        return f"[BG-{num}] {cue['name']}"
+    return f"[FX-{num}] {cue['name']}"
+
+
+class ScriptEditor(tk.Frame):
+    """Scrollable screenplay editor with inline cue markers."""
+
+    def __init__(
+        self,
+        parent,
+        project: ScriptProject,
+        *,
+        on_cue_selected=None,
+        on_cues_changed=None,
+    ):
+        super().__init__(parent, bg="#0a0a12")
+        self.project = project
+        self.on_cue_selected = on_cue_selected
+        self.on_cues_changed = on_cues_changed
+        self._sync_lock = False
+        self._scroll_job: str | None = None
+        self._active_fg_id: str | None = None
+        self._active_bg_id: str | None = None
+        self._selected_cue_id: str | None = None
+        self._selected_para_id: str | None = None
+        self._drag_cue_id: str | None = None
+        self._drag_moved = False
+        self._drag_start_y = 0
+        self._para_frames: dict[str, tk.Frame] = {}
+        self._cue_widgets: dict[str, tk.Label] = {}
+        self._search_hits: list[tuple[str, str | None]] = []
+        self._search_index = 0
+
+        self._build_ui()
+        self.rebuild()
+
+    def _build_ui(self):
+        header = tk.Frame(self, bg="#0a0a12")
+        header.pack(fill=tk.X, padx=8, pady=(8, 4))
+
+        tk.Label(header, text="SCREENPLAY", font=tkfont.Font(size=12, weight="bold"),
+                 fg="#a0d2ff", bg="#0a0a12").pack(side=tk.LEFT)
+
+        legend = tk.Frame(header, bg="#0a0a12")
+        legend.pack(side=tk.RIGHT)
+        for label, color in (
+            ("FX", FX_COLOR), ("BG", BG_COLOR), ("BG STOP", BG_STOP_COLOR), ("MUSIC", MUSIC_COLOR)
+        ):
+            tk.Label(legend, text=f"■ {label}", fg=color, bg="#0a0a12",
+                     font=tkfont.Font(size=9)).pack(side=tk.LEFT, padx=5)
+
+        search_row = tk.Frame(self, bg="#0a0a12")
+        search_row.pack(fill=tk.X, padx=8, pady=(0, 6))
+        tk.Label(search_row, text="Search:", fg="#a0a0b0", bg="#0a0a12",
+                 font=tkfont.Font(size=10)).pack(side=tk.LEFT)
+        self.search_var = tk.StringVar()
+        ent = tk.Entry(search_row, textvariable=self.search_var, width=32, bg="#16213e", fg="white",
+                       insertbackground="white", relief=tk.FLAT)
+        ent.pack(side=tk.LEFT, padx=6)
+        ent.bind("<Return>", lambda e: self._search_next())
+        tk.Button(search_row, text="Find", command=self._search_next, bg="#16213e", fg="white",
+                  relief=tk.FLAT, padx=8).pack(side=tk.LEFT, padx=2)
+        tk.Button(search_row, text="Clear", command=self._search_clear, bg="#16213e", fg="white",
+                  relief=tk.FLAT, padx=8).pack(side=tk.LEFT)
+
+        body = tk.Frame(self, bg="#0a0a12")
+        body.pack(fill=tk.BOTH, expand=True)
+
+        self.canvas = tk.Canvas(body, bg="#12121c", highlightthickness=0)
+        self.vscroll = tk.Scrollbar(body, orient=tk.VERTICAL, command=self._on_scroll)
+        self.canvas.configure(yscrollcommand=self.vscroll.set)
+        self.vscroll.pack(side=tk.RIGHT, fill=tk.Y)
+        self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+        self.inner = tk.Frame(self.canvas, bg="#12121c")
+        self.canvas_window = self.canvas.create_window((0, 0), window=self.inner, anchor="nw")
+
+        self.inner.bind("<Configure>", self._on_inner_configure)
+        self.canvas.bind("<Configure>", self._on_canvas_configure)
+        self.canvas.bind("<MouseWheel>", self._on_mousewheel)
+        self.canvas.bind("<Button-4>", self._on_mousewheel)
+        self.canvas.bind("<Button-5>", self._on_mousewheel)
+        self.canvas.bind("<Button-3>", self._on_canvas_context)
+
+    def _on_canvas_configure(self, event):
+        self.canvas.itemconfig(self.canvas_window, width=event.width)
+
+    def _on_inner_configure(self):
+        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+
+    def _on_scroll(self, *args):
+        self.canvas.yview(*args)
+        if not self._sync_lock:
+            self._schedule_scroll_notify()
+
+    def _on_mousewheel(self, event):
+        if event.num == 5 or getattr(event, "delta", 0) < 0:
+            self.canvas.yview_scroll(3, "units")
+        else:
+            self.canvas.yview_scroll(-3, "units")
+        if not self._sync_lock:
+            self._schedule_scroll_notify()
+        return "break"
+
+    def _schedule_scroll_notify(self):
+        if self._scroll_job:
+            self.after_cancel(self._scroll_job)
+        self._scroll_job = self.after(150, self._scroll_notify)
+
+    def _scroll_notify(self):
+        self._scroll_job = None
+        if self._sync_lock:
+            return
+        # Scroll-driven sync disabled by default to avoid fighting navigation;
+        # user can click paragraphs/cues to select.
+
+    def set_sync_lock(self, locked: bool):
+        self._sync_lock = locked
+
+    def release_sync_lock(self):
+        self._sync_lock = False
+
+    def rebuild(self):
+        for child in self.inner.winfo_children():
+            child.destroy()
+        self._para_frames.clear()
+        self._cue_widgets.clear()
+
+        last_page = 0
+        for para in self.project.paragraphs:
+            if para.page != last_page:
+                last_page = para.page
+                pf = tk.Frame(self.inner, bg="#12121c")
+                pf.pack(fill=tk.X, padx=12, pady=(14, 4))
+                tk.Label(pf, text=f"— Page {para.page} —", fg=PAGE_COLOR, bg="#12121c",
+                         font=tkfont.Font(size=10, weight="bold")).pack(anchor="w")
+
+            frame = tk.Frame(self.inner, bg="#12121c", padx=8, pady=2)
+            frame.pack(fill=tk.X, padx=8, pady=1)
+            frame._paragraph_id = para.id  # type: ignore[attr-defined]
+            self._para_frames[para.id] = frame
+
+            if para.type == "scene_heading":
+                tk.Label(
+                    frame, text=para.text, fg=SCENE_COLOR, bg="#12121c", anchor="w",
+                    font=tkfont.Font(size=11, weight="bold"), wraplength=700, justify=tk.LEFT,
+                ).pack(fill=tk.X)
+            elif para.type == "character":
+                tk.Label(
+                    frame, text=para.text, fg="#e0e0e0", bg="#12121c", anchor="center",
+                    font=tkfont.Font(size=10, weight="bold"), wraplength=500,
+                ).pack(fill=tk.X, padx=80)
+            elif para.type == "dialogue":
+                tk.Label(
+                    frame, text=para.text, fg="#f0f0f0", bg="#12121c", anchor="w",
+                    font=tkfont.Font(size=10), wraplength=520, justify=tk.LEFT,
+                ).pack(fill=tk.X, padx=60)
+            elif para.type == "parenthetical":
+                tk.Label(
+                    frame, text=para.text, fg="#b0b0b0", bg="#12121c", anchor="center",
+                    font=tkfont.Font(size=9, slant="italic"), wraplength=400,
+                ).pack(fill=tk.X, padx=90)
+            elif para.type == "transition":
+                tk.Label(
+                    frame, text=para.text, fg="#c0c0c0", bg="#12121c", anchor="e",
+                    font=tkfont.Font(size=10, weight="bold"), wraplength=700,
+                ).pack(fill=tk.X)
+            else:
+                tk.Label(
+                    frame, text=para.text, fg="#d8d8d8", bg="#12121c", anchor="w",
+                    font=tkfont.Font(family="Courier", size=10), wraplength=700, justify=tk.LEFT,
+                ).pack(fill=tk.X)
+
+            frame.bind("<Button-1>", lambda e, pid=para.id: self._select_paragraph(pid))
+            frame.bind("<ButtonRelease-1>", lambda e, pid=para.id: self._drop_on_paragraph(pid))
+            frame.bind("<Button-3>", lambda e, pid=para.id: self._show_paragraph_menu(e, pid))
+
+            cues = self.project.cues_after(para.id)
+            if cues:
+                cue_row = tk.Frame(frame, bg="#12121c")
+                cue_row.pack(fill=tk.X, pady=(4, 0))
+                for cue in cues:
+                    self._add_cue_chip(cue_row, cue, para.id)
+
+            self._apply_para_highlight(para.id)
+
+        self._apply_cue_highlight()
+        self.inner.update_idletasks()
+        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+
+    def _add_cue_chip(self, parent, cue: dict, after_paragraph_id: str):
+        color = _marker_color(cue)
+        active = cue["id"] in (self._active_fg_id, self._active_bg_id, self._selected_cue_id)
+        lbl = tk.Label(
+            parent,
+            text=f"  {_marker_label(cue)}  ",
+            fg="white",
+            bg=color,
+            font=tkfont.Font(size=9, weight="bold"),
+            padx=4,
+            pady=2,
+            cursor="hand2",
+            relief=tk.RAISED if active else tk.FLAT,
+            borderwidth=2 if active else 1,
+        )
+        lbl.pack(anchor="w", pady=2)
+        lbl._cue_id = cue["id"]  # type: ignore[attr-defined]
+        self._cue_widgets[cue["id"]] = lbl
+
+        lbl.bind("<Button-1>", lambda e, c=cue: self._cue_click(c))
+        lbl.bind("<Double-Button-1>", lambda e, c=cue: self._cue_edit(c))
+        lbl.bind("<Button-3>", lambda e, c=cue: self._show_cue_menu(e, c))
+        lbl.bind("<ButtonPress-1>", lambda e, c=cue: self._start_drag(c["id"], e))
+        lbl.bind("<B1-Motion>", self._drag_motion)
+        lbl.bind("<ButtonRelease-1>", lambda e, pid=after_paragraph_id: self._drop_on_paragraph(pid))
+
+    def _apply_para_highlight(self, para_id: str):
+        frame = self._para_frames.get(para_id)
+        if not frame:
+            return
+        bg = PARA_SELECT_BG if para_id == self._selected_para_id else "#12121c"
+        frame.configure(bg=bg)
+        for child in frame.winfo_children():
+            try:
+                child.configure(bg=bg)
+            except tk.TclError:
+                pass
+
+    def _apply_cue_highlight(self):
+        for cue_id, widget in self._cue_widgets.items():
+            active = cue_id in (self._active_fg_id, self._active_bg_id, self._selected_cue_id)
+            widget.configure(relief=tk.RAISED if active else tk.FLAT, borderwidth=2 if active else 1)
+
+    def _select_paragraph(self, para_id: str):
+        self._selected_para_id = para_id
+        for pid in self._para_frames:
+            self._apply_para_highlight(pid)
+
+    def _cue_click(self, cue: dict):
+        self._selected_cue_id = cue["id"]
+        pl = self.project.placement_for(cue["id"])
+        if pl:
+            self._selected_para_id = pl.after_paragraph_id
+        self._apply_cue_highlight()
+        for pid in self._para_frames:
+            self._apply_para_highlight(pid)
+        if self.on_cue_selected:
+            self.on_cue_selected(cue)
+
+    def _cue_edit(self, cue: dict):
+        updated = ask_edit_cue(self, self.project.assets_by_id, cue)
+        if updated:
+            self.project.update_cue(cue["id"], updated)
+            self._persist()
+
+    def _start_drag(self, cue_id: str, event):
+        self._drag_cue_id = cue_id
+        self._drag_moved = False
+        self._drag_start_y = event.y_root
+
+    def _drag_motion(self, event):
+        if self._drag_cue_id and abs(event.y_root - self._drag_start_y) > 8:
+            self._drag_moved = True
+
+    def _drop_on_paragraph(self, para_id: str):
+        if not self._drag_cue_id or not self._drag_moved:
+            self._drag_cue_id = None
+            self._drag_moved = False
+            return
+        self.project.move_cue(self._drag_cue_id, para_id)
+        self._drag_cue_id = None
+        self._drag_moved = False
+        self._persist()
+
+    def _persist(self):
+        self.project.save_all()
+        self.rebuild()
+        if self.on_cues_changed:
+            self.on_cues_changed()
+
+    def _show_cue_menu(self, event, cue: dict):
+        menu = tk.Menu(self, tearoff=0, bg="#16213e", fg="white")
+        pl = self.project.placement_for(cue["id"])
+        para_id = pl.after_paragraph_id if pl else (self.project.paragraphs[0].id if self.project.paragraphs else "")
+
+        menu.add_command(label="Jump To Cue", command=lambda: self._cue_click(cue))
+        menu.add_command(label="Edit Cue…", command=lambda: self._cue_edit(cue))
+        menu.add_separator()
+        menu.add_command(label="Move Cue Up", command=lambda: self._move_cue(cue["id"], -1))
+        menu.add_command(label="Move Cue Down", command=lambda: self._move_cue(cue["id"], 1))
+        menu.add_command(label="Duplicate Cue", command=lambda: self._duplicate(cue["id"]))
+        menu.add_command(label="Delete Cue", command=lambda: self._delete(cue["id"]))
+        menu.add_separator()
+        menu.add_command(label="Assign Existing Asset…", command=lambda: self._assign_asset(cue))
+        menu.add_command(label="Edit Notes…", command=lambda: self._cue_edit(cue))
+        menu.add_separator()
+        menu.add_command(label="Add Effect Cue Here", command=lambda: self._add_cue(para_id, "FOREGROUND", "SFX"))
+        menu.add_command(label="Add Background Cue Here", command=lambda: self._add_cue(para_id, "BACKGROUND", "Ambience"))
+        menu.add_command(label="Add Music Cue Here", command=lambda: self._add_cue(para_id, "FOREGROUND", "Music"))
+        menu.tk_popup(event.x_root, event.y_root)
+
+    def _show_paragraph_menu(self, event, para_id: str):
+        menu = tk.Menu(self, tearoff=0, bg="#16213e", fg="white")
+        menu.add_command(label="Add Effect Cue Here", command=lambda: self._add_cue(para_id, "FOREGROUND", "SFX"))
+        menu.add_command(label="Add Background Cue Here", command=lambda: self._add_cue(para_id, "BACKGROUND", "Ambience"))
+        menu.add_command(label="Add Music Cue Here", command=lambda: self._add_cue(para_id, "FOREGROUND", "Music"))
+        menu.tk_popup(event.x_root, event.y_root)
+
+    def _on_canvas_context(self, event):
+        pass
+
+    def _move_cue(self, cue_id: str, direction: int):
+        self.project.reorder_cue(cue_id, direction)
+        self._persist()
+
+    def _duplicate(self, cue_id: str):
+        self.project.duplicate_cue(cue_id)
+        self._persist()
+
+    def _delete(self, cue_id: str):
+        if messagebox.askyesno("Delete Cue", f"Delete {cue_id}?", parent=self):
+            self.project.delete_cue(cue_id)
+            self._persist()
+
+    def _assign_asset(self, cue: dict):
+        self._cue_edit(cue)
+
+    def _add_cue(self, para_id: str, cue_type: str, category: str):
+        para = self.project.paragraph(para_id)
+        trigger = para.text[:120] if para else ""
+        data = ask_new_cue(self, self.project.assets_by_id, default_trigger=trigger)
+        if not data:
+            return
+        data["cue_type"] = cue_type
+        data["category"] = category
+        self.project.add_cue(para_id, data)
+        self._persist()
+
+    def _search_next(self):
+        query = self.search_var.get().strip().lower()
+        if not query:
+            return
+        if not self._search_hits or self._search_hits[0][0] != query:
+            self._search_hits = self._build_search_hits(query)
+            self._search_index = 0
+        if not self._search_hits:
+            messagebox.showinfo("Search", f"No matches for '{query}'", parent=self)
+            return
+        if self._search_index >= len(self._search_hits):
+            self._search_index = 0
+        kind, target_id = self._search_hits[self._search_index]
+        self._search_index += 1
+        if kind == "paragraph":
+            self._select_paragraph(target_id)
+            self._scroll_to_paragraph(target_id)
+        elif kind == "cue":
+            cue = next((c for c in self.project.cues if c["id"] == target_id), None)
+            if cue:
+                self._cue_click(cue)
+                pl = self.project.placement_for(target_id)
+                if pl:
+                    self._scroll_to_paragraph(pl.after_paragraph_id)
+
+    def _search_clear(self):
+        self.search_var.set("")
+        self._search_hits = []
+        self._search_index = 0
+
+    def _build_search_hits(self, query: str) -> list[tuple[str, str]]:
+        hits: list[tuple[str, str]] = []
+        for p in self.project.paragraphs:
+            hay = f"{p.text} {p.scene} {p.speaker or ''} {p.page}".lower()
+            if query in hay or query in p.type.lower():
+                hits.append(("paragraph", p.id))
+        for c in self.project.cues:
+            asset = self.project.assets_by_id.get(c.get("asset_id", ""), {})
+            hay = " ".join([
+                c.get("id", ""), c.get("name", ""), c.get("trigger", ""),
+                c.get("scene", ""), str(c.get("page", "")), asset.get("name", ""),
+            ]).lower()
+            if query in hay:
+                hits.append(("cue", c["id"]))
+        return hits
+
+    def _scroll_to_paragraph(self, para_id: str):
+        frame = self._para_frames.get(para_id)
+        if not frame:
+            self.rebuild()
+            frame = self._para_frames.get(para_id)
+        if not frame:
+            return
+        self._sync_lock = True
+        self.inner.update_idletasks()
+        y = frame.winfo_y()
+        height = max(frame.winfo_height(), 40)
+        total = max(self.inner.winfo_height(), 1)
+        view_h = max(self.canvas.winfo_height(), 200)
+        target = y + height / 2 - view_h / 2
+        scrollable = max(total - view_h, 1)
+        fraction = max(0, min(1, target / scrollable))
+        self.canvas.yview_moveto(fraction)
+        self.after(200, self.release_sync_lock)
+
+    def scroll_to_cue(self, cue: dict, *, fg_id: str | None = None, bg_id: str | None = None):
+        self._active_fg_id = fg_id
+        self._active_bg_id = bg_id
+        self._selected_cue_id = cue["id"]
+        pl = self.project.placement_for(cue["id"])
+        if pl:
+            self._selected_para_id = pl.after_paragraph_id
+        self._apply_cue_highlight()
+        for pid in self._para_frames:
+            self._apply_para_highlight(pid)
+        if pl:
+            self._scroll_to_paragraph(pl.after_paragraph_id)
+
+    def set_active_cues(self, *, fg_id: str | None = None, bg_id: str | None = None):
+        if self._sync_lock:
+            return
+        self._active_fg_id = fg_id
+        self._active_bg_id = bg_id
+        self._apply_cue_highlight()
+
+    def close(self):
+        pass
