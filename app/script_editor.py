@@ -136,7 +136,7 @@ class ScriptEditor(tk.Frame):
     def _on_canvas_configure(self, event):
         self.canvas.itemconfig(self.canvas_window, width=event.width)
 
-    def _on_inner_configure(self):
+    def _on_inner_configure(self, event=None):
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
 
     def _on_scroll(self, *args):
