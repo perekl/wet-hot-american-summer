@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
+import re
 import tkinter as tk
 from tkinter import font as tkfont, messagebox
 
-from cue_dialogs import ask_edit_cue, ask_new_cue
+from cue_dialogs import UNCHANGED, ask_edit_cue, ask_expected_background, ask_new_cue
 from script_model import ScriptProject, _marker_kind
 
 FX_COLOR = "#e94560"
@@ -46,6 +47,10 @@ def _marker_label(cue: dict) -> str:
     if kind == "BG":
         return f"[BG-{num}] {cue['name']}"
     return f"[FX-{num}] {cue['name']}"
+
+
+def _tokenize(text: str) -> list[tuple[str, int]]:
+    return [(m.group(), m.start()) for m in re.finditer(r"\S+|\s+", text)]
 
 
 class ScriptEditor(tk.Frame):
@@ -186,40 +191,14 @@ class ScriptEditor(tk.Frame):
             frame._paragraph_id = para.id  # type: ignore[attr-defined]
             self._para_frames[para.id] = frame
 
-            if para.type == "scene_heading":
-                tk.Label(
-                    frame, text=para.text, fg=SCENE_COLOR, bg="#12121c", anchor="w",
-                    font=tkfont.Font(size=11, weight="bold"), wraplength=700, justify=tk.LEFT,
-                ).pack(fill=tk.X)
-            elif para.type == "character":
-                tk.Label(
-                    frame, text=para.text, fg="#e0e0e0", bg="#12121c", anchor="center",
-                    font=tkfont.Font(size=10, weight="bold"), wraplength=500,
-                ).pack(fill=tk.X, padx=80)
-            elif para.type == "dialogue":
-                tk.Label(
-                    frame, text=para.text, fg="#f0f0f0", bg="#12121c", anchor="w",
-                    font=tkfont.Font(size=10), wraplength=520, justify=tk.LEFT,
-                ).pack(fill=tk.X, padx=60)
-            elif para.type == "parenthetical":
-                tk.Label(
-                    frame, text=para.text, fg="#b0b0b0", bg="#12121c", anchor="center",
-                    font=tkfont.Font(size=9, slant="italic"), wraplength=400,
-                ).pack(fill=tk.X, padx=90)
-            elif para.type == "transition":
-                tk.Label(
-                    frame, text=para.text, fg="#c0c0c0", bg="#12121c", anchor="e",
-                    font=tkfont.Font(size=10, weight="bold"), wraplength=700,
-                ).pack(fill=tk.X)
-            else:
-                tk.Label(
-                    frame, text=para.text, fg="#d8d8d8", bg="#12121c", anchor="w",
-                    font=tkfont.Font(family="Courier", size=10), wraplength=700, justify=tk.LEFT,
-                ).pack(fill=tk.X)
-
             frame.bind("<Button-1>", lambda e, pid=para.id: self._select_paragraph(pid))
             frame.bind("<ButtonRelease-1>", lambda e, pid=para.id: self._drop_on_paragraph(pid))
             frame.bind("<Button-3>", lambda e, pid=para.id: self._show_paragraph_menu(e, pid))
+
+            style = self._para_style(para.type)
+            text_row = tk.Frame(frame, bg="#12121c")
+            text_row.pack(fill=tk.X, **style.get("pack", {}))
+            self._build_text_row(text_row, para, style)
 
             cues = self.project.cues_after(para.id)
             if cues:
@@ -234,7 +213,118 @@ class ScriptEditor(tk.Frame):
         self.inner.update_idletasks()
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
 
-    def _add_cue_chip(self, parent, cue: dict, after_paragraph_id: str):
+        self.inner.update_idletasks()
+        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+
+    def _para_style(self, para_type: str) -> dict:
+        if para_type == "scene_heading":
+            return {
+                "pack": {},
+                "fg": SCENE_COLOR,
+                "font": tkfont.Font(size=11, weight="bold"),
+                "anchor": "w",
+            }
+        if para_type == "character":
+            return {
+                "pack": {"padx": 80},
+                "fg": "#e0e0e0",
+                "font": tkfont.Font(size=10, weight="bold"),
+                "anchor": "center",
+            }
+        if para_type == "dialogue":
+            return {
+                "pack": {"padx": 60},
+                "fg": "#f0f0f0",
+                "font": tkfont.Font(size=10),
+                "anchor": "w",
+            }
+        if para_type == "parenthetical":
+            return {
+                "pack": {"padx": 90},
+                "fg": "#b0b0b0",
+                "font": tkfont.Font(size=9, slant="italic"),
+                "anchor": "center",
+            }
+        if para_type == "transition":
+            return {
+                "pack": {},
+                "fg": "#c0c0c0",
+                "font": tkfont.Font(size=10, weight="bold"),
+                "anchor": "e",
+            }
+        return {
+            "pack": {},
+            "fg": "#d8d8d8",
+            "font": tkfont.Font(family="Courier", size=10),
+            "anchor": "w",
+        }
+
+    def _inline_cues_at(self, para_id: str, char_pos: int) -> list[dict]:
+        by_id = {c["id"]: c for c in self.project.cues}
+        result: list[dict] = []
+        for pl in self.project._placements_for(para_id, inline=True):
+            if pl.anchor_start == char_pos:
+                cue = by_id.get(pl.cue_id)
+                if cue:
+                    result.append(cue)
+        return result
+
+    def _build_text_row(self, parent, para, style: dict):
+        tokens = _tokenize(para.text)
+        if not tokens:
+            spacer = tk.Label(parent, text=" ", fg=style["fg"], bg="#12121c")
+            spacer.pack(side=tk.LEFT)
+            return
+
+        row_top = tk.Frame(parent, bg="#12121c")
+        row_top.pack(fill=tk.X, anchor=style["anchor"])
+        current_row = row_top
+        chars_on_row = 0
+        max_chars = 72
+
+        for token, start in tokens:
+            for cue in self._inline_cues_at(para.id, start):
+                chip = tk.Frame(current_row, bg="#12121c")
+                chip.pack(side=tk.LEFT)
+                self._add_cue_chip(chip, cue, para.id, inline=True)
+
+            if token.isspace():
+                lbl = tk.Label(
+                    current_row, text=token, fg=style["fg"], bg="#12121c",
+                    font=style["font"],
+                )
+                lbl.pack(side=tk.LEFT)
+                chars_on_row += len(token)
+                continue
+
+            word = token
+            lbl = tk.Label(
+                current_row,
+                text=word,
+                fg=style["fg"],
+                bg="#12121c",
+                font=style["font"],
+                cursor="hand2",
+                padx=0,
+            )
+            lbl.pack(side=tk.LEFT)
+            chars_on_row += len(word)
+
+            lbl.bind(
+                "<Button-3>",
+                lambda e, pid=para.id, pos=start, w=word: self._show_word_menu(e, pid, pos, w),
+            )
+            lbl.bind(
+                "<ButtonRelease-1>",
+                lambda e, pid=para.id, pos=start, w=word: self._drop_on_anchor(pid, pos, w),
+            )
+
+            if chars_on_row >= max_chars:
+                current_row = tk.Frame(parent, bg="#12121c")
+                current_row.pack(fill=tk.X, anchor=style["anchor"])
+                chars_on_row = 0
+
+    def _add_cue_chip(self, parent, cue: dict, paragraph_id: str, *, inline: bool = False):
         color = _marker_color(cue)
         active = cue["id"] in (self._active_fg_id, self._active_bg_id, self._selected_cue_id)
         lbl = tk.Label(
@@ -249,7 +339,7 @@ class ScriptEditor(tk.Frame):
             relief=tk.RAISED if active else tk.FLAT,
             borderwidth=2 if active else 1,
         )
-        lbl.pack(anchor="w", pady=2)
+        lbl.pack(anchor="w" if not inline else "center", side=tk.LEFT if inline else tk.TOP, pady=2)
         lbl._cue_id = cue["id"]  # type: ignore[attr-defined]
         self._cue_widgets[cue["id"]] = lbl
 
@@ -258,7 +348,7 @@ class ScriptEditor(tk.Frame):
         lbl.bind("<Button-3>", lambda e, c=cue: self._show_cue_menu(e, c))
         lbl.bind("<ButtonPress-1>", lambda e, c=cue: self._start_drag(c["id"], e))
         lbl.bind("<B1-Motion>", self._drag_motion)
-        lbl.bind("<ButtonRelease-1>", lambda e, pid=after_paragraph_id: self._drop_on_paragraph(pid))
+        lbl.bind("<ButtonRelease-1>", lambda e, pid=paragraph_id: self._drop_on_paragraph(pid))
 
     def _apply_para_highlight(self, para_id: str):
         frame = self._para_frames.get(para_id)
@@ -294,7 +384,7 @@ class ScriptEditor(tk.Frame):
             self.on_cue_selected(cue)
 
     def _cue_edit(self, cue: dict):
-        updated = ask_edit_cue(self, self.project.assets_by_id, cue)
+        updated = ask_edit_cue(self, self.project, cue)
         if updated:
             self.project.update_cue(cue["id"], updated)
             self._persist()
@@ -313,7 +403,18 @@ class ScriptEditor(tk.Frame):
             self._drag_cue_id = None
             self._drag_moved = False
             return
-        self.project.move_cue(self._drag_cue_id, para_id)
+        self.project.move_cue(self._drag_cue_id, para_id, anchor_start=-1, anchor_text="")
+        self._drag_cue_id = None
+        self._drag_moved = False
+        self._persist()
+
+    def _drop_on_anchor(self, para_id: str, anchor_start: int, anchor_text: str):
+        if not self._drag_cue_id or not self._drag_moved:
+            return
+        self.project.move_cue(
+            self._drag_cue_id, para_id,
+            anchor_start=anchor_start, anchor_text=anchor_text,
+        )
         self._drag_cue_id = None
         self._drag_moved = False
         self._persist()
@@ -338,6 +439,7 @@ class ScriptEditor(tk.Frame):
         menu.add_command(label="Delete Cue", command=lambda: self._delete(cue["id"]))
         menu.add_separator()
         menu.add_command(label="Assign Existing Asset…", command=lambda: self._assign_asset(cue))
+        menu.add_command(label="Set Expected Background…", command=lambda: self._set_expected_background(cue))
         menu.add_command(label="Edit Notes…", command=lambda: self._cue_edit(cue))
         menu.add_separator()
         menu.add_command(label="Add Effect Cue Here", command=lambda: self._add_cue(para_id, "FOREGROUND", "SFX"))
@@ -371,15 +473,70 @@ class ScriptEditor(tk.Frame):
     def _assign_asset(self, cue: dict):
         self._cue_edit(cue)
 
-    def _add_cue(self, para_id: str, cue_type: str, category: str):
+    def _show_word_menu(self, event, para_id: str, anchor_start: int, word: str):
+        menu = tk.Menu(self, tearoff=0, bg="#16213e", fg="white")
+        quoted = f"'{word}'"
+        menu.add_command(
+            label=f"Add Effect Cue on {quoted}",
+            command=lambda: self._add_cue(
+                para_id, "FOREGROUND", "SFX", anchor_start=anchor_start, anchor_text=word,
+            ),
+        )
+        menu.add_command(
+            label=f"Add Background Cue on {quoted}",
+            command=lambda: self._add_cue(
+                para_id, "BACKGROUND", "Ambience", anchor_start=anchor_start, anchor_text=word,
+            ),
+        )
+        menu.add_command(
+            label=f"Add Music Cue on {quoted}",
+            command=lambda: self._add_cue(
+                para_id, "FOREGROUND", "Music", anchor_start=anchor_start, anchor_text=word,
+            ),
+        )
+        menu.tk_popup(event.x_root, event.y_root)
+
+    def _set_expected_background(self, cue: dict):
+        current = cue.get("expected_background_asset_id", "") or ""
+        picked = ask_expected_background(self, self.project.assets_by_id, current)
+        if picked is UNCHANGED:
+            return
+        cue_obj = next((c for c in self.project.cues if c["id"] == cue["id"]), None)
+        if not cue_obj:
+            return
+        if picked:
+            cue_obj["expected_background_asset_id"] = picked
+        else:
+            cue_obj.pop("expected_background_asset_id", None)
+        self._persist()
+
+    def _add_cue(
+        self,
+        para_id: str,
+        cue_type: str,
+        category: str,
+        *,
+        anchor_start: int = -1,
+        anchor_text: str = "",
+    ):
         para = self.project.paragraph(para_id)
-        trigger = para.text[:120] if para else ""
-        data = ask_new_cue(self, self.project.assets_by_id, default_trigger=trigger)
+        trigger = anchor_text or (para.text[:120] if para else "")
+        data = ask_new_cue(
+            self,
+            self.project,
+            default_trigger=trigger,
+            anchor_text=anchor_text,
+            paragraph_id=para_id,
+            cue_type=cue_type,
+            category=category,
+        )
         if not data:
             return
-        data["cue_type"] = cue_type
-        data["category"] = category
-        self.project.add_cue(para_id, data)
+        data.setdefault("cue_type", cue_type)
+        data.setdefault("category", category)
+        self.project.add_cue(
+            para_id, data, anchor_start=anchor_start, anchor_text=anchor_text or data.get("trigger", ""),
+        )
         self._persist()
 
     def _search_next(self):
