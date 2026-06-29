@@ -93,12 +93,27 @@ python app/soundboard.py
 
 **Display:** current cue name, trigger dialogue, script page, and upcoming cue.
 
+## Sourcing Royalty-Free Assets
+
+Automated sourcing tries **Pixabay first**, then **BBC Sound Effects**:
+
+```bash
+python tools/source_assets.py
+```
+
+- Downloads BBC metadata from Internet Archive (`BBCSoundEffects.csv`)
+- Converts audio to the expected `.mp3` / `.wav` paths in `assets/`
+- Updates `data/assets.json`, `data/master_sound_assets.xlsx`, and writes `data/asset_sourcing_report.md`
+- **71 royalty-free assets** are included; licensed music must still be acquired manually
+
+Pixabay sound effects are not available via official API; automated Pixabay access may be blocked by Cloudflare — see the sourcing report for per-asset status.
+
 ## Future Workflow
 
-1. **Source assets** — Populate `assets/sfx/` and `assets/ambience/` using `master_sound_assets.xlsx` as a shopping list. Update Status and Download URL columns as files are acquired.
+1. **Source assets** — Run `python tools/source_assets.py` for royalty-free SFX/ambience; manually acquire licensed tracks from `licensed_music.xlsx`.
 2. **Clear music** — Use `licensed_music.xlsx` to secure sync/performance rights or plan live musician/karaoke substitutes for the table read.
 3. **Rehearse** — Stage manager runs from `docs/StageManagerBook.docx`; sound op uses the soundboard app in parallel with the script.
-4. **Implement playback** — Wire `app/soundboard.py` PLAY button to a cross-platform audio engine (e.g., `sounddevice` + preloaded buffers, or a Windows-specific backend).
+4. **Rehearse with playback** — Place audio files at paths listed in `master_sound_assets.xlsx`, then run the soundboard live.
 5. **Screenplay updates** — Re-extract text from an updated PDF, revise `tools/cues_data.py`, and regenerate.
 
 ## Source of Truth
