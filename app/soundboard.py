@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import json
 import subprocess
 import sys
 from pathlib import Path
@@ -17,14 +16,20 @@ except ImportError:
 
 APP_DIR = Path(__file__).resolve().parent
 ROOT = APP_DIR.parent
-CUES_PATH = ROOT / "data" / "cues.json"
-ASSETS_PATH = ROOT / "data" / "assets.json"
 
 sys.path.insert(0, str(APP_DIR))
 from cue_script_index import cue_type  # noqa: E402
 from playback import VLCPlaybackEngine  # noqa: E402
-from script_editor import ScriptEditor  # noqa: E402
-from script_model import ScriptProject  # noqa: E402
+from script_editor import (  # noqa: E402
+    BG_COLOR,
+    BG_STOP_COLOR,
+    FX_COLOR,
+    MUSIC_COLOR,
+    ScriptEditor,
+    _marker_color,
+    _marker_label,
+)
+from script_model import ScriptProject, _marker_kind  # noqa: E402
 
 
 def _format_elapsed(seconds: float) -> str:
@@ -45,6 +50,14 @@ def resolve_volume_from_cue(cue: dict) -> int:
     return max(0, min(100, int(cue.get("suggested_volume", 70))))
 
 
+BROWSER_GROUPS = (
+    ("MUSIC", MUSIC_COLOR, "MUSIC"),
+    ("FX", FX_COLOR, "SOUND EFFECTS"),
+    ("BG", BG_COLOR, "BACKGROUND"),
+    ("BG_STOP", BG_STOP_COLOR, "BACKGROUND STOP"),
+)
+
+
 class SoundboardApp(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -60,28 +73,23 @@ class SoundboardApp(tk.Tk):
             )
         self.project.load()
         self.all_cues = self.project.get_cues_sorted()
-        self.foreground_cues = [c for c in self.all_cues if cue_type(c) == "FOREGROUND"]
-        self.background_cues = [c for c in self.all_cues if cue_type(c) == "BACKGROUND"]
         self.assets_by_id = self.project.assets_by_id
-        self.fg_index = 0
-        self.bg_index = 0
         self.player = self._init_player()
         self._fade_job: str | None = None
         self._tick_job: str | None = None
-        self._ignore_mismatch_for: str | None = None
-        self._script_sync_lock = False
         self.script_editor: ScriptEditor | None = None
         self._paned_split_done = False
         self._paned_split_retries = 0
+        self._active_cue_id: str | None = None
+        self._browser_rows: dict[str, tk.Frame] = {}
+        self._browser_filter = tk.StringVar(value="")
 
         self._build_ui()
         self._maximize_window()
         self.update_idletasks()
         self._bind_keys()
-        self._refresh_foreground()
-        self._refresh_background()
+        self._rebuild_browser()
         self._start_background_tick()
-        self.after(200, self._sync_script_from_foreground)
         self.protocol("WM_DELETE_WINDOW", self._on_close)
 
     def _maximize_window(self):
@@ -111,10 +119,9 @@ class SoundboardApp(tk.Tk):
             return
 
         minsize = 280
-        target = width // 2
-        target = max(minsize, min(width - minsize, target))
+        target = max(minsize, min(width - minsize, width // 2))
         try:
-            self.paned.sashpos(0, target)
+            self.paned.sash_place(0, target, 0)
             self._paned_split_done = True
         except tk.TclError:
             if self._paned_split_retries < 40:
@@ -140,99 +147,26 @@ class SoundboardApp(tk.Tk):
             return asset["name"]
         return asset_id
 
-    def _foreground_cue(self) -> dict:
-        return self.foreground_cues[self.fg_index]
-
-    def _background_cue(self) -> dict:
-        return self.background_cues[self.bg_index]
-
-    def _bg_index_for_asset(self, asset_id: str) -> int | None:
-        for i, cue in enumerate(self.background_cues):
-            if cue.get("asset_id") == asset_id:
-                return i
-        return None
+    def _asset_summary(self, cue: dict) -> str:
+        asset_id = cue.get("asset_id", "")
+        asset = self.assets_by_id.get(asset_id, {})
+        name = asset.get("name") or asset_id or "—"
+        return f"{asset_id} — {name}"
 
     def _build_ui(self):
-        med_font = tkfont.Font(family="Helvetica", size=12)
         small_font = tkfont.Font(family="Helvetica", size=10)
 
         self.paned = tk.PanedWindow(self, orient=tk.HORIZONTAL, sashwidth=5, bg="#1a1a2e")
         self.paned.pack(fill=tk.BOTH, expand=True)
 
-        controls = tk.Frame(self.paned, bg="#1a1a2e")
-        self.paned.add(controls, minsize=280, stretch="always")
+        browser_host = tk.Frame(self.paned, bg="#1a1a2e")
+        self.paned.add(browser_host, minsize=280, stretch="always")
 
         script_host = tk.Frame(self.paned, bg="#0a0a12")
         self.paned.add(script_host, minsize=280, stretch="always")
         self.paned.bind("<Configure>", self._on_paned_configure)
 
-        tk.Label(
-            controls, text="WET HOT AMERICAN SUMMER", font=tkfont.Font(size=16, weight="bold"),
-            fg="#e94560", bg="#1a1a2e", wraplength=360,
-        ).pack(pady=(10, 2), padx=12)
-
-        self._build_background_panel(controls, med_font, small_font)
-
-        tk.Label(controls, text="EFFECTS", font=tkfont.Font(size=11, weight="bold"),
-                 fg="#a0d2ff", bg="#1a1a2e").pack(anchor="w", padx=12, pady=(8, 0))
-
-        nav = tk.Frame(controls, bg="#1a1a2e")
-        nav.pack(pady=4, padx=8)
-
-        self.btn_prev = tk.Button(nav, text="◀ PREV", font=med_font, width=8,
-                                  command=self.prev_foreground, bg="#16213e", fg="white",
-                                  activebackground="#0f3460", relief=tk.FLAT, padx=6, pady=8)
-        self.btn_prev.grid(row=0, column=0, padx=4)
-
-        self.btn_play = tk.Button(nav, text="▶ GO", font=tkfont.Font(size=22, weight="bold"),
-                                  width=6, command=self.play_foreground_cue, bg="#e94560", fg="white",
-                                  activebackground="#c73652", relief=tk.FLAT, padx=10, pady=10)
-        self.btn_play.grid(row=0, column=1, padx=4)
-
-        self.btn_next = tk.Button(nav, text="NEXT ▶", font=med_font, width=8,
-                                  command=self.next_foreground, bg="#16213e", fg="white",
-                                  activebackground="#0f3460", relief=tk.FLAT, padx=6, pady=8)
-        self.btn_next.grid(row=0, column=2, padx=4)
-
-        tk.Label(controls, text="Space = next effect  |  Enter = GO  |  Esc = stop all",
-                 font=small_font, fg="#a0a0b0", bg="#1a1a2e", wraplength=360).pack(padx=12)
-
-        panel = tk.Frame(controls, bg="#16213e", padx=14, pady=12)
-        panel.pack(fill=tk.BOTH, expand=True, padx=10, pady=(6, 8))
-
-        self.sync_banner = tk.Frame(panel, bg="#16213e")
-        self.sync_banner.pack(fill=tk.X, pady=(0, 8))
-        self.lbl_sync = tk.Label(self.sync_banner, text="", font=med_font,
-                                 bg="#16213e", anchor="w", wraplength=330, justify=tk.LEFT)
-        self.lbl_sync.pack(fill=tk.X)
-
-        self.lbl_cue_id = tk.Label(panel, text="", font=tkfont.Font(size=14, weight="bold"),
-                                   fg="#e94560", bg="#16213e", anchor="w")
-        self.lbl_cue_id.pack(fill=tk.X)
-
-        self.lbl_name = tk.Label(panel, text="", font=tkfont.Font(size=15, weight="bold"),
-                                 fg="white", bg="#16213e", anchor="w", wraplength=330, justify=tk.LEFT)
-        self.lbl_name.pack(fill=tk.X, pady=(6, 4))
-
-        self.lbl_meta = tk.Label(panel, text="", font=small_font, fg="#a0d2ff", bg="#16213e",
-                                 anchor="w", wraplength=330, justify=tk.LEFT)
-        self.lbl_meta.pack(fill=tk.X, pady=4)
-
-        tk.Label(panel, text="TRIGGER", font=small_font, fg="#a0a0b0",
-                 bg="#16213e", anchor="w").pack(fill=tk.X, pady=(8, 2))
-        self.lbl_trigger = tk.Label(panel, text="", font=med_font, fg="#f5f5f5", bg="#16213e",
-                                    anchor="w", wraplength=330, justify=tk.LEFT)
-        self.lbl_trigger.pack(fill=tk.X)
-
-        tk.Label(panel, text="UPCOMING EFFECT", font=small_font, fg="#a0a0b0",
-                 bg="#16213e", anchor="w").pack(fill=tk.X, pady=(8, 2))
-        self.lbl_upcoming = tk.Label(panel, text="", font=med_font, fg="#7ec8a3", bg="#16213e",
-                                     anchor="w", wraplength=330, justify=tk.LEFT)
-        self.lbl_upcoming.pack(fill=tk.X)
-
-        self.status = tk.Label(controls, text="", font=small_font, fg="#a0a0b0", bg="#1a1a2e",
-                               wraplength=360)
-        self.status.pack(pady=(0, 8), padx=12)
+        self._build_sound_browser(browser_host, small_font)
 
         self.script_editor = ScriptEditor(
             script_host,
@@ -242,262 +176,229 @@ class SoundboardApp(tk.Tk):
         )
         self.script_editor.pack(fill=tk.BOTH, expand=True)
 
-    def _build_background_panel(self, parent, med_font, small_font):
-        panel = tk.Frame(parent, bg="#0f3460", padx=12, pady=10)
-        panel.pack(fill=tk.X, padx=10, pady=(6, 0))
+    def _build_sound_browser(self, parent, small_font):
+        tk.Label(
+            parent, text="WET HOT AMERICAN SUMMER", font=tkfont.Font(size=15, weight="bold"),
+            fg="#e94560", bg="#1a1a2e", wraplength=360,
+        ).pack(pady=(10, 2), padx=12)
 
-        tk.Label(panel, text="BACKGROUND", font=tkfont.Font(size=11, weight="bold"),
-                 fg="#a0d2ff", bg="#0f3460").grid(row=0, column=0, columnspan=6, sticky="w")
+        tk.Label(
+            parent, text="SOUND BROWSER", font=tkfont.Font(size=11, weight="bold"),
+            fg="#a0d2ff", bg="#1a1a2e",
+        ).pack(anchor="w", padx=12, pady=(4, 0))
 
-        tk.Label(panel, text="Queue:", font=small_font, fg="#c0c0d0", bg="#0f3460").grid(
-            row=1, column=0, sticky="nw", pady=(6, 0))
-        self.lbl_bg_queue = tk.Label(
-            panel, text="—", font=small_font, fg="white", bg="#0f3460",
-            wraplength=220, justify=tk.LEFT, anchor="w",
+        filter_row = tk.Frame(parent, bg="#1a1a2e")
+        filter_row.pack(fill=tk.X, padx=12, pady=(6, 4))
+        tk.Label(filter_row, text="Filter:", fg="#a0a0b0", bg="#1a1a2e",
+                 font=small_font).pack(side=tk.LEFT)
+        ent = tk.Entry(
+            filter_row, textvariable=self._browser_filter, bg="#16213e", fg="white",
+            insertbackground="white", relief=tk.FLAT, width=28,
         )
-        self.lbl_bg_queue.grid(row=1, column=1, columnspan=2, sticky="w", padx=(4, 8), pady=(6, 0))
+        ent.pack(side=tk.LEFT, padx=6, fill=tk.X, expand=True)
+        self._browser_filter.trace_add("write", lambda *_: self._rebuild_browser())
 
-        bg_nav = tk.Frame(panel, bg="#0f3460")
-        bg_nav.grid(row=2, column=0, columnspan=6, sticky="w", pady=(8, 0))
-        btn_nav = {"font": small_font, "bg": "#16213e", "fg": "white",
-                   "activebackground": "#1a1a2e", "relief": tk.FLAT, "padx": 8, "pady": 4}
-        tk.Button(bg_nav, text="◀ PREV", command=self.prev_background, **btn_nav).pack(
-            side=tk.LEFT, padx=(0, 4))
-        tk.Button(bg_nav, text="GO ▶", command=self.play_background_cue,
-                  bg="#e94560", fg="white", font=small_font, relief=tk.FLAT,
-                  padx=10, pady=4, activebackground="#c73652").pack(side=tk.LEFT, padx=4)
-        tk.Button(bg_nav, text="NEXT ▶", command=self.next_background, **btn_nav).pack(
-            side=tk.LEFT, padx=(4, 0))
+        list_body = tk.Frame(parent, bg="#1a1a2e")
+        list_body.pack(fill=tk.BOTH, expand=True, padx=8, pady=(0, 4))
 
-        tk.Label(panel, text="Playing:", font=small_font, fg="#c0c0d0", bg="#0f3460").grid(
-            row=3, column=0, sticky="w", pady=(8, 0))
-        self.lbl_bg_name = tk.Label(panel, text="—", font=small_font, fg="white", bg="#0f3460")
-        self.lbl_bg_name.grid(row=3, column=1, sticky="w", padx=(4, 0), pady=(8, 0))
+        self.browser_canvas = tk.Canvas(list_body, bg="#12121c", highlightthickness=0)
+        browser_scroll = tk.Scrollbar(list_body, orient=tk.VERTICAL, command=self.browser_canvas.yview)
+        self.browser_canvas.configure(yscrollcommand=browser_scroll.set)
+        browser_scroll.pack(side=tk.RIGHT, fill=tk.Y)
+        self.browser_canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-        tk.Label(panel, text="Status:", font=small_font, fg="#c0c0d0", bg="#0f3460").grid(
-            row=3, column=2, sticky="w", padx=(12, 0), pady=(8, 0))
-        self.lbl_bg_status = tk.Label(panel, text="Stopped", font=small_font, fg="#f5d76e", bg="#0f3460")
-        self.lbl_bg_status.grid(row=3, column=3, sticky="w", padx=(4, 0), pady=(8, 0))
+        self.browser_inner = tk.Frame(self.browser_canvas, bg="#12121c")
+        self._browser_window = self.browser_canvas.create_window(
+            (0, 0), window=self.browser_inner, anchor="nw",
+        )
+        self.browser_inner.bind("<Configure>", self._on_browser_configure)
+        self.browser_canvas.bind("<Configure>", self._on_browser_canvas_configure)
+        self.browser_canvas.bind("<MouseWheel>", self._on_browser_mousewheel)
+        self.browser_canvas.bind("<Button-4>", self._on_browser_mousewheel)
+        self.browser_canvas.bind("<Button-5>", self._on_browser_mousewheel)
 
-        tk.Label(panel, text="Elapsed:", font=small_font, fg="#c0c0d0", bg="#0f3460").grid(
-            row=4, column=0, sticky="w", pady=(4, 0))
-        self.lbl_bg_elapsed = tk.Label(panel, text="0:00", font=small_font, fg="white", bg="#0f3460")
-        self.lbl_bg_elapsed.grid(row=4, column=1, sticky="w", padx=(4, 0), pady=(4, 0))
+        transport = tk.Frame(parent, bg="#0f3460", padx=12, pady=10)
+        transport.pack(fill=tk.X, padx=10, pady=(0, 8))
 
-        btn_row = tk.Frame(panel, bg="#0f3460")
-        btn_row.grid(row=5, column=0, columnspan=6, sticky="w", pady=(8, 2))
+        tk.Label(transport, text="NOW PLAYING", font=tkfont.Font(size=10, weight="bold"),
+                 fg="#a0d2ff", bg="#0f3460").pack(anchor="w")
+        self.lbl_now_playing = tk.Label(
+            transport, text="—", font=small_font, fg="white", bg="#0f3460",
+            wraplength=320, justify=tk.LEFT, anchor="w",
+        )
+        self.lbl_now_playing.pack(fill=tk.X, pady=(4, 6))
 
+        btn_row = tk.Frame(transport, bg="#0f3460")
+        btn_row.pack(fill=tk.X, pady=(0, 6))
         btn_style = {"font": small_font, "bg": "#16213e", "fg": "white",
-                     "activebackground": "#1a1a2e", "relief": tk.FLAT, "padx": 6, "pady": 3}
-        tk.Button(btn_row, text="Play", command=self._bg_play, **btn_style).pack(side=tk.LEFT, padx=(0, 4))
-        tk.Button(btn_row, text="Pause", command=self._bg_pause, **btn_style).pack(side=tk.LEFT, padx=4)
-        tk.Button(btn_row, text="Stop", command=self._bg_stop, **btn_style).pack(side=tk.LEFT, padx=4)
+                     "activebackground": "#1a1a2e", "relief": tk.FLAT, "padx": 8, "pady": 4}
+        tk.Button(btn_row, text="Stop All", command=self.stop_all, **btn_style).pack(side=tk.LEFT, padx=(0, 4))
+        tk.Button(btn_row, text="BG Play", command=self._bg_play, **btn_style).pack(side=tk.LEFT, padx=4)
+        tk.Button(btn_row, text="BG Pause", command=self._bg_pause, **btn_style).pack(side=tk.LEFT, padx=4)
+        tk.Button(btn_row, text="BG Stop", command=self._bg_stop, **btn_style).pack(side=tk.LEFT, padx=4)
         tk.Button(btn_row, text="Fade Out", command=self._bg_fade_out, **btn_style).pack(side=tk.LEFT, padx=4)
-        tk.Button(btn_row, text="Switch", command=self._bg_switch_to_expected, **btn_style).pack(
-            side=tk.LEFT, padx=4)
 
-        vol_row = tk.Frame(panel, bg="#0f3460")
-        vol_row.grid(row=6, column=0, columnspan=6, sticky="w", pady=(4, 0))
-        tk.Label(vol_row, text="Vol:", font=small_font, fg="#c0c0d0", bg="#0f3460").pack(side=tk.LEFT)
+        status_row = tk.Frame(transport, bg="#0f3460")
+        status_row.pack(fill=tk.X)
+        self.lbl_bg_status = tk.Label(status_row, text="BG: Stopped", font=small_font,
+                                      fg="#f5d76e", bg="#0f3460", anchor="w")
+        self.lbl_bg_status.pack(side=tk.LEFT)
+        self.lbl_bg_elapsed = tk.Label(status_row, text="0:00", font=small_font,
+                                       fg="white", bg="#0f3460", anchor="e")
+        self.lbl_bg_elapsed.pack(side=tk.RIGHT)
+
+        vol_row = tk.Frame(transport, bg="#0f3460")
+        vol_row.pack(fill=tk.X, pady=(6, 0))
+        tk.Label(vol_row, text="BG Vol:", font=small_font, fg="#c0c0d0", bg="#0f3460").pack(side=tk.LEFT)
         self.bg_volume = tk.IntVar(value=30)
         self.bg_volume_scale = tk.Scale(
-            vol_row, from_=0, to=100, orient=tk.HORIZONTAL, length=180,
+            vol_row, from_=0, to=100, orient=tk.HORIZONTAL, length=220,
             variable=self.bg_volume, command=self._on_bg_volume, bg="#0f3460", fg="white",
             highlightthickness=0, troughcolor="#16213e", activebackground="#e94560",
         )
         self.bg_volume_scale.pack(side=tk.LEFT, padx=(6, 0))
 
-    def _bind_keys(self):
-        self.bind("<space>", self._on_space)
-        self.bind("<Left>", lambda e: self.prev_foreground())
-        self.bind("<Right>", lambda e: self.next_foreground())
-        self.bind("<Return>", lambda e: self.play_foreground_cue())
-        self.bind("<Escape>", self._on_escape)
+        self.status = tk.Label(parent, text="Click a cue in the script or sound browser to play.",
+                               font=small_font, fg="#a0a0b0", bg="#1a1a2e", wraplength=360)
+        self.status.pack(pady=(0, 8), padx=12)
 
-    def _on_space(self, _event=None):
-        self.next_foreground()
+    def _on_browser_configure(self, event=None):
+        if event is not None:
+            self.browser_canvas.configure(scrollregion=(0, 0, event.width, max(event.height, 1)))
+
+    def _on_browser_canvas_configure(self, event):
+        self.browser_canvas.itemconfig(self._browser_window, width=event.width)
+
+    def _on_browser_mousewheel(self, event):
+        if event.num == 5:
+            self.browser_canvas.yview_scroll(3, "units")
+        elif event.num == 4:
+            self.browser_canvas.yview_scroll(-3, "units")
+        else:
+            delta = event.delta
+            if delta:
+                steps = max(1, abs(delta) // 120)
+                self.browser_canvas.yview_scroll(-steps if delta > 0 else steps, "units")
         return "break"
+
+    def _cue_matches_filter(self, cue: dict, query: str) -> bool:
+        if not query:
+            return True
+        asset = self.assets_by_id.get(cue.get("asset_id", ""), {})
+        hay = " ".join([
+            cue.get("id", ""), cue.get("name", ""), cue.get("category", ""),
+            cue.get("trigger", ""), str(cue.get("page", "")), asset.get("name", ""),
+        ]).lower()
+        return query in hay
+
+    def _rebuild_browser(self):
+        for child in self.browser_inner.winfo_children():
+            child.destroy()
+        self._browser_rows.clear()
+
+        query = self._browser_filter.get().strip().lower()
+        small_font = tkfont.Font(family="Helvetica", size=9)
+
+        for kind, _color, title in BROWSER_GROUPS:
+            cues = [
+                c for c in self.all_cues
+                if _marker_kind(c) == kind and self._cue_matches_filter(c, query)
+            ]
+            if not cues:
+                continue
+
+            tk.Label(
+                self.browser_inner, text=title, font=tkfont.Font(size=10, weight="bold"),
+                fg="#a0d2ff", bg="#12121c", anchor="w",
+            ).pack(fill=tk.X, padx=8, pady=(10, 4))
+
+            for cue in cues:
+                self._add_browser_row(cue, small_font)
+
+        self.browser_inner.update_idletasks()
+        self.browser_canvas.configure(scrollregion=self.browser_canvas.bbox("all"))
+        self._highlight_browser_cue(self._active_cue_id)
+
+    def _add_browser_row(self, cue: dict, small_font):
+        color = _marker_color(cue)
+        row = tk.Frame(self.browser_inner, bg=color, cursor="hand2")
+        row.pack(fill=tk.X, padx=8, pady=2)
+        row._cue_id = cue["id"]  # type: ignore[attr-defined]
+        row._base_color = color  # type: ignore[attr-defined]
+        self._browser_rows[cue["id"]] = row
+
+        asset_name = self._asset_label(cue.get("asset_id"))
+        tk.Label(
+            row, text=_marker_label(cue), font=tkfont.Font(size=9, weight="bold"),
+            fg="white", bg=color, anchor="w",
+        ).pack(fill=tk.X, padx=8, pady=(4, 0))
+        tk.Label(
+            row, text=f"p.{cue.get('page', '?')}  •  {asset_name}",
+            font=small_font, fg="#f0f0f0", bg=color, anchor="w",
+        ).pack(fill=tk.X, padx=8, pady=(0, 4))
+
+        for widget in row.winfo_children():
+            widget.bind("<Button-1>", lambda e, c=cue: self._play_cue(c))
+        row.bind("<Button-1>", lambda e, c=cue: self._play_cue(c))
+
+    def _highlight_browser_cue(self, cue_id: str | None):
+        self._active_cue_id = cue_id
+        for cid, row in self._browser_rows.items():
+            base = row._base_color  # type: ignore[attr-defined]
+            active = cid == cue_id
+            row.configure(bg="#ffffff" if active else base)
+            for i, child in enumerate(row.winfo_children()):
+                child.configure(
+                    bg="#ffffff" if active else base,
+                    fg="#1a1a2e" if active else ("white" if i == 0 else "#f0f0f0"),
+                )
+
+    def _bind_keys(self):
+        self.bind("<Escape>", self._on_escape)
 
     def _on_escape(self, _event=None):
         self.stop_all()
         return "break"
 
-    def _expected_background(self, cue: dict) -> str | None:
-        return cue.get("expected_background_asset_id") or None
-
-    def _current_background(self) -> str | None:
-        if not self.player:
-            return None
-        return self.player.current_background_asset_id()
-
-    def _backgrounds_match(self, cue: dict) -> bool | None:
-        expected = self._expected_background(cue)
-        if not expected:
-            return None
-        return self._current_background() == expected
-
-    def _active_script_ids(self) -> tuple[str | None, str | None]:
-        fg_id = self._foreground_cue()["id"]
-        bg_id = self._background_cue()["id"] if self.background_cues else None
-        return fg_id, bg_id
-
-    def _sync_script_from_foreground(self):
-        if not self.script_editor:
-            return
-        self._script_sync_lock = True
-        fg_id, bg_id = self._active_script_ids()
-        self.script_editor.scroll_to_cue(self._foreground_cue(), fg_id=fg_id, bg_id=bg_id)
-        self.after(300, self._release_script_sync)
-
-    def _sync_script_from_background(self):
-        if not self.script_editor:
-            return
-        self._script_sync_lock = True
-        fg_id, bg_id = self._active_script_ids()
-        self.script_editor.scroll_to_cue(self._background_cue(), fg_id=fg_id, bg_id=bg_id)
-        self.after(300, self._release_script_sync)
-
-    def _sync_script_to_queues(self):
-        self._sync_script_from_foreground()
-
-    def _release_script_sync(self):
-        self._script_sync_lock = False
-        if self.script_editor:
-            self.script_editor.release_sync_lock()
-
     def _on_project_updated(self):
         self.project.load()
         self.all_cues = self.project.get_cues_sorted()
-        self.foreground_cues = [c for c in self.all_cues if cue_type(c) == "FOREGROUND"]
-        self.background_cues = [c for c in self.all_cues if cue_type(c) == "BACKGROUND"]
         self.assets_by_id = self.project.assets_by_id
-        if self.foreground_cues:
-            self.fg_index = min(self.fg_index, len(self.foreground_cues) - 1)
-        if self.background_cues:
-            self.bg_index = min(self.bg_index, len(self.background_cues) - 1)
-        self._refresh_foreground()
-        self._refresh_background()
-
-    def _asset_summary(self, cue: dict) -> str:
-        asset_id = cue.get("asset_id", "")
-        asset = self.assets_by_id.get(asset_id, {})
-        name = asset.get("name") or asset_id or "—"
-        filename = cue.get("asset_filename") or asset.get("filename", "")
-        mode = cue.get("playback_mode") or asset.get("playback_mode", "")
-        parts = [f"{asset_id} — {name}"]
-        if mode:
-            parts.append(mode)
-        if filename:
-            parts.append(Path(filename).name)
-        return "  |  ".join(parts)
+        self._rebuild_browser()
 
     def _on_script_cue_clicked(self, cue: dict):
-        if cue_type(cue) == "FOREGROUND":
-            for i, item in enumerate(self.foreground_cues):
-                if item["id"] == cue["id"]:
-                    self.fg_index = i
-                    self._refresh_foreground()
-                    break
-            self._sync_script_from_foreground()
-            self.play_foreground_cue()
+        self._play_cue(cue, from_script=True)
+
+    def _play_cue(self, cue: dict, *, from_script: bool = False):
+        self._highlight_browser_cue(cue["id"])
+        if cue_type(cue) == "BACKGROUND":
+            self._execute_background_go(cue)
         else:
-            for i, item in enumerate(self.background_cues):
-                if item["id"] == cue["id"]:
-                    self.bg_index = i
-                    self._refresh_background()
-                    break
-            self._sync_script_from_background()
-            self.play_background_cue()
-        self.status.config(text=f"▶ {cue['id']} — {self._asset_summary(cue)}")
-        self._refresh_sync_banner(self._foreground_cue())
+            self._execute_foreground_go(cue)
 
-    def _refresh_sync_banner(self, cue: dict):
-        match = self._backgrounds_match(cue)
-        if match is None:
-            self.sync_banner.config(bg="#16213e")
-            self.lbl_sync.config(bg="#16213e", fg="#a0a0b0", text="")
-            return
+        if self.script_editor:
+            self.script_editor.scroll_to_cue(cue, fg_id=cue["id"])
+        elif not from_script:
+            pass
 
-        current_label = self._asset_label(self._current_background())
-        expected_label = self._asset_label(self._expected_background(cue))
-
-        if match or self._ignore_mismatch_for == cue["id"]:
-            self.sync_banner.config(bg="#1b4332")
-            self.lbl_sync.config(
-                bg="#1b4332", fg="#95d5b2",
-                text=f"✓  Background in sync — {expected_label}",
-            )
-        else:
-            self.sync_banner.config(bg="#7f4f00")
-            self.lbl_sync.config(
-                bg="#7f4f00", fg="#ffe08a",
-                text=f"⚠  Expected: {expected_label}  (current: {current_label})",
-            )
+        self.lbl_now_playing.config(text=f"{cue['id']} — {cue['name']}\n{self._asset_summary(cue)}")
+        self.status.config(text=f"▶ {cue['id']} — {cue['name']}")
 
     def _refresh_background_playback(self):
         if not self.player:
             return
         asset_id = self.player.current_background_asset_id()
-        self.lbl_bg_name.config(text=self._asset_label(asset_id))
-
         if asset_id is None:
-            self.lbl_bg_status.config(text="Stopped", fg="#a0a0b0")
+            self.lbl_bg_status.config(text="BG: Stopped", fg="#a0a0b0")
         elif self.player.background_is_playing():
-            self.lbl_bg_status.config(text="Playing", fg="#7ec8a3")
+            self.lbl_bg_status.config(text=f"BG: {self._asset_label(asset_id)}", fg="#7ec8a3")
         elif self.player.background_is_active():
-            self.lbl_bg_status.config(text="Paused", fg="#f5d76e")
+            self.lbl_bg_status.config(text=f"BG: Paused — {self._asset_label(asset_id)}", fg="#f5d76e")
         else:
-            self.lbl_bg_status.config(text="Stopped", fg="#a0a0b0")
+            self.lbl_bg_status.config(text="BG: Stopped", fg="#a0a0b0")
 
         self.lbl_bg_elapsed.config(text=_format_elapsed(self.player.background_elapsed_seconds()))
         self.bg_volume.set(self.player.background_volume())
-
-    def _refresh_background(self):
-        if not self.background_cues:
-            self.lbl_bg_queue.config(text="(no background cues)")
-            self._refresh_background_playback()
-            return
-
-        c = self._background_cue()
-        nxt = (
-            self.background_cues[self.bg_index + 1]
-            if self.bg_index + 1 < len(self.background_cues)
-            else None
-        )
-        queue_text = f"{c['id']} p.{c['page']} — {c['name']}\n{self._asset_summary(c)}"
-        if nxt:
-            queue_text += f"\nNext: {nxt['id']}"
-        self.lbl_bg_queue.config(text=queue_text)
-        self._refresh_background_playback()
-
-    def _refresh_foreground(self):
-        c = self._foreground_cue()
-        nxt = (
-            self.foreground_cues[self.fg_index + 1]
-            if self.fg_index + 1 < len(self.foreground_cues)
-            else None
-        )
-        expected = self._expected_background(c)
-        expected_text = self._asset_label(expected) if expected else "—"
-
-        self.lbl_cue_id.config(text=f"{c['id']}  •  p.{c['page']}  •  {c['category']}")
-        self.lbl_name.config(text=c["name"])
-        self.lbl_meta.config(
-            text=(
-                f"Asset: {self._asset_summary(c)}  |  "
-                f"Scene: {c['scene'][:36]}  |  Vol {c['volume']}  |  "
-                f"Expected BG: {expected_text}"
-            )
-        )
-        self.lbl_trigger.config(text=c["trigger"])
-        self.lbl_upcoming.config(
-            text=f"{nxt['id']} p.{nxt['page']} — {nxt['name']}" if nxt else "(end of effects)"
-        )
-        self.status.config(
-            text=f"Effect {self.fg_index + 1}/{len(self.foreground_cues)}  |  "
-                 f"BG queue {self.bg_index + 1}/{len(self.background_cues)}"
-        )
-        self._refresh_sync_banner(c)
 
     def _start_background_tick(self):
         self._refresh_background_playback()
@@ -548,8 +449,7 @@ class SoundboardApp(tk.Tk):
             return
         self._cancel_fade()
         self.player.stop_background()
-        self._refresh_background()
-        self._refresh_sync_banner(self._foreground_cue())
+        self._refresh_background_playback()
 
     def _bg_fade_out(self):
         if not self.player or not self.player.background_is_active():
@@ -559,8 +459,7 @@ class SoundboardApp(tk.Tk):
         def finish():
             if self.player:
                 self.player.stop_background()
-            self._refresh_background()
-            self._refresh_sync_banner(self._foreground_cue())
+            self._refresh_background_playback()
 
         self._fade_background_volume(start, 0, 1500, on_complete=finish)
 
@@ -575,8 +474,7 @@ class SoundboardApp(tk.Tk):
                 self._fade_background_volume(0, resolve_volume_from_cue(cue), 800)
             prefix = "▶" if ok else "⚠"
             self.status.config(text=f"{prefix} BG {cue['id']} — {message}")
-            self._refresh_background()
-            self._refresh_sync_banner(self._foreground_cue())
+            self._refresh_background_playback()
 
         if self.player.background_is_active() and cue.get("category") != "Silence":
             start_vol = self.player.background_volume()
@@ -589,71 +487,6 @@ class SoundboardApp(tk.Tk):
         else:
             run_background()
 
-    def play_background_cue(self):
-        if self.background_cues:
-            self._execute_background_go(self._background_cue())
-
-    def _switch_to_asset(self, asset_id: str) -> tuple[bool, str]:
-        if not self.player:
-            return False, "Playback unavailable"
-        idx = self._bg_index_for_asset(asset_id)
-        cue = self.background_cues[idx] if idx is not None else None
-        if cue:
-            self.bg_index = idx
-        else:
-            cue = self.player.background_cue_for_asset(asset_id, self.background_cues)
-        if not cue:
-            return False, f"No background cue for {asset_id}"
-        self._execute_background_go(cue)
-        return True, f"Switched to {cue['name']}"
-
-    def _bg_switch_to_expected(self):
-        expected = self._expected_background(self._foreground_cue())
-        if not expected:
-            self.status.config(text="No expected background on current effect")
-            return
-        ok, message = self._switch_to_asset(expected)
-        self.status.config(text=f"{'▶' if ok else '⚠'} {message}")
-
-    def _show_mismatch_dialog(self, cue: dict, on_continue):
-        expected = self._expected_background(cue)
-        current = self._current_background()
-        dialog = tk.Toplevel(self)
-        dialog.title("Background Out of Sync")
-        dialog.configure(bg="#3d1f00")
-        dialog.transient(self)
-        dialog.grab_set()
-        dialog.geometry("420x260")
-
-        tk.Label(dialog, text="⚠ BACKGROUND OUT OF SYNC",
-                 font=tkfont.Font(size=14, weight="bold"), fg="#ffe08a", bg="#3d1f00").pack(pady=(16, 10))
-        body = tk.Frame(dialog, bg="#3d1f00")
-        body.pack(fill=tk.X, padx=20)
-        tk.Label(body, text=f"Current: {self._asset_label(current)}", fg="white", bg="#3d1f00",
-                 font=tkfont.Font(size=11)).pack(anchor="w")
-        tk.Label(body, text=f"Expected: {self._asset_label(expected)}", fg="#95d5b2", bg="#3d1f00",
-                 font=tkfont.Font(size=11)).pack(anchor="w", pady=(6, 0))
-
-        btn_row = tk.Frame(dialog, bg="#3d1f00")
-        btn_row.pack(pady=16)
-
-        def switch_and_go():
-            if expected:
-                self._switch_to_asset(expected)
-            dialog.destroy()
-            on_continue()
-
-        def ignore_and_go():
-            self._ignore_mismatch_for = cue["id"]
-            dialog.destroy()
-            self._refresh_sync_banner(cue)
-            on_continue()
-
-        tk.Button(btn_row, text="Switch Background", command=switch_and_go,
-                  bg="#e94560", fg="white", relief=tk.FLAT, padx=10, pady=6).pack(side=tk.LEFT, padx=6)
-        tk.Button(btn_row, text="Ignore", command=ignore_and_go,
-                  bg="#16213e", fg="white", relief=tk.FLAT, padx=10, pady=6).pack(side=tk.LEFT, padx=6)
-
     def _execute_foreground_go(self, cue: dict):
         if not self.player:
             self.status.config(text="Playback unavailable — install python-vlc and VLC")
@@ -661,50 +494,13 @@ class SoundboardApp(tk.Tk):
         ok, message = self.player.play_foreground(cue)
         self.status.config(text=f"{'▶' if ok else '⚠'} {cue['id']} — {message}")
         self._refresh_background_playback()
-        self._refresh_sync_banner(cue)
-
-    def play_foreground_cue(self):
-        c = self._foreground_cue()
-        if not self.player:
-            self.status.config(text="Playback unavailable — install python-vlc and VLC")
-            return
-        match = self._backgrounds_match(c)
-        if match is False and self._ignore_mismatch_for != c["id"]:
-            self._show_mismatch_dialog(c, lambda: self._execute_foreground_go(c))
-            return
-        self._execute_foreground_go(c)
 
     def stop_all(self):
         self._cancel_fade()
         if self.player:
             self.player.stop_all()
-        self.status.config(text=f"■ Stopped all — effect {self._foreground_cue()['id']}")
-        self._refresh_background()
-        self._refresh_sync_banner(self._foreground_cue())
-
-    def next_foreground(self):
-        if self.fg_index < len(self.foreground_cues) - 1:
-            self.fg_index += 1
-            self._refresh_foreground()
-            self._sync_script_from_foreground()
-
-    def prev_foreground(self):
-        if self.fg_index > 0:
-            self.fg_index -= 1
-            self._refresh_foreground()
-            self._sync_script_from_foreground()
-
-    def next_background(self):
-        if self.bg_index < len(self.background_cues) - 1:
-            self.bg_index += 1
-            self._refresh_background()
-            self._sync_script_from_background()
-
-    def prev_background(self):
-        if self.bg_index > 0:
-            self.bg_index -= 1
-            self._refresh_background()
-            self._sync_script_from_background()
+        self.status.config(text="■ Stopped all playback")
+        self._refresh_background_playback()
 
     def _on_bg_volume(self, _value):
         if self.player:

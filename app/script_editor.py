@@ -6,7 +6,7 @@ import re
 import tkinter as tk
 from tkinter import font as tkfont, messagebox
 
-from cue_dialogs import UNCHANGED, ask_edit_cue, ask_expected_background, ask_new_cue
+from cue_dialogs import ask_edit_cue, ask_new_cue
 from script_model import ScriptProject, _marker_kind
 
 FX_COLOR = "#e94560"
@@ -291,6 +291,7 @@ class ScriptEditor(tk.Frame):
         cues = self.project.cues_after(para.id)
         if cues:
             cue_row = tk.Frame(frame, bg="#12121c")
+            cue_row._is_cue_row = True  # type: ignore[attr-defined]
             cue_row.pack(fill=tk.X, pady=(4, 0))
             for cue in cues:
                 self._add_cue_chip(cue_row, cue, para.id)
@@ -379,9 +380,7 @@ class ScriptEditor(tk.Frame):
         else:
             for token, start in tokens:
                 for cue in self._inline_cues_at(para.id, start):
-                    chip_holder = tk.Frame(text, bg="#12121c")
-                    self._add_cue_chip(chip_holder, cue, para.id, inline=True)
-                    text.window_create(tk.END, window=chip_holder)
+                    self._insert_inline_cue_tag(text, para.id, cue, start)
                 if token.isspace():
                     text.insert(tk.END, token)
                 else:
@@ -400,6 +399,20 @@ class ScriptEditor(tk.Frame):
         line_count = max(1, int(text.index("end-1c").split(".")[0]))
         text.configure(height=line_count)
         text.configure(state=tk.DISABLED)
+
+    def _insert_inline_cue_tag(self, text: tk.Text, para_id: str, cue: dict, start: int):
+        color = _marker_color(cue)
+        tag = f"cue_{para_id}_{cue['id']}_{start}"
+        label = f" {_marker_label(cue)} "
+        text.insert(tk.END, label, tag)
+        text.tag_configure(tag, background=color, foreground="white")
+        text.tag_bind(tag, "<Button-3>", lambda e, c=cue: self._show_cue_menu(e, c))
+        text.tag_bind(
+            tag, "<ButtonRelease-1>",
+            lambda e, c=cue: self._on_cue_release(c, para_id, e),
+        )
+        text.tag_bind(tag, "<ButtonPress-1>", lambda e, c=cue: self._start_drag(c["id"], e))
+        self._cue_widgets[cue["id"]] = (text, tag, color)
 
     def _add_cue_chip(self, parent, cue: dict, paragraph_id: str, *, inline: bool = False):
         color = _marker_color(cue)
@@ -453,22 +466,30 @@ class ScriptEditor(tk.Frame):
             except tk.TclError:
                 pass
         for child in frame.winfo_children():
-            if child is text:
+            if child is text or getattr(child, "_is_cue_row", False):
                 continue
             try:
                 child.configure(bg=bg)
             except tk.TclError:
                 pass
-            for sub in child.winfo_children():
-                try:
-                    sub.configure(bg=bg)
-                except tk.TclError:
-                    pass
 
     def _apply_cue_highlight(self):
         for cue_id, widget in self._cue_widgets.items():
             active = cue_id in (self._active_fg_id, self._active_bg_id, self._selected_cue_id)
-            widget.configure(relief=tk.RAISED if active else tk.FLAT, borderwidth=2 if active else 1)
+            if isinstance(widget, tuple):
+                text, tag, color = widget
+                try:
+                    text.configure(state=tk.NORMAL)
+                    text.tag_configure(
+                        tag,
+                        background="#ffffff" if active else color,
+                        foreground="#1a1a2e" if active else "white",
+                    )
+                    text.configure(state=tk.DISABLED)
+                except tk.TclError:
+                    pass
+            else:
+                widget.configure(relief=tk.RAISED if active else tk.FLAT, borderwidth=2 if active else 1)
 
     def _select_paragraph(self, para_id: str):
         self._selected_para_id = para_id
@@ -542,7 +563,6 @@ class ScriptEditor(tk.Frame):
         menu.add_command(label="Delete Cue", command=lambda: self._delete(cue["id"]))
         menu.add_separator()
         menu.add_command(label="Assign Existing Asset…", command=lambda: self._assign_asset(cue))
-        menu.add_command(label="Set Expected Background…", command=lambda: self._set_expected_background(cue))
         menu.add_command(label="Edit Notes…", command=lambda: self._cue_edit(cue))
         menu.add_separator()
         menu.add_command(label="Add Effect Cue Here", command=lambda: self._add_cue(para_id, "FOREGROUND", "SFX"))
@@ -598,20 +618,6 @@ class ScriptEditor(tk.Frame):
             ),
         )
         menu.tk_popup(event.x_root, event.y_root)
-
-    def _set_expected_background(self, cue: dict):
-        current = cue.get("expected_background_asset_id", "") or ""
-        picked = ask_expected_background(self, self.project.assets_by_id, current)
-        if picked is UNCHANGED:
-            return
-        cue_obj = next((c for c in self.project.cues if c["id"] == cue["id"]), None)
-        if not cue_obj:
-            return
-        if picked:
-            cue_obj["expected_background_asset_id"] = picked
-        else:
-            cue_obj.pop("expected_background_asset_id", None)
-        self._persist()
 
     def _add_cue(
         self,

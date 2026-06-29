@@ -64,7 +64,6 @@ class CueFormDialog(tk.Toplevel):
             initial["id"] = project._next_cue_id()
 
         initial_asset = initial.get("asset_id", "")
-        initial_expected = initial.get("expected_background_asset_id", "") or ""
 
         container = tk.Frame(self, bg=DIALOG_BG)
         container.pack(fill=tk.BOTH, expand=True)
@@ -84,9 +83,6 @@ class CueFormDialog(tk.Toplevel):
             "cue_type": tk.StringVar(value=initial.get("cue_type", "FOREGROUND")),
             "category": tk.StringVar(value=initial.get("category", "SFX")),
             "asset_id": tk.StringVar(value=self._display_for_asset(initial_asset)),
-            "expected_background_asset_id": tk.StringVar(
-                value=self._display_for_asset(initial_expected)
-            ),
             "page": tk.StringVar(value=str(initial.get("page", 1))),
             "scene": tk.StringVar(value=initial.get("scene", "")),
             "trigger": tk.StringVar(value=initial.get("trigger", "")),
@@ -163,21 +159,12 @@ class CueFormDialog(tk.Toplevel):
         return value
 
     def _fields(self, parent):
-        bg_displays = [
-            self._asset_display_by_id[aid]
-            for aid, asset in sorted(self.assets_by_id.items())
-            if asset.get("playback_mode") in ("Loop", "Silence") or asset.get("category") == "Ambience"
-        ]
-
         yield "Cue ID", "id", self._entry(parent, "id", width=20, readonly=True)
         yield "Cue Name", "name", self._entry(parent, "name")
         yield "Cue Type", "cue_type", self._combo(parent, "cue_type", CUE_TYPES, width=18)
         yield "Category", "category", self._combo(parent, "category", CATEGORIES, width=18)
         yield "Asset", "asset_id", self._combo(
             parent, "asset_id", self._asset_display_values, width=48, readonly=True,
-        )
-        yield "Expected Background", "expected_background_asset_id", self._combo(
-            parent, "expected_background_asset_id", [""] + bg_displays, width=48, readonly=True,
         )
         yield "Script Page", "page", self._entry(parent, "page", width=10)
         yield "Scene", "scene", self._entry(parent, "scene")
@@ -211,7 +198,6 @@ class CueFormDialog(tk.Toplevel):
             return
         asset_id = self._resolve_asset_id(self.vars["asset_id"].get())
         asset = self.assets_by_id.get(asset_id, {})
-        expected_id = self._resolve_asset_id(self.vars["expected_background_asset_id"].get())
         try:
             volume = int(self.vars["volume"].get())
         except ValueError:
@@ -227,7 +213,6 @@ class CueFormDialog(tk.Toplevel):
             "cue_type": self.vars["cue_type"].get(),
             "category": self.vars["category"].get(),
             "asset_id": asset_id,
-            "expected_background_asset_id": expected_id or None,
             "page": page,
             "scene": self.vars["scene"].get().strip(),
             "priority": self.vars["priority"].get(),
@@ -242,77 +227,6 @@ class CueFormDialog(tk.Toplevel):
             "suggested_volume": asset.get("suggested_volume", 85),
             "asset_filename": asset.get("filename", ""),
         }
-        if not self.result["expected_background_asset_id"]:
-            self.result.pop("expected_background_asset_id", None)
-        self.destroy()
-
-
-UNCHANGED = "__UNCHANGED__"
-
-
-class ExpectedBackgroundDialog(tk.Toplevel):
-    """Quick picker for expected background asset on a foreground cue."""
-
-    def __init__(self, parent, assets_by_id: dict, current: str = ""):
-        super().__init__(parent)
-        self.title("Expected Background")
-        self.configure(bg=DIALOG_BG)
-        self.result: str | None | object = UNCHANGED
-
-        tk.Label(
-            self, text="Select the background that should be playing:", fg=LABEL_FG, bg=DIALOG_BG,
-            wraplength=360, justify=tk.LEFT, padx=16, pady=(12, 4),
-        ).pack(anchor="w")
-
-        bg_assets = [
-            (aid, a) for aid, a in sorted(assets_by_id.items())
-            if a.get("playback_mode") in ("Loop", "Silence") or a.get("category") == "Ambience"
-        ]
-
-        list_frame = tk.Frame(self, bg=DIALOG_BG, padx=16)
-        list_frame.pack(fill=tk.BOTH, expand=True)
-        self.listbox = tk.Listbox(
-            list_frame, bg=FIELD_BG, fg=ENTRY_FG, selectbackground="#e94560",
-            height=min(12, max(6, len(bg_assets))), width=50, relief=tk.FLAT,
-        )
-        scroll = tk.Scrollbar(list_frame, command=self.listbox.yview)
-        self.listbox.configure(yscrollcommand=scroll.set)
-        scroll.pack(side=tk.RIGHT, fill=tk.Y)
-        self.listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-
-        self.listbox.insert(tk.END, "(none)")
-        self._asset_ids = [""]
-        for aid, asset in bg_assets:
-            label = asset_display_label(aid, asset)
-            self.listbox.insert(tk.END, label)
-            self._asset_ids.append(aid)
-
-        if current and current in self._asset_ids:
-            self.listbox.selection_set(self._asset_ids.index(current))
-        else:
-            self.listbox.selection_set(0)
-
-        btn_row = tk.Frame(self, bg=DIALOG_BG, pady=8, padx=16)
-        btn_row.pack(fill=tk.X)
-        tk.Button(btn_row, text="Cancel", command=self._cancel, bg=FIELD_BG, fg="white",
-                  relief=tk.FLAT, padx=12).pack(side=tk.RIGHT, padx=4)
-        tk.Button(btn_row, text="Set", command=self._save, bg="#4a90d9", fg="white",
-                  relief=tk.FLAT, padx=12).pack(side=tk.RIGHT, padx=4)
-
-        self.transient(parent)
-        self.grab_set()
-        self.geometry("420x320")
-
-    def _cancel(self):
-        self.result = UNCHANGED
-        self.destroy()
-
-    def _save(self):
-        sel = self.listbox.curselection()
-        if not sel:
-            self.result = None
-        else:
-            self.result = self._asset_ids[sel[0]] or None
         self.destroy()
 
 
@@ -344,12 +258,5 @@ def ask_new_cue(
 
 def ask_edit_cue(parent, project: ScriptProject, cue: dict) -> dict | None:
     dlg = CueFormDialog(parent, f"Edit {cue.get('id', 'Cue')}", project, cue, is_new=False)
-    parent.wait_window(dlg)
-    return dlg.result
-
-
-def ask_expected_background(parent, assets_by_id: dict, current: str = "") -> str | None | object:
-    """Return asset id, None to clear, or UNCHANGED if cancelled."""
-    dlg = ExpectedBackgroundDialog(parent, assets_by_id, current)
     parent.wait_window(dlg)
     return dlg.result
