@@ -141,6 +141,8 @@ class ScriptEditor(tk.Frame):
         for widget in (self, header, search_row, body, self.canvas, self.inner):
             widget.bind("<Enter>", self._activate_mousewheel)
             widget.bind("<Leave>", self._deactivate_mousewheel)
+
+    def _activate_mousewheel(self, _event=None):
         if self._mousewheel_active:
             return
         self._mousewheel_active = True
