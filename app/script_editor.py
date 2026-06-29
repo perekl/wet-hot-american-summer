@@ -377,12 +377,24 @@ class ScriptEditor(tk.Frame):
         lbl._cue_id = cue["id"]  # type: ignore[attr-defined]
         self._cue_widgets[cue["id"]] = lbl
 
-        lbl.bind("<Button-1>", lambda e, c=cue: self._cue_click(c))
         lbl.bind("<Double-Button-1>", lambda e, c=cue: self._cue_edit(c))
         lbl.bind("<Button-3>", lambda e, c=cue: self._show_cue_menu(e, c))
         lbl.bind("<ButtonPress-1>", lambda e, c=cue: self._start_drag(c["id"], e))
         lbl.bind("<B1-Motion>", self._drag_motion)
-        lbl.bind("<ButtonRelease-1>", lambda e, pid=paragraph_id: self._drop_on_paragraph(pid))
+        lbl.bind(
+            "<ButtonRelease-1>",
+            lambda e, c=cue, pid=paragraph_id: self._on_cue_release(c, pid, e),
+        )
+
+    def _on_cue_release(self, cue: dict, paragraph_id: str, event):
+        if self._drag_cue_id == cue["id"] and self._drag_moved:
+            self._drag_cue_id = None
+            self._drag_moved = False
+            return "break"
+        self._drag_cue_id = None
+        self._drag_moved = False
+        self._cue_click(cue)
+        return "break"
 
     def _apply_para_highlight(self, para_id: str):
         frame = self._para_frames.get(para_id)

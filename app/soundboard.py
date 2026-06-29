@@ -89,6 +89,13 @@ class SoundboardApp(tk.Tk):
             w = self.winfo_screenwidth()
             h = self.winfo_screenheight()
             self.geometry(f"{w}x{h}")
+        self.after_idle(self._set_paned_50_50)
+
+    def _set_paned_50_50(self):
+        self.update_idletasks()
+        width = self.paned.winfo_width()
+        if width > 2:
+            self.paned.sashpos(0, width // 2)
 
     def _init_player(self) -> VLCPlaybackEngine | None:
         try:
@@ -124,11 +131,11 @@ class SoundboardApp(tk.Tk):
         self.paned = tk.PanedWindow(self, orient=tk.HORIZONTAL, sashwidth=5, bg="#1a1a2e")
         self.paned.pack(fill=tk.BOTH, expand=True)
 
-        controls = tk.Frame(self.paned, bg="#1a1a2e", width=400)
-        self.paned.add(controls, minsize=360)
+        controls = tk.Frame(self.paned, bg="#1a1a2e")
+        self.paned.add(controls, minsize=280)
 
         script_host = tk.Frame(self.paned, bg="#0a0a12")
-        self.paned.add(script_host, minsize=500)
+        self.paned.add(script_host, minsize=280)
 
         tk.Label(
             controls, text="WET HOT AMERICAN SUMMER", font=tkfont.Font(size=16, weight="bold"),
@@ -363,9 +370,7 @@ class SoundboardApp(tk.Tk):
                     self._refresh_foreground()
                     break
             self._sync_script_from_foreground()
-            self.status.config(
-                text=f"▸ Effect {cue['id']} — {self._asset_summary(cue)}"
-            )
+            self.play_foreground_cue()
         else:
             for i, item in enumerate(self.background_cues):
                 if item["id"] == cue["id"]:
@@ -373,9 +378,8 @@ class SoundboardApp(tk.Tk):
                     self._refresh_background()
                     break
             self._sync_script_from_background()
-            self.status.config(
-                text=f"▸ Background {cue['id']} — {self._asset_summary(cue)}"
-            )
+            self.play_background_cue()
+        self.status.config(text=f"▶ {cue['id']} — {self._asset_summary(cue)}")
         self._refresh_sync_banner(self._foreground_cue())
 
     def _refresh_sync_banner(self, cue: dict):
