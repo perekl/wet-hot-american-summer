@@ -66,6 +66,7 @@ class ScriptPanel(tk.Frame):
         self._scroll_job: str | None = None
         self._active_fg_id: str | None = None
         self._active_bg_id: str | None = None
+        self._pending_center_cue_id: str | None = None
 
         self.pdf_path = pdf_path or resolve_screenplay_pdf()
         self.doc: fitz.Document | None = None
@@ -138,20 +139,26 @@ class ScriptPanel(tk.Frame):
 
     def _on_scrollbar(self, *args):
         self.canvas.yview(*args)
-        self._schedule_page_notify()
+        if not self._sync_lock:
+            self._schedule_page_notify()
 
     def _on_mousewheel(self, event):
         if event.num == 5 or getattr(event, "delta", 0) < 0:
             self.canvas.yview_scroll(3, "units")
         else:
             self.canvas.yview_scroll(-3, "units")
-        self._schedule_page_notify()
+        if not self._sync_lock:
+            self._schedule_page_notify()
         return "break"
 
     def _on_resize(self, _event=None):
-        if self.doc:
-            self._layout_pages()
-            self._render_visible_pages()
+        if not self.doc:
+            return
+        center_id = self._pending_center_cue_id or self._active_fg_id
+        self._layout_pages()
+        if center_id and center_id in self.cues_by_id:
+            self._scroll_y_to_center(self._cue_anchor_y(self.cues_by_id[center_id]))
+        self._render_visible_pages()
 
     def _schedule_page_notify(self):
         if self._scroll_job:
@@ -195,6 +202,55 @@ class ScriptPanel(tk.Frame):
             last = self.page_count - 1
         return first, min(last + 2, self.page_count)
 
+    def _page_scale(self, page_idx: int) -> float:
+        canvas_width = max(self.canvas.winfo_width(), 400)
+        page = self.doc[page_idx]
+        scale = (canvas_width - MARGIN_BADGE_WIDTH - 24) / page.rect.width
+        return min(scale, self.zoom)
+
+    def _trigger_anchor_y(self, cue: dict, page_idx: int, y0: float) -> float | None:
+        page = self.doc[page_idx]
+        scale = self._page_scale(page_idx)
+        for snippet in search_snippets(cue.get("trigger", "")):
+            try:
+                rects = page.search_for(snippet)
+            except Exception:
+                rects = []
+            if rects:
+                rect = rects[0]
+                return y0 + (rect.y0 + rect.y1) / 2 * scale
+        return None
+
+    def _cue_anchor_y(self, cue: dict) -> float:
+        page = int(cue["page"])
+        idx = page - 1
+        if idx < 0 or idx >= len(self.page_tops):
+            return 0.0
+        y0 = self.page_tops[idx]
+        anchor = self._trigger_anchor_y(cue, idx, y0)
+        if anchor is not None:
+            return anchor
+
+        page_cues = self.page_index.get(page, [])
+        badge_y = y0 + 6
+        for item in page_cues:
+            h = 18
+            if item["id"] == cue["id"]:
+                return badge_y + h / 2
+            badge_y += h + 4
+        return y0 + self.page_heights[idx] / 2
+
+    def _scroll_y_to_center(self, anchor_y: float) -> None:
+        if not self.page_tops:
+            return
+        total = self.page_tops[-1] + self.page_heights[-1]
+        view_h = max(self.canvas.winfo_height(), 200)
+        target_top = anchor_y - view_h / 2
+        scrollable = max(total - view_h, 1)
+        target_top = max(0, min(target_top, scrollable))
+        fraction = target_top / scrollable
+        self.canvas.yview_moveto(fraction)
+
     def _render_visible_pages(self):
         if not self.doc:
             return
@@ -208,8 +264,7 @@ class ScriptPanel(tk.Frame):
         for page_idx in range(first, last):
             page_num = page_idx + 1
             page = self.doc[page_idx]
-            scale = (canvas_width - MARGIN_BADGE_WIDTH - 24) / page.rect.width
-            scale = min(scale, self.zoom)
+            scale = self._page_scale(page_idx)
             matrix = fitz.Matrix(scale, scale)
             pix = page.get_pixmap(matrix=matrix, alpha=False)
             image = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
@@ -347,21 +402,54 @@ class ScriptPanel(tk.Frame):
         if self.on_page_visible:
             self.on_page_visible(page)
 
+    def scroll_to_cue(
+        self,
+        cue: dict,
+        *,
+        fg_id: str | None = None,
+        bg_id: str | None = None,
+    ) -> None:
+        """Center the viewport on a specific cue without reverse-syncing queues."""
+        if not self.doc or not self.page_tops:
+            return
+        self._sync_lock = True
+        if fg_id is not None:
+            self._active_fg_id = fg_id
+        if bg_id is not None:
+            self._active_bg_id = bg_id
+        self._pending_center_cue_id = cue["id"]
+
+        if self._scroll_job:
+            self.after_cancel(self._scroll_job)
+            self._scroll_job = None
+
+        anchor_y = self._cue_anchor_y(cue)
+        self._scroll_y_to_center(anchor_y)
+        self._render_visible_pages()
+
     def scroll_to_page(self, page: int, *, fg_id: str | None = None, bg_id: str | None = None):
+        """Legacy: scroll to first cue on page, centered."""
         if not self.doc or not self.page_tops:
             return
         page = max(1, min(page, self.page_count))
+        cues = self.page_index.get(page, [])
+        if cues:
+            self.scroll_to_cue(cues[0], fg_id=fg_id, bg_id=bg_id)
+            return
+        self._sync_lock = True
         self._active_fg_id = fg_id
         self._active_bg_id = bg_id
         idx = page - 1
-        target = self.page_tops[idx]
-        total = self.page_tops[-1] + self.page_heights[-1]
-        fraction = target / total if total else 0
-        self.canvas.yview_moveto(max(0, fraction - 0.02))
+        self._scroll_y_to_center(self.page_tops[idx] + self.page_heights[idx] / 2)
         self._render_visible_pages()
-        self._schedule_page_notify()
+
+    def release_sync_lock(self) -> None:
+        self._sync_lock = False
+        self._pending_center_cue_id = None
 
     def set_active_cues(self, *, fg_id: str | None = None, bg_id: str | None = None):
+        if self._sync_lock:
+            return
         self._active_fg_id = fg_id
         self._active_bg_id = bg_id
         self._render_visible_pages()

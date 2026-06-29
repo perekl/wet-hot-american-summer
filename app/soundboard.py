@@ -311,21 +311,17 @@ class SoundboardApp(tk.Tk):
         if not self.script_panel or not self.script_panel.doc:
             return
         self._script_sync_lock = True
-        self.script_panel.set_sync_lock(True)
         fg_id, bg_id = self._active_script_ids()
-        cue = self._foreground_cue()
-        self.script_panel.scroll_to_page(cue["page"], fg_id=fg_id, bg_id=bg_id)
-        self.after(180, self._release_script_sync)
+        self.script_panel.scroll_to_cue(self._foreground_cue(), fg_id=fg_id, bg_id=bg_id)
+        self.after(300, self._release_script_sync)
 
     def _sync_script_from_background(self):
         if not self.script_panel or not self.script_panel.doc:
             return
         self._script_sync_lock = True
-        self.script_panel.set_sync_lock(True)
         fg_id, bg_id = self._active_script_ids()
-        cue = self._background_cue()
-        self.script_panel.scroll_to_page(cue["page"], fg_id=fg_id, bg_id=bg_id)
-        self.after(180, self._release_script_sync)
+        self.script_panel.scroll_to_cue(self._background_cue(), fg_id=fg_id, bg_id=bg_id)
+        self.after(300, self._release_script_sync)
 
     def _sync_script_to_queues(self):
         self._sync_script_from_foreground()
@@ -333,13 +329,8 @@ class SoundboardApp(tk.Tk):
     def _release_script_sync(self):
         self._script_sync_lock = False
         if self.script_panel:
-            self.script_panel.set_sync_lock(False)
+            self.script_panel.release_sync_lock()
 
-    def _update_script_highlights(self):
-        if not self.script_panel or not self.script_panel.doc:
-            return
-        fg_id, bg_id = self._active_script_ids()
-        self.script_panel.set_active_cues(fg_id=fg_id, bg_id=bg_id)
 
     def _on_script_page_visible(self, page: int):
         if self._script_sync_lock:
@@ -347,18 +338,16 @@ class SoundboardApp(tk.Tk):
         self._script_sync_lock = True
         new_fg = queue_index_for_page(self.foreground_cues, page)
         new_bg = queue_index_for_page(self.background_cues, page) if self.background_cues else 0
-        changed = False
         if new_fg != self.fg_index:
             self.fg_index = new_fg
             self._refresh_foreground()
-            changed = True
         if self.background_cues and new_bg != self.bg_index:
             self.bg_index = new_bg
             self._refresh_background()
-            changed = True
-        if not changed:
-            self._update_script_highlights()
-        self.after(80, self._release_script_sync)
+        if self.script_panel:
+            fg_id, bg_id = self._active_script_ids()
+            self.script_panel.set_active_cues(fg_id=fg_id, bg_id=bg_id)
+        self.after(80, lambda: setattr(self, "_script_sync_lock", False))
 
     def _asset_summary(self, cue: dict) -> str:
         asset_id = cue.get("asset_id", "")
@@ -441,7 +430,6 @@ class SoundboardApp(tk.Tk):
         if not self.background_cues:
             self.lbl_bg_queue.config(text="(no background cues)")
             self._refresh_background_playback()
-            self._update_script_highlights()
             return
 
         c = self._background_cue()
@@ -455,7 +443,6 @@ class SoundboardApp(tk.Tk):
             queue_text += f"\nNext: {nxt['id']}"
         self.lbl_bg_queue.config(text=queue_text)
         self._refresh_background_playback()
-        self._update_script_highlights()
 
     def _refresh_foreground(self):
         c = self._foreground_cue()
@@ -485,7 +472,6 @@ class SoundboardApp(tk.Tk):
                  f"BG queue {self.bg_index + 1}/{len(self.background_cues)}"
         )
         self._refresh_sync_banner(c)
-        self._update_script_highlights()
 
     def _start_background_tick(self):
         self._refresh_background_playback()
