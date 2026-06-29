@@ -1,0 +1,3545 @@
+[
+  {
+    "id": "AST-001",
+    "name": "Pre-show Silence / House Lights",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/pre_show_silence_house_lights.mp3",
+    "duration": "5s",
+    "used_by": [
+      "CUE-001"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Hold black before titles."
+  },
+  {
+    "id": "AST-002",
+    "name": "Projector / Room Tone (Optional)",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/projector_room_tone_optional.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-239"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Pre-show optional."
+  },
+  {
+    "id": "AST-003",
+    "name": "Jane (Jefferson Starship) - Opening Titles",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/jane_jefferson_starship_opening_titles.mp3",
+    "duration": "Full song excerpt",
+    "used_by": [
+      "CUE-002"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Licensed. Fade under first scene."
+  },
+  {
+    "id": "AST-004",
+    "name": "Scene Transition Stinger",
+    "category": "Transition",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/scene_transition_stinger.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-003"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Cut from black to campfire."
+  },
+  {
+    "id": "AST-005",
+    "name": "Campfire Night Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/campfire_night_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-004"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Crackling fire, distant crickets, counselors murmuring."
+  },
+  {
+    "id": "AST-006",
+    "name": "Acoustic Guitar Strumming (Diegetic)",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/acoustic_guitar_strumming_diegetic.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-005"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Under Jane or post-title music."
+  },
+  {
+    "id": "AST-007",
+    "name": "Title Card Whoosh (Optional)",
+    "category": "Transition",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/title_card_whoosh_optional.wav",
+    "duration": "1s",
+    "used_by": [
+      "CUE-006"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Comedy enhancement for date stamp."
+  },
+  {
+    "id": "AST-008",
+    "name": "Jane / Title Music Continue",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/jane_title_music_continue.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-007"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Maintain through dawn montage."
+  },
+  {
+    "id": "AST-009",
+    "name": "Dawn Lake Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/dawn_lake_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-008"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Birds, gentle water, rural New England morning."
+  },
+  {
+    "id": "AST-010",
+    "name": "Banana Peel / Eating SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/banana_peel_eating_sfx.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-009"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Comedy sound dissolves into next scene."
+  },
+  {
+    "id": "AST-011",
+    "name": "Smooching / Making Out SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/smooching_making_out_sfx.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-010"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Exaggerated comedy smooch layer."
+  },
+  {
+    "id": "AST-012",
+    "name": "Bunk Rustle / Blanket Movement",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/bunk_rustle_blanket_movement.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-011"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-013",
+    "name": "Running Footsteps - Bunk Exit",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/running_footsteps_bunk_exit.wav",
+    "duration": "4s",
+    "used_by": [
+      "CUE-012"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-014",
+    "name": "Title Music Continue",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/title_music_continue.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-013"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-015",
+    "name": "Camp Morning Bustle Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/camp_morning_bustle_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-014"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Footsteps, whispers, hurried movement."
+  },
+  {
+    "id": "AST-016",
+    "name": "Campers Acapella Rock Snippet",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/campers_acapella_rock_snippet.mp3",
+    "duration": "15s",
+    "used_by": [
+      "CUE-015"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Diegetic camper singing, not full track."
+  },
+  {
+    "id": "AST-017",
+    "name": "Kids Scream / Pile-On SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/kids_scream_pile_on_sfx.wav",
+    "duration": "5s",
+    "used_by": [
+      "CUE-016"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Badminton rackets and whiffle bats."
+  },
+  {
+    "id": "AST-018",
+    "name": "Racket / Bat Air-Guitar Bangs",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/racket_bat_air_guitar_bangs.wav",
+    "duration": "4s",
+    "used_by": [
+      "CUE-017"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-019",
+    "name": "Camp Radio Static / Bed",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/camp_radio_static_bed.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-018"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Under Arty V.O. - WCFW radio."
+  },
+  {
+    "id": "AST-020",
+    "name": "Radio VO Filter (Optional)",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/radio_vo_filter_optional.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-019"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Light AM radio EQ on table read if desired."
+  },
+  {
+    "id": "AST-021",
+    "name": "Bunk Morning Activity",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/bunk_morning_activity.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-197"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-022",
+    "name": "Flagpole Rope / Fabric SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/flagpole_rope_fabric_sfx.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-020"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-023",
+    "name": "Comedy Smooch Stinger",
+    "category": "Comedy",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/comedy_smooch_stinger.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-021"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-024",
+    "name": "Camp Assembly Murmur",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/camp_assembly_murmur.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-198"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-025",
+    "name": "Flagpole Crowd Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/flagpole_crowd_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-022"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Distant camp assembly murmur."
+  },
+  {
+    "id": "AST-026",
+    "name": "Garden Morning Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/garden_morning_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-023"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Birds, light breeze."
+  },
+  {
+    "id": "AST-027",
+    "name": "Tool Clatter SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/tool_clatter_sfx.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-024"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-028",
+    "name": "Mud / Pot Squish SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/mud_pot_squish_sfx.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-025"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-029",
+    "name": "Awkward Beat",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/awkward_beat.mp3",
+    "duration": "2s",
+    "used_by": [
+      "CUE-199"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-030",
+    "name": "Mess Hall Breakfast Crowd",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/mess_hall_breakfast_crowd.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-026"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-031",
+    "name": "Awkward Silence Beat",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/awkward_silence_beat.mp3",
+    "duration": "3s",
+    "used_by": [
+      "CUE-027"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Drop crowd bed after Professor snaps."
+  },
+  {
+    "id": "AST-032",
+    "name": "Kitchen Call-Out Echo",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/kitchen_call_out_echo.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-028"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-033",
+    "name": "Kitchen Tension Bed",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/kitchen_tension_bed.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-200"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-034",
+    "name": "Mess Hall Ambience Continue",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/mess_hall_ambience_continue.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-029"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-035",
+    "name": "Comedy Crickets (Optional)",
+    "category": "Comedy",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/comedy_crickets_optional.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-030"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-036",
+    "name": "Metal Tray Thud SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/metal_tray_thud_sfx.wav",
+    "duration": "1s",
+    "used_by": [
+      "CUE-031"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-037",
+    "name": "Kitchen Backroom Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/kitchen_backroom_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-032"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Pots, distant dining noise."
+  },
+  {
+    "id": "AST-038",
+    "name": "Mess Hall Tension",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/mess_hall_tension.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-201"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-039",
+    "name": "Godspell Announcement Sting (Ref)",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/godspell_announcement_sting_ref.mp3",
+    "duration": "5s",
+    "used_by": [
+      "CUE-033"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Tease only; full cue at talent show."
+  },
+  {
+    "id": "AST-040",
+    "name": "Mess Hall Door / Exterior Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/mess_hall_door_exterior_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-034"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-041",
+    "name": "Camp Exterior Day Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/camp_exterior_day_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-035"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-042",
+    "name": "Camp Radio Bed Under VO",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/camp_radio_bed_under_vo.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-036"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-043",
+    "name": "Car Door / Departure SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/car_door_departure_sfx.wav",
+    "duration": "4s",
+    "used_by": [
+      "CUE-037"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-044",
+    "name": "Wrestling / Grunts SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/wrestling_grunts_sfx.wav",
+    "duration": "5s",
+    "used_by": [
+      "CUE-038"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-045",
+    "name": "Comedy Beat",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/comedy_beat.mp3",
+    "duration": "2s",
+    "used_by": [
+      "CUE-202"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-046",
+    "name": "Arts & Crafts Room Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/arts_crafts_room_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-039"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-047",
+    "name": "Kid Shout SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/kid_shout_sfx.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-040"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-048",
+    "name": "Emotional Silence Beat",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/emotional_silence_beat.mp3",
+    "duration": "2s",
+    "used_by": [
+      "CUE-041"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Drop ambience for Gail breakdown."
+  },
+  {
+    "id": "AST-049",
+    "name": "Tension Silence - Victor/Abby",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/tension_silence_victor_abby.mp3",
+    "duration": "4s",
+    "used_by": [
+      "CUE-042"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-050",
+    "name": "Radio Station Room Tone",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/radio_station_room_tone.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-043"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Tiny closet, fan hum."
+  },
+  {
+    "id": "AST-051",
+    "name": "Mic On Click / Headphone SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/mic_on_click_headphone_sfx.wav",
+    "duration": "1s",
+    "used_by": [
+      "CUE-044"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-052",
+    "name": "Hill / Office Exterior Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/hill_office_exterior_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-045"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-053",
+    "name": "Nostalgic Wind (Optional)",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/nostalgic_wind_optional.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-203"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-054",
+    "name": "Group Agreement Beat",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/group_agreement_beat.mp3",
+    "duration": "2s",
+    "used_by": [
+      "CUE-046"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Brief pause before science scene."
+  },
+  {
+    "id": "AST-055",
+    "name": "Plate Crash SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/plate_crash_sfx.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-047"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-056",
+    "name": "Arts & Crafts Dead Silence",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/arts_crafts_dead_silence.mp3",
+    "duration": "5s",
+    "used_by": [
+      "CUE-048"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Hold for Aaron's line."
+  },
+  {
+    "id": "AST-057",
+    "name": "Light Applause SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/light_applause_sfx.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-049"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-058",
+    "name": "VCR Hum (Optional Comedy)",
+    "category": "Comedy",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/vcr_hum_optional_comedy.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-050"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-059",
+    "name": "Footsteps Running Away",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/footsteps_running_away.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-204"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-060",
+    "name": "Office Porch Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/office_porch_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-051"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-061",
+    "name": "Lake / Waterfront Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/lake_waterfront_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-052"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Splashing, distant motor."
+  },
+  {
+    "id": "AST-062",
+    "name": "Motorboat Pass-By SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/motorboat_pass_by_sfx.wav",
+    "duration": "5s",
+    "used_by": [
+      "CUE-053"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-063",
+    "name": "Bunk Area Day Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/bunk_area_day_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-205"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-064",
+    "name": "Wolf Whistles SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/wolf_whistles_sfx.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-054"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-065",
+    "name": "Splash / Choking SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/splash_choking_sfx.wav",
+    "duration": "4s",
+    "used_by": [
+      "CUE-055"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-066",
+    "name": "Underwater Bubble Silence",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/underwater_bubble_silence.mp3",
+    "duration": "3s",
+    "used_by": [
+      "CUE-056"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Tense beat before science scene."
+  },
+  {
+    "id": "AST-067",
+    "name": "Science Clearing Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/science_clearing_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-057"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-068",
+    "name": "Ominous Bubble SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/ominous_bubble_sfx.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-058"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-069",
+    "name": "Van Highway Drive Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/van_highway_drive_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-059"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-070",
+    "name": "Body Tumble / Road Roll SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/body_tumble_road_roll_sfx.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-060"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Comedy beat."
+  },
+  {
+    "id": "AST-071",
+    "name": "Truck Engine / Gravel SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/truck_engine_gravel_sfx.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-061"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-072",
+    "name": "Truck Door / Peel Out",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/truck_door_peel_out.wav",
+    "duration": "4s",
+    "used_by": [
+      "CUE-206"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-073",
+    "name": "Love Is Alright Tonight (Rick Springfield)",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/love_is_alright_tonight_rick_springfield.mp3",
+    "duration": "Montage length",
+    "used_by": [
+      "CUE-062"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Licensed. Town trip montage."
+  },
+  {
+    "id": "AST-074",
+    "name": "Small Town Street Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/small_town_street_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-063"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Under montage music."
+  },
+  {
+    "id": "AST-075",
+    "name": "Crowd Cheer SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/crowd_cheer_sfx.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-064"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-076",
+    "name": "Montage Music Fade Out",
+    "category": "Transition",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/montage_music_fade_out.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-065"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "End Rick Springfield montage."
+  },
+  {
+    "id": "AST-077",
+    "name": "Camp Parking Lot Return",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/camp_parking_lot_return.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-066"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Normal camp day resumes."
+  },
+  {
+    "id": "AST-078",
+    "name": "Fart SFX + Laughter",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/fart_sfx_laughter.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-067"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Comedy."
+  },
+  {
+    "id": "AST-079",
+    "name": "Van Engine Acceleration",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/van_engine_acceleration.wav",
+    "duration": "4s",
+    "used_by": [
+      "CUE-068"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-080",
+    "name": "BBQ Pit Sizzle Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/bbq_pit_sizzle_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-069"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-081",
+    "name": "Comedy Pause",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/comedy_pause.mp3",
+    "duration": "2s",
+    "used_by": [
+      "CUE-207"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-082",
+    "name": "Radio Booth Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/radio_booth_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-070",
+      "CUE-115"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-083",
+    "name": "Radio Broadcast Bed",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/radio_broadcast_bed.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-208"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-084",
+    "name": "Soft Crying Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/soft_crying_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-071"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-085",
+    "name": "Soft Room Tone",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/soft_room_tone.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-209"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-086",
+    "name": "Victor Yelling / Van Doors SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/victor_yelling_van_doors_sfx.wav",
+    "duration": "5s",
+    "used_by": [
+      "CUE-072"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-087",
+    "name": "Danny's Song (Loggins & Messina)",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/danny_s_song_loggins_messina.mp3",
+    "duration": "Verse+",
+    "used_by": [
+      "CUE-073"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Licensed. Victor driving."
+  },
+  {
+    "id": "AST-088",
+    "name": "Van Crash Impact SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/van_crash_impact_sfx.wav",
+    "duration": "4s",
+    "used_by": [
+      "CUE-074"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Hard cut music."
+  },
+  {
+    "id": "AST-089",
+    "name": "Danny's Song (Tape Player Underscore)",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/danny_s_song_tape_player_underscore.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-075"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Licensed, lo-fi bedroom."
+  },
+  {
+    "id": "AST-090",
+    "name": "Lonely Road Wind Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/lonely_road_wind_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-076"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-091",
+    "name": "Makeout Rustle (Low)",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/makeout_rustle_low.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-077"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-092",
+    "name": "River / Raft Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/river_raft_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-078"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Gentle current."
+  },
+  {
+    "id": "AST-093",
+    "name": "Motorcycle Start / Skid SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/motorcycle_start_skid_sfx.wav",
+    "duration": "4s",
+    "used_by": [
+      "CUE-079"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-094",
+    "name": "Ominous River Current",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/ominous_river_current.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-210"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-095",
+    "name": "Motorcycle Approach Loop",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/motorcycle_approach_loop.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-080"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-096",
+    "name": "Chase Sequence Underscore",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/chase_sequence_underscore.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-081"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Royalty-free action/comedy."
+  },
+  {
+    "id": "AST-097",
+    "name": "Motorcycle Screech / Stop SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/motorcycle_screech_stop_sfx.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-082"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-098",
+    "name": "Woods / Swimming Hole Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/woods_swimming_hole_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-083"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-099",
+    "name": "Door Knock SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/door_knock_sfx.wav",
+    "duration": "1s",
+    "used_by": [
+      "CUE-211"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-100",
+    "name": "Shack Interior Silence",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/shack_interior_silence.mp3",
+    "duration": "3s",
+    "used_by": [
+      "CUE-084"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Sun through cracks."
+  },
+  {
+    "id": "AST-101",
+    "name": "Ball Field Crowd Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/ball_field_crowd_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-085"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-102",
+    "name": "Awkward Team Silence",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/awkward_team_silence.mp3",
+    "duration": "4s",
+    "used_by": [
+      "CUE-086"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-103",
+    "name": "Bus Arrival / Diesel SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/bus_arrival_diesel_sfx.wav",
+    "duration": "6s",
+    "used_by": [
+      "CUE-087"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-104",
+    "name": "Bus Departure SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/bus_departure_sfx.wav",
+    "duration": "5s",
+    "used_by": [
+      "CUE-088"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-105",
+    "name": "Ceremony Flute Music",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/ceremony_flute_music.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-089"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Original or royalty-free flute."
+  },
+  {
+    "id": "AST-106",
+    "name": "Comedy Gasp",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/comedy_gasp.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-212"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-107",
+    "name": "Wedding Ceremony Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/wedding_ceremony_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-090"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Under flute."
+  },
+  {
+    "id": "AST-108",
+    "name": "Flute Music Continue",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/flute_music_continue.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-091"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-109",
+    "name": "Capture The Flag Call (Vocal)",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/capture_the_flag_call_vocal.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-092"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Live read or recorded shout."
+  },
+  {
+    "id": "AST-110",
+    "name": "Whistle Blast + Game Start",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/whistle_blast_game_start.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-093"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-111",
+    "name": "Capture The Flag Game Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/capture_the_flag_game_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-094"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Running, yelling."
+  },
+  {
+    "id": "AST-112",
+    "name": "Pea Throw / Tree Tap SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/pea_throw_tree_tap_sfx.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-095"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-113",
+    "name": "Camp Afternoon Bed",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/camp_afternoon_bed.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-213"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-114",
+    "name": "BBQ / Ribs Ready Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/bbq_ribs_ready_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-096"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Sizzling, crowd."
+  },
+  {
+    "id": "AST-115",
+    "name": "Distant Game Noise",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/distant_game_noise.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-214"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-116",
+    "name": "Emotional Group Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/emotional_group_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-097"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-117",
+    "name": "Tense Outdoor Bed",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/tense_outdoor_bed.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-215"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-118",
+    "name": "BBQ Pit Crowd Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/bbq_pit_crowd_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-098"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-119",
+    "name": "Mess Hall Exterior",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/mess_hall_exterior.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-216"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-120",
+    "name": "Picnic Crowd Murmur",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/picnic_crowd_murmur.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-217"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-121",
+    "name": "Boat Engine Loop",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/boat_engine_loop.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-218"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-122",
+    "name": "Slo-Mo Sports Underscore",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/slo_mo_sports_underscore.mp3",
+    "duration": "30s",
+    "used_by": [
+      "CUE-099"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Royalty-free inspirational."
+  },
+  {
+    "id": "AST-123",
+    "name": "Water Ski Drag / Splash SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/water_ski_drag_splash_sfx.wav",
+    "duration": "6s",
+    "used_by": [
+      "CUE-100"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-124",
+    "name": "Body Tumble SFX (Repeat)",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/body_tumble_sfx_repeat.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-101"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-125",
+    "name": "Woods Day Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/woods_day_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-102"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Birds, light wind."
+  },
+  {
+    "id": "AST-126",
+    "name": "Romantic Kiss Stinger (Optional)",
+    "category": "Comedy",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/romantic_kiss_stinger_optional.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-103"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-127",
+    "name": "Wind Through Trees Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/wind_through_trees_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-104"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-128",
+    "name": "Phone Ring SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/phone_ring_sfx.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-105",
+      "CUE-138"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-129",
+    "name": "Kids Applause / Cheer",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/kids_applause_cheer.wav",
+    "duration": "4s",
+    "used_by": [
+      "CUE-106"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-130",
+    "name": "Office Phone Room Tone",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/office_phone_room_tone.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-107"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-131",
+    "name": "Rehearsal Piano / Movement Room",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/rehearsal_piano_movement_room.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-108"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-132",
+    "name": "Paul's Guitar (Diegetic)",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/paul_s_guitar_diegetic.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-109"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-133",
+    "name": "Dinner Call Shout",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/dinner_call_shout.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-110"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-134",
+    "name": "Emotional Door Creak",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/emotional_door_creak.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-219"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-135",
+    "name": "Mess Hall Dinner Crowd",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/mess_hall_dinner_crowd.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-111"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-136",
+    "name": "Large Box Roll / Door SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/large_box_roll_door_sfx.wav",
+    "duration": "4s",
+    "used_by": [
+      "CUE-112"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-137",
+    "name": "Mess Hall Applause",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/mess_hall_applause.wav",
+    "duration": "5s",
+    "used_by": [
+      "CUE-113"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-138",
+    "name": "Kitchen Backroom Quiet",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/kitchen_backroom_quiet.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-114"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-139",
+    "name": "Comedy Dead Air",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/comedy_dead_air.mp3",
+    "duration": "3s",
+    "used_by": [
+      "CUE-220"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Beat before Gary speaks."
+  },
+  {
+    "id": "AST-140",
+    "name": "Summer in the City (Lovin' Spoonful)",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/summer_in_the_city_lovin_spoonful.mp3",
+    "duration": "Full/skip",
+    "used_by": [
+      "CUE-116"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Licensed. Under mess hall scene."
+  },
+  {
+    "id": "AST-141",
+    "name": "Exterior Lawn Under Music",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/exterior_lawn_under_music.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-117"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-142",
+    "name": "Music Duck / Focus Dialogue",
+    "category": "Transition",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/music_duck_focus_dialogue.wav",
+    "duration": "Fade",
+    "used_by": [
+      "CUE-118"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Pull Summer in the City down."
+  },
+  {
+    "id": "AST-143",
+    "name": "Heartbreak Sting (Optional)",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/heartbreak_sting_optional.mp3",
+    "duration": "3s",
+    "used_by": [
+      "CUE-221"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-144",
+    "name": "Plates Crash SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/plates_crash_sfx.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-119"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-145",
+    "name": "Room Hush",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/room_hush.mp3",
+    "duration": "2s",
+    "used_by": [
+      "CUE-222"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-146",
+    "name": "Big Mess Hall Cheer / Applause",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/big_mess_hall_cheer_applause.wav",
+    "duration": "8s",
+    "used_by": [
+      "CUE-120"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-147",
+    "name": "Comedy Cheer Continue",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/comedy_cheer_continue.wav",
+    "duration": "6s",
+    "used_by": [
+      "CUE-121"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-148",
+    "name": "Struggle / Crowd Movement SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/struggle_crowd_movement_sfx.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-122"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-149",
+    "name": "Shower Spray / Arty Yelling",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/shower_spray_arty_yelling.wav",
+    "duration": "8s",
+    "used_by": [
+      "CUE-123"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-150",
+    "name": "Victory Cheer SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/victory_cheer_sfx.wav",
+    "duration": "5s",
+    "used_by": [
+      "CUE-124"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-151",
+    "name": "Lakeside Evening Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/lakeside_evening_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-125"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-152",
+    "name": "Evening Lake Insects",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/evening_lake_insects.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-223"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-153",
+    "name": "Ominous Drone Underscore",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/ominous_drone_underscore.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-126"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Tension bed."
+  },
+  {
+    "id": "AST-154",
+    "name": "Science Montage Tick",
+    "category": "Transition",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/science_montage_tick.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-224"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-155",
+    "name": "Bunk Interior Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/bunk_interior_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-127"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-156",
+    "name": "Lonely Lake Lap",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/lonely_lake_lap.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-225"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-157",
+    "name": "Slapstick Rake Bonk SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/slapstick_rake_bonk_sfx.wav",
+    "duration": "1s",
+    "used_by": [
+      "CUE-128"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-158",
+    "name": "Banana Peel Slip / Splash SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/banana_peel_slip_splash_sfx.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-129"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-159",
+    "name": "Bucket Clunk SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/bucket_clunk_sfx.wav",
+    "duration": "1s",
+    "used_by": [
+      "CUE-130"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Optional sad trombone."
+  },
+  {
+    "id": "AST-160",
+    "name": "Tinkering / Building SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/tinkering_building_sfx.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-226"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-161",
+    "name": "80s Training Montage Music",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/80s_training_montage_music.mp3",
+    "duration": "Montage",
+    "used_by": [
+      "CUE-131"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Royalty-free synth rock."
+  },
+  {
+    "id": "AST-162",
+    "name": "Running / Wind SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/running_wind_sfx.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-132"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-163",
+    "name": "Montage Music Dip",
+    "category": "Transition",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/montage_music_dip.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-133"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Brief emotional beat."
+  },
+  {
+    "id": "AST-164",
+    "name": "Montage Music Swell",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/montage_music_swell.mp3",
+    "duration": "5s",
+    "used_by": [
+      "CUE-134"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-165",
+    "name": "Night Forest Running / Panting",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/night_forest_running_panting.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-135"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-166",
+    "name": "Motorcycle Arrival Night",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/motorcycle_arrival_night.wav",
+    "duration": "4s",
+    "used_by": [
+      "CUE-136"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-167",
+    "name": "Rapids Danger Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/rapids_danger_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-137"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Rushing water."
+  },
+  {
+    "id": "AST-168",
+    "name": "Retro Phone Trace Beeps",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/retro_phone_trace_beeps.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-139"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Comedy tech."
+  },
+  {
+    "id": "AST-169",
+    "name": "Suspense Sting",
+    "category": "Transition",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/suspense_sting.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-227"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-170",
+    "name": "Door Smash / Chaos SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/door_smash_chaos_sfx.wav",
+    "duration": "6s",
+    "used_by": [
+      "CUE-140"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-171",
+    "name": "Rec Hall Crowd Murmur",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/rec_hall_crowd_murmur.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-141"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-172",
+    "name": "Hero Beat Silence",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/hero_beat_silence.mp3",
+    "duration": "2s",
+    "used_by": [
+      "CUE-142"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-173",
+    "name": "Action Run Underscore",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/action_run_underscore.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-143"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Royalty-free hero run."
+  },
+  {
+    "id": "AST-174",
+    "name": "Running Feet / Night Ambience",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/running_feet_night_ambience.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-144"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-175",
+    "name": "Skylab Device Sputter SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/skylab_device_sputter_sfx.wav",
+    "duration": "4s",
+    "used_by": [
+      "CUE-145"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-176",
+    "name": "Rapids Intensify",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/rapids_intensify.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-146"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-177",
+    "name": "Comedy Shock Sting",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/comedy_shock_sting.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-228"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-178",
+    "name": "Triumph Stinger SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/triumph_stinger_sfx.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-147"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-179",
+    "name": "Night Crickets Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/night_crickets_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-148"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-180",
+    "name": "Dramatic Pause",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/dramatic_pause.mp3",
+    "duration": "3s",
+    "used_by": [
+      "CUE-229"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-181",
+    "name": "Talent Show Audience Settle",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/talent_show_audience_settle.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-149"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Pre-show hush."
+  },
+  {
+    "id": "AST-182",
+    "name": "Talent Show Open Applause",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/talent_show_open_applause.wav",
+    "duration": "5s",
+    "used_by": [
+      "CUE-230"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-183",
+    "name": "Audience Gasp / Quiet",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/audience_gasp_quiet.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-150"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-184",
+    "name": "Wild Audience Scream / Applause",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/wild_audience_scream_applause.wav",
+    "duration": "10s",
+    "used_by": [
+      "CUE-151"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Beatles-level chaos."
+  },
+  {
+    "id": "AST-185",
+    "name": "Showbiz Entrance Stinger",
+    "category": "Transition",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/showbiz_entrance_stinger.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-152"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-186",
+    "name": "Dice Roll SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/dice_roll_sfx.wav",
+    "duration": "1s",
+    "used_by": [
+      "CUE-153",
+      "CUE-158"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-187",
+    "name": "Symphonic Hope Crescendo",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/symphonic_hope_crescendo.mp3",
+    "duration": "8s",
+    "used_by": [
+      "CUE-154"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Royalty-free orchestral."
+  },
+  {
+    "id": "AST-188",
+    "name": "Awkward Talent Show Silence",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/awkward_talent_show_silence.mp3",
+    "duration": "4s",
+    "used_by": [
+      "CUE-155"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Unimpressive act."
+  },
+  {
+    "id": "AST-189",
+    "name": "Comedy Rimshot (Optional)",
+    "category": "Comedy",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/comedy_rimshot_optional.wav",
+    "duration": "1s",
+    "used_by": [
+      "CUE-231"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-190",
+    "name": "Quiet Prayer Murmur",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/quiet_prayer_murmur.mp3",
+    "duration": "3s",
+    "used_by": [
+      "CUE-156"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-191",
+    "name": "Night Outdoor Work Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/night_outdoor_work_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-232"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-192",
+    "name": "You've Got a Friend (Campers)",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/you_ve_got_a_friend_campers.mp3",
+    "duration": "Full",
+    "used_by": [
+      "CUE-157"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Licensed. Bunk 7 dedication."
+  },
+  {
+    "id": "AST-193",
+    "name": "Audience Laughter Loop",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/audience_laughter_loop.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-159"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-194",
+    "name": "Crowd Chant MOOOSE",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/crowd_chant_mooose.wav",
+    "duration": "5s",
+    "used_by": [
+      "CUE-160"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-195",
+    "name": "Fart Flamethrower SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/fart_flamethrower_sfx.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-161"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Comedy centerpiece."
+  },
+  {
+    "id": "AST-196",
+    "name": "Big Cheer SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/big_cheer_sfx.wav",
+    "duration": "6s",
+    "used_by": [
+      "CUE-162"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-197",
+    "name": "Dramatic Reveal Stinger",
+    "category": "Transition",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/dramatic_reveal_stinger.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-163"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-198",
+    "name": "Applause for Gail",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/applause_for_gail.wav",
+    "duration": "5s",
+    "used_by": [
+      "CUE-164"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-199",
+    "name": "Dramatic Underscore Dip",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/dramatic_underscore_dip.mp3",
+    "duration": "2s",
+    "used_by": [
+      "CUE-233"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-200",
+    "name": "Day By Day (Godspell)",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/day_by_day_godspell.mp3",
+    "duration": "Full number",
+    "used_by": [
+      "CUE-165"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Licensed. Broadway-quality read."
+  },
+  {
+    "id": "AST-201",
+    "name": "Rhythmic Audience Clap",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/rhythmic_audience_clap.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-166"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-202",
+    "name": "Audience Boo / Hiss",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/audience_boo_hiss.wav",
+    "duration": "6s",
+    "used_by": [
+      "CUE-167"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-203",
+    "name": "Urgent Dice Roll",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/urgent_dice_roll.wav",
+    "duration": "1s",
+    "used_by": [
+      "CUE-168"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-204",
+    "name": "Roaring Laughter Bed",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/roaring_laughter_bed.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-169"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-205",
+    "name": "Door Creak / Gasp",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/door_creak_gasp.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-170"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-206",
+    "name": "Urgent Clock Tick (Optional)",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/urgent_clock_tick_optional.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-234"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-207",
+    "name": "Awkward Steve Intro Silence",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/awkward_steve_intro_silence.mp3",
+    "duration": "4s",
+    "used_by": [
+      "CUE-171"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Before Steve's act."
+  },
+  {
+    "id": "AST-208",
+    "name": "Gentle Breeze SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/gentle_breeze_sfx.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-172"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Builds to wind."
+  },
+  {
+    "id": "AST-209",
+    "name": "Night Exterior Running",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/night_exterior_running.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-235"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-210",
+    "name": "Rumbling / Building Shake",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/rumbling_building_shake.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-173"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-211",
+    "name": "Wind Crescendo SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/wind_crescendo_sfx.wav",
+    "duration": "15s",
+    "used_by": [
+      "CUE-174"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Steve's power moment."
+  },
+  {
+    "id": "AST-212",
+    "name": "Debris / Furniture Crash",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/debris_furniture_crash.wav",
+    "duration": "6s",
+    "used_by": [
+      "CUE-175"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-213",
+    "name": "Emotional Music Swell",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/emotional_music_swell.mp3",
+    "duration": "6s",
+    "used_by": [
+      "CUE-236"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-214",
+    "name": "Device Power-Up Hum",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/device_power_up_hum.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-176"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-215",
+    "name": "Massive Wind Gust",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/massive_wind_gust.wav",
+    "duration": "8s",
+    "used_by": [
+      "CUE-177"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-216",
+    "name": "Skylab Crash Impact",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/skylab_crash_impact.wav",
+    "duration": "5s",
+    "used_by": [
+      "CUE-178"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Flaming metal debris."
+  },
+  {
+    "id": "AST-217",
+    "name": "Post-Wind Dead Silence",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/post_wind_dead_silence.mp3",
+    "duration": "5s",
+    "used_by": [
+      "CUE-179"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Hold before slow clap."
+  },
+  {
+    "id": "AST-218",
+    "name": "Slow Clap to Thunderous Ovation",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/slow_clap_to_thunderous_ovation.wav",
+    "duration": "15s",
+    "used_by": [
+      "CUE-180"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Beatles concert level."
+  },
+  {
+    "id": "AST-219",
+    "name": "Romantic Kiss Stinger",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/romantic_kiss_stinger.mp3",
+    "duration": "4s",
+    "used_by": [
+      "CUE-181"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Optional swoon."
+  },
+  {
+    "id": "AST-220",
+    "name": "Door Fly Off Hinges SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/door_fly_off_hinges_sfx.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-182"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-221",
+    "name": "Night to Morning Dissolve",
+    "category": "Transition",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/night_to_morning_dissolve.wav",
+    "duration": "5s",
+    "used_by": [
+      "CUE-183"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-222",
+    "name": "Departure Day Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/departure_day_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-184"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Buses, families."
+  },
+  {
+    "id": "AST-223",
+    "name": "Group Laughter SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/group_laughter_sfx.wav",
+    "duration": "4s",
+    "used_by": [
+      "CUE-185"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Shrimp cocktail joke."
+  },
+  {
+    "id": "AST-224",
+    "name": "Warm Morning Sting",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/warm_morning_sting.mp3",
+    "duration": "5s",
+    "used_by": [
+      "CUE-237"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-225",
+    "name": "Sentimental Underscore (Optional)",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/sentimental_underscore_optional.mp3",
+    "duration": "8s",
+    "used_by": [
+      "CUE-186"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-226",
+    "name": "Morning Birds / Field Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/morning_birds_field_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-187"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-227",
+    "name": "Lonely Morning Ambience",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/lonely_morning_ambience.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-188"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-228",
+    "name": "Comedy Alien Sting (Optional)",
+    "category": "Comedy",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/comedy_alien_sting_optional.wav",
+    "duration": "2s",
+    "used_by": [
+      "CUE-238"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Page coverage."
+  },
+  {
+    "id": "AST-229",
+    "name": "Car Drive Away SFX",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/car_drive_away_sfx.wav",
+    "duration": "5s",
+    "used_by": [
+      "CUE-189"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-230",
+    "name": "Melancholy Silence",
+    "category": "Silence",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/generated/melancholy_silence.mp3",
+    "duration": "4s",
+    "used_by": [
+      "CUE-190"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-231",
+    "name": "Gentle Ending Underscore",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/gentle_ending_underscore.mp3",
+    "duration": "20s",
+    "used_by": [
+      "CUE-191"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Royalty-free bittersweet."
+  },
+  {
+    "id": "AST-232",
+    "name": "Fade to Black",
+    "category": "Transition",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/fade_to_black.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-192"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-233",
+    "name": "Epilogue Title Sting",
+    "category": "Transition",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/epilogue_title_sting.wav",
+    "duration": "3s",
+    "used_by": [
+      "CUE-193"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-234",
+    "name": "VCR Projector Whir",
+    "category": "SFX",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/sfx/vcr_projector_whir.wav",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-194"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": ""
+  },
+  {
+    "id": "AST-235",
+    "name": "Epilogue Room Tone / Laughter",
+    "category": "Ambience",
+    "royalty_free": "Yes",
+    "source": "Freesound / BBC / original",
+    "filename": "assets/ambience/epilogue_room_tone_laughter.mp3",
+    "duration": "Loop",
+    "used_by": [
+      "CUE-195"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "End of show."
+  },
+  {
+    "id": "AST-236",
+    "name": "End Credits Music (Optional)",
+    "category": "Music",
+    "royalty_free": "No",
+    "source": "TBD - acquire for production",
+    "filename": "assets/generated/end_credits_music_optional.mp3",
+    "duration": "60s",
+    "used_by": [
+      "CUE-196"
+    ],
+    "status": "Needed",
+    "download_url": "",
+    "notes": "Reprise Jane or original."
+  }
+]
