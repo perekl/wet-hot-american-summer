@@ -360,6 +360,19 @@ class SoundboardApp(tk.Tk):
             self._update_script_highlights()
         self.after(80, self._release_script_sync)
 
+    def _asset_summary(self, cue: dict) -> str:
+        asset_id = cue.get("asset_id", "")
+        asset = self.assets_by_id.get(asset_id, {})
+        name = asset.get("name") or asset_id or "—"
+        filename = cue.get("asset_filename") or asset.get("filename", "")
+        mode = cue.get("playback_mode") or asset.get("playback_mode", "")
+        parts = [f"{asset_id} — {name}"]
+        if mode:
+            parts.append(mode)
+        if filename:
+            parts.append(Path(filename).name)
+        return "  |  ".join(parts)
+
     def _on_script_cue_clicked(self, cue: dict):
         if cue_type(cue) == "FOREGROUND":
             for i, item in enumerate(self.foreground_cues):
@@ -368,6 +381,9 @@ class SoundboardApp(tk.Tk):
                     self._refresh_foreground()
                     break
             self._sync_script_from_foreground()
+            self.status.config(
+                text=f"▸ Effect {cue['id']} — {self._asset_summary(cue)}"
+            )
         else:
             for i, item in enumerate(self.background_cues):
                 if item["id"] == cue["id"]:
@@ -375,6 +391,10 @@ class SoundboardApp(tk.Tk):
                     self._refresh_background()
                     break
             self._sync_script_from_background()
+            self.status.config(
+                text=f"▸ Background {cue['id']} — {self._asset_summary(cue)}"
+            )
+        self._refresh_sync_banner(self._foreground_cue())
 
     def _refresh_sync_banner(self, cue: dict):
         match = self._backgrounds_match(cue)
@@ -430,7 +450,7 @@ class SoundboardApp(tk.Tk):
             if self.bg_index + 1 < len(self.background_cues)
             else None
         )
-        queue_text = f"{c['id']} p.{c['page']} — {c['name']}"
+        queue_text = f"{c['id']} p.{c['page']} — {c['name']}\n{self._asset_summary(c)}"
         if nxt:
             queue_text += f"\nNext: {nxt['id']}"
         self.lbl_bg_queue.config(text=queue_text)
@@ -451,8 +471,9 @@ class SoundboardApp(tk.Tk):
         self.lbl_name.config(text=c["name"])
         self.lbl_meta.config(
             text=(
-                f"{c.get('playback_mode', '')}  |  {c['scene'][:40]}  |  "
-                f"Vol {c['volume']}  |  Expected BG: {expected_text}"
+                f"Asset: {self._asset_summary(c)}  |  "
+                f"Scene: {c['scene'][:36]}  |  Vol {c['volume']}  |  "
+                f"Expected BG: {expected_text}"
             )
         )
         self.lbl_trigger.config(text=c["trigger"])

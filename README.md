@@ -124,6 +124,7 @@ The right-hand panel shows the screenplay with cue markers:
 - **Space / Enter / arrows** on effects also scroll the script to that cue’s page
 - Background **PREV / GO / NEXT** scroll the script to the selected background cue
 - Click a cue badge in the script margin to jump that queue to the cue
+- Click highlighted trigger text or cue strips in the script to select that cue and show its asset in the control panel
 
 **PDF sources** (first match wins):
 1. `WHAS_SCREENPLAY_PDF` environment variable

@@ -56,6 +56,7 @@ class ScriptPanel(tk.Frame):
     ):
         super().__init__(parent, bg="#0a0a12")
         self.cues = cues
+        self.cues_by_id = {c["id"]: c for c in cues}
         self.foreground_cues = [c for c in cues if cue_type(c) == "FOREGROUND"]
         self.background_cues = [c for c in cues if cue_type(c) == "BACKGROUND"]
         self.page_index = build_page_index(cues)
@@ -97,6 +98,8 @@ class ScriptPanel(tk.Frame):
         for label, color in (("FX", FX_COLOR), ("BG", BG_COLOR), ("BG STOP", BG_STOP_COLOR)):
             tk.Label(legend, text=f"■ {label}", fg=color, bg="#0a0a12",
                      font=tkfont.Font(size=9)).pack(side=tk.LEFT, padx=6)
+        tk.Label(legend, text="Click highlights to select cue", fg="#8090a8", bg="#0a0a12",
+                 font=tkfont.Font(size=9)).pack(side=tk.LEFT, padx=(8, 0))
 
         body = tk.Frame(self, bg="#0a0a12")
         body.pack(fill=tk.BOTH, expand=True)
@@ -218,6 +221,7 @@ class ScriptPanel(tk.Frame):
             img_id = self.canvas.create_image(x0, y0, anchor="nw", image=photo)
             items = [img_id]
             items.extend(self._draw_margin_badges(page_num, page_idx, y0))
+            items.extend(self._draw_page_cue_hit_areas(page_num, x0, y0, pix.width))
             items.extend(self._draw_trigger_highlights(page, page_num, page_idx, x0, y0, scale))
             self._page_items[page_idx] = items
 
@@ -260,9 +264,30 @@ class ScriptPanel(tk.Frame):
                 tags=("cue_badge", cue["id"], cue_type(cue)),
             )
             for item in (rect, text):
-                self.canvas.tag_bind(item, "<Button-1>", lambda e, c=cue: self._cue_click(c))
+                self._bind_cue_clickable(item, cue)
             items.extend([rect, text])
             y += h + 4
+        return items
+
+    def _draw_page_cue_hit_areas(
+        self, page_num: int, x0: int, y0: int, content_width: int
+    ) -> list[int]:
+        """Clickable bands over annotated cue strips at the top of each page."""
+        items: list[int] = []
+        cues = self.page_index.get(page_num, [])
+        if not cues:
+            return items
+        y = y0 + 22
+        band_h = 14
+        for cue in cues:
+            item = self.canvas.create_rectangle(
+                x0, y, x0 + content_width, y + band_h,
+                fill="", outline="", width=0,
+                tags=("cue_strip_hit", cue["id"], cue_type(cue)),
+            )
+            self._bind_cue_clickable(item, cue)
+            items.append(item)
+            y += band_h + 3
         return items
 
     def _draw_trigger_highlights(
@@ -280,20 +305,28 @@ class ScriptPanel(tk.Frame):
                 if not rects:
                     continue
                 for rect in rects[:2]:
-                    rx0 = x0 + rect.x0 * scale
-                    ry0 = y0 + rect.y0 * scale
-                    rx1 = x0 + rect.x1 * scale
-                    ry1 = y0 + rect.y1 * scale
-                    stipple = "" if active else "gray50"
+                    pad = 2
+                    rx0 = x0 + rect.x0 * scale - pad
+                    ry0 = y0 + rect.y0 * scale - pad
+                    rx1 = x0 + rect.x1 * scale + pad
+                    ry1 = y0 + rect.y1 * scale + pad
                     item = self.canvas.create_rectangle(
                         rx0, ry0, rx1, ry1,
-                        outline=color, width=3 if active else 1,
-                        stipple=stipple,
-                        tags=("cue_highlight", cue["id"]),
+                        outline=color,
+                        fill=color,
+                        width=3 if active else 2,
+                        stipple="" if active else "gray50",
+                        tags=("cue_highlight", cue["id"], cue_type(cue)),
                     )
+                    self._bind_cue_clickable(item, cue)
                     items.append(item)
                 break
         return items
+
+    def _bind_cue_clickable(self, item_id: int, cue: dict) -> None:
+        self.canvas.tag_bind(item_id, "<Button-1>", lambda e, c=cue: self._cue_click(c))
+        self.canvas.tag_bind(item_id, "<Enter>", lambda e: self.canvas.config(cursor="hand2"))
+        self.canvas.tag_bind(item_id, "<Leave>", lambda e: self.canvas.config(cursor=""))
 
     def _cue_click(self, cue: dict):
         if self.on_cue_clicked:
