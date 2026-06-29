@@ -90,6 +90,8 @@ class SoundboardApp(tk.Tk):
         self._active_tab = "browser"
         self._browser_canvas_width = 0
         self._browser_resize_job: str | None = None
+        self._now_playing_fg: dict | None = None
+        self._now_playing_bg: dict | None = None
 
         self._build_ui()
         self._maximize_window()
@@ -260,16 +262,29 @@ class SoundboardApp(tk.Tk):
         tk.Label(bg_panel, text="BACKGROUND", font=tkfont.Font(size=11, weight="bold"),
                  fg="#a0d2ff", bg="#0f3460").grid(row=0, column=0, columnspan=4, sticky="w")
 
-        tk.Label(bg_panel, text="Queue:", font=small_font, fg="#c0c0d0", bg="#0f3460").grid(
-            row=1, column=0, sticky="nw", pady=(6, 0))
-        self.lbl_bg_queue = tk.Label(
+        tk.Label(bg_panel, text="Now Playing:", font=small_font, fg="#c0c0d0", bg="#0f3460").grid(
+            row=1, column=0, sticky="nw", pady=(8, 0))
+        self.lbl_bg_now_playing = tk.Label(
             bg_panel, text="—", font=small_font, fg="white", bg="#0f3460",
             wraplength=260, justify=tk.LEFT, anchor="w",
         )
-        self.lbl_bg_queue.grid(row=1, column=1, columnspan=3, sticky="w", padx=(4, 0), pady=(6, 0))
+        self.lbl_bg_now_playing.grid(row=1, column=1, columnspan=3, sticky="w", padx=(4, 0), pady=(8, 0))
+
+        self.lbl_bg_now_status = tk.Label(
+            bg_panel, text="", font=small_font, fg="#7ec8a3", bg="#0f3460", anchor="w",
+        )
+        self.lbl_bg_now_status.grid(row=2, column=1, columnspan=3, sticky="w", padx=(4, 0))
+
+        tk.Label(bg_panel, text="Queue:", font=small_font, fg="#c0c0d0", bg="#0f3460").grid(
+            row=3, column=0, sticky="nw", pady=(8, 0))
+        self.lbl_bg_queue = tk.Label(
+            bg_panel, text="—", font=small_font, fg="#d0d0e0", bg="#0f3460",
+            wraplength=260, justify=tk.LEFT, anchor="w",
+        )
+        self.lbl_bg_queue.grid(row=3, column=1, columnspan=3, sticky="w", padx=(4, 0), pady=(8, 0))
 
         bg_nav = tk.Frame(bg_panel, bg="#0f3460")
-        bg_nav.grid(row=2, column=0, columnspan=4, sticky="w", pady=(8, 0))
+        bg_nav.grid(row=4, column=0, columnspan=4, sticky="w", pady=(8, 0))
         btn_nav = {"font": small_font, "bg": "#16213e", "fg": "white",
                    "activebackground": "#1a1a2e", "relief": tk.FLAT, "padx": 8, "pady": 4}
         tk.Button(bg_nav, text="◀ PREV", command=self.prev_background, **btn_nav).pack(side=tk.LEFT, padx=(0, 4))
@@ -279,7 +294,17 @@ class SoundboardApp(tk.Tk):
         tk.Button(bg_nav, text="NEXT ▶", command=self.next_background, **btn_nav).pack(side=tk.LEFT, padx=(4, 0))
 
         tk.Label(parent, text="EFFECTS", font=tkfont.Font(size=11, weight="bold"),
-                 fg="#a0d2ff", bg="#1a1a2e").pack(anchor="w", padx=12, pady=(10, 0))
+                 fg="#a0d2ff", bg="#1a1a2e").pack(anchor="w", padx=12, pady=(12, 0))
+
+        fg_now = tk.Frame(parent, bg="#16213e", padx=12, pady=8)
+        fg_now.pack(fill=tk.X, padx=10, pady=(4, 0))
+        tk.Label(fg_now, text="Now Playing:", font=small_font, fg="#a0a0b0",
+                 bg="#16213e", anchor="w").pack(fill=tk.X)
+        self.lbl_fg_now_playing = tk.Label(
+            fg_now, text="—", font=med_font, fg="white", bg="#16213e",
+            wraplength=320, justify=tk.LEFT, anchor="w",
+        )
+        self.lbl_fg_now_playing.pack(fill=tk.X, pady=(4, 0))
 
         nav = tk.Frame(parent, bg="#1a1a2e")
         nav.pack(pady=4, padx=8)
@@ -298,6 +323,9 @@ class SoundboardApp(tk.Tk):
 
         tk.Label(parent, text="Space = next  |  Enter = GO  |  Esc = stop all",
                  font=small_font, fg="#a0a0b0", bg="#1a1a2e", wraplength=340).pack(padx=12)
+
+        tk.Label(parent, text="QUEUED EFFECT", font=tkfont.Font(size=10, weight="bold"),
+                 fg="#8090a8", bg="#1a1a2e").pack(anchor="w", padx=12, pady=(8, 0))
 
         panel = tk.Frame(parent, bg="#16213e", padx=14, pady=12)
         panel.pack(fill=tk.BOTH, expand=True, padx=10, pady=(6, 4))
@@ -326,16 +354,11 @@ class SoundboardApp(tk.Tk):
         transport = tk.Frame(parent, bg="#0f3460", padx=12, pady=10)
         transport.pack(fill=tk.X, padx=10, pady=(4, 0))
 
-        tk.Label(transport, text="NOW PLAYING", font=tkfont.Font(size=10, weight="bold"),
+        tk.Label(transport, text="TRANSPORT", font=tkfont.Font(size=10, weight="bold"),
                  fg="#a0d2ff", bg="#0f3460").pack(anchor="w")
-        self.lbl_now_playing = tk.Label(
-            transport, text="—", font=small_font, fg="white", bg="#0f3460",
-            wraplength=320, justify=tk.LEFT, anchor="w",
-        )
-        self.lbl_now_playing.pack(fill=tk.X, pady=(4, 6))
 
         btn_row = tk.Frame(transport, bg="#0f3460")
-        btn_row.pack(fill=tk.X, pady=(0, 6))
+        btn_row.pack(fill=tk.X, pady=(6, 6))
         btn_style = {"font": small_font, "bg": "#16213e", "fg": "white",
                      "activebackground": "#1a1a2e", "relief": tk.FLAT, "padx": 8, "pady": 4}
         tk.Button(btn_row, text="Stop All", command=self.stop_all, **btn_style).pack(side=tk.LEFT, padx=(0, 4))
@@ -516,6 +539,39 @@ class SoundboardApp(tk.Tk):
             text=f"Effect {self.fg_index + 1}/{len(self.foreground_cues)}  |  "
                  f"BG {self.bg_index + 1}/{len(self.background_cues)}"
         )
+        self._refresh_now_playing_labels()
+
+    def _refresh_now_playing_labels(self):
+        if self._now_playing_fg:
+            c = self._now_playing_fg
+            self.lbl_fg_now_playing.config(
+                text=f"{c['id']} — {c['name']}\n{self._asset_summary(c)}"
+            )
+        else:
+            self.lbl_fg_now_playing.config(text="—")
+
+        if self._now_playing_bg:
+            c = self._now_playing_bg
+            self.lbl_bg_now_playing.config(
+                text=f"{c['id']} — {c['name']}\n{self._asset_summary(c)}"
+            )
+            is_silence = c.get("category") == "Silence" or c.get("playback_mode") == "Silence"
+            if is_silence:
+                self.lbl_bg_now_status.config(text="Silence", fg="#a0a0b0")
+            elif self.player and self.player.background_is_active():
+                elapsed = _format_elapsed(self.player.background_elapsed_seconds())
+                if self.player.background_is_playing():
+                    status = f"Playing  •  {elapsed}"
+                    color = "#7ec8a3"
+                else:
+                    status = f"Paused  •  {elapsed}"
+                    color = "#f5d76e"
+                self.lbl_bg_now_status.config(text=status, fg=color)
+            else:
+                self.lbl_bg_now_status.config(text="Stopped", fg="#a0a0b0")
+        else:
+            self.lbl_bg_now_playing.config(text="—")
+            self.lbl_bg_now_status.config(text="Stopped", fg="#a0a0b0")
 
     def _sync_script_to_cue(self, cue: dict):
         if self.script_editor:
@@ -559,7 +615,6 @@ class SoundboardApp(tk.Tk):
         else:
             self._execute_foreground_go(cue)
         self._sync_script_to_cue(cue)
-        self.lbl_now_playing.config(text=f"{cue['id']} — {cue['name']}\n{self._asset_summary(cue)}")
 
     def _refresh_background_playback(self):
         if not self.player:
@@ -575,6 +630,7 @@ class SoundboardApp(tk.Tk):
             self.lbl_bg_status.config(text="BG: Stopped", fg="#a0a0b0")
         self.lbl_bg_elapsed.config(text=_format_elapsed(self.player.background_elapsed_seconds()))
         self.bg_volume.set(self.player.background_volume())
+        self._refresh_now_playing_labels()
 
     def _start_background_tick(self):
         self._refresh_background_playback()
@@ -624,6 +680,7 @@ class SoundboardApp(tk.Tk):
             return
         self._cancel_fade()
         self.player.stop_background()
+        self._now_playing_bg = None
         self._refresh_background_playback()
 
     def _bg_fade_out(self):
@@ -634,6 +691,7 @@ class SoundboardApp(tk.Tk):
         def finish():
             if self.player:
                 self.player.stop_background()
+            self._now_playing_bg = None
             self._refresh_background_playback()
 
         self._fade_background_volume(start, 0, 1500, on_complete=finish)
@@ -645,6 +703,8 @@ class SoundboardApp(tk.Tk):
 
         def run_background():
             ok, message = self.player.play_background(cue, fade_in_ms=800)
+            if ok:
+                self._now_playing_bg = cue
             if ok and cue.get("category") != "Silence":
                 self._fade_background_volume(0, resolve_volume_from_cue(cue), 800)
             prefix = "▶" if ok else "⚠"
@@ -669,13 +729,15 @@ class SoundboardApp(tk.Tk):
         self._set_active_cue(cue)
         self._execute_background_go(cue)
         self._sync_script_to_cue(cue)
-        self.lbl_now_playing.config(text=f"{cue['id']} — {cue['name']}\n{self._asset_summary(cue)}")
 
     def _execute_foreground_go(self, cue: dict):
         if not self.player:
             self.status.config(text="Playback unavailable — install python-vlc and VLC")
             return
         ok, message = self.player.play_foreground(cue)
+        if ok:
+            self._now_playing_fg = cue
+            self._refresh_now_playing_labels()
         self.status.config(text=f"{'▶' if ok else '⚠'} {cue['id']} — {message}")
         self._refresh_background_playback()
 
@@ -686,12 +748,13 @@ class SoundboardApp(tk.Tk):
         self._set_active_cue(cue)
         self._execute_foreground_go(cue)
         self._sync_script_to_cue(cue)
-        self.lbl_now_playing.config(text=f"{cue['id']} — {cue['name']}\n{self._asset_summary(cue)}")
 
     def stop_all(self):
         self._cancel_fade()
         if self.player:
             self.player.stop_all()
+        self._now_playing_fg = None
+        self._now_playing_bg = None
         self.status.config(text="■ Stopped all playback")
         self._refresh_background_playback()
 
