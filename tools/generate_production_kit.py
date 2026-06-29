@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import json
-import re
 from collections import OrderedDict
 from pathlib import Path
 
@@ -20,67 +19,78 @@ from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
 
+from asset_library import CANONICAL_ASSETS, resolve_asset_key, suggested_volume_for_mode
 from cues_data import CUES, LICENSED_MUSIC
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 DOCS = ROOT / "docs"
-ASSETS_SFX = ROOT / "assets" / "sfx"
-ASSETS_AMB = ROOT / "assets" / "ambience"
 
 CUE_COLS = [
-    "Cue ID", "Script Page", "Scene", "Trigger Dialogue", "Cue Name",
+    "Cue ID", "Asset ID", "Script Page", "Scene", "Trigger Dialogue", "Cue Name",
     "Category", "Priority", "Duration", "Loop", "Fade", "Volume", "Notes",
 ]
 ASSET_COLS = [
-    "Asset ID", "Name", "Category", "Royalty Free?", "Source",
-    "Filename", "Duration", "Used By Cue IDs", "Status", "Download URL", "Notes",
+    "Asset ID", "Name", "Category", "Playback Mode", "Suggested Volume",
+    "Royalty Free?", "Source", "Filename", "Duration",
+    "Used By Cue IDs", "Status", "Download URL", "Notes",
 ]
 
-CATEGORY_TO_FOLDER = {
-    "Music": "assets/generated",
-    "Ambience": "assets/ambience",
-    "SFX": "assets/sfx",
-    "Transition": "assets/sfx",
-    "Silence": "assets/generated",
-    "Comedy": "assets/sfx",
-}
+
+def assign_cue_assets(cues: list[dict]) -> list[dict]:
+    """Attach canonical Asset ID to each cue; cue Volume/Fade/Loop preserve behavior."""
+    enriched = []
+    for cue in cues:
+        key = resolve_asset_key(cue)
+        if key not in CANONICAL_ASSETS:
+            raise KeyError(f"No canonical asset for key '{key}' (cue {cue['Cue ID']})")
+        asset_id = _asset_id_for_key(key)
+        row = dict(cue)
+        row["Asset ID"] = asset_id
+        enriched.append(row)
+    return enriched
 
 
-def slugify(text: str) -> str:
-    s = re.sub(r"[^a-zA-Z0-9]+", "_", text.lower()).strip("_")
-    return s[:60] or "asset"
+def _asset_id_for_key(key: str) -> str:
+    keys = sorted(CANONICAL_ASSETS.keys())
+    return f"AST-{keys.index(key) + 1:03d}"
 
 
-def build_assets() -> list[dict]:
-    seen: OrderedDict[str, dict] = OrderedDict()
-    for cue in CUES:
-        name = cue["Cue Name"]
-        cat = cue["Category"]
-        key = (name, cat)
-        if key not in seen:
-            folder = CATEGORY_TO_FOLDER.get(cat, "assets/sfx")
-            slug = slugify(name)
-            ext = ".wav" if cat in ("SFX", "Comedy", "Transition") else ".mp3"
-            aid = f"AST-{len(seen) + 1:03d}"
-            seen[key] = {
-                "Asset ID": aid,
-                "Name": name,
-                "Category": cat,
-                "Royalty Free?": "Yes" if cat in ("Ambience", "SFX", "Silence", "Transition", "Comedy") else "No",
-                "Source": "TBD - acquire for production" if cat == "Music" else "Freesound / BBC / original",
-                "Filename": f"{folder}/{slug}{ext}",
-                "Duration": cue["Duration"] or "TBD",
-                "Used By Cue IDs": cue["Cue ID"],
-                "Status": "Needed",
-                "Download URL": "",
-                "Notes": cue["Notes"],
-            }
-        else:
-            existing = seen[key]["Used By Cue IDs"]
-            if cue["Cue ID"] not in existing:
-                seen[key]["Used By Cue IDs"] = f"{existing}, {cue['Cue ID']}"
-    return list(seen.values())
+def _key_by_asset_id(asset_id: str) -> str:
+    keys = sorted(CANONICAL_ASSETS.keys())
+    idx = int(asset_id.split("-")[1]) - 1
+    return keys[idx]
+
+
+def build_assets(cues: list[dict]) -> list[dict]:
+    """Build consolidated asset rows from canonical library + cue usage."""
+    usage: OrderedDict[str, list[str]] = OrderedDict()
+    for cue in cues:
+        key = resolve_asset_key(cue)
+        usage.setdefault(key, []).append(cue["Cue ID"])
+
+    assets = []
+    for key in sorted(CANONICAL_ASSETS.keys()):
+        if key not in usage:
+            continue
+        spec = CANONICAL_ASSETS[key]
+        mode = spec["playback_mode"]
+        assets.append({
+            "Asset ID": _asset_id_for_key(key),
+            "Name": spec["name"],
+            "Category": spec["category"],
+            "Playback Mode": mode,
+            "Suggested Volume": suggested_volume_for_mode(mode),
+            "Royalty Free?": spec["royalty_free"],
+            "Source": spec["source"],
+            "Filename": spec["filename"],
+            "Duration": spec["duration"],
+            "Used By Cue IDs": ", ".join(usage[key]),
+            "Status": "Needed",
+            "Download URL": "",
+            "Notes": spec["notes"],
+        })
+    return assets
 
 
 def style_header(ws, cols):
@@ -216,11 +226,17 @@ def write_cue_book_pdf(path: Path, cues: list[dict]):
 
 
 def write_json_exports(cues: list[dict], assets: list[dict]):
+    asset_by_id = {a["Asset ID"]: a for a in assets}
     cue_export = []
     for i, c in enumerate(cues):
+        asset = asset_by_id[c["Asset ID"]]
         cue_export.append({
             "index": i,
             "id": c["Cue ID"],
+            "asset_id": c["Asset ID"],
+            "asset_filename": asset["Filename"],
+            "playback_mode": asset["Playback Mode"],
+            "suggested_volume": asset["Suggested Volume"],
             "page": c["Script Page"],
             "scene": c["Scene"],
             "trigger": c["Trigger Dialogue"],
@@ -239,6 +255,8 @@ def write_json_exports(cues: list[dict], assets: list[dict]):
             "id": a["Asset ID"],
             "name": a["Name"],
             "category": a["Category"],
+            "playback_mode": a["Playback Mode"],
+            "suggested_volume": a["Suggested Volume"],
             "royalty_free": a["Royalty Free?"],
             "source": a["Source"],
             "filename": a["Filename"],
@@ -262,10 +280,11 @@ def verify_page_coverage(cues: list[dict], total_pages: int = 90):
 
 
 def main():
-    assets = build_assets()
-    verify_page_coverage(CUES)
+    cues = assign_cue_assets(CUES)
+    assets = build_assets(cues)
+    verify_page_coverage(cues)
 
-    write_xlsx(DATA / "master_cues.xlsx", "Master Cues", CUE_COLS, CUES)
+    write_xlsx(DATA / "master_cues.xlsx", "Master Cues", CUE_COLS, cues)
     write_xlsx(DATA / "master_sound_assets.xlsx", "Sound Assets", ASSET_COLS, assets)
     write_xlsx(
         DATA / "licensed_music.xlsx", "Licensed Music",
@@ -273,13 +292,15 @@ def main():
         LICENSED_MUSIC,
     )
 
-    write_cue_book_docx(DOCS / "CueBook.docx", CUES)
-    write_stage_manager_docx(DOCS / "StageManagerBook.docx", CUES)
-    write_cue_book_pdf(DOCS / "CueBook.pdf", CUES)
+    write_cue_book_docx(DOCS / "CueBook.docx", cues)
+    write_stage_manager_docx(DOCS / "StageManagerBook.docx", cues)
+    write_cue_book_pdf(DOCS / "CueBook.pdf", cues)
 
-    write_json_exports(CUES, assets)
+    write_json_exports(cues, assets)
 
-    print(f"Generated {len(CUES)} cues, {len(assets)} unique assets, {len(LICENSED_MUSIC)} licensed tracks")
+    reuse = len(cues) / len(assets)
+    print(f"Generated {len(cues)} cues, {len(assets)} reusable assets ({reuse:.1f}x reuse), "
+          f"{len(LICENSED_MUSIC)} licensed tracks")
     print(f"Output: {DATA}, {DOCS}")
 
 

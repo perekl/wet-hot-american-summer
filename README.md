@@ -39,6 +39,7 @@ Each row in `data/master_sound_assets.xlsx` is a **unique audio file** the produ
 | Cue Field | Purpose |
 |-----------|---------|
 | Cue ID | Unique identifier (`CUE-001` …) for call sheets and the app |
+| Asset ID | Canonical reusable sound file (`AST-001` …) |
 | Script Page | Screenplay page reference |
 | Trigger Dialogue | Exact line or stage direction that fires the cue |
 | Category | Music, Ambience, SFX, Transition, Silence, Comedy |
@@ -46,11 +47,15 @@ Each row in `data/master_sound_assets.xlsx` is a **unique audio file** the produ
 
 | Asset Field | Purpose |
 |-------------|---------|
-| Asset ID | Unique file identifier (`AST-001` …) |
+| Asset ID | Unique file identifier (`AST-001` …) linked from master cues |
+| Playback Mode | How the asset plays: `Loop`, `One Shot`, `Music`, or `Silence` |
+| Suggested Volume | Default level by mode: Loop 30, One Shot 85, Music 70, Silence 0 |
 | Filename | Target path under `assets/` |
-| Used By Cue IDs | All cues that need this file |
+| Used By Cue IDs | All cues that share this file |
 | Royalty Free? | Whether the asset can be sourced royalty-free |
 | Status | Production tracking (`Needed`, etc.) |
+
+**Cue-level mix is preserved:** each cue keeps its own `Volume`, `Fade`, and `Loop` in `master_cues.xlsx`. Multiple cues can share one asset file while behaving differently in context (e.g., Mess Hall Crowd at breakfast vs. dinner with different fades/volumes).
 
 **Licensed music** is tracked separately in `data/licensed_music.xlsx` because it requires rights clearance (Jefferson Starship, Rick Springfield, Lovin' Spoonful, Godspell, etc.).
 
@@ -63,7 +68,7 @@ pip install -r requirements.txt
 python tools/generate_production_kit.py
 ```
 
-This rebuilds all spreadsheets, Word/PDF cue books, and JSON exports. The generator verifies **all 90 screenplay pages** have cue coverage before completing.
+This rebuilds all spreadsheets, Word/PDF cue books, and JSON exports. Assets are consolidated via `tools/asset_library.py` (78 reusable files serving 239 cues). The generator verifies **all 90 screenplay pages** have cue coverage before completing.
 
 ## Soundboard Application
 
