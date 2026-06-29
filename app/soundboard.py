@@ -73,13 +73,14 @@ class SoundboardApp(tk.Tk):
         self.script_editor: ScriptEditor | None = None
 
         self._build_ui()
+        self._maximize_window()
+        self.update_idletasks()
         self._bind_keys()
         self._refresh_foreground()
         self._refresh_background()
         self._start_background_tick()
-        self._sync_script_from_foreground()
+        self.after(200, self._sync_script_from_foreground)
         self.protocol("WM_DELETE_WINDOW", self._on_close)
-        self._maximize_window()
 
     def _maximize_window(self):
         try:
