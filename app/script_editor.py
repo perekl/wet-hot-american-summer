@@ -87,6 +87,9 @@ class ScriptEditor(tk.Frame):
         self._pending_scroll_para: str | None = None
         self._last_rendered_page = 0
         self._mousewheel_active = False
+        self._canvas_width = 0
+        self._canvas_resize_job: str | None = None
+        self._inner_configure_job: str | None = None
 
         self._build_ui()
         self._show_loading()
@@ -174,13 +177,28 @@ class ScriptEditor(tk.Frame):
         self.canvas.configure(scrollregion=(0, 0, width, height))
 
     def _on_canvas_configure(self, event):
-        self.canvas.itemconfig(self.canvas_window, width=event.width)
+        new_width = event.width
+        if abs(new_width - self._canvas_width) < 4:
+            return
+        self._canvas_width = new_width
+        if self._canvas_resize_job:
+            self.after_cancel(self._canvas_resize_job)
+        self._canvas_resize_job = self.after(80, lambda w=new_width: self._apply_canvas_width(w))
+
+    def _apply_canvas_width(self, width: int):
+        self._canvas_resize_job = None
+        self.canvas.itemconfig(self.canvas_window, width=width)
 
     def _on_inner_configure(self, event=None):
-        if event is not None:
-            self.canvas.configure(scrollregion=(0, 0, event.width, max(event.height, 1)))
-        else:
-            self._update_scrollregion()
+        if self._inner_configure_job:
+            self.after_cancel(self._inner_configure_job)
+        self._inner_configure_job = self.after(50, self._apply_scrollregion)
+
+    def _apply_scrollregion(self):
+        self._inner_configure_job = None
+        if self._rebuild_in_progress:
+            return
+        self._update_scrollregion()
 
     def _on_scroll(self, *args):
         self.canvas.yview(*args)
@@ -305,6 +323,7 @@ class ScriptEditor(tk.Frame):
                 "fg": SCENE_COLOR,
                 "font": tkfont.Font(size=11, weight="bold"),
                 "anchor": "w",
+                "wraplength": 680,
             }
         if para_type == "character":
             return {
@@ -312,6 +331,7 @@ class ScriptEditor(tk.Frame):
                 "fg": "#e0e0e0",
                 "font": tkfont.Font(size=10, weight="bold"),
                 "anchor": "center",
+                "wraplength": 500,
             }
         if para_type == "dialogue":
             return {
@@ -319,6 +339,7 @@ class ScriptEditor(tk.Frame):
                 "fg": "#f0f0f0",
                 "font": tkfont.Font(size=10),
                 "anchor": "w",
+                "wraplength": 520,
             }
         if para_type == "parenthetical":
             return {
@@ -326,6 +347,7 @@ class ScriptEditor(tk.Frame):
                 "fg": "#b0b0b0",
                 "font": tkfont.Font(size=9, slant="italic"),
                 "anchor": "center",
+                "wraplength": 400,
             }
         if para_type == "transition":
             return {
@@ -333,12 +355,14 @@ class ScriptEditor(tk.Frame):
                 "fg": "#c0c0c0",
                 "font": tkfont.Font(size=10, weight="bold"),
                 "anchor": "e",
+                "wraplength": 680,
             }
         return {
             "pack": {},
             "fg": "#d8d8d8",
             "font": tkfont.Font(family="Courier", size=10),
             "anchor": "w",
+            "wraplength": 680,
         }
 
     def _inline_cues_at(self, para_id: str, char_pos: int) -> list[dict]:
@@ -352,6 +376,19 @@ class ScriptEditor(tk.Frame):
         return result
 
     def _build_text_row(self, parent, para, style: dict):
+        if not self.project._placements_for(para.id, inline=True):
+            tk.Label(
+                parent,
+                text=para.text or " ",
+                fg=style["fg"],
+                bg="#12121c",
+                font=style["font"],
+                wraplength=style.get("wraplength", 680),
+                justify=style.get("justify", "left"),
+                anchor=style.get("anchor", "w"),
+            ).pack(fill=tk.X)
+            return
+
         text = tk.Text(
             parent,
             wrap=tk.WORD,
@@ -363,21 +400,17 @@ class ScriptEditor(tk.Frame):
             borderwidth=0,
             highlightthickness=0,
             padx=0,
-            pady=2,
+            pady=0,
+            spacing1=0,
+            spacing2=0,
+            spacing3=0,
             cursor="xterm",
         )
-        justify = style.get("justify", "left")
-        if justify == "center":
-            text.tag_configure("center", justify="center")
-        elif justify == "right":
-            text.tag_configure("right", justify="right")
         text.pack(fill=tk.X)
         self._text_widgets[para.id] = text
 
         tokens = _tokenize(para.text)
-        if not tokens:
-            text.insert("1.0", " ")
-        else:
+        if tokens:
             for token, start in tokens:
                 for cue in self._inline_cues_at(para.id, start):
                     self._insert_inline_cue_tag(text, para.id, cue, start)
@@ -396,9 +429,19 @@ class ScriptEditor(tk.Frame):
                         lambda e, pid=para.id, pos=start, w=token: self._drop_on_anchor(pid, pos, w),
                     )
 
-        line_count = max(1, int(text.index("end-1c").split(".")[0]))
+        text.update_idletasks()
+        line_count = self._text_display_lines(text)
         text.configure(height=line_count)
         text.configure(state=tk.DISABLED)
+
+    def _text_display_lines(self, text: tk.Text) -> int:
+        try:
+            count = text.count("1.0", "end-1c", "displaylines")
+            if count:
+                return max(1, int(count[0] if isinstance(count, tuple) else count))
+        except tk.TclError:
+            pass
+        return max(1, int(text.index("end-1c").split(".")[0]))
 
     def _insert_inline_cue_tag(self, text: tk.Text, para_id: str, cue: dict, start: int):
         color = _marker_color(cue)
