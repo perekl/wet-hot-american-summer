@@ -16,7 +16,8 @@
     "loop": "No",
     "fade": "In",
     "volume": 0,
-    "notes": "Hold black before titles."
+    "notes": "Hold black before titles.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 1,
@@ -35,7 +36,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 25,
-    "notes": "Pre-show optional."
+    "notes": "Pre-show optional.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 2,
@@ -54,7 +56,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 85,
-    "notes": "Licensed. Fade under first scene."
+    "notes": "Licensed. Fade under first scene.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-017"
   },
   {
     "index": 3,
@@ -73,7 +77,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 70,
-    "notes": "Cut from black to campfire."
+    "notes": "Cut from black to campfire.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-017"
   },
   {
     "index": 4,
@@ -92,7 +98,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 60,
-    "notes": "Crackling fire, distant crickets, counselors murmuring."
+    "notes": "Crackling fire, distant crickets, counselors murmuring.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 5,
@@ -111,7 +118,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 45,
-    "notes": "Under Jane or post-title music."
+    "notes": "Under Jane or post-title music.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 6,
@@ -130,7 +138,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 55,
-    "notes": "Comedy enhancement for date stamp."
+    "notes": "Comedy enhancement for date stamp.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 7,
@@ -149,7 +159,9 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 80,
-    "notes": "Maintain through dawn montage."
+    "notes": "Maintain through dawn montage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 8,
@@ -168,7 +180,8 @@
     "loop": "Yes",
     "fade": "Crossfade",
     "volume": 55,
-    "notes": "Birds, gentle water, rural New England morning."
+    "notes": "Birds, gentle water, rural New England morning.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 9,
@@ -187,7 +200,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 70,
-    "notes": "Comedy sound dissolves into next scene."
+    "notes": "Comedy sound dissolves into next scene.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 10,
@@ -206,7 +221,9 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 50,
-    "notes": "Exaggerated comedy smooch layer."
+    "notes": "Exaggerated comedy smooch layer.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 11,
@@ -225,7 +242,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 55,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 12,
@@ -244,7 +263,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 65,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 13,
@@ -263,7 +284,9 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 75,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 14,
@@ -282,7 +305,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 60,
-    "notes": "Footsteps, whispers, hurried movement."
+    "notes": "Footsteps, whispers, hurried movement.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 15,
@@ -301,7 +325,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 50,
-    "notes": "Diegetic camper singing, not full track."
+    "notes": "Diegetic camper singing, not full track.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-005"
   },
   {
     "index": 16,
@@ -320,7 +346,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 75,
-    "notes": "Badminton rackets and whiffle bats."
+    "notes": "Badminton rackets and whiffle bats.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-005"
   },
   {
     "index": 17,
@@ -339,7 +367,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 60,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-005"
   },
   {
     "index": 18,
@@ -358,7 +388,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 40,
-    "notes": "Under Arty V.O. - WCFW radio."
+    "notes": "Under Arty V.O. - WCFW radio.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 19,
@@ -377,7 +408,9 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 35,
-    "notes": "Light AM radio EQ on table read if desired."
+    "notes": "Light AM radio EQ on table read if desired.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-018"
   },
   {
     "index": 20,
@@ -396,7 +429,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 35,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 21,
@@ -415,7 +449,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 45,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-003"
   },
   {
     "index": 22,
@@ -434,7 +470,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 50,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-003"
   },
   {
     "index": 23,
@@ -453,7 +491,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 45,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 24,
@@ -472,7 +511,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 35,
-    "notes": "Distant camp assembly murmur."
+    "notes": "Distant camp assembly murmur.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 25,
@@ -491,7 +531,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 40,
-    "notes": "Birds, light breeze."
+    "notes": "Birds, light breeze.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 26,
@@ -510,7 +551,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 65,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 27,
@@ -529,7 +572,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 55,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 28,
@@ -548,7 +593,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 0,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 29,
@@ -567,7 +614,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 65,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 30,
@@ -586,7 +634,8 @@
     "loop": "No",
     "fade": "Out",
     "volume": 0,
-    "notes": "Drop crowd bed after Professor snaps."
+    "notes": "Drop crowd bed after Professor snaps.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 31,
@@ -605,7 +654,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 60,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-086"
   },
   {
     "index": 32,
@@ -624,7 +675,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 40,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 33,
@@ -643,7 +695,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 50,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 34,
@@ -662,7 +715,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 40,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-014"
   },
   {
     "index": 35,
@@ -681,7 +736,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 70,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-014"
   },
   {
     "index": 36,
@@ -700,7 +757,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 45,
-    "notes": "Pots, distant dining noise."
+    "notes": "Pots, distant dining noise.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 37,
@@ -719,7 +777,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 40,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 38,
@@ -738,7 +797,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 40,
-    "notes": "Tease only; full cue at talent show."
+    "notes": "Tease only; full cue at talent show.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-014"
   },
   {
     "index": 39,
@@ -757,7 +818,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 40,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 40,
@@ -776,7 +838,8 @@
     "loop": "Yes",
     "fade": "Crossfade",
     "volume": 50,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 41,
@@ -795,7 +858,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 40,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 42,
@@ -814,7 +878,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 55,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-018"
   },
   {
     "index": 43,
@@ -833,7 +899,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 60,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-018"
   },
   {
     "index": 44,
@@ -852,7 +920,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 0,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-018"
   },
   {
     "index": 45,
@@ -871,7 +941,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 45,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 46,
@@ -890,7 +961,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 65,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-001"
   },
   {
     "index": 47,
@@ -909,7 +982,8 @@
     "loop": "No",
     "fade": "Out",
     "volume": 0,
-    "notes": "Drop ambience for Gail breakdown."
+    "notes": "Drop ambience for Gail breakdown.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 48,
@@ -928,7 +1002,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 0,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-086"
   },
   {
     "index": 49,
@@ -947,7 +1023,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 40,
-    "notes": "Tiny closet, fan hum."
+    "notes": "Tiny closet, fan hum.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 50,
@@ -966,7 +1043,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 50,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-018"
   },
   {
     "index": 51,
@@ -985,7 +1064,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 45,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 52,
@@ -1004,7 +1084,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 30,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 53,
@@ -1023,7 +1104,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 0,
-    "notes": "Brief pause before science scene."
+    "notes": "Brief pause before science scene.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 54,
@@ -1042,7 +1125,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 75,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 55,
@@ -1061,7 +1146,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 0,
-    "notes": "Hold for Aaron's line."
+    "notes": "Hold for Aaron's line.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 56,
@@ -1080,7 +1167,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 55,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 57,
@@ -1099,7 +1188,9 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 30,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 58,
@@ -1118,7 +1209,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 50,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 59,
@@ -1137,7 +1230,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 35,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 60,
@@ -1156,7 +1250,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 55,
-    "notes": "Splashing, distant motor."
+    "notes": "Splashing, distant motor.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 61,
@@ -1175,7 +1270,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 70,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 62,
@@ -1194,7 +1291,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 35,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 63,
@@ -1213,7 +1311,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 55,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 64,
@@ -1232,7 +1332,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 70,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 65,
@@ -1251,7 +1353,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 0,
-    "notes": "Tense beat before science scene."
+    "notes": "Tense beat before science scene.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 66,
@@ -1270,7 +1374,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 45,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 67,
@@ -1289,7 +1394,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 40,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-021"
   },
   {
     "index": 68,
@@ -1308,7 +1415,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 60,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 69,
@@ -1327,7 +1435,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 75,
-    "notes": "Comedy beat."
+    "notes": "Comedy beat.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-011"
   },
   {
     "index": 70,
@@ -1346,7 +1456,9 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 55,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-011"
   },
   {
     "index": 71,
@@ -1365,7 +1477,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 60,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-011"
   },
   {
     "index": 72,
@@ -1384,7 +1498,9 @@
     "loop": "No",
     "fade": "In/Out",
     "volume": 85,
-    "notes": "Licensed. Town trip montage."
+    "notes": "Licensed. Town trip montage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-011"
   },
   {
     "index": 73,
@@ -1403,7 +1519,8 @@
     "loop": "Yes",
     "fade": "Under",
     "volume": 45,
-    "notes": "Under montage music."
+    "notes": "Under montage music.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 74,
@@ -1422,7 +1539,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 60,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 75,
@@ -1441,7 +1560,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 0,
-    "notes": "End Rick Springfield montage."
+    "notes": "End Rick Springfield montage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 76,
@@ -1460,7 +1581,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 50,
-    "notes": "Normal camp day resumes."
+    "notes": "Normal camp day resumes.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 77,
@@ -1479,7 +1601,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 65,
-    "notes": "Comedy."
+    "notes": "Comedy.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 78,
@@ -1498,7 +1622,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 70,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 79,
@@ -1517,7 +1643,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 50,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 80,
@@ -1536,7 +1663,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 0,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-002"
   },
   {
     "index": 81,
@@ -1555,7 +1684,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 40,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 82,
@@ -1574,7 +1704,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 40,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 83,
@@ -1593,7 +1724,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 35,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 84,
@@ -1612,7 +1744,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 35,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 85,
@@ -1631,7 +1764,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 75,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-001"
   },
   {
     "index": 86,
@@ -1650,7 +1785,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 80,
-    "notes": "Licensed. Victor driving."
+    "notes": "Licensed. Victor driving.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-001"
   },
   {
     "index": 87,
@@ -1669,7 +1806,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 90,
-    "notes": "Hard cut music."
+    "notes": "Hard cut music.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-001"
   },
   {
     "index": 88,
@@ -1688,7 +1827,9 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 50,
-    "notes": "Licensed, lo-fi bedroom."
+    "notes": "Licensed, lo-fi bedroom.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-001"
   },
   {
     "index": 89,
@@ -1707,7 +1848,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 45,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 90,
@@ -1726,7 +1868,9 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 30,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-011"
   },
   {
     "index": 91,
@@ -1745,7 +1889,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 55,
-    "notes": "Gentle current."
+    "notes": "Gentle current.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 92,
@@ -1764,7 +1909,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 75,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-020"
   },
   {
     "index": 93,
@@ -1783,7 +1930,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 50,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 94,
@@ -1802,7 +1950,9 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 65,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-020"
   },
   {
     "index": 95,
@@ -1821,7 +1971,9 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 70,
-    "notes": "Royalty-free action/comedy."
+    "notes": "Royalty-free action/comedy.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-020"
   },
   {
     "index": 96,
@@ -1840,7 +1992,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 80,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-020"
   },
   {
     "index": 97,
@@ -1859,7 +2013,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 45,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 98,
@@ -1878,7 +2033,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 55,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-022"
   },
   {
     "index": 99,
@@ -1897,7 +2054,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 0,
-    "notes": "Sun through cracks."
+    "notes": "Sun through cracks.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-022"
   },
   {
     "index": 100,
@@ -1916,7 +2075,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 55,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 101,
@@ -1935,7 +2095,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 0,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 102,
@@ -1954,7 +2116,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 70,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 103,
@@ -1973,7 +2137,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 60,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 104,
@@ -1992,7 +2158,9 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 60,
-    "notes": "Original or royalty-free flute."
+    "notes": "Original or royalty-free flute.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 105,
@@ -2011,7 +2179,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 55,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 106,
@@ -2030,7 +2200,8 @@
     "loop": "Yes",
     "fade": "Under",
     "volume": 45,
-    "notes": "Under flute."
+    "notes": "Under flute.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 107,
@@ -2049,7 +2220,9 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 55,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 108,
@@ -2068,7 +2241,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 80,
-    "notes": "Live read or recorded shout."
+    "notes": "Live read or recorded shout.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 109,
@@ -2087,7 +2262,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 85,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 110,
@@ -2106,7 +2283,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 60,
-    "notes": "Running, yelling."
+    "notes": "Running, yelling.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 111,
@@ -2125,7 +2303,9 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 35,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-007"
   },
   {
     "index": 112,
@@ -2144,7 +2324,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 35,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 113,
@@ -2163,7 +2344,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 50,
-    "notes": "Sizzling, crowd."
+    "notes": "Sizzling, crowd.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 114,
@@ -2182,7 +2364,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 40,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 115,
@@ -2201,7 +2384,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 40,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 116,
@@ -2220,7 +2404,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 35,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 117,
@@ -2239,7 +2424,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 50,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 118,
@@ -2258,7 +2444,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 35,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 119,
@@ -2277,7 +2464,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 40,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 120,
@@ -2296,7 +2484,9 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 55,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 121,
@@ -2315,7 +2505,9 @@
     "loop": "No",
     "fade": "In/Out",
     "volume": 65,
-    "notes": "Royalty-free inspirational."
+    "notes": "Royalty-free inspirational.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 122,
@@ -2334,7 +2526,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 80,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 123,
@@ -2353,7 +2547,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 70,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 124,
@@ -2372,7 +2568,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 45,
-    "notes": "Birds, light wind."
+    "notes": "Birds, light wind.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 125,
@@ -2391,7 +2588,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 45,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 126,
@@ -2410,7 +2609,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 50,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 127,
@@ -2429,7 +2629,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 70,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 128,
@@ -2448,7 +2650,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 60,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 129,
@@ -2467,7 +2671,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 35,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 130,
@@ -2486,7 +2691,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 45,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 131,
@@ -2505,7 +2711,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 50,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 132,
@@ -2524,7 +2731,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 85,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-038"
   },
   {
     "index": 133,
@@ -2543,7 +2752,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 45,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-038"
   },
   {
     "index": 134,
@@ -2562,7 +2773,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 60,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 135,
@@ -2581,7 +2793,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 60,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-014"
   },
   {
     "index": 136,
@@ -2600,7 +2814,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 65,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-014"
   },
   {
     "index": 137,
@@ -2619,7 +2835,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 40,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 138,
@@ -2638,7 +2855,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 40,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 139,
@@ -2657,7 +2875,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 0,
-    "notes": "Beat before Gary speaks."
+    "notes": "Beat before Gary speaks.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-018"
   },
   {
     "index": 140,
@@ -2676,7 +2896,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 85,
-    "notes": "Licensed. Under mess hall scene."
+    "notes": "Licensed. Under mess hall scene.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-018"
   },
   {
     "index": 141,
@@ -2695,7 +2917,8 @@
     "loop": "Yes",
     "fade": "Under",
     "volume": 35,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 142,
@@ -2714,7 +2937,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 20,
-    "notes": "Pull Summer in the City down."
+    "notes": "Pull Summer in the City down.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 143,
@@ -2733,7 +2958,9 @@
     "loop": "No",
     "fade": "In/Out",
     "volume": 40,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 144,
@@ -2752,7 +2979,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 80,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 145,
@@ -2771,7 +3000,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 0,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 146,
@@ -2790,7 +3021,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 80,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 147,
@@ -2809,7 +3042,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 75,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 148,
@@ -2828,7 +3063,9 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 65,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 149,
@@ -2847,7 +3084,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 75,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 150,
@@ -2866,7 +3105,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 70,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 151,
@@ -2885,7 +3126,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 50,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 152,
@@ -2904,7 +3146,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 40,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 153,
@@ -2923,7 +3166,9 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 55,
-    "notes": "Tension bed."
+    "notes": "Tension bed.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 154,
@@ -2942,7 +3187,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 50,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 155,
@@ -2961,7 +3208,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 35,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 156,
@@ -2980,7 +3228,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 45,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 157,
@@ -2999,7 +3248,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 80,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 158,
@@ -3018,7 +3269,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 85,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 159,
@@ -3037,7 +3290,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 70,
-    "notes": "Optional sad trombone."
+    "notes": "Optional sad trombone.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 160,
@@ -3056,7 +3311,9 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 40,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 161,
@@ -3075,7 +3332,9 @@
     "loop": "No",
     "fade": "In/Out",
     "volume": 80,
-    "notes": "Royalty-free synth rock."
+    "notes": "Royalty-free synth rock.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 162,
@@ -3094,7 +3353,9 @@
     "loop": "Yes",
     "fade": "Under",
     "volume": 45,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 163,
@@ -3113,7 +3374,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 40,
-    "notes": "Brief emotional beat."
+    "notes": "Brief emotional beat.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 164,
@@ -3132,7 +3395,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 85,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 165,
@@ -3151,7 +3416,9 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 60,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 166,
@@ -3170,7 +3437,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 70,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 167,
@@ -3189,7 +3458,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 75,
-    "notes": "Rushing water."
+    "notes": "Rushing water.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 168,
@@ -3208,7 +3478,9 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 80,
-    "notes": "Urgent ring."
+    "notes": "Urgent ring.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-020"
   },
   {
     "index": 169,
@@ -3227,7 +3499,9 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 55,
-    "notes": "Comedy tech."
+    "notes": "Comedy tech.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-020"
   },
   {
     "index": 170,
@@ -3246,7 +3520,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 65,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-020"
   },
   {
     "index": 171,
@@ -3265,7 +3541,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 80,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-020"
   },
   {
     "index": 172,
@@ -3284,7 +3562,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 55,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 173,
@@ -3303,7 +3582,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 0,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-023"
   },
   {
     "index": 174,
@@ -3322,7 +3603,9 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 80,
-    "notes": "Royalty-free hero run."
+    "notes": "Royalty-free hero run.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-023"
   },
   {
     "index": 175,
@@ -3341,7 +3624,9 @@
     "loop": "Yes",
     "fade": "Under",
     "volume": 65,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-023"
   },
   {
     "index": 176,
@@ -3360,7 +3645,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 60,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-023"
   },
   {
     "index": 177,
@@ -3379,7 +3666,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 85,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 178,
@@ -3398,7 +3686,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 60,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-020"
   },
   {
     "index": 179,
@@ -3417,7 +3707,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 70,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-020"
   },
   {
     "index": 180,
@@ -3436,7 +3728,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 40,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 181,
@@ -3455,7 +3748,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 0,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 182,
@@ -3474,7 +3769,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 50,
-    "notes": "Pre-show hush."
+    "notes": "Pre-show hush.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 183,
@@ -3493,7 +3789,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 70,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-023"
   },
   {
     "index": 184,
@@ -3512,7 +3810,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 55,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-023"
   },
   {
     "index": 185,
@@ -3531,7 +3831,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 90,
-    "notes": "Beatles-level chaos."
+    "notes": "Beatles-level chaos.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-023"
   },
   {
     "index": 186,
@@ -3550,7 +3852,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 65,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-023"
   },
   {
     "index": 187,
@@ -3569,7 +3873,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 60,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-023"
   },
   {
     "index": 188,
@@ -3588,7 +3894,9 @@
     "loop": "No",
     "fade": "In/Out",
     "volume": 75,
-    "notes": "Royalty-free orchestral."
+    "notes": "Royalty-free orchestral.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-023"
   },
   {
     "index": 189,
@@ -3607,7 +3915,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 0,
-    "notes": "Unimpressive act."
+    "notes": "Unimpressive act.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-023"
   },
   {
     "index": 190,
@@ -3626,7 +3936,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 45,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-023"
   },
   {
     "index": 191,
@@ -3645,7 +3957,8 @@
     "loop": "No",
     "fade": "None",
     "volume": 40,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 192,
@@ -3664,7 +3977,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 40,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 193,
@@ -3683,7 +3997,9 @@
     "loop": "No",
     "fade": "In/Out",
     "volume": 75,
-    "notes": "Licensed. Bunk 7 dedication."
+    "notes": "Licensed. Bunk 7 dedication.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 194,
@@ -3702,7 +4018,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 55,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 195,
@@ -3721,7 +4039,9 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 60,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 196,
@@ -3740,7 +4060,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 80,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 197,
@@ -3759,7 +4081,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 90,
-    "notes": "Comedy centerpiece."
+    "notes": "Comedy centerpiece.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 198,
@@ -3778,7 +4102,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 80,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 199,
@@ -3797,7 +4123,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 55,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 200,
@@ -3816,7 +4144,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 65,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 201,
@@ -3835,7 +4165,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 0,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 202,
@@ -3854,7 +4186,9 @@
     "loop": "No",
     "fade": "In/Out",
     "volume": 85,
-    "notes": "Licensed. Broadway-quality read."
+    "notes": "Licensed. Broadway-quality read.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 203,
@@ -3873,7 +4207,9 @@
     "loop": "Yes",
     "fade": "Under",
     "volume": 55,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 204,
@@ -3892,7 +4228,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 80,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 205,
@@ -3911,7 +4249,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 60,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 206,
@@ -3930,7 +4270,9 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 70,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 207,
@@ -3949,7 +4291,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 60,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 208,
@@ -3968,7 +4312,9 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 45,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 209,
@@ -3987,7 +4333,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 0,
-    "notes": "Before Steve's act."
+    "notes": "Before Steve's act.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 210,
@@ -4006,7 +4354,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 40,
-    "notes": "Builds to wind."
+    "notes": "Builds to wind.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 211,
@@ -4025,7 +4375,9 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 55,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 212,
@@ -4044,7 +4396,9 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 70,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 213,
@@ -4063,7 +4417,9 @@
     "loop": "No",
     "fade": "In/Out",
     "volume": 85,
-    "notes": "Steve's power moment."
+    "notes": "Steve's power moment.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 214,
@@ -4082,7 +4438,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 75,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 215,
@@ -4101,7 +4459,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 65,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 216,
@@ -4120,7 +4480,9 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 55,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 217,
@@ -4139,7 +4501,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 90,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 218,
@@ -4158,7 +4522,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 95,
-    "notes": "Flaming metal debris."
+    "notes": "Flaming metal debris.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 219,
@@ -4177,7 +4543,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 0,
-    "notes": "Hold before slow clap."
+    "notes": "Hold before slow clap.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 220,
@@ -4196,7 +4564,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 85,
-    "notes": "Beatles concert level."
+    "notes": "Beatles concert level.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 221,
@@ -4215,7 +4585,9 @@
     "loop": "No",
     "fade": "In/Out",
     "volume": 60,
-    "notes": "Optional swoon."
+    "notes": "Optional swoon.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 222,
@@ -4234,7 +4606,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 80,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 223,
@@ -4253,7 +4627,9 @@
     "loop": "No",
     "fade": "Crossfade",
     "volume": 50,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 224,
@@ -4272,7 +4648,8 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 55,
-    "notes": "Buses, families."
+    "notes": "Buses, families.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 225,
@@ -4291,7 +4668,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 60,
-    "notes": "Shrimp cocktail joke."
+    "notes": "Shrimp cocktail joke.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 226,
@@ -4310,7 +4689,9 @@
     "loop": "No",
     "fade": "In/Out",
     "volume": 50,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 227,
@@ -4329,7 +4710,9 @@
     "loop": "No",
     "fade": "In/Out",
     "volume": 45,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 228,
@@ -4348,7 +4731,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 40,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 229,
@@ -4367,7 +4751,8 @@
     "loop": "Yes",
     "fade": "Under",
     "volume": 40,
-    "notes": ""
+    "notes": "",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 230,
@@ -4386,7 +4771,9 @@
     "loop": "No",
     "fade": "None",
     "volume": 40,
-    "notes": "Page coverage."
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 231,
@@ -4405,7 +4792,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 55,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 232,
@@ -4424,7 +4813,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 0,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 233,
@@ -4443,7 +4834,9 @@
     "loop": "No",
     "fade": "In/Out",
     "volume": 55,
-    "notes": "Royalty-free bittersweet."
+    "notes": "Royalty-free bittersweet.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 234,
@@ -4462,7 +4855,9 @@
     "loop": "No",
     "fade": "Out",
     "volume": 0,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 235,
@@ -4481,7 +4876,9 @@
     "loop": "No",
     "fade": "In",
     "volume": 60,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 236,
@@ -4500,7 +4897,9 @@
     "loop": "Yes",
     "fade": "In",
     "volume": 50,
-    "notes": ""
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 237,
@@ -4519,7 +4918,8 @@
     "loop": "Yes",
     "fade": "None",
     "volume": 45,
-    "notes": "End of show."
+    "notes": "End of show.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 238,
@@ -4538,6 +4938,8 @@
     "loop": "No",
     "fade": "Out",
     "volume": 50,
-    "notes": "Reprise Jane or original."
+    "notes": "Reprise Jane or original.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-008"
   }
 ]

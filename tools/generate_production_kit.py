@@ -20,6 +20,7 @@ from reportlab.lib.units import inch
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
 
 from asset_library import CANONICAL_ASSETS, resolve_asset_key, suggested_volume_for_mode
+from background_cues import enrich_background_fields
 from cues_data import CUES, LICENSED_MUSIC
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -27,7 +28,8 @@ DATA = ROOT / "data"
 DOCS = ROOT / "docs"
 
 CUE_COLS = [
-    "Cue ID", "Asset ID", "Script Page", "Scene", "Trigger Dialogue", "Cue Name",
+    "Cue ID", "Asset ID", "Cue Type", "Expected Background Asset",
+    "Script Page", "Scene", "Trigger Dialogue", "Cue Name",
     "Category", "Priority", "Duration", "Loop", "Fade", "Volume", "Notes",
 ]
 ASSET_COLS = [
@@ -230,7 +232,7 @@ def write_json_exports(cues: list[dict], assets: list[dict]):
     cue_export = []
     for i, c in enumerate(cues):
         asset = asset_by_id[c["Asset ID"]]
-        cue_export.append({
+        entry = {
             "index": i,
             "id": c["Cue ID"],
             "asset_id": c["Asset ID"],
@@ -248,7 +250,12 @@ def write_json_exports(cues: list[dict], assets: list[dict]):
             "fade": c["Fade"],
             "volume": int(c["Volume"]) if str(c["Volume"]).isdigit() else c["Volume"],
             "notes": c["Notes"],
-        })
+        }
+        if c.get("Cue Type"):
+            entry["cue_type"] = c["Cue Type"]
+        if c.get("Expected Background Asset"):
+            entry["expected_background_asset_id"] = c["Expected Background Asset"]
+        cue_export.append(entry)
     asset_export = []
     for a in assets:
         asset_export.append({
@@ -281,6 +288,7 @@ def verify_page_coverage(cues: list[dict], total_pages: int = 90):
 
 def main():
     cues = assign_cue_assets(CUES)
+    cues = enrich_background_fields(cues, _asset_id_for_key)
     assets = build_assets(cues)
     verify_page_coverage(cues)
 

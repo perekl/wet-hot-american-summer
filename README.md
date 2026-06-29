@@ -27,6 +27,7 @@ app/
 
 tools/
   cues_data.py               # Screenplay-derived master cue database
+  background_cues.py         # Background/foreground classification + expected beds
   generate_production_kit.py # Regenerates all deliverables from cues_data.py
 ```
 
@@ -40,6 +41,8 @@ Each row in `data/master_sound_assets.xlsx` is a **unique audio file** the produ
 |-----------|---------|
 | Cue ID | Unique identifier (`CUE-001` …) for call sheets and the app |
 | Asset ID | Canonical reusable sound file (`AST-001` …) |
+| Cue Type | `BACKGROUND` (persistent bed) or `FOREGROUND` (one-shot / music / beat) |
+| Expected Background Asset | Optional — which background bed *should* be active for this cue |
 | Script Page | Screenplay page reference |
 | Trigger Dialogue | Exact line or stage direction that fires the cue |
 | Category | Music, Ambience, SFX, Transition, Silence, Comedy |
@@ -68,7 +71,7 @@ pip install -r requirements.txt
 python tools/generate_production_kit.py
 ```
 
-This rebuilds all spreadsheets, Word/PDF cue books, and JSON exports. Assets are consolidated via `tools/asset_library.py` (78 reusable files serving 239 cues). The generator verifies **all 90 screenplay pages** have cue coverage before completing.
+This rebuilds all spreadsheets, Word/PDF cue books, and JSON exports. Assets are consolidated via `tools/asset_library.py` (78 reusable files serving 239 cues). Background/foreground classification and expected-background fields are added by `tools/background_cues.py`. The generator verifies **all 90 screenplay pages** have cue coverage before completing.
 
 ## Soundboard Application
 
@@ -80,18 +83,52 @@ python app/soundboard.py
 ```
 
 **Controls:**
-- **PLAY / Enter** — play current cue
+- **GO / Enter** — fire the current cue
 - **NEXT / PREVIOUS** — step through cues in screenplay order
-- **Spacebar** — advance to next cue
-- **ESC** — stop all playback
+- **Spacebar** — advance to next cue (does not auto-play)
+- **ESC** — stop all playback (background + foreground)
 
-**Playback behavior:**
-- **Ambience** loops on a dedicated bed; starting a new ambience stops the previous one
-- **SFX / transitions** fire as one-shots (overlap ambience)
-- **Music** plays on a separate channel; loops when the cue `loop` field is `Yes`
-- **Silence** cues stop the ambience bed
+### Background Cue System
 
-**Display:** current cue name, trigger dialogue, script page, and upcoming cue.
+The soundboard separates **persistent background beds** from **foreground** sound effects. This is designed to assist a live human operator during a table read — not to automate cue progression.
+
+**Background cues** (`cue_type: BACKGROUND`) change the current background audio:
+- Ambience loops (campfire, mess hall crowd, lake, radio station, etc.)
+- Background **Silence** cues that fade out or clear the bed (e.g., pre-show hold, “drop crowd bed”)
+
+When **GO** is pressed on a background cue:
+1. Fade out any current background
+2. Start the new background (or silence)
+3. Update the **Background** panel
+
+The background continues until another background cue changes it.
+
+**Foreground cues** (`cue_type: FOREGROUND`) behave as before:
+- SFX, transitions, comedy hits, music stings
+- Dramatic silence *beats* (momentary pauses — they do **not** stop the background bed)
+- Foreground playback never interrupts background playback
+
+### Expected Background
+
+Every foreground cue may include an optional `expected_background_asset_id` in `cues.json` (and **Expected Background Asset** in `master_cues.xlsx`). This field is **informational only** — it describes which background should currently be active for the scene. It is not a command.
+
+When the selected cue’s expected background does not match what is playing:
+- A **yellow warning banner** appears on the cue panel
+- Pressing **GO** opens a **Background Out of Sync** dialog with **Switch Background** or **Ignore**
+- Nothing happens automatically; the operator decides
+
+When they match, a **green checkmark** confirms sync.
+
+### Background Panel
+
+A persistent panel at the top of the soundboard shows:
+- Current background name
+- Playing / Paused / Stopped
+- Elapsed time
+- **Play**, **Pause**, **Stop**, **Fade Out**, **Switch** (to expected background for current cue)
+- Volume slider
+
+**Display:** current cue name, trigger dialogue, script page, expected background, sync status, and upcoming cue.
 
 ## Sourcing Royalty-Free Assets
 
