@@ -365,16 +365,36 @@ class ScriptPanel(tk.Frame):
                     ry0 = y0 + rect.y0 * scale - pad
                     rx1 = x0 + rect.x1 * scale + pad
                     ry1 = y0 + rect.y1 * scale + pad
-                    item = self.canvas.create_rectangle(
-                        rx0, ry0, rx1, ry1,
-                        outline=color,
-                        fill=color,
-                        width=3 if active else 2,
-                        stipple="" if active else "gray50",
-                        tags=("cue_highlight", cue["id"], cue_type(cue)),
-                    )
-                    self._bind_cue_clickable(item, cue)
-                    items.append(item)
+                    if active:
+                        # Active: light tint + solid border (text stays readable)
+                        tint = self.canvas.create_rectangle(
+                            rx0, ry0, rx1, ry1,
+                            outline="",
+                            fill=color,
+                            stipple="gray12",
+                            tags=("cue_highlight", cue["id"], cue_type(cue)),
+                        )
+                        border = self.canvas.create_rectangle(
+                            rx0, ry0, rx1, ry1,
+                            outline=color,
+                            fill="",
+                            width=2,
+                            tags=("cue_highlight", cue["id"], cue_type(cue)),
+                        )
+                        for item in (tint, border):
+                            self._bind_cue_clickable(item, cue)
+                        items.extend([tint, border])
+                    else:
+                        item = self.canvas.create_rectangle(
+                            rx0, ry0, rx1, ry1,
+                            outline=color,
+                            fill="",
+                            width=1,
+                            dash=(3, 2),
+                            tags=("cue_highlight", cue["id"], cue_type(cue)),
+                        )
+                        self._bind_cue_clickable(item, cue)
+                        items.append(item)
                 break
         return items
 
