@@ -39,10 +39,12 @@ class VLCPlaybackEngine:
 
     def __init__(self, root: Path):
         self.root = root
-        self._instance = _vlc_instance()
-        self._background = self._instance.media_player_new()
-        self._sfx = self._instance.media_player_new()
-        self._music = self._instance.media_player_new()
+        # Separate VLC instances so per-channel volume sliders stay independent on Windows.
+        self._bg_instance = _vlc_instance()
+        self._fg_instance = _vlc_instance()
+        self._background = self._bg_instance.media_player_new()
+        self._sfx = self._fg_instance.media_player_new()
+        self._music = self._fg_instance.media_player_new()
         self._current_background_asset: str | None = None
         self._current_background_cue: dict | None = None
         self._background_volume = 30
@@ -51,15 +53,17 @@ class VLCPlaybackEngine:
         self._background_paused_elapsed = 0.0
         self._background_pause_started: float | None = None
 
-    def _media(self, path: Path, loop: bool) -> vlc.Media:
-        media = self._instance.media_new(str(path))
+    def _media(self, path: Path, loop: bool, *, instance: vlc.Instance) -> vlc.Media:
+        media = instance.media_new(str(path))
         if loop:
             media.add_option("input-repeat=65535")
         return media
 
-    def _play(self, player: vlc.MediaPlayer, path: Path, volume: int, loop: bool) -> None:
+    def _play(
+        self, player: vlc.MediaPlayer, path: Path, volume: int, loop: bool, *, instance: vlc.Instance,
+    ) -> None:
         player.stop()
-        player.set_media(self._media(path, loop))
+        player.set_media(self._media(path, loop, instance=instance))
         player.audio_set_volume(_clamp_volume(volume))
         player.play()
 
@@ -160,7 +164,6 @@ class VLCPlaybackEngine:
         """Switch persistent background bed (fade out previous, start new)."""
         mode = cue.get("playback_mode", "")
         category = cue.get("category", "")
-        volume = resolve_volume(cue)
 
         if mode == "Silence" or category == "Silence":
             self.stop_background()
@@ -173,21 +176,22 @@ class VLCPlaybackEngine:
             return False, f"Missing audio file: {path.relative_to(self.root)}"
 
         self._background.stop()
-        self._play(self._background, path, 0 if fade_in_ms else volume, loop=True)
+        self._play(self._background, path, 0 if fade_in_ms else self._background_volume, loop=True,
+                  instance=self._bg_instance)
         self._current_background_asset = cue.get("asset_id")
         self._current_background_cue = cue
         self._mark_background_started()
         if fade_in_ms:
             self.set_background_volume(0)
         else:
-            self.set_background_volume(volume)
-        return True, f"Background: {path.name} @ {volume}"
+            self.set_background_volume(self._background_volume)
+        return True, f"Background: {path.name} @ {self._background_volume}"
 
     def play_foreground(self, cue: dict) -> tuple[bool, str]:
         """Play SFX/music without touching the background channel."""
         mode = cue.get("playback_mode", "")
         category = cue.get("category", "")
-        volume = resolve_volume(cue)
+        volume = self._foreground_volume
         path = self._resolve_path(cue)
 
         if mode == "Silence" or category == "Silence":
@@ -196,25 +200,23 @@ class VLCPlaybackEngine:
         if not path.is_file():
             return False, f"Missing audio file: {path.relative_to(self.root)}"
 
-        self.set_foreground_volume(volume)
-
         if mode == "One Shot" or category in ("SFX", "Transition", "Comedy"):
             loop = cue.get("loop") == "Yes"
-            self._play(self._sfx, path, volume, loop=loop)
+            self._play(self._sfx, path, volume, loop=loop, instance=self._fg_instance)
             kind = "loop" if loop else "one-shot"
             return True, f"Playing SFX {kind}: {path.name} @ {volume}"
 
         if mode == "Music" or category == "Music":
             loop = cue.get("loop") == "Yes"
-            self._play(self._music, path, volume, loop=loop)
+            self._play(self._music, path, volume, loop=loop, instance=self._fg_instance)
             kind = "loop" if loop else "music"
             return True, f"Playing {kind}: {path.name} @ {volume}"
 
         if mode == "Loop":
-            self._play(self._sfx, path, volume, loop=True)
+            self._play(self._sfx, path, volume, loop=True, instance=self._fg_instance)
             return True, f"Playing loop: {path.name} @ {volume}"
 
-        self._play(self._sfx, path, volume, loop=False)
+        self._play(self._sfx, path, volume, loop=False, instance=self._fg_instance)
         return True, f"Playing: {path.name} @ {volume}"
 
     def play_cue(self, cue: dict) -> tuple[bool, str]:

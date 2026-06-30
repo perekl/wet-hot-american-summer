@@ -95,6 +95,9 @@ class SoundboardApp(tk.Tk):
         self._syncing_volume = False
 
         self._build_ui()
+        if self.player:
+            self.player.set_background_volume(self.bg_volume.get())
+            self.player.set_foreground_volume(self.fg_volume.get())
         self._maximize_window()
         self.update_idletasks()
         self._bind_keys()
@@ -599,7 +602,6 @@ class SoundboardApp(tk.Tk):
         if not self.player:
             return
         self._set_volume_slider(self.bg_volume, self.player.background_volume())
-        self._set_volume_slider(self.fg_volume, self.player.foreground_volume())
         self._refresh_now_playing_labels()
 
     def _start_background_tick(self):
