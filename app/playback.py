@@ -46,6 +46,7 @@ class VLCPlaybackEngine:
         self._current_background_asset: str | None = None
         self._current_background_cue: dict | None = None
         self._background_volume = 30
+        self._foreground_volume = 70
         self._background_started_at: float | None = None
         self._background_paused_elapsed = 0.0
         self._background_pause_started: float | None = None
@@ -74,6 +75,21 @@ class VLCPlaybackEngine:
 
     def background_volume(self) -> int:
         return self._background_volume
+
+    def set_foreground_volume(self, volume: int) -> None:
+        self._foreground_volume = _clamp_volume(volume)
+        self._sfx.audio_set_volume(self._foreground_volume)
+        self._music.audio_set_volume(self._foreground_volume)
+
+    def foreground_volume(self) -> int:
+        return self._foreground_volume
+
+    def foreground_is_playing(self) -> bool:
+        return bool(self._sfx.is_playing() or self._music.is_playing())
+
+    def stop_foreground(self) -> None:
+        self._sfx.stop()
+        self._music.stop()
 
     def background_is_playing(self) -> bool:
         return bool(self._background.is_playing())
@@ -179,6 +195,8 @@ class VLCPlaybackEngine:
 
         if not path.is_file():
             return False, f"Missing audio file: {path.relative_to(self.root)}"
+
+        self.set_foreground_volume(volume)
 
         if mode == "One Shot" or category in ("SFX", "Transition", "Comedy"):
             loop = cue.get("loop") == "Yes"
