@@ -26,7 +26,7 @@ docs/
 
 app/
   soundboard.py              # Fullscreen soundboard + screenplay editor
-  script_editor.py           # Editable screenplay view with inline cues
+  script_editor.py           # Editable screenplay view with line-level cues
   script_model.py            # script.json project model
   cue_persistence.py         # Auto-save to cues.json + master_cues.xlsx
   cue_dialogs.py             # Create/edit cue dialogs

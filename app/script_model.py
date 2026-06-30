@@ -91,6 +91,7 @@ class ScriptProject:
             assets = json.loads(self.assets_path.read_text(encoding="utf-8"))
             self.assets_by_id = {a["id"]: a for a in assets}
         self._rebuild_index()
+        self._normalize_line_placements()
         if not self.placements and self.paragraphs:
             self._placements_from_cue_pages()
 
@@ -104,6 +105,12 @@ class ScriptProject:
         }
         self.script_path.parent.mkdir(parents=True, exist_ok=True)
         self.script_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
+    def _normalize_line_placements(self) -> None:
+        """Fold legacy word-anchored placements into line-level markers."""
+        for pl in self.placements:
+            if pl.anchor_start >= 0:
+                pl.anchor_start = -1
 
     def _rebuild_index(self) -> None:
         self._paragraph_index = {p.id: p for p in self.paragraphs}
@@ -119,10 +126,17 @@ class ScriptProject:
             matches = [p for p in matches if p.anchor_start < 0]
         return sorted(matches, key=lambda x: (x.anchor_start, x.order, x.cue_id))
 
-    def cues_after(self, paragraph_id: str) -> list[dict]:
-        ids = [pl.cue_id for pl in self._placements_for(paragraph_id, inline=False)]
+    def cues_for_paragraph(self, paragraph_id: str) -> list[dict]:
+        """All cues on a screenplay line, in play order."""
         by_id = {c["id"]: c for c in self.cues}
-        return [by_id[cid] for cid in ids if cid in by_id]
+        placements = sorted(
+            self._placements_for(paragraph_id),
+            key=lambda x: (x.order, x.cue_id),
+        )
+        return [by_id[pl.cue_id] for pl in placements if pl.cue_id in by_id]
+
+    def cues_after(self, paragraph_id: str) -> list[dict]:
+        return self.cues_for_paragraph(paragraph_id)
 
     def cues_inline(self, paragraph_id: str) -> list[tuple[int, dict]]:
         by_id = {c["id"]: c for c in self.cues}
@@ -146,8 +160,7 @@ class ScriptProject:
             seq = para_seq.get(pl.after_paragraph_id, 999999)
             para = self.paragraph(pl.after_paragraph_id)
             page = para.page if para else 999
-            anchor = pl.anchor_start if pl.anchor_start >= 0 else 999999
-            order.append((page, seq, anchor, pl.order, pl.cue_id))
+            order.append((page, seq, pl.order, pl.cue_id))
         order.sort()
         return [cid for *_, cid in order]
 
@@ -207,19 +220,16 @@ class ScriptProject:
         cue_id: str,
         after_paragraph_id: str,
         order: int | None = None,
-        *,
-        anchor_start: int = -1,
-        anchor_text: str = "",
     ) -> None:
         self.placements = [p for p in self.placements if p.cue_id != cue_id]
         if order is None:
             siblings = [
                 p for p in self.placements
-                if p.after_paragraph_id == after_paragraph_id and p.anchor_start == anchor_start
+                if p.after_paragraph_id == after_paragraph_id
             ]
             order = len(siblings)
         self.placements.append(
-            Placement(cue_id, after_paragraph_id, order, anchor_start, anchor_text)
+            Placement(cue_id, after_paragraph_id, order)
         )
         self._sync_cue_from_placement(cue_id)
 
@@ -228,10 +238,7 @@ class ScriptProject:
         if not pl:
             return
         siblings = sorted(
-            [
-                p for p in self.placements
-                if p.after_paragraph_id == pl.after_paragraph_id and p.anchor_start == pl.anchor_start
-            ],
+            [p for p in self.placements if p.after_paragraph_id == pl.after_paragraph_id],
             key=lambda x: (x.order, x.cue_id),
         )
         idx = next((i for i, s in enumerate(siblings) if s.cue_id == cue_id), None)
@@ -253,10 +260,7 @@ class ScriptProject:
         new_cue["id"] = self._next_cue_id()
         new_cue["name"] = f"{src['name']} (copy)"
         self.cues.append(new_cue)
-        self.move_cue(
-            new_cue["id"], pl.after_paragraph_id, pl.order + 1,
-            anchor_start=pl.anchor_start, anchor_text=pl.anchor_text,
-        )
+        self.move_cue(new_cue["id"], pl.after_paragraph_id, pl.order + 1)
         return new_cue
 
     def delete_cue(self, cue_id: str) -> None:
@@ -274,12 +278,9 @@ class ScriptProject:
         self,
         after_paragraph_id: str,
         fields: dict,
-        *,
-        anchor_start: int = -1,
-        anchor_text: str = "",
     ) -> dict:
         para = self.paragraph(after_paragraph_id)
-        default_trigger = anchor_text or (para.text[:120] if para else "")
+        default_trigger = para.text[:120] if para else ""
         cue = {
             "id": fields.get("id") or self._next_cue_id(),
             "asset_id": fields.get("asset_id", ""),
@@ -308,10 +309,7 @@ class ScriptProject:
             cue["playback_mode"] = asset.get("playback_mode", cue["playback_mode"])
             cue["suggested_volume"] = asset.get("suggested_volume", cue["suggested_volume"])
         self.cues.append(cue)
-        self.move_cue(
-            cue["id"], after_paragraph_id,
-            anchor_start=anchor_start, anchor_text=anchor_text or cue["trigger"],
-        )
+        self.move_cue(cue["id"], after_paragraph_id)
         return cue
 
     def _sync_cue_from_placement(self, cue_id: str) -> None:
@@ -325,9 +323,7 @@ class ScriptProject:
         cue["paragraph_id"] = pl.after_paragraph_id
         cue["page"] = para.page
         cue["scene"] = para.scene
-        if pl.anchor_text:
-            cue["trigger"] = pl.anchor_text
-        elif not cue.get("trigger"):
+        if not cue.get("trigger"):
             cue["trigger"] = para.text[:160]
 
     def _next_cue_id(self) -> str:
