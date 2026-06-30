@@ -92,6 +92,7 @@ class SoundboardApp(tk.Tk):
         self._browser_resize_job: str | None = None
         self._now_playing_fg: dict | None = None
         self._now_playing_bg: dict | None = None
+        self._syncing_volume = False
 
         self._build_ui()
         self._maximize_window()
@@ -202,6 +203,8 @@ class SoundboardApp(tk.Tk):
 
         self._build_browser_tab(self.browser_tab, small_font)
         self._build_performance_tab(self.performance_tab, small_font)
+        self.browser_tab.pack(fill=tk.BOTH, expand=True)
+        self.performance_tab.pack(fill=tk.BOTH, expand=True)
 
         self.status = tk.Label(
             left_host, text="Click a cue in the script or browser to play.",
@@ -221,14 +224,13 @@ class SoundboardApp(tk.Tk):
 
     def _show_tab(self, tab_id: str):
         self._active_tab = tab_id
-        self.browser_tab.pack_forget()
-        self.performance_tab.pack_forget()
         if tab_id == "browser":
-            self.browser_tab.pack(fill=tk.BOTH, expand=True)
+            self.browser_tab.lift()
         else:
-            self.performance_tab.pack(fill=tk.BOTH, expand=True)
+            self.performance_tab.lift()
         for name, btn in self._tab_buttons.items():
             btn.configure(relief=tk.SUNKEN if name == tab_id else tk.RAISED)
+        self.tab_content.update_idletasks()
 
     def _build_browser_tab(self, parent, small_font):
         filter_row = tk.Frame(parent, bg="#1a1a2e")
@@ -584,15 +586,30 @@ class SoundboardApp(tk.Tk):
             self._execute_foreground_go(cue)
         self._sync_script_to_cue(cue)
 
+    def _set_volume_slider(self, var: tk.IntVar, value: int):
+        if var.get() == value:
+            return
+        self._syncing_volume = True
+        try:
+            var.set(value)
+        finally:
+            self._syncing_volume = False
+
     def _refresh_playback_ui(self):
         if not self.player:
             return
-        self.bg_volume.set(self.player.background_volume())
-        self.fg_volume.set(self.player.foreground_volume())
+        self._set_volume_slider(self.bg_volume, self.player.background_volume())
+        self._set_volume_slider(self.fg_volume, self.player.foreground_volume())
         self._refresh_now_playing_labels()
 
     def _start_background_tick(self):
-        self._refresh_playback_ui()
+        if self.player and (
+            self.player.background_is_active()
+            or self.player.foreground_is_playing()
+            or self._now_playing_bg
+            or self._now_playing_fg
+        ):
+            self._refresh_playback_ui()
         self._tick_job = self.after(500, self._start_background_tick)
 
     def _cancel_fade(self):
@@ -616,7 +633,7 @@ class SoundboardApp(tk.Tk):
                 return
             vol = int(round(volume))
             self.player.set_background_volume(vol)
-            self.bg_volume.set(vol)
+            self._set_volume_slider(self.bg_volume, vol)
             if remaining <= 1:
                 self._fade_job = None
                 if on_complete:
@@ -728,12 +745,14 @@ class SoundboardApp(tk.Tk):
             self._sync_script_to_cue(self._background_cue())
 
     def _on_bg_volume(self, _value):
-        if self.player:
-            self.player.set_background_volume(self.bg_volume.get())
+        if self._syncing_volume or not self.player:
+            return
+        self.player.set_background_volume(self.bg_volume.get())
 
     def _on_fg_volume(self, _value):
-        if self.player:
-            self.player.set_foreground_volume(self.fg_volume.get())
+        if self._syncing_volume or not self.player:
+            return
+        self.player.set_foreground_volume(self.fg_volume.get())
 
     def _on_close(self):
         self._cancel_fade()
