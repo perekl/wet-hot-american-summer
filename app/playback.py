@@ -1,4 +1,8 @@
-"""VLC-backed cue playback for the WHAS table-read soundboard."""
+"""Cue playback for the WHAS table-read soundboard.
+
+Background beds use VLC (reliable looping). Foreground SFX/music use pygame so
+Windows volume sliders stay independent — VLC ties all its players to one mixer.
+"""
 
 from __future__ import annotations
 
@@ -13,6 +17,11 @@ except ImportError as exc:
     raise ImportError(
         "python-vlc is required for playback. Install: pip install python-vlc"
     ) from exc
+
+try:
+    import pygame
+except ImportError:
+    pygame = None  # type: ignore[assignment]
 
 
 def _clamp_volume(value: int) -> int:
@@ -37,23 +46,28 @@ def _vlc_instance() -> vlc.Instance:
         if aout:
             args.append(f"--aout={aout}")
         elif sys.platform == "win32":
-            # VLC 3.x MMDevice shares volume across players; DirectSound keeps beds/SFX independent.
             args.append("--aout=directsound")
     return vlc.Instance(*args)
 
 
+def _init_pygame_mixer() -> bool:
+    if pygame is None:
+        return False
+    try:
+        if not pygame.mixer.get_init():
+            pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=2048)
+        return True
+    except pygame.error:
+        return False
+
+
 class VLCPlaybackEngine:
-    """Three-channel player: background (persistent bed), sfx (one-shots), music."""
+    """Background via VLC; foreground SFX/music via pygame (independent volume)."""
 
     def __init__(self, root: Path):
         self.root = root
-        # One VLC instance per player — required for independent volume on Windows.
         self._bg_instance = _vlc_instance()
-        self._sfx_instance = _vlc_instance()
-        self._music_instance = _vlc_instance()
         self._background = self._bg_instance.media_player_new()
-        self._sfx = self._sfx_instance.media_player_new()
-        self._music = self._music_instance.media_player_new()
         self._current_background_asset: str | None = None
         self._current_background_cue: dict | None = None
         self._background_volume = 30
@@ -61,24 +75,27 @@ class VLCPlaybackEngine:
         self._background_started_at: float | None = None
         self._background_paused_elapsed = 0.0
         self._background_pause_started: float | None = None
+        self._pygame_ready = _init_pygame_mixer()
+        self._fg_channel = None
 
-    def _media(self, path: Path, loop: bool, *, instance: vlc.Instance) -> vlc.Media:
-        media = instance.media_new(str(path))
+    def _media(self, path: Path, loop: bool) -> vlc.Media:
+        media = self._bg_instance.media_new(str(path))
         if loop:
             media.add_option("input-repeat=65535")
         return media
 
-    def _play(
-        self, player: vlc.MediaPlayer, path: Path, volume: int, loop: bool, *, instance: vlc.Instance,
-    ) -> None:
+    def _play_background_file(self, path: Path, volume: int) -> None:
         vol = _clamp_volume(volume)
-        player.stop()
-        player.set_media(self._media(path, loop, instance=instance))
-        player.play()
-        player.audio_set_volume(vol)
+        self._background.stop()
+        self._background.set_media(self._media(path, loop=True))
+        self._background.play()
+        self._background.audio_set_volume(vol)
 
     def _resolve_path(self, cue: dict) -> Path:
         return self.root / cue.get("asset_filename", "")
+
+    def _fg_gain(self) -> float:
+        return self._foreground_volume / 100.0
 
     def current_background_asset_id(self) -> str | None:
         return self._current_background_asset
@@ -92,18 +109,29 @@ class VLCPlaybackEngine:
 
     def set_foreground_volume(self, volume: int) -> None:
         self._foreground_volume = _clamp_volume(volume)
-        self._sfx.audio_set_volume(self._foreground_volume)
-        self._music.audio_set_volume(self._foreground_volume)
+        if not self._pygame_ready or pygame is None:
+            return
+        gain = self._fg_gain()
+        pygame.mixer.music.set_volume(gain)
+        if self._fg_channel is not None and self._fg_channel.get_busy():
+            self._fg_channel.set_volume(gain)
 
     def foreground_volume(self) -> int:
         return self._foreground_volume
 
     def foreground_is_playing(self) -> bool:
-        return bool(self._sfx.is_playing() or self._music.is_playing())
+        if not self._pygame_ready or pygame is None:
+            return False
+        if pygame.mixer.music.get_busy():
+            return True
+        return bool(self._fg_channel is not None and self._fg_channel.get_busy())
 
     def stop_foreground(self) -> None:
-        self._sfx.stop()
-        self._music.stop()
+        if not self._pygame_ready or pygame is None:
+            return
+        pygame.mixer.music.stop()
+        pygame.mixer.stop()
+        self._fg_channel = None
 
     def background_is_playing(self) -> bool:
         return bool(self._background.is_playing())
@@ -147,8 +175,7 @@ class VLCPlaybackEngine:
 
     def stop_all(self) -> None:
         self._background.stop()
-        self._sfx.stop()
-        self._music.stop()
+        self.stop_foreground()
         self._current_background_asset = None
         self._current_background_cue = None
         self._clear_background_tracking()
@@ -185,9 +212,7 @@ class VLCPlaybackEngine:
         if not path.is_file():
             return False, f"Missing audio file: {path.relative_to(self.root)}"
 
-        self._background.stop()
-        self._play(self._background, path, 0 if fade_in_ms else self._background_volume, loop=True,
-                  instance=self._bg_instance)
+        self._play_background_file(path, 0 if fade_in_ms else self._background_volume)
         self._current_background_asset = cue.get("asset_id")
         self._current_background_cue = cue
         self._mark_background_started()
@@ -198,36 +223,48 @@ class VLCPlaybackEngine:
         return True, f"Background: {path.name} @ {self._background_volume}"
 
     def play_foreground(self, cue: dict) -> tuple[bool, str]:
-        """Play SFX/music without touching the background channel."""
+        """Play SFX/music via pygame — does not touch the VLC background channel."""
         mode = cue.get("playback_mode", "")
         category = cue.get("category", "")
-        volume = self._foreground_volume
         path = self._resolve_path(cue)
 
         if mode == "Silence" or category == "Silence":
             return True, f"Foreground silence beat ({cue['id']}) — background unchanged"
 
+        if not self._pygame_ready:
+            self._pygame_ready = _init_pygame_mixer()
+        if not self._pygame_ready or pygame is None:
+            return False, "Foreground playback unavailable — pip install pygame"
+
         if not path.is_file():
             return False, f"Missing audio file: {path.relative_to(self.root)}"
 
-        if mode == "One Shot" or category in ("SFX", "Transition", "Comedy"):
-            loop = cue.get("loop") == "Yes"
-            self._play(self._sfx, path, volume, loop=loop, instance=self._sfx_instance)
-            kind = "loop" if loop else "one-shot"
-            return True, f"Playing SFX {kind}: {path.name} @ {volume}"
+        self.stop_foreground()
+        gain = self._fg_gain()
+        loop = cue.get("loop") == "Yes" or mode == "Loop"
 
         if mode == "Music" or category == "Music":
-            loop = cue.get("loop") == "Yes"
-            self._play(self._music, path, volume, loop=loop, instance=self._music_instance)
+            try:
+                pygame.mixer.music.load(str(path))
+            except pygame.error as exc:
+                return False, f"Could not load music: {exc}"
+            pygame.mixer.music.set_volume(gain)
+            pygame.mixer.music.play(-1 if loop else 0)
             kind = "loop" if loop else "music"
-            return True, f"Playing {kind}: {path.name} @ {volume}"
+            return True, f"Playing {kind}: {path.name} @ {self._foreground_volume}"
 
-        if mode == "Loop":
-            self._play(self._sfx, path, volume, loop=True, instance=self._sfx_instance)
-            return True, f"Playing loop: {path.name} @ {volume}"
+        try:
+            sound = pygame.mixer.Sound(str(path))
+        except pygame.error as exc:
+            return False, f"Could not load SFX: {exc}"
 
-        self._play(self._sfx, path, volume, loop=False, instance=self._sfx_instance)
-        return True, f"Playing: {path.name} @ {volume}"
+        channel = sound.play(loops=-1 if loop else 0)
+        if channel is None:
+            return False, f"Could not play SFX: {path.name}"
+        channel.set_volume(gain)
+        self._fg_channel = channel
+        kind = "loop" if loop else "one-shot"
+        return True, f"Playing SFX {kind}: {path.name} @ {self._foreground_volume}"
 
     def play_cue(self, cue: dict) -> tuple[bool, str]:
         """Legacy entry: route by cue_type when present, else category."""
@@ -236,7 +273,6 @@ class VLCPlaybackEngine:
             return self.play_background(cue)
         if cue_type == "FOREGROUND":
             return self.play_foreground(cue)
-        # Backward compatibility for projects without cue_type
         category = cue.get("category", "")
         if category == "Ambience":
             return self.play_background(cue)

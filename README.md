@@ -84,7 +84,7 @@ This rebuilds all spreadsheets, Word/PDF cue books, and JSON exports. Assets are
 
 ## Soundboard Application
 
-The tkinter app reads `data/cues.json` and plays cues via **python-vlc** (requires [VLC](https://www.videolan.org/vlc/) installed on the system).
+The tkinter app reads `data/cues.json` and plays cues via **python-vlc** (background beds; requires [VLC](https://www.videolan.org/vlc/)) and **pygame** (foreground SFX/music — keeps volume sliders independent on Windows).
 
 ```bash
 pip install -r requirements.txt
