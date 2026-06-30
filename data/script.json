@@ -11175,7 +11175,7 @@
   "placements": [
     {
       "cue_id": "CUE-001",
-      "after_paragraph_id": "PAR-00003",
+      "after_paragraph_id": "PAR-00001",
       "order": 0
     },
     {
@@ -11221,7 +11221,7 @@
     {
       "cue_id": "CUE-009",
       "after_paragraph_id": "PAR-00011",
-      "order": 0
+      "order": 1
     },
     {
       "cue_id": "CUE-010",
@@ -11261,7 +11261,7 @@
     {
       "cue_id": "CUE-017",
       "after_paragraph_id": "PAR-00033",
-      "order": 0
+      "order": 1
     },
     {
       "cue_id": "CUE-018",
@@ -11291,11 +11291,11 @@
     {
       "cue_id": "CUE-198",
       "after_paragraph_id": "PAR-00051",
-      "order": 0
+      "order": 1
     },
     {
       "cue_id": "CUE-022",
-      "after_paragraph_id": "PAR-00066",
+      "after_paragraph_id": "PAR-00395",
       "order": 0
     },
     {
@@ -11315,7 +11315,7 @@
     },
     {
       "cue_id": "CUE-199",
-      "after_paragraph_id": "PAR-00097",
+      "after_paragraph_id": "PAR-00115",
       "order": 0
     },
     {
@@ -11350,12 +11350,12 @@
     },
     {
       "cue_id": "CUE-031",
-      "after_paragraph_id": "PAR-00155",
+      "after_paragraph_id": "PAR-00152",
       "order": 0
     },
     {
       "cue_id": "CUE-032",
-      "after_paragraph_id": "PAR-00171",
+      "after_paragraph_id": "PAR-00167",
       "order": 0
     },
     {
@@ -11445,7 +11445,7 @@
     },
     {
       "cue_id": "CUE-047",
-      "after_paragraph_id": "PAR-00311",
+      "after_paragraph_id": "PAR-00305",
       "order": 0
     },
     {
@@ -11470,7 +11470,7 @@
     },
     {
       "cue_id": "CUE-051",
-      "after_paragraph_id": "PAR-00351",
+      "after_paragraph_id": "PAR-00346",
       "order": 0
     },
     {
@@ -11485,8 +11485,8 @@
     },
     {
       "cue_id": "CUE-205",
-      "after_paragraph_id": "PAR-00403",
-      "order": 0
+      "after_paragraph_id": "PAR-00395",
+      "order": 1
     },
     {
       "cue_id": "CUE-054",
@@ -11505,7 +11505,7 @@
     },
     {
       "cue_id": "CUE-057",
-      "after_paragraph_id": "PAR-00434",
+      "after_paragraph_id": "PAR-00432",
       "order": 0
     },
     {
@@ -11530,7 +11530,7 @@
     },
     {
       "cue_id": "CUE-206",
-      "after_paragraph_id": "PAR-00477",
+      "after_paragraph_id": "PAR-00491",
       "order": 0
     },
     {
@@ -11540,7 +11540,7 @@
     },
     {
       "cue_id": "CUE-063",
-      "after_paragraph_id": "PAR-00496",
+      "after_paragraph_id": "PAR-00497",
       "order": 0
     },
     {
@@ -11560,7 +11560,7 @@
     },
     {
       "cue_id": "CUE-067",
-      "after_paragraph_id": "PAR-00534",
+      "after_paragraph_id": "PAR-00517",
       "order": 0
     },
     {
@@ -11570,7 +11570,7 @@
     },
     {
       "cue_id": "CUE-069",
-      "after_paragraph_id": "PAR-00542",
+      "after_paragraph_id": "PAR-00539",
       "order": 0
     },
     {
@@ -11586,11 +11586,11 @@
     {
       "cue_id": "CUE-208",
       "after_paragraph_id": "PAR-00561",
-      "order": 0
+      "order": 1
     },
     {
       "cue_id": "CUE-071",
-      "after_paragraph_id": "PAR-00567",
+      "after_paragraph_id": "PAR-00318",
       "order": 0
     },
     {
@@ -11600,7 +11600,7 @@
     },
     {
       "cue_id": "CUE-072",
-      "after_paragraph_id": "PAR-00581",
+      "after_paragraph_id": "PAR-00572",
       "order": 0
     },
     {
@@ -11615,7 +11615,7 @@
     },
     {
       "cue_id": "CUE-075",
-      "after_paragraph_id": "PAR-00613",
+      "after_paragraph_id": "PAR-00590",
       "order": 0
     },
     {
@@ -11645,12 +11645,12 @@
     },
     {
       "cue_id": "CUE-080",
-      "after_paragraph_id": "PAR-00645",
+      "after_paragraph_id": "PAR-00627",
       "order": 0
     },
     {
       "cue_id": "CUE-081",
-      "after_paragraph_id": "PAR-00645",
+      "after_paragraph_id": "PAR-00628",
       "order": 0
     },
     {
@@ -11660,7 +11660,7 @@
     },
     {
       "cue_id": "CUE-083",
-      "after_paragraph_id": "PAR-00646",
+      "after_paragraph_id": "PAR-00632",
       "order": 0
     },
     {
@@ -11670,7 +11670,7 @@
     },
     {
       "cue_id": "CUE-084",
-      "after_paragraph_id": "PAR-00664",
+      "after_paragraph_id": "PAR-00661",
       "order": 0
     },
     {
@@ -11700,8 +11700,8 @@
     },
     {
       "cue_id": "CUE-212",
-      "after_paragraph_id": "PAR-00695",
-      "order": 0
+      "after_paragraph_id": "PAR-00702",
+      "order": 1
     },
     {
       "cue_id": "CUE-090",
@@ -11711,7 +11711,7 @@
     {
       "cue_id": "CUE-091",
       "after_paragraph_id": "PAR-00710",
-      "order": 0
+      "order": 1
     },
     {
       "cue_id": "CUE-092",
@@ -11730,7 +11730,7 @@
     },
     {
       "cue_id": "CUE-095",
-      "after_paragraph_id": "PAR-00728",
+      "after_paragraph_id": "PAR-00722",
       "order": 0
     },
     {
@@ -11755,27 +11755,27 @@
     },
     {
       "cue_id": "CUE-215",
-      "after_paragraph_id": "PAR-00758",
+      "after_paragraph_id": "PAR-00725",
       "order": 0
     },
     {
       "cue_id": "CUE-098",
-      "after_paragraph_id": "PAR-00778",
+      "after_paragraph_id": "PAR-00801",
       "order": 0
     },
     {
       "cue_id": "CUE-216",
-      "after_paragraph_id": "PAR-00786",
+      "after_paragraph_id": "PAR-00816",
       "order": 0
     },
     {
       "cue_id": "CUE-217",
-      "after_paragraph_id": "PAR-00802",
+      "after_paragraph_id": "PAR-00773",
       "order": 0
     },
     {
       "cue_id": "CUE-218",
-      "after_paragraph_id": "PAR-00820",
+      "after_paragraph_id": "PAR-00831",
       "order": 0
     },
     {
@@ -11795,7 +11795,7 @@
     },
     {
       "cue_id": "CUE-102",
-      "after_paragraph_id": "PAR-00845",
+      "after_paragraph_id": "PAR-00959",
       "order": 0
     },
     {
@@ -11840,12 +11840,12 @@
     },
     {
       "cue_id": "CUE-219",
-      "after_paragraph_id": "PAR-00909",
+      "after_paragraph_id": "PAR-01272",
       "order": 0
     },
     {
       "cue_id": "CUE-111",
-      "after_paragraph_id": "PAR-00934",
+      "after_paragraph_id": "PAR-00921",
       "order": 0
     },
     {
@@ -11871,7 +11871,7 @@
     {
       "cue_id": "CUE-220",
       "after_paragraph_id": "PAR-00948",
-      "order": 0
+      "order": 1
     },
     {
       "cue_id": "CUE-116",
@@ -11881,7 +11881,7 @@
     {
       "cue_id": "CUE-117",
       "after_paragraph_id": "PAR-00959",
-      "order": 0
+      "order": 1
     },
     {
       "cue_id": "CUE-118",
@@ -11891,7 +11891,7 @@
     {
       "cue_id": "CUE-221",
       "after_paragraph_id": "PAR-00970",
-      "order": 0
+      "order": 1
     },
     {
       "cue_id": "CUE-119",
@@ -11935,17 +11935,17 @@
     },
     {
       "cue_id": "CUE-223",
-      "after_paragraph_id": "PAR-01009",
+      "after_paragraph_id": "PAR-01023",
       "order": 0
     },
     {
       "cue_id": "CUE-126",
       "after_paragraph_id": "PAR-01023",
-      "order": 0
+      "order": 1
     },
     {
       "cue_id": "CUE-224",
-      "after_paragraph_id": "PAR-01036",
+      "after_paragraph_id": "PAR-01058",
       "order": 0
     },
     {
@@ -11955,7 +11955,7 @@
     },
     {
       "cue_id": "CUE-225",
-      "after_paragraph_id": "PAR-01037",
+      "after_paragraph_id": "PAR-01063",
       "order": 0
     },
     {
@@ -11966,16 +11966,16 @@
     {
       "cue_id": "CUE-129",
       "after_paragraph_id": "PAR-01056",
-      "order": 0
+      "order": 1
     },
     {
       "cue_id": "CUE-130",
       "after_paragraph_id": "PAR-01056",
-      "order": 0
+      "order": 2
     },
     {
       "cue_id": "CUE-226",
-      "after_paragraph_id": "PAR-01059",
+      "after_paragraph_id": "PAR-01027",
       "order": 0
     },
     {
@@ -12000,7 +12000,7 @@
     },
     {
       "cue_id": "CUE-135",
-      "after_paragraph_id": "PAR-01087",
+      "after_paragraph_id": "PAR-01123",
       "order": 0
     },
     {
@@ -12010,7 +12010,7 @@
     },
     {
       "cue_id": "CUE-137",
-      "after_paragraph_id": "PAR-01093",
+      "after_paragraph_id": "PAR-01094",
       "order": 0
     },
     {
@@ -12020,12 +12020,12 @@
     },
     {
       "cue_id": "CUE-139",
-      "after_paragraph_id": "PAR-01103",
+      "after_paragraph_id": "PAR-01104",
       "order": 0
     },
     {
       "cue_id": "CUE-227",
-      "after_paragraph_id": "PAR-01103",
+      "after_paragraph_id": "PAR-01109",
       "order": 0
     },
     {
@@ -12040,27 +12040,27 @@
     },
     {
       "cue_id": "CUE-142",
-      "after_paragraph_id": "PAR-01122",
+      "after_paragraph_id": "PAR-01137",
       "order": 0
     },
     {
       "cue_id": "CUE-143",
-      "after_paragraph_id": "PAR-01105",
+      "after_paragraph_id": "PAR-01139",
       "order": 0
     },
     {
       "cue_id": "CUE-144",
-      "after_paragraph_id": "PAR-01105",
+      "after_paragraph_id": "PAR-01142",
       "order": 0
     },
     {
       "cue_id": "CUE-145",
-      "after_paragraph_id": "PAR-01140",
+      "after_paragraph_id": "PAR-01146",
       "order": 0
     },
     {
       "cue_id": "CUE-146",
-      "after_paragraph_id": "PAR-01133",
+      "after_paragraph_id": "PAR-01156",
       "order": 0
     },
     {
@@ -12070,42 +12070,42 @@
     },
     {
       "cue_id": "CUE-147",
-      "after_paragraph_id": "PAR-01142",
-      "order": 0
+      "after_paragraph_id": "PAR-01139",
+      "order": 1
     },
     {
       "cue_id": "CUE-148",
-      "after_paragraph_id": "PAR-01144",
+      "after_paragraph_id": "PAR-01169",
       "order": 0
     },
     {
       "cue_id": "CUE-229",
-      "after_paragraph_id": "PAR-01158",
+      "after_paragraph_id": "PAR-01185",
       "order": 0
     },
     {
       "cue_id": "CUE-149",
-      "after_paragraph_id": "PAR-01176",
+      "after_paragraph_id": "PAR-01190",
       "order": 0
     },
     {
       "cue_id": "CUE-230",
-      "after_paragraph_id": "PAR-01166",
+      "after_paragraph_id": "PAR-01193",
       "order": 0
     },
     {
       "cue_id": "CUE-150",
-      "after_paragraph_id": "PAR-01192",
+      "after_paragraph_id": "PAR-01195",
       "order": 0
     },
     {
       "cue_id": "CUE-151",
-      "after_paragraph_id": "PAR-01192",
+      "after_paragraph_id": "PAR-01201",
       "order": 0
     },
     {
       "cue_id": "CUE-152",
-      "after_paragraph_id": "PAR-01192",
+      "after_paragraph_id": "PAR-01202",
       "order": 0
     },
     {
@@ -12120,7 +12120,7 @@
     },
     {
       "cue_id": "CUE-155",
-      "after_paragraph_id": "PAR-01206",
+      "after_paragraph_id": "PAR-01217",
       "order": 0
     },
     {
@@ -12130,7 +12130,7 @@
     },
     {
       "cue_id": "CUE-156",
-      "after_paragraph_id": "PAR-01220",
+      "after_paragraph_id": "PAR-01222",
       "order": 0
     },
     {
@@ -12140,7 +12140,7 @@
     },
     {
       "cue_id": "CUE-157",
-      "after_paragraph_id": "PAR-01224",
+      "after_paragraph_id": "PAR-01225",
       "order": 0
     },
     {
@@ -12166,21 +12166,21 @@
     {
       "cue_id": "CUE-162",
       "after_paragraph_id": "PAR-01238",
-      "order": 0
+      "order": 1
     },
     {
       "cue_id": "CUE-163",
-      "after_paragraph_id": "PAR-01239",
+      "after_paragraph_id": "PAR-01253",
       "order": 0
     },
     {
       "cue_id": "CUE-164",
-      "after_paragraph_id": "PAR-01245",
-      "order": 0
+      "after_paragraph_id": "PAR-01253",
+      "order": 1
     },
     {
       "cue_id": "CUE-233",
-      "after_paragraph_id": "PAR-01239",
+      "after_paragraph_id": "PAR-01252",
       "order": 0
     },
     {
@@ -12230,13 +12230,13 @@
     },
     {
       "cue_id": "CUE-235",
-      "after_paragraph_id": "PAR-01299",
+      "after_paragraph_id": "PAR-01298",
       "order": 0
     },
     {
       "cue_id": "CUE-173",
-      "after_paragraph_id": "PAR-01308",
-      "order": 0
+      "after_paragraph_id": "PAR-01298",
+      "order": 1
     },
     {
       "cue_id": "CUE-174",
@@ -12266,7 +12266,7 @@
     {
       "cue_id": "CUE-178",
       "after_paragraph_id": "PAR-01322",
-      "order": 0
+      "order": 1
     },
     {
       "cue_id": "CUE-179",
@@ -12280,12 +12280,12 @@
     },
     {
       "cue_id": "CUE-181",
-      "after_paragraph_id": "PAR-01332",
+      "after_paragraph_id": "PAR-01317",
       "order": 0
     },
     {
       "cue_id": "CUE-182",
-      "after_paragraph_id": "PAR-01336",
+      "after_paragraph_id": "PAR-01316",
       "order": 0
     },
     {
@@ -12295,12 +12295,12 @@
     },
     {
       "cue_id": "CUE-184",
-      "after_paragraph_id": "PAR-01349",
+      "after_paragraph_id": "PAR-01335",
       "order": 0
     },
     {
       "cue_id": "CUE-185",
-      "after_paragraph_id": "PAR-01349",
+      "after_paragraph_id": "PAR-01352",
       "order": 0
     },
     {
@@ -12315,8 +12315,8 @@
     },
     {
       "cue_id": "CUE-187",
-      "after_paragraph_id": "PAR-01358",
-      "order": 0
+      "after_paragraph_id": "PAR-01058",
+      "order": 1
     },
     {
       "cue_id": "CUE-188",
@@ -12350,7 +12350,7 @@
     },
     {
       "cue_id": "CUE-193",
-      "after_paragraph_id": "PAR-01394",
+      "after_paragraph_id": "PAR-01390",
       "order": 0
     },
     {
@@ -12365,7 +12365,7 @@
     },
     {
       "cue_id": "CUE-196",
-      "after_paragraph_id": "PAR-01396",
+      "after_paragraph_id": "PAR-01387",
       "order": 0
     }
   ]

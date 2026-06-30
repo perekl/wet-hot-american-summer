@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from dataclasses import asdict
 from pathlib import Path
@@ -33,28 +34,101 @@ def _extract_pdf_text(pdf_path: Path) -> str:
     return "\n".join(parts)
 
 
+def _norm(text: str) -> str:
+    return re.sub(r"\s+", " ", text.strip().strip('"').lower())
+
+
+def _trigger_score(trigger: str, text: str) -> int:
+    if not trigger:
+        return 0
+    t = _norm(trigger)
+    tx = _norm(text)
+    if not t:
+        return 0
+    if t in tx:
+        return 2000 - min(len(tx), 500)
+    if tx in t:
+        return 1500 - min(len(tx), 500)
+    words = [w for w in re.findall(r"[a-z0-9']+", t) if len(w) > 2]
+    if not words:
+        return 0
+    hits = sum(1 for w in words if w in tx)
+    if hits == 0:
+        return 0
+    phrase_bonus = 0
+    for n in range(min(4, len(words)), 1, -1):
+        for i in range(len(words) - n + 1):
+            phrase = " ".join(words[i : i + n])
+            if phrase in tx:
+                phrase_bonus = max(phrase_bonus, n * 80)
+                break
+        if phrase_bonus:
+            break
+    ratio = hits / len(words)
+    return int(phrase_bonus + ratio * 150 + hits * 10)
+
+
+def _scene_score(scene: str, para_scene: str, para_text: str) -> int:
+    if not scene:
+        return 0
+    s = scene.strip().upper()
+    ps = (para_scene or "").strip().upper()
+    body = para_text.upper()
+    if ps == s:
+        return 25
+    tail = s.split(" - ")[-1].strip() if " - " in s else s
+    if tail and len(tail) > 4 and tail in ps:
+        return 15
+    if s in body:
+        return 10
+    return 0
+
+
+def _page_bonus(cue_page: int, para_page: int) -> int:
+    diff = abs(cue_page - para_page)
+    if diff == 0:
+        return 30
+    if diff == 1:
+        return 10
+    return -5 * diff
+
+
+def _type_penalty(para_type: str) -> int:
+    if para_type in ("scene_heading", "transition"):
+        return -80
+    if para_type == "character":
+        return -40
+    return 0
+
+
 def _best_paragraph(cue: dict, paragraphs: list, by_page: dict) -> str:
-    page = int(cue.get("page", 1))
-    paras = by_page.get(page, [])
-    trigger = cue.get("trigger", "").strip().strip('"').lower()
+    cue_page = int(cue.get("page", 1))
+    trigger = cue.get("trigger", "")
+    scene = cue.get("scene", "")
+    name = cue.get("name", "")
     best_id = None
-    best_score = 0
-    for p in paras:
-        text = p.text.lower()
-        score = 0
-        if trigger and trigger in text:
-            score = len(text) + 100
-        elif trigger and text in trigger:
-            score = len(text) + 50
-        elif trigger:
-            score = sum(1 for w in trigger.split() if len(w) > 3 and w in text) * 10
+    best_score = -9999
+    for p in paragraphs:
+        score = _trigger_score(trigger, p.text)
+        score += _scene_score(scene, p.scene, p.text)
+        score += _page_bonus(cue_page, p.page)
+        score += _type_penalty(p.type)
+        if name:
+            name_words = [
+                w for w in re.findall(r"[a-z0-9']+", name.lower()) if len(w) > 4
+            ]
+            score += sum(3 for w in name_words if w in p.text.lower())
         if score > best_score:
             best_score = score
             best_id = p.id
-    if best_id:
+    if best_score > 0 and best_id:
         return best_id
-    if paras:
-        return paras[-1].id
+    page_paras = by_page.get(cue_page, [])
+    for p in reversed(page_paras):
+        if p.type in ("action", "dialogue"):
+            return p.id
+    if page_paras:
+        return page_paras[-1].id
     return paragraphs[0].id if paragraphs else ""
 
 
@@ -81,12 +155,15 @@ def import_screenplay(
         by_page.setdefault(p.page, []).append(p)
 
     placements = []
-    for i, cue in enumerate(cues):
+    para_order: dict[str, int] = {}
+    for cue in cues:
         after = _best_paragraph(cue, paragraphs, by_page)
+        order = para_order.get(after, 0)
+        para_order[after] = order + 1
         placements.append({
             "cue_id": cue["id"],
             "after_paragraph_id": after,
-            "order": 0,
+            "order": order,
         })
 
     payload = {

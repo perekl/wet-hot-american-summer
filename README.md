@@ -49,19 +49,19 @@ Each row in `data/master_sound_assets.xlsx` is a **unique audio file** the produ
 |-----------|---------|
 | Cue ID | Unique identifier (`CUE-001` …) for call sheets and the app |
 | Asset ID | Canonical reusable sound file (`AST-001` …) |
-| Cue Type | `BACKGROUND` (persistent bed) or `FOREGROUND` (one-shot / music / beat) |
+| Cue Type | `BACKGROUND` (persistent bed, including songs) or `FOREGROUND` (one-shot / beat) |
 | Expected Background Asset | Optional — which background bed *should* be active for this cue |
 | Paragraph ID | Script paragraph where the cue is placed (`PAR-00042` …) |
 | Script Page | Screenplay page reference |
 | Trigger Dialogue | Exact line or stage direction that fires the cue |
-| Category | Music, Ambience, SFX, Transition, Silence, Comedy |
+| Category | Ambience (beds + songs), SFX, Transition, Silence, Comedy |
 | Priority | Critical / High / Medium / Low / Optional |
 
 | Asset Field | Purpose |
 |-------------|---------|
 | Asset ID | Unique file identifier (`AST-001` …) linked from master cues |
-| Playback Mode | How the asset plays: `Loop`, `One Shot`, `Music`, or `Silence` |
-| Suggested Volume | Default level by mode: Loop 30, One Shot 85, Music 70, Silence 0 |
+| Playback Mode | How the asset plays: `Loop`, `One Shot`, or `Silence` |
+| Suggested Volume | Default level by mode: Loop 30, One Shot 85, Silence 0 |
 | Filename | Target path under `assets/` |
 | Used By Cue IDs | All cues that share this file |
 | Royalty Free? | Whether the asset can be sourced royalty-free |
@@ -126,14 +126,13 @@ The screenplay is the **primary project document**. The PDF is import/reference 
 | `paragraphs` | Screenplay text blocks with page, scene, type, speaker |
 | `placements` | Which cue appears after which paragraph |
 
-**Cue markers** appear inline after paragraphs:
+**Cue markers** appear on the line below each screenplay paragraph (multiple cues per line supported). Right-click a line to add an effect or background cue (songs and ambience beds are background cues).
 
 | Color | Type |
 |-------|------|
 | **Pink** | Effect (`FX`) |
-| **Blue** | Background (`BG`) |
+| **Blue** | Background (`BG`) — ambience loops, songs, beds |
 | **Orange** | Background stop (`BG STOP`) |
-| **Purple** | Music (`MUSIC`) |
 
 **Editing in the app:**
 - **Click** a cue marker — select cue and sync soundboard
@@ -171,7 +170,7 @@ When **GO** is pressed on a background cue (Background panel, mouse only):
 The background continues until another background cue changes it.
 
 **Foreground cues** (`cue_type: FOREGROUND`) behave as before:
-- SFX, transitions, comedy hits, music stings
+- SFX, transitions, comedy hits, one-shot stings
 - Dramatic silence *beats* (momentary pauses — they do **not** stop the background bed)
 - Foreground playback never interrupts background playback
 

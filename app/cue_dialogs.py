@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from script_model import ScriptProject
 
 CUE_TYPES = ["FOREGROUND", "BACKGROUND"]
-CATEGORIES = ["SFX", "Ambience", "Music", "Transition", "Silence", "Comedy"]
+CATEGORIES = ["SFX", "Ambience", "Transition", "Silence", "Comedy"]
 PRIORITIES = ["Critical", "High", "Medium", "Low", "Optional"]
 DURATIONS = ["1s", "2s", "3s", "5s", "10s", "30s", "Loop", "Full song excerpt", "Scene length"]
 LOOPS = ["Yes", "No"]

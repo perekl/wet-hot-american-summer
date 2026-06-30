@@ -7,7 +7,7 @@
     "playback_mode": "Silence",
     "suggested_volume": 0,
     "page": 1,
-    "scene": "",
+    "scene": "TITLE CARD",
     "trigger": "Screenplay opens",
     "name": "Pre-show Silence / House Lights",
     "category": "Silence",
@@ -17,8 +17,7 @@
     "fade": "In",
     "volume": 0,
     "notes": "Hold black before titles.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00003"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 1,
@@ -28,7 +27,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 1,
-    "scene": "",
+    "scene": "TITLE CARD",
     "trigger": "Second Draft / February 2026",
     "name": "Projector / Room Tone (Optional)",
     "category": "Ambience",
@@ -38,30 +37,27 @@
     "fade": "In",
     "volume": 25,
     "notes": "Pre-show optional.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00003"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 2,
     "id": "CUE-002",
     "asset_id": "AST-035",
     "asset_filename": "assets/generated/music_jane_jefferson_starship.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 2,
-    "scene": "",
+    "scene": "OPENING TITLES",
     "trigger": "\"Jane\" by Jefferson Starship begins with opening TITLES over black",
     "name": "Jane (Jefferson Starship) - Opening Titles",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "Critical",
     "duration": "Full song excerpt",
-    "loop": "No",
+    "loop": "Yes",
     "fade": "In",
     "volume": 85,
-    "notes": "Licensed. Fade under first scene.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-017",
-    "paragraph_id": "PAR-00004"
+    "notes": "Licensed song bed. Fade under first scene.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 3,
@@ -71,7 +67,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 2,
-    "scene": "",
+    "scene": "EXT. CAMPFIRE SITE - NIGHT",
     "trigger": "CUT TO: EXT. CAMPFIRE SITE - NIGHT",
     "name": "Scene Transition Stinger",
     "category": "Transition",
@@ -82,8 +78,7 @@
     "volume": 70,
     "notes": "Cut from black to campfire.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-017",
-    "paragraph_id": "PAR-00005"
+    "expected_background_asset_id": "AST-035"
   },
   {
     "index": 4,
@@ -93,7 +88,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 2,
-    "scene": "",
+    "scene": "EXT. CAMPFIRE SITE - NIGHT",
     "trigger": "Music KICKS IN.",
     "name": "Campfire Night Ambience",
     "category": "Ambience",
@@ -103,8 +98,7 @@
     "fade": "In",
     "volume": 60,
     "notes": "Crackling fire, distant crickets, counselors murmuring.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00006"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 5,
@@ -114,7 +108,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 2,
-    "scene": "",
+    "scene": "EXT. CAMPFIRE SITE - NIGHT",
     "trigger": "counselors dance and play guitar",
     "name": "Acoustic Guitar Strumming (Diegetic)",
     "category": "Ambience",
@@ -124,8 +118,7 @@
     "fade": "In",
     "volume": 45,
     "notes": "Under Jane or post-title music.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00007"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 6,
@@ -135,7 +128,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 2,
-    "scene": "TITLE: AUGUST 18, 1981",
+    "scene": "EXT. CAMPFIRE SITE - NIGHT",
     "trigger": "TITLE: AUGUST 18, 1981",
     "name": "Title Card Whoosh (Optional)",
     "category": "Transition",
@@ -146,30 +139,27 @@
     "volume": 55,
     "notes": "Comedy enhancement for date stamp.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00008"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 7,
     "id": "CUE-007",
     "asset_id": "AST-035",
     "asset_filename": "assets/generated/music_jane_jefferson_starship.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 2,
-    "scene": "TITLE: AUGUST 18, 1981",
+    "scene": "EXT. CAMPFIRE SITE - NIGHT",
     "trigger": "MUSIC / TITLES CONTINUE",
     "name": "Jane / Title Music Continue",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "Critical",
     "duration": "Loop",
     "loop": "Yes",
     "fade": "None",
     "volume": 80,
     "notes": "Maintain through dawn montage.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00009"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 8,
@@ -189,8 +179,7 @@
     "fade": "Crossfade",
     "volume": 55,
     "notes": "Birds, gentle water, rural New England morning.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00011"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 9,
@@ -211,8 +200,7 @@
     "volume": 70,
     "notes": "Comedy sound dissolves into next scene.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-016",
-    "paragraph_id": "PAR-00011"
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 10,
@@ -222,7 +210,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 2,
-    "scene": "INT. KATIE\u2019S BUNK - DAWN",
+    "scene": "INT. KATIE'S BUNK - DAWN",
     "trigger": "banana-like sound of MAKING OUT",
     "name": "Smooching / Making Out SFX",
     "category": "SFX",
@@ -233,8 +221,7 @@
     "volume": 50,
     "notes": "Exaggerated comedy smooch layer.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-016",
-    "paragraph_id": "PAR-00013"
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 11,
@@ -244,7 +231,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 2,
-    "scene": "INT. KATIE\u2019S BUNK - DAWN",
+    "scene": "INT. KATIE'S BUNK - DAWN",
     "trigger": "BUNK BOY emerges from under blanket",
     "name": "Bunk Rustle / Blanket Movement",
     "category": "SFX",
@@ -255,8 +242,7 @@
     "volume": 55,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-016",
-    "paragraph_id": "PAR-00014"
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 12,
@@ -266,7 +252,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 2,
-    "scene": "INT. KATIE\u2019S BUNK - DAWN",
+    "scene": "INT. KATIE'S BUNK - DAWN",
     "trigger": "They flip up their goods and DASH out",
     "name": "Running Footsteps - Bunk Exit",
     "category": "SFX",
@@ -277,30 +263,27 @@
     "volume": 65,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-016",
-    "paragraph_id": "PAR-00019"
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 13,
     "id": "CUE-013",
     "asset_id": "AST-035",
     "asset_filename": "assets/generated/music_jane_jefferson_starship.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 2,
-    "scene": "EXT. KATIE\u2019S BUNK - DAWN",
+    "scene": "EXT. KATIE'S BUNK - DAWN",
     "trigger": "Music and credits continue.",
     "name": "Title Music Continue",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "High",
     "duration": "Loop",
     "loop": "Yes",
     "fade": "None",
     "volume": 75,
     "notes": "",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-016",
-    "paragraph_id": "PAR-00021"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 14,
@@ -310,7 +293,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 3,
-    "scene": "EXT. KATIE\u2019S BUNK - DAWN",
+    "scene": "EXT. MAIN FIELD - DAWN",
     "trigger": "Hundreds of sweat suited campers scurry about",
     "name": "Camp Morning Bustle Ambience",
     "category": "Ambience",
@@ -320,30 +303,27 @@
     "fade": "In",
     "volume": 60,
     "notes": "Footsteps, whispers, hurried movement.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00023"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 15,
     "id": "CUE-015",
     "asset_id": "AST-024",
     "asset_filename": "assets/generated/music_campers_acapella_snippet.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 3,
-    "scene": "INT. COOP\u2019S BUNK - DAWN",
+    "scene": "INT. COOP'S BUNK - DAWN",
     "trigger": "CAMPERS singing \"Standing in the rain\"",
     "name": "Campers Acapella Rock Snippet",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "Medium",
     "duration": "15s",
     "loop": "No",
     "fade": "In",
     "volume": 50,
     "notes": "Diegetic camper singing, not full track.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-005",
-    "paragraph_id": "PAR-00030"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 16,
@@ -353,7 +333,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 3,
-    "scene": "INT. COOP\u2019S BUNK - DAWN",
+    "scene": "INT. COOP'S BUNK - DAWN",
     "trigger": "campers SCREAM, jump on top of Coop",
     "name": "Kids Scream / Pile-On SFX",
     "category": "SFX",
@@ -364,8 +344,7 @@
     "volume": 75,
     "notes": "Badminton rackets and whiffle bats.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-005",
-    "paragraph_id": "PAR-00033"
+    "expected_background_asset_id": "AST-024"
   },
   {
     "index": 17,
@@ -375,7 +354,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 3,
-    "scene": "INT. COOP\u2019S BUNK - DAWN",
+    "scene": "INT. COOP'S BUNK - DAWN",
     "trigger": "banging their feet and air-guitaring",
     "name": "Racket / Bat Air-Guitar Bangs",
     "category": "SFX",
@@ -386,39 +365,17 @@
     "volume": 60,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-005",
-    "paragraph_id": "PAR-00033"
+    "expected_background_asset_id": "AST-024"
   },
   {
     "index": 18,
-    "id": "CUE-197",
-    "asset_id": "AST-003",
-    "asset_filename": "assets/ambience/bunk_interior.mp3",
-    "playback_mode": "Loop",
-    "suggested_volume": 30,
-    "page": 4,
-    "scene": "INT. KATIE\u2019S BUNK - DAWN",
-    "trigger": "girls putting on makeup",
-    "name": "Bunk Morning Activity",
-    "category": "Ambience",
-    "priority": "Low",
-    "duration": "Loop",
-    "loop": "Yes",
-    "fade": "None",
-    "volume": 35,
-    "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00039"
-  },
-  {
-    "index": 19,
     "id": "CUE-018",
     "asset_id": "AST-018",
     "asset_filename": "assets/ambience/wcfw_radio_station.mp3",
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 4,
-    "scene": "EXT. COOP\u2019S BUNK - DAWN",
+    "scene": "EXT. COOP'S BUNK - DAWN",
     "trigger": "we hear the voice-over of ARTY",
     "name": "Camp Radio Static / Bed",
     "category": "Ambience",
@@ -428,18 +385,17 @@
     "fade": "In",
     "volume": 40,
     "notes": "Under Arty V.O. - WCFW radio.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00045"
+    "cue_type": "BACKGROUND"
   },
   {
-    "index": 20,
+    "index": 19,
     "id": "CUE-019",
     "asset_id": "AST-018",
     "asset_filename": "assets/ambience/wcfw_radio_station.mp3",
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 4,
-    "scene": "EXT. COOP\u2019S BUNK - DAWN",
+    "scene": "EXT. COOP'S BUNK - DAWN",
     "trigger": "Good morning everybody",
     "name": "Radio VO Filter (Optional)",
     "category": "SFX",
@@ -450,8 +406,27 @@
     "volume": 35,
     "notes": "Light AM radio EQ on table read if desired.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-018",
-    "paragraph_id": "PAR-00046"
+    "expected_background_asset_id": "AST-018"
+  },
+  {
+    "index": 20,
+    "id": "CUE-197",
+    "asset_id": "AST-003",
+    "asset_filename": "assets/ambience/bunk_interior.mp3",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
+    "page": 4,
+    "scene": "INT. KATIE'S BUNK - DAWN",
+    "trigger": "girls putting on makeup",
+    "name": "Bunk Morning Activity",
+    "category": "Ambience",
+    "priority": "Low",
+    "duration": "Loop",
+    "loop": "Yes",
+    "fade": "None",
+    "volume": 35,
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 21,
@@ -461,7 +436,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 5,
-    "scene": "EXT. FLAGPOLE (NEXT TO DINING HALL) - DAWN",
+    "scene": "EXT. FLAGPOLE - DAWN",
     "trigger": "Moose silently raises the flag",
     "name": "Flagpole Rope / Fabric SFX",
     "category": "SFX",
@@ -472,39 +447,17 @@
     "volume": 45,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-003",
-    "paragraph_id": "PAR-00051"
+    "expected_background_asset_id": "AST-003"
   },
   {
     "index": 22,
-    "id": "CUE-198",
-    "asset_id": "AST-005",
-    "asset_filename": "assets/ambience/camp_morning_bustle.mp3",
-    "playback_mode": "Loop",
-    "suggested_volume": 30,
-    "page": 5,
-    "scene": "EXT. FLAGPOLE (NEXT TO DINING HALL) - DAWN",
-    "trigger": "whole camp assembled",
-    "name": "Camp Assembly Murmur",
-    "category": "Ambience",
-    "priority": "Medium",
-    "duration": "Loop",
-    "loop": "Yes",
-    "fade": "None",
-    "volume": 45,
-    "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00051"
-  },
-  {
-    "index": 23,
     "id": "CUE-021",
     "asset_id": "AST-073",
     "asset_filename": "assets/sfx/smooch_makeout.wav",
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 5,
-    "scene": "EXT. FLAGPOLE (NEXT TO DINING HALL) - DAWN",
+    "scene": "EXT. FLAGPOLE - DAWN",
     "trigger": "French kiss grossly",
     "name": "Comedy Smooch Stinger",
     "category": "Comedy",
@@ -515,8 +468,27 @@
     "volume": 50,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-003",
-    "paragraph_id": "PAR-00053"
+    "expected_background_asset_id": "AST-003"
+  },
+  {
+    "index": 23,
+    "id": "CUE-198",
+    "asset_id": "AST-005",
+    "asset_filename": "assets/ambience/camp_morning_bustle.mp3",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
+    "page": 5,
+    "scene": "EXT. FLAGPOLE - DAWN",
+    "trigger": "whole camp assembled",
+    "name": "Camp Assembly Murmur",
+    "category": "Ambience",
+    "priority": "Medium",
+    "duration": "Loop",
+    "loop": "Yes",
+    "fade": "None",
+    "volume": 45,
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 24,
@@ -526,7 +498,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 6,
-    "scene": "EXT. FLAGPOLE (NEXT TO DINING HALL) - DAWN",
+    "scene": "EXT. FLAGPOLE - DAWN",
     "trigger": "Coop and Katie banter continues",
     "name": "Flagpole Crowd Ambience",
     "category": "Ambience",
@@ -536,8 +508,7 @@
     "fade": "None",
     "volume": 35,
     "notes": "Distant camp assembly murmur.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00066"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 25,
@@ -547,7 +518,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 7,
-    "scene": "EXT. PROFESSOR\u2019S COTTAGE - MORNING",
+    "scene": "EXT. PROFESSOR'S COTTAGE - MORNING",
     "trigger": "Beth approaches Professor",
     "name": "Garden Morning Ambience",
     "category": "Ambience",
@@ -557,8 +528,7 @@
     "fade": "In",
     "volume": 40,
     "notes": "Birds, light breeze.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00087"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 26,
@@ -568,7 +538,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 7,
-    "scene": "EXT. PROFESSOR\u2019S COTTAGE - MORNING",
+    "scene": "EXT. PROFESSOR'S COTTAGE - MORNING",
     "trigger": "trowel flies off leaving handle",
     "name": "Tool Clatter SFX",
     "category": "SFX",
@@ -579,8 +549,7 @@
     "volume": 65,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-016",
-    "paragraph_id": "PAR-00091"
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 27,
@@ -590,7 +559,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 8,
-    "scene": "EXT. PROFESSOR\u2019S COTTAGE - MORNING",
+    "scene": "EXT. PROFESSOR'S COTTAGE - MORNING",
     "trigger": "Henry leans on flower pot, fist sinks",
     "name": "Mud / Pot Squish SFX",
     "category": "SFX",
@@ -601,8 +570,7 @@
     "volume": 55,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-016",
-    "paragraph_id": "PAR-00095"
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 28,
@@ -612,7 +580,7 @@
     "playback_mode": "Silence",
     "suggested_volume": 0,
     "page": 8,
-    "scene": "EXT. PROFESSOR\u2019S COTTAGE - MORNING",
+    "scene": "EXT. PROFESSOR'S COTTAGE",
     "trigger": "Beth embarrassed after NO",
     "name": "Awkward Beat",
     "category": "Silence",
@@ -623,32 +591,10 @@
     "volume": 0,
     "notes": "Page coverage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-016",
-    "paragraph_id": "PAR-00097"
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 29,
-    "id": "CUE-027",
-    "asset_id": "AST-086",
-    "asset_filename": "assets/generated/silence_hold.mp3",
-    "playback_mode": "Silence",
-    "suggested_volume": 0,
-    "page": 9,
-    "scene": "EXT. PROFESSOR\u2019S COTTAGE - MORNING",
-    "trigger": "I SAID NO!!!",
-    "name": "Awkward Silence Beat",
-    "category": "Silence",
-    "priority": "Medium",
-    "duration": "3s",
-    "loop": "No",
-    "fade": "Out",
-    "volume": 0,
-    "notes": "Drop crowd bed after Professor snaps.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00114"
-  },
-  {
-    "index": 30,
     "id": "CUE-026",
     "asset_id": "AST-014",
     "asset_filename": "assets/ambience/mess_hall_crowd.mp3",
@@ -665,8 +611,27 @@
     "fade": "In",
     "volume": 65,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00117"
+    "cue_type": "BACKGROUND"
+  },
+  {
+    "index": 30,
+    "id": "CUE-027",
+    "asset_id": "AST-086",
+    "asset_filename": "assets/generated/silence_hold.mp3",
+    "playback_mode": "Silence",
+    "suggested_volume": 0,
+    "page": 9,
+    "scene": "INT. MESS HALL - SERVING AREA - MORNING",
+    "trigger": "I SAID NO!!!",
+    "name": "Awkward Silence Beat",
+    "category": "Silence",
+    "priority": "Medium",
+    "duration": "3s",
+    "loop": "No",
+    "fade": "Out",
+    "volume": 0,
+    "notes": "Drop crowd bed after Professor snaps.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 31,
@@ -676,7 +641,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 10,
-    "scene": "INT. MESS HALL - SERVING AREA - MORNING",
+    "scene": "INT. MESS HALL - MORNING",
     "trigger": "GARY! BRING OUT THE TATERS!",
     "name": "Kitchen Call-Out Echo",
     "category": "SFX",
@@ -687,8 +652,7 @@
     "volume": 60,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-086",
-    "paragraph_id": "PAR-00126"
+    "expected_background_asset_id": "AST-086"
   },
   {
     "index": 32,
@@ -698,7 +662,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 10,
-    "scene": "INT. MESS HALL - SERVING AREA - MORNING",
+    "scene": "INT. MESS HALL",
     "trigger": "Gene Vietnam rant",
     "name": "Kitchen Tension Bed",
     "category": "Ambience",
@@ -708,8 +672,7 @@
     "fade": "None",
     "volume": 40,
     "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00134"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 33,
@@ -729,8 +692,7 @@
     "fade": "None",
     "volume": 50,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00141"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 34,
@@ -751,8 +713,7 @@
     "volume": 40,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-014",
-    "paragraph_id": "PAR-00142"
+    "expected_background_asset_id": "AST-014"
   },
   {
     "index": 35,
@@ -773,8 +734,7 @@
     "volume": 70,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-014",
-    "paragraph_id": "PAR-00155"
+    "expected_background_asset_id": "AST-014"
   },
   {
     "index": 36,
@@ -794,8 +754,7 @@
     "fade": "None",
     "volume": 45,
     "notes": "Pots, distant dining noise.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00171"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 37,
@@ -805,7 +764,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 13,
-    "scene": "INT. MESS HALL - MORNING",
+    "scene": "INT. MESS HALL",
     "trigger": "Victor refuses Moose River",
     "name": "Mess Hall Tension",
     "category": "Ambience",
@@ -815,30 +774,27 @@
     "fade": "None",
     "volume": 40,
     "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00179"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 38,
     "id": "CUE-033",
     "asset_id": "AST-034",
     "asset_filename": "assets/generated/music_godspell_sting.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 14,
-    "scene": "INT. MESS HALL - MORNING - ANOTHER TABLE",
+    "scene": "INT. MESS HALL - MORNING",
     "trigger": "musical number from Godspell for talent show",
     "name": "Godspell Announcement Sting (Ref)",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "Low",
     "duration": "5s",
     "loop": "No",
     "fade": "In",
     "volume": 40,
     "notes": "Tease only; full cue at talent show.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-014",
-    "paragraph_id": "PAR-00186"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 39,
@@ -858,8 +814,7 @@
     "fade": "None",
     "volume": 40,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00199"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 40,
@@ -879,8 +834,7 @@
     "fade": "Crossfade",
     "volume": 50,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00209"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 41,
@@ -900,8 +854,7 @@
     "fade": "None",
     "volume": 40,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00211"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 42,
@@ -922,33 +875,10 @@
     "volume": 55,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-018",
-    "paragraph_id": "PAR-00213"
+    "expected_background_asset_id": "AST-018"
   },
   {
     "index": 43,
-    "id": "CUE-202",
-    "asset_id": "AST-086",
-    "asset_filename": "assets/generated/silence_hold.mp3",
-    "playback_mode": "Silence",
-    "suggested_volume": 0,
-    "page": 16,
-    "scene": "EXT. MESS HALL / PARKING LOT - DAY",
-    "trigger": "Where's the tape?",
-    "name": "Comedy Beat",
-    "category": "Silence",
-    "priority": "Low",
-    "duration": "2s",
-    "loop": "No",
-    "fade": "None",
-    "volume": 0,
-    "notes": "Page coverage.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-018",
-    "paragraph_id": "PAR-00219"
-  },
-  {
-    "index": 44,
     "id": "CUE-038",
     "asset_id": "AST-064",
     "asset_filename": "assets/sfx/human_reaction.wav",
@@ -966,8 +896,28 @@
     "volume": 60,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-018",
-    "paragraph_id": "PAR-00225"
+    "expected_background_asset_id": "AST-018"
+  },
+  {
+    "index": 44,
+    "id": "CUE-202",
+    "asset_id": "AST-086",
+    "asset_filename": "assets/generated/silence_hold.mp3",
+    "playback_mode": "Silence",
+    "suggested_volume": 0,
+    "page": 16,
+    "scene": "EXT. PARKING LOT",
+    "trigger": "Where's the tape?",
+    "name": "Comedy Beat",
+    "category": "Silence",
+    "priority": "Low",
+    "duration": "2s",
+    "loop": "No",
+    "fade": "None",
+    "volume": 0,
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-018"
   },
   {
     "index": 45,
@@ -987,8 +937,7 @@
     "fade": "In",
     "volume": 45,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00228"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 46,
@@ -1009,8 +958,7 @@
     "volume": 65,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-001",
-    "paragraph_id": "PAR-00233"
+    "expected_background_asset_id": "AST-001"
   },
   {
     "index": 47,
@@ -1030,8 +978,7 @@
     "fade": "Out",
     "volume": 0,
     "notes": "Drop ambience for Gail breakdown.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00242"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 48,
@@ -1052,8 +999,7 @@
     "volume": 0,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-086",
-    "paragraph_id": "PAR-00250"
+    "expected_background_asset_id": "AST-086"
   },
   {
     "index": 49,
@@ -1073,8 +1019,7 @@
     "fade": "In",
     "volume": 40,
     "notes": "Tiny closet, fan hum.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00265"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 50,
@@ -1095,8 +1040,7 @@
     "volume": 50,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-018",
-    "paragraph_id": "PAR-00276"
+    "expected_background_asset_id": "AST-018"
   },
   {
     "index": 51,
@@ -1106,7 +1050,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 20,
-    "scene": "EXT. BETH\u2019S OFFICE - DAY",
+    "scene": "EXT. BETH'S OFFICE - DAY",
     "trigger": "counselors on the hill",
     "name": "Hill / Office Exterior Ambience",
     "category": "Ambience",
@@ -1116,8 +1060,7 @@
     "fade": "In",
     "volume": 45,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00280"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 52,
@@ -1127,7 +1070,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 20,
-    "scene": "EXT. BETH\u2019S OFFICE - DAY",
+    "scene": "EXT. BETH'S OFFICE",
     "trigger": "ten year reunion promise",
     "name": "Nostalgic Wind (Optional)",
     "category": "Ambience",
@@ -1137,8 +1080,7 @@
     "fade": "None",
     "volume": 30,
     "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00283"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 53,
@@ -1148,7 +1090,7 @@
     "playback_mode": "Silence",
     "suggested_volume": 0,
     "page": 21,
-    "scene": "EXT. BETH\u2019S OFFICE - DAY",
+    "scene": "EXT. BETH'S OFFICE - DAY",
     "trigger": "ALL Agreed.",
     "name": "Group Agreement Beat",
     "category": "Silence",
@@ -1159,8 +1101,7 @@
     "volume": 0,
     "notes": "Brief pause before science scene.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00295"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 54,
@@ -1181,8 +1122,7 @@
     "volume": 75,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00311"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 55,
@@ -1203,8 +1143,7 @@
     "volume": 0,
     "notes": "Hold for Aaron's line.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00313"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 56,
@@ -1214,7 +1153,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 23,
-    "scene": "EXT. BETH\u2019S OFFICE - DAY",
+    "scene": "EXT. BETH'S OFFICE - DAY",
     "trigger": "counselors applaud Beth",
     "name": "Light Applause SFX",
     "category": "SFX",
@@ -1225,8 +1164,7 @@
     "volume": 55,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00326"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 57,
@@ -1236,7 +1174,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 23,
-    "scene": "EXT. BETH\u2019S OFFICE - DAY",
+    "scene": "EXT. BETH'S OFFICE - DAY",
     "trigger": "BetaMax / China Syndrome mention",
     "name": "VCR Hum (Optional Comedy)",
     "category": "Comedy",
@@ -1247,8 +1185,7 @@
     "volume": 30,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00330"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 58,
@@ -1258,7 +1195,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 24,
-    "scene": "EXT. BETH\u2019S OFFICE - DAY",
+    "scene": "EXT. BETH'S OFFICE",
     "trigger": "Steve runs away robot voice",
     "name": "Footsteps Running Away",
     "category": "SFX",
@@ -1269,8 +1206,7 @@
     "volume": 50,
     "notes": "Page coverage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00340"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 59,
@@ -1280,7 +1216,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 25,
-    "scene": "EXT. BETH\u2019S OFFICE - DAY",
+    "scene": "EXT. BETH'S OFFICE - DAY",
     "trigger": "Beth and Katie mousse conversation",
     "name": "Office Porch Ambience",
     "category": "Ambience",
@@ -1290,8 +1226,7 @@
     "fade": "None",
     "volume": 35,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00351"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 60,
@@ -1311,8 +1246,7 @@
     "fade": "In",
     "volume": 55,
     "notes": "Splashing, distant motor.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00370"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 61,
@@ -1333,8 +1267,7 @@
     "volume": 70,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-013",
-    "paragraph_id": "PAR-00393"
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 62,
@@ -1344,7 +1277,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 28,
-    "scene": "EXT. BUNK AREA - DAY",
+    "scene": "EXT. BUNK AREA",
     "trigger": "Coop and Katie list girls",
     "name": "Bunk Area Day Ambience",
     "category": "Ambience",
@@ -1354,8 +1287,7 @@
     "fade": "None",
     "volume": 35,
     "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00403"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 63,
@@ -1376,8 +1308,7 @@
     "volume": 55,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00422"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 64,
@@ -1398,8 +1329,7 @@
     "volume": 70,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00423"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 65,
@@ -1420,8 +1350,7 @@
     "volume": 0,
     "notes": "Tense beat before science scene.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00430"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 66,
@@ -1441,8 +1370,7 @@
     "fade": "In",
     "volume": 45,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00434"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 67,
@@ -1463,8 +1391,7 @@
     "volume": 40,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-021",
-    "paragraph_id": "PAR-00450"
+    "expected_background_asset_id": "AST-021"
   },
   {
     "index": 68,
@@ -1484,8 +1411,7 @@
     "fade": "In",
     "volume": 60,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00459"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 69,
@@ -1506,8 +1432,7 @@
     "volume": 75,
     "notes": "Comedy beat.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-011",
-    "paragraph_id": "PAR-00464"
+    "expected_background_asset_id": "AST-011"
   },
   {
     "index": 70,
@@ -1528,8 +1453,7 @@
     "volume": 55,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-011",
-    "paragraph_id": "PAR-00477"
+    "expected_background_asset_id": "AST-011"
   },
   {
     "index": 71,
@@ -1539,7 +1463,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 32,
-    "scene": "EXT. PARKING AREA - DAY",
+    "scene": "EXT. PARKING AREA",
     "trigger": "Come on!! Coop gets in truck",
     "name": "Truck Door / Peel Out",
     "category": "SFX",
@@ -1550,30 +1474,27 @@
     "volume": 60,
     "notes": "Page coverage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-011",
-    "paragraph_id": "PAR-00477"
+    "expected_background_asset_id": "AST-011"
   },
   {
     "index": 72,
     "id": "CUE-062",
     "asset_id": "AST-036",
     "asset_filename": "assets/generated/music_love_is_alright_tonight.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 33,
     "scene": "EXT. WATERVILLE - VARIOUS - DAY",
     "trigger": "TRIP TO TOWN MONTAGE: Love is Alright Tonight plays",
     "name": "Love Is Alright Tonight (Rick Springfield)",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "Critical",
     "duration": "Montage length",
     "loop": "No",
     "fade": "In/Out",
     "volume": 85,
     "notes": "Licensed. Town trip montage.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-011",
-    "paragraph_id": "PAR-00493"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 73,
@@ -1593,8 +1514,7 @@
     "fade": "Under",
     "volume": 45,
     "notes": "Under montage music.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00496"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 74,
@@ -1615,8 +1535,7 @@
     "volume": 60,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00501"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 75,
@@ -1637,8 +1556,7 @@
     "volume": 0,
     "notes": "End Rick Springfield montage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00506"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 76,
@@ -1658,11 +1576,31 @@
     "fade": "In",
     "volume": 50,
     "notes": "Normal camp day resumes.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00508"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 77,
+    "id": "CUE-067",
+    "asset_id": "AST-047",
+    "asset_filename": "assets/sfx/audience_laughter.wav",
+    "playback_mode": "One Shot",
+    "suggested_volume": 85,
+    "page": 35,
+    "scene": "EXT. HIGHWAY 95 - DAY",
+    "trigger": "camper farts, everyone laughs",
+    "name": "Fart SFX + Laughter",
+    "category": "SFX",
+    "priority": "High",
+    "duration": "3s",
+    "loop": "No",
+    "fade": "None",
+    "volume": 65,
+    "notes": "Comedy.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
+  },
+  {
+    "index": 78,
     "id": "CUE-068",
     "asset_id": "AST-080",
     "asset_filename": "assets/sfx/vehicle_van_engine.wav",
@@ -1680,40 +1618,37 @@
     "volume": 70,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00529"
-  },
-  {
-    "index": 78,
-    "id": "CUE-067",
-    "asset_id": "AST-047",
-    "asset_filename": "assets/sfx/audience_laughter.wav",
-    "playback_mode": "One Shot",
-    "suggested_volume": 85,
-    "page": 35,
-    "scene": "EXT. BARBECUE PIT (BUNK AREA) - DAY",
-    "trigger": "camper farts, everyone laughs",
-    "name": "Fart SFX + Laughter",
-    "category": "SFX",
-    "priority": "High",
-    "duration": "3s",
-    "loop": "No",
-    "fade": "None",
-    "volume": 65,
-    "notes": "Comedy.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00534"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 79,
+    "id": "CUE-069",
+    "asset_id": "AST-002",
+    "asset_filename": "assets/ambience/bbq_pit_picnic.mp3",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
+    "page": 36,
+    "scene": "EXT. BARBECUE PIT - DAY",
+    "trigger": "Gene and Gary at barbecue",
+    "name": "BBQ Pit Sizzle Ambience",
+    "category": "Ambience",
+    "priority": "Medium",
+    "duration": "Loop",
+    "loop": "Yes",
+    "fade": "In",
+    "volume": 50,
+    "notes": "",
+    "cue_type": "BACKGROUND"
+  },
+  {
+    "index": 80,
     "id": "CUE-207",
     "asset_id": "AST-086",
     "asset_filename": "assets/generated/silence_hold.mp3",
     "playback_mode": "Silence",
     "suggested_volume": 0,
     "page": 36,
-    "scene": "EXT. BARBECUE PIT (BUNK AREA) - DAY",
+    "scene": "EXT. BARBECUE PIT",
     "trigger": "Gene fondue with cheddar cover",
     "name": "Comedy Pause",
     "category": "Silence",
@@ -1724,29 +1659,7 @@
     "volume": 0,
     "notes": "Page coverage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-002",
-    "paragraph_id": "PAR-00541"
-  },
-  {
-    "index": 80,
-    "id": "CUE-069",
-    "asset_id": "AST-002",
-    "asset_filename": "assets/ambience/bbq_pit_picnic.mp3",
-    "playback_mode": "Loop",
-    "suggested_volume": 30,
-    "page": 36,
-    "scene": "EXT. BARBECUE PIT (BUNK AREA) - DAY",
-    "trigger": "Gene and Gary at barbecue",
-    "name": "BBQ Pit Sizzle Ambience",
-    "category": "Ambience",
-    "priority": "Medium",
-    "duration": "Loop",
-    "loop": "Yes",
-    "fade": "In",
-    "volume": 50,
-    "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00542"
+    "expected_background_asset_id": "AST-002"
   },
   {
     "index": 81,
@@ -1766,8 +1679,7 @@
     "fade": "None",
     "volume": 40,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00561"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 82,
@@ -1777,7 +1689,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 37,
-    "scene": "INT. RADIO STATION - DAY",
+    "scene": "INT. RADIO STATION",
     "trigger": "Arty picnic announcement",
     "name": "Radio Broadcast Bed",
     "category": "Ambience",
@@ -1787,8 +1699,7 @@
     "fade": "None",
     "volume": 40,
     "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00561"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 83,
@@ -1808,8 +1719,7 @@
     "fade": "In",
     "volume": 35,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00567"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 84,
@@ -1819,7 +1729,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 38,
-    "scene": "INT. ARTS AND CRAFTS BUNK - DAY",
+    "scene": "INT. ARTS AND CRAFTS",
     "trigger": "Aaron shiatsu massage",
     "name": "Soft Room Tone",
     "category": "Ambience",
@@ -1829,8 +1739,7 @@
     "fade": "None",
     "volume": 35,
     "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00567"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 85,
@@ -1851,30 +1760,27 @@
     "volume": 75,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-001",
-    "paragraph_id": "PAR-00581"
+    "expected_background_asset_id": "AST-001"
   },
   {
     "index": 86,
     "id": "CUE-073",
     "asset_id": "AST-028",
     "asset_filename": "assets/generated/music_danny_song_loggins_messina.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 39,
     "scene": "EXT. COUNTRY ROAD - DAY",
     "trigger": "sings Danny's Song by Loggins & Messina",
     "name": "Danny's Song (Loggins & Messina)",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "Critical",
     "duration": "Verse+",
     "loop": "No",
     "fade": "In",
     "volume": 80,
     "notes": "Licensed. Victor driving.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-001",
-    "paragraph_id": "PAR-00585"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 87,
@@ -1895,11 +1801,30 @@
     "volume": 90,
     "notes": "Hard cut music.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-001",
-    "paragraph_id": "PAR-00587"
+    "expected_background_asset_id": "AST-028"
   },
   {
     "index": 88,
+    "id": "CUE-075",
+    "asset_id": "AST-028",
+    "asset_filename": "assets/generated/music_danny_song_loggins_messina.mp3",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
+    "page": 40,
+    "scene": "INT. ABBY'S BUNK - DAY",
+    "trigger": "Danny's Song hums from tape player",
+    "name": "Danny's Song (Tape Player Underscore)",
+    "category": "Ambience",
+    "priority": "High",
+    "duration": "Loop",
+    "loop": "Yes",
+    "fade": "In",
+    "volume": 50,
+    "notes": "Licensed, lo-fi bedroom.",
+    "cue_type": "BACKGROUND"
+  },
+  {
+    "index": 89,
     "id": "CUE-076",
     "asset_id": "AST-011",
     "asset_filename": "assets/ambience/highway_rural_road.mp3",
@@ -1916,18 +1841,17 @@
     "fade": "In",
     "volume": 45,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00600"
+    "cue_type": "BACKGROUND"
   },
   {
-    "index": 89,
+    "index": 90,
     "id": "CUE-077",
     "asset_id": "AST-073",
     "asset_filename": "assets/sfx/smooch_makeout.wav",
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 40,
-    "scene": "INT. ABBY\u2019S BUNK - DAY",
+    "scene": "INT. ABBY'S BUNK - DAY",
     "trigger": "Abby and Gary making out",
     "name": "Makeout Rustle (Low)",
     "category": "SFX",
@@ -1938,30 +1862,7 @@
     "volume": 30,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-011",
-    "paragraph_id": "PAR-00603"
-  },
-  {
-    "index": 90,
-    "id": "CUE-075",
-    "asset_id": "AST-028",
-    "asset_filename": "assets/generated/music_danny_song_loggins_messina.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
-    "page": 40,
-    "scene": "EXT. MOOSE RIVER - DAY",
-    "trigger": "Danny's Song hums from tape player",
-    "name": "Danny's Song (Tape Player Underscore)",
-    "category": "Music",
-    "priority": "High",
-    "duration": "Loop",
-    "loop": "Yes",
-    "fade": "In",
-    "volume": 50,
-    "notes": "Licensed, lo-fi bedroom.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-001",
-    "paragraph_id": "PAR-00613"
+    "expected_background_asset_id": "AST-011"
   },
   {
     "index": 91,
@@ -1981,8 +1882,7 @@
     "fade": "In",
     "volume": 55,
     "notes": "Gentle current.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00620"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 92,
@@ -2003,8 +1903,7 @@
     "volume": 75,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-020",
-    "paragraph_id": "PAR-00623"
+    "expected_background_asset_id": "AST-020"
   },
   {
     "index": 93,
@@ -2014,7 +1913,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 41,
-    "scene": "EXT. MOOSE RIVER - DAY",
+    "scene": "EXT. MOOSE RIVER",
     "trigger": "campers float alone",
     "name": "Ominous River Current",
     "category": "Ambience",
@@ -2024,40 +1923,17 @@
     "fade": "In",
     "volume": 50,
     "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00625"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 94,
-    "id": "CUE-082",
-    "asset_id": "AST-078",
-    "asset_filename": "assets/sfx/vehicle_motorcycle.wav",
-    "playback_mode": "One Shot",
-    "suggested_volume": 85,
-    "page": 42,
-    "scene": "EXT. A SMALL RURAL HIGHWAY - DAY",
-    "trigger": "Neil screeches to halt at hay bale",
-    "name": "Motorcycle Screech / Stop SFX",
-    "category": "SFX",
-    "priority": "High",
-    "duration": "2s",
-    "loop": "No",
-    "fade": "None",
-    "volume": 80,
-    "notes": "",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-020",
-    "paragraph_id": "PAR-00630"
-  },
-  {
-    "index": 95,
     "id": "CUE-080",
     "asset_id": "AST-078",
     "asset_filename": "assets/sfx/vehicle_motorcycle.wav",
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 42,
-    "scene": "EXT. SWIMMING HOLE - DAY",
+    "scene": "EXT. SMALL RURAL HIGHWAY - DAY",
     "trigger": "Neil's motorcycle approaching",
     "name": "Motorcycle Approach Loop",
     "category": "SFX",
@@ -2068,30 +1944,48 @@
     "volume": 65,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-020",
-    "paragraph_id": "PAR-00645"
+    "expected_background_asset_id": "AST-020"
   },
   {
-    "index": 96,
+    "index": 95,
     "id": "CUE-081",
     "asset_id": "AST-027",
     "asset_filename": "assets/generated/music_chase_comedy_underscore.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 42,
-    "scene": "EXT. SWIMMING HOLE - DAY",
+    "scene": "EXT. SMALL RURAL HIGHWAY - DAY",
     "trigger": "RUNNER VS. MOTORCYCLE CHASE",
     "name": "Chase Sequence Underscore",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "High",
     "duration": "Loop",
     "loop": "Yes",
     "fade": "In",
     "volume": 70,
     "notes": "Royalty-free action/comedy.",
+    "cue_type": "BACKGROUND"
+  },
+  {
+    "index": 96,
+    "id": "CUE-082",
+    "asset_id": "AST-078",
+    "asset_filename": "assets/sfx/vehicle_motorcycle.wav",
+    "playback_mode": "One Shot",
+    "suggested_volume": 85,
+    "page": 42,
+    "scene": "EXT. SMALL RURAL HIGHWAY - DAY",
+    "trigger": "Neil screeches to halt at hay bale",
+    "name": "Motorcycle Screech / Stop SFX",
+    "category": "SFX",
+    "priority": "High",
+    "duration": "2s",
+    "loop": "No",
+    "fade": "None",
+    "volume": 80,
+    "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-020",
-    "paragraph_id": "PAR-00645"
+    "expected_background_asset_id": "AST-027"
   },
   {
     "index": 97,
@@ -2111,8 +2005,7 @@
     "fade": "In",
     "volume": 45,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00646"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 98,
@@ -2122,7 +2015,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 43,
-    "scene": "INT. EQUIPMENT SHACK - DAY",
+    "scene": "INT. EQUIPMENT SHACK",
     "trigger": "knock on door",
     "name": "Door Knock SFX",
     "category": "SFX",
@@ -2133,8 +2026,7 @@
     "volume": 55,
     "notes": "Page coverage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-022",
-    "paragraph_id": "PAR-00652"
+    "expected_background_asset_id": "AST-022"
   },
   {
     "index": 99,
@@ -2144,7 +2036,7 @@
     "playback_mode": "Silence",
     "suggested_volume": 0,
     "page": 44,
-    "scene": "EXT. SWIMMING HOLE - DAY",
+    "scene": "INT. EQUIPMENT SHACK - DAY",
     "trigger": "Ben and McKinley in silence, kissing",
     "name": "Shack Interior Silence",
     "category": "Silence",
@@ -2155,8 +2047,7 @@
     "volume": 0,
     "notes": "Sun through cracks.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-022",
-    "paragraph_id": "PAR-00664"
+    "expected_background_asset_id": "AST-022"
   },
   {
     "index": 100,
@@ -2176,8 +2067,7 @@
     "fade": "In",
     "volume": 55,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00672"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 101,
@@ -2198,8 +2088,7 @@
     "volume": 0,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00679"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 102,
@@ -2220,8 +2109,7 @@
     "volume": 70,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00685"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 103,
@@ -2242,18 +2130,37 @@
     "volume": 60,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00687"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 104,
+    "id": "CUE-089",
+    "asset_id": "AST-026",
+    "asset_filename": "assets/generated/music_ceremony_flute.mp3",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
+    "page": 46,
+    "scene": "EXT. FOREST LAKE - DAY",
+    "trigger": "Susie playing wooden flute",
+    "name": "Ceremony Flute Music",
+    "category": "Ambience",
+    "priority": "High",
+    "duration": "Loop",
+    "loop": "Yes",
+    "fade": "In",
+    "volume": 60,
+    "notes": "Original or royalty-free flute.",
+    "cue_type": "BACKGROUND"
+  },
+  {
+    "index": 105,
     "id": "CUE-212",
     "asset_id": "AST-055",
     "asset_filename": "assets/sfx/comedy_stinger.wav",
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 46,
-    "scene": "EXT. BASEBALL FIELD - DAY",
+    "scene": "EXT. FOREST LAKE",
     "trigger": "JJ and Gary shocked at wedding",
     "name": "Comedy Gasp",
     "category": "SFX",
@@ -2264,30 +2171,7 @@
     "volume": 55,
     "notes": "Page coverage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00695"
-  },
-  {
-    "index": 105,
-    "id": "CUE-089",
-    "asset_id": "AST-026",
-    "asset_filename": "assets/generated/music_ceremony_flute.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
-    "page": 46,
-    "scene": "EXT. FOREST LAKE - DAY",
-    "trigger": "Susie playing wooden flute",
-    "name": "Ceremony Flute Music",
-    "category": "Music",
-    "priority": "High",
-    "duration": "Loop",
-    "loop": "Yes",
-    "fade": "In",
-    "volume": 60,
-    "notes": "Original or royalty-free flute.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00702"
+    "expected_background_asset_id": "AST-026"
   },
   {
     "index": 106,
@@ -2307,30 +2191,27 @@
     "fade": "Under",
     "volume": 45,
     "notes": "Under flute.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00710"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 107,
     "id": "CUE-091",
     "asset_id": "AST-026",
     "asset_filename": "assets/generated/music_ceremony_flute.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 47,
     "scene": "EXT. FOREST LAKE - DAY",
     "trigger": "flute music continues as Ben and McKinley kiss",
     "name": "Flute Music Continue",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "Medium",
     "duration": "Loop",
     "loop": "Yes",
     "fade": "None",
     "volume": 55,
     "notes": "",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00710"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 108,
@@ -2351,8 +2232,7 @@
     "volume": 80,
     "notes": "Live read or recorded shout.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00718"
+    "expected_background_asset_id": "AST-026"
   },
   {
     "index": 109,
@@ -2373,8 +2253,7 @@
     "volume": 85,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00719"
+    "expected_background_asset_id": "AST-026"
   },
   {
     "index": 110,
@@ -2394,8 +2273,7 @@
     "fade": "In",
     "volume": 60,
     "notes": "Running, yelling.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00720"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 111,
@@ -2416,8 +2294,7 @@
     "volume": 35,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-007",
-    "paragraph_id": "PAR-00728"
+    "expected_background_asset_id": "AST-007"
   },
   {
     "index": 112,
@@ -2427,7 +2304,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 48,
-    "scene": "EXT. BUNK AREA - DAY",
+    "scene": "EXT. BUNK AREA",
     "trigger": "Beth invites Steve to talent show",
     "name": "Camp Afternoon Bed",
     "category": "Ambience",
@@ -2437,32 +2314,10 @@
     "fade": "None",
     "volume": 35,
     "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00735"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 113,
-    "id": "CUE-214",
-    "asset_id": "AST-007",
-    "asset_filename": "assets/ambience/capture_the_flag_game.mp3",
-    "playback_mode": "Loop",
-    "suggested_volume": 30,
-    "page": 49,
-    "scene": "EXT. CAPTURE THE FLAG SIDELINES - DAY",
-    "trigger": "Andy and Katie on grass",
-    "name": "Distant Game Noise",
-    "category": "Ambience",
-    "priority": "Low",
-    "duration": "Loop",
-    "loop": "Yes",
-    "fade": "None",
-    "volume": 40,
-    "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00744"
-  },
-  {
-    "index": 114,
     "id": "CUE-096",
     "asset_id": "AST-002",
     "asset_filename": "assets/ambience/bbq_pit_picnic.mp3",
@@ -2479,32 +2334,30 @@
     "fade": "None",
     "volume": 50,
     "notes": "Sizzling, crowd.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00752"
+    "cue_type": "BACKGROUND"
   },
   {
-    "index": 115,
-    "id": "CUE-215",
-    "asset_id": "AST-004",
-    "asset_filename": "assets/ambience/camp_exterior_day.mp3",
+    "index": 114,
+    "id": "CUE-214",
+    "asset_id": "AST-007",
+    "asset_filename": "assets/ambience/capture_the_flag_game.mp3",
     "playback_mode": "Loop",
     "suggested_volume": 30,
-    "page": 50,
-    "scene": "EXT. BUNK AREA - DAY",
-    "trigger": "Susie argues with Beth",
-    "name": "Tense Outdoor Bed",
+    "page": 49,
+    "scene": "EXT. CAPTURE THE FLAG SIDELINES",
+    "trigger": "Andy and Katie on grass",
+    "name": "Distant Game Noise",
     "category": "Ambience",
     "priority": "Low",
     "duration": "Loop",
     "loop": "Yes",
     "fade": "None",
-    "volume": 35,
+    "volume": 40,
     "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00758"
+    "cue_type": "BACKGROUND"
   },
   {
-    "index": 116,
+    "index": 115,
     "id": "CUE-097",
     "asset_id": "AST-010",
     "asset_filename": "assets/ambience/soft_emotional_room.mp3",
@@ -2521,8 +2374,27 @@
     "fade": "None",
     "volume": 40,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00763"
+    "cue_type": "BACKGROUND"
+  },
+  {
+    "index": 116,
+    "id": "CUE-215",
+    "asset_id": "AST-004",
+    "asset_filename": "assets/ambience/camp_exterior_day.mp3",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
+    "page": 50,
+    "scene": "EXT. SCIENCE CLEARING",
+    "trigger": "Susie argues with Beth",
+    "name": "Tense Outdoor Bed",
+    "category": "Ambience",
+    "priority": "Low",
+    "duration": "Loop",
+    "loop": "Yes",
+    "fade": "None",
+    "volume": 35,
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 117,
@@ -2532,7 +2404,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 51,
-    "scene": "EXT. SCIENCE CLEARING - DAY",
+    "scene": "EXT. BARBECUE PIT - DAY",
     "trigger": "Lindsay face SLATHERED in barbecue sauce",
     "name": "BBQ Pit Crowd Ambience",
     "category": "Ambience",
@@ -2542,8 +2414,7 @@
     "fade": "None",
     "volume": 50,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00778"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 118,
@@ -2553,7 +2424,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 51,
-    "scene": "EXT. SCIENCE CLEARING - DAY",
+    "scene": "EXT. BARBECUE PIT",
     "trigger": "Andy and Lindsay sneak behind mess hall",
     "name": "Mess Hall Exterior",
     "category": "Ambience",
@@ -2563,8 +2434,7 @@
     "fade": "None",
     "volume": 35,
     "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00786"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 119,
@@ -2574,7 +2444,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 52,
-    "scene": "EXT. BARBECUE PIT (BUNK AREA) - DAY",
+    "scene": "EXT. SIDELINES",
     "trigger": "Medieval kid shushed",
     "name": "Picnic Crowd Murmur",
     "category": "Ambience",
@@ -2584,8 +2454,7 @@
     "fade": "None",
     "volume": 40,
     "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00802"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 120,
@@ -2595,7 +2464,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 53,
-    "scene": "EXT. SIDELINES (BUNK AREA) - DAY",
+    "scene": "EXT. WATERFRONT",
     "trigger": "Lars waterskiing before fall",
     "name": "Boat Engine Loop",
     "category": "SFX",
@@ -2606,30 +2475,27 @@
     "volume": 55,
     "notes": "Page coverage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00820"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 121,
     "id": "CUE-099",
     "asset_id": "AST-040",
     "asset_filename": "assets/generated/music_slo_mo_sports.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 54,
     "scene": "EXT. BUNK AREA - CAPTURE THE FLAG - DAY",
     "trigger": "slo-mo chase sequence",
     "name": "Slo-Mo Sports Underscore",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "Medium",
     "duration": "30s",
     "loop": "No",
     "fade": "In/Out",
     "volume": 65,
     "notes": "Royalty-free inspirational.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00828"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 122,
@@ -2650,8 +2516,7 @@
     "volume": 80,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00835"
+    "expected_background_asset_id": "AST-040"
   },
   {
     "index": 123,
@@ -2672,8 +2537,7 @@
     "volume": 70,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00843"
+    "expected_background_asset_id": "AST-040"
   },
   {
     "index": 124,
@@ -2693,8 +2557,7 @@
     "fade": "In",
     "volume": 45,
     "notes": "Birds, light wind.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00845"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 125,
@@ -2715,8 +2578,7 @@
     "volume": 45,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-016",
-    "paragraph_id": "PAR-00873"
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 126,
@@ -2736,8 +2598,7 @@
     "fade": "In",
     "volume": 50,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00876"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 127,
@@ -2758,8 +2619,7 @@
     "volume": 70,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-016",
-    "paragraph_id": "PAR-00880"
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 128,
@@ -2780,8 +2640,7 @@
     "volume": 60,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-016",
-    "paragraph_id": "PAR-00888"
+    "expected_background_asset_id": "AST-016"
   },
   {
     "index": 129,
@@ -2791,7 +2650,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 58,
-    "scene": "INT. BETH\u2019S OFFICE - DAY",
+    "scene": "INT. BETH'S OFFICE - DAY",
     "trigger": "Coop on phone with parents",
     "name": "Office Phone Room Tone",
     "category": "Ambience",
@@ -2801,8 +2660,7 @@
     "fade": "None",
     "volume": 35,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00895"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 130,
@@ -2822,38 +2680,15 @@
     "fade": "In",
     "volume": 45,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00900"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 131,
-    "id": "CUE-219",
-    "asset_id": "AST-010",
-    "asset_filename": "assets/ambience/soft_emotional_room.mp3",
-    "playback_mode": "Loop",
-    "suggested_volume": 30,
-    "page": 59,
-    "scene": "EXT. KATIE\u2019S BUNK -",
-    "trigger": "Coop finds Katie crying with Andy",
-    "name": "Emotional Door Creak",
-    "category": "SFX",
-    "priority": "Low",
-    "duration": "2s",
-    "loop": "No",
-    "fade": "None",
-    "volume": 45,
-    "notes": "Page coverage.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-038",
-    "paragraph_id": "PAR-00909"
-  },
-  {
-    "index": 132,
     "id": "CUE-109",
     "asset_id": "AST-038",
     "asset_filename": "assets/generated/music_paul_guitar_diegetic.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 59,
     "scene": "EXT. MESS HALL - DAY",
     "trigger": "Paul plays guitar on hill",
@@ -2865,11 +2700,10 @@
     "fade": "In",
     "volume": 50,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00918"
+    "cue_type": "BACKGROUND"
   },
   {
-    "index": 133,
+    "index": 132,
     "id": "CUE-110",
     "asset_id": "AST-064",
     "asset_filename": "assets/sfx/human_reaction.wav",
@@ -2887,11 +2721,51 @@
     "volume": 85,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-038",
-    "paragraph_id": "PAR-00919"
+    "expected_background_asset_id": "AST-038"
+  },
+  {
+    "index": 133,
+    "id": "CUE-219",
+    "asset_id": "AST-010",
+    "asset_filename": "assets/ambience/soft_emotional_room.mp3",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
+    "page": 59,
+    "scene": "EXT. KATIE'S BUNK",
+    "trigger": "Coop finds Katie crying with Andy",
+    "name": "Emotional Door Creak",
+    "category": "SFX",
+    "priority": "Low",
+    "duration": "2s",
+    "loop": "No",
+    "fade": "None",
+    "volume": 45,
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-038"
   },
   {
     "index": 134,
+    "id": "CUE-111",
+    "asset_id": "AST-014",
+    "asset_filename": "assets/ambience/mess_hall_crowd.mp3",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
+    "page": 60,
+    "scene": "INT. MESS HALL - DAY",
+    "trigger": "Everyone eating dinner",
+    "name": "Mess Hall Dinner Crowd",
+    "category": "Ambience",
+    "priority": "High",
+    "duration": "Loop",
+    "loop": "Yes",
+    "fade": "In",
+    "volume": 60,
+    "notes": "",
+    "cue_type": "BACKGROUND"
+  },
+  {
+    "index": 135,
     "id": "CUE-112",
     "asset_id": "AST-061",
     "asset_filename": "assets/sfx/door.wav",
@@ -2909,29 +2783,7 @@
     "volume": 60,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-014",
-    "paragraph_id": "PAR-00930"
-  },
-  {
-    "index": 135,
-    "id": "CUE-111",
-    "asset_id": "AST-014",
-    "asset_filename": "assets/ambience/mess_hall_crowd.mp3",
-    "playback_mode": "Loop",
-    "suggested_volume": 30,
-    "page": 60,
-    "scene": "INT. MESS HALL - DAY",
-    "trigger": "Everyone eating dinner",
-    "name": "Mess Hall Dinner Crowd",
-    "category": "Ambience",
-    "priority": "High",
-    "duration": "Loop",
-    "loop": "Yes",
-    "fade": "In",
-    "volume": 60,
-    "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00934"
+    "expected_background_asset_id": "AST-014"
   },
   {
     "index": 136,
@@ -2952,8 +2804,7 @@
     "volume": 65,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-014",
-    "paragraph_id": "PAR-00934"
+    "expected_background_asset_id": "AST-014"
   },
   {
     "index": 137,
@@ -2973,8 +2824,7 @@
     "fade": "None",
     "volume": 40,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00938"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 138,
@@ -2994,8 +2844,7 @@
     "fade": "None",
     "volume": 40,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00948"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 139,
@@ -3005,7 +2854,7 @@
     "playback_mode": "Silence",
     "suggested_volume": 0,
     "page": 61,
-    "scene": "INT. RADIO STATION - DAY",
+    "scene": "INT. RADIO STATION",
     "trigger": "Gary dinner interview silence",
     "name": "Comedy Dead Air",
     "category": "Silence",
@@ -3016,30 +2865,27 @@
     "volume": 0,
     "notes": "Beat before Gary speaks.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-018",
-    "paragraph_id": "PAR-00948"
+    "expected_background_asset_id": "AST-018"
   },
   {
     "index": 140,
     "id": "CUE-116",
     "asset_id": "AST-041",
     "asset_filename": "assets/generated/music_summer_in_the_city.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 62,
     "scene": "INT. RADIO STATION - DAY",
     "trigger": "Summer in the City starts",
     "name": "Summer in the City (Lovin' Spoonful)",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "Critical",
     "duration": "Full/skip",
     "loop": "No",
     "fade": "In",
     "volume": 85,
     "notes": "Licensed. Under mess hall scene.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-018",
-    "paragraph_id": "PAR-00957"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 141,
@@ -3059,8 +2905,7 @@
     "fade": "Under",
     "volume": 35,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-00959"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 142,
@@ -3081,30 +2926,27 @@
     "volume": 20,
     "notes": "Pull Summer in the City down.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00970"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 143,
     "id": "CUE-221",
-    "asset_id": "AST-039",
-    "asset_filename": "assets/generated/music_romantic_kiss_stinger.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "asset_id": "AST-004",
+    "asset_filename": "assets/ambience/camp_exterior_day.mp3",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 63,
-    "scene": "EXT. MESS HALL - DAY",
+    "scene": "EXT. MESS HALL",
     "trigger": "Katie rejects Coop",
     "name": "Heartbreak Sting (Optional)",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "Optional",
     "duration": "3s",
     "loop": "No",
     "fade": "In/Out",
     "volume": 40,
     "notes": "Page coverage.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00970"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 144,
@@ -3125,8 +2967,7 @@
     "volume": 80,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00987"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 145,
@@ -3136,7 +2977,7 @@
     "playback_mode": "Silence",
     "suggested_volume": 0,
     "page": 64,
-    "scene": "INT. MESS HALL - DAY",
+    "scene": "INT. MESS HALL",
     "trigger": "Gene military speech buildup",
     "name": "Room Hush",
     "category": "Silence",
@@ -3147,8 +2988,7 @@
     "volume": 0,
     "notes": "Page coverage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00991"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 146,
@@ -3169,8 +3009,7 @@
     "volume": 80,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00995"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 147,
@@ -3191,8 +3030,7 @@
     "volume": 75,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-00997"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 148,
@@ -3213,8 +3051,7 @@
     "volume": 65,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-01001"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 149,
@@ -3235,8 +3072,7 @@
     "volume": 75,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-01004"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 150,
@@ -3257,8 +3093,7 @@
     "volume": 70,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-01006"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 151,
@@ -3278,8 +3113,7 @@
     "fade": "In",
     "volume": 50,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-01009"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 152,
@@ -3289,7 +3123,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 66,
-    "scene": "EXT. PATH TO PICNIC TABLE - DAY",
+    "scene": "EXT. PATH TO PICNIC TABLE",
     "trigger": "Professor distracted by sky",
     "name": "Evening Lake Insects",
     "category": "Ambience",
@@ -3299,30 +3133,27 @@
     "fade": "None",
     "volume": 40,
     "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-01009"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 153,
     "id": "CUE-126",
     "asset_id": "AST-037",
     "asset_filename": "assets/generated/music_80s_training_montage.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 67,
-    "scene": "EXT. PATH TO PICNIC TABLE - DAY",
+    "scene": "EXT. PICNIC TABLE - DAY",
     "trigger": "Skylab headed right for camp",
     "name": "Ominous Drone Underscore",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "High",
     "duration": "Loop",
     "loop": "Yes",
     "fade": "In",
     "volume": 55,
     "notes": "Tension bed.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-013",
-    "paragraph_id": "PAR-01023"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 154,
@@ -3332,7 +3163,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 67,
-    "scene": "INT. ANDY\u2019S BUNK - DAY",
+    "scene": "EXT. PICNIC TABLE",
     "trigger": "Let's do it! science montage",
     "name": "Science Montage Tick",
     "category": "Transition",
@@ -3343,39 +3174,17 @@
     "volume": 50,
     "notes": "Page coverage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-013",
-    "paragraph_id": "PAR-01036"
+    "expected_background_asset_id": "AST-037"
   },
   {
     "index": 155,
-    "id": "CUE-225",
-    "asset_id": "AST-013",
-    "asset_filename": "assets/ambience/lake_waterfront.mp3",
-    "playback_mode": "Loop",
-    "suggested_volume": 30,
-    "page": 68,
-    "scene": "INT. ANDY\u2019S BUNK - DAY",
-    "trigger": "Coop crying, Gene approaches",
-    "name": "Lonely Lake Lap",
-    "category": "Ambience",
-    "priority": "Medium",
-    "duration": "Loop",
-    "loop": "Yes",
-    "fade": "In",
-    "volume": 45,
-    "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-01037"
-  },
-  {
-    "index": 156,
     "id": "CUE-127",
     "asset_id": "AST-003",
     "asset_filename": "assets/ambience/bunk_interior.mp3",
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 68,
-    "scene": "INT. ANDY\u2019S BUNK - DAY",
+    "scene": "INT. ANDY'S BUNK - DAY",
     "trigger": "Coop confronts Andy",
     "name": "Bunk Interior Ambience",
     "category": "Ambience",
@@ -3385,8 +3194,27 @@
     "fade": "None",
     "volume": 35,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-01039"
+    "cue_type": "BACKGROUND"
+  },
+  {
+    "index": 156,
+    "id": "CUE-225",
+    "asset_id": "AST-013",
+    "asset_filename": "assets/ambience/lake_waterfront.mp3",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
+    "page": 68,
+    "scene": "EXT. ROCK BY LAKE",
+    "trigger": "Coop crying, Gene approaches",
+    "name": "Lonely Lake Lap",
+    "category": "Ambience",
+    "priority": "Medium",
+    "duration": "Loop",
+    "loop": "Yes",
+    "fade": "In",
+    "volume": 45,
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 157,
@@ -3396,7 +3224,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 69,
-    "scene": "EXT. ANDY\u2019S BUNK - DAY",
+    "scene": "EXT. ANDY'S BUNK - DAY",
     "trigger": "steps on RAKE which hits head",
     "name": "Slapstick Rake Bonk SFX",
     "category": "SFX",
@@ -3407,8 +3235,7 @@
     "volume": 80,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-013",
-    "paragraph_id": "PAR-01056"
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 158,
@@ -3418,7 +3245,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 69,
-    "scene": "EXT. ANDY\u2019S BUNK - DAY",
+    "scene": "EXT. ANDY'S BUNK - DAY",
     "trigger": "steps on BANANA PEEL, falls in pool",
     "name": "Banana Peel Slip / Splash SFX",
     "category": "SFX",
@@ -3429,8 +3256,7 @@
     "volume": 85,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-013",
-    "paragraph_id": "PAR-01056"
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 159,
@@ -3440,7 +3266,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 69,
-    "scene": "EXT. ANDY\u2019S BUNK - DAY",
+    "scene": "EXT. ANDY'S BUNK - DAY",
     "trigger": "bucket lands on his head",
     "name": "Bucket Clunk SFX",
     "category": "SFX",
@@ -3451,8 +3277,7 @@
     "volume": 70,
     "notes": "Optional sad trombone.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-013",
-    "paragraph_id": "PAR-01056"
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 160,
@@ -3462,7 +3287,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 69,
-    "scene": "EXT. PICNIC TABLE - DAY",
+    "scene": "EXT. PICNIC TABLE",
     "trigger": "Skylab device construction",
     "name": "Tinkering / Building SFX",
     "category": "SFX",
@@ -3473,30 +3298,27 @@
     "volume": 40,
     "notes": "Page coverage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-013",
-    "paragraph_id": "PAR-01059"
+    "expected_background_asset_id": "AST-013"
   },
   {
     "index": 161,
     "id": "CUE-131",
     "asset_id": "AST-037",
     "asset_filename": "assets/generated/music_80s_training_montage.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 70,
     "scene": "EXT. FIELD, ETC. - MONTAGE, DUSK",
     "trigger": "Coop's TRAINING MONTAGE",
     "name": "80s Training Montage Music",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "Critical",
     "duration": "Montage",
     "loop": "No",
     "fade": "In/Out",
     "volume": 80,
     "notes": "Royalty-free synth rock.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-013",
-    "paragraph_id": "PAR-01074"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 162,
@@ -3517,16 +3339,15 @@
     "volume": 45,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-013",
-    "paragraph_id": "PAR-01075"
+    "expected_background_asset_id": "AST-037"
   },
   {
     "index": 163,
     "id": "CUE-133",
     "asset_id": "AST-037",
     "asset_filename": "assets/generated/music_80s_training_montage.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 70,
     "scene": "EXT. FIELD, ETC. - MONTAGE, DUSK",
     "trigger": "Coop breaks into tears in therapy",
@@ -3539,30 +3360,27 @@
     "volume": 40,
     "notes": "Brief emotional beat.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-013",
-    "paragraph_id": "PAR-01081"
+    "expected_background_asset_id": "AST-037"
   },
   {
     "index": 164,
     "id": "CUE-134",
     "asset_id": "AST-037",
     "asset_filename": "assets/generated/music_80s_training_montage.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 70,
     "scene": "EXT. FIELD, ETC. - MONTAGE, DUSK",
     "trigger": "Coop finally NAILS the dance move",
     "name": "Montage Music Swell",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "High",
     "duration": "5s",
     "loop": "No",
     "fade": "In",
     "volume": 85,
     "notes": "",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-013",
-    "paragraph_id": "PAR-01082"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 165,
@@ -3583,8 +3401,7 @@
     "volume": 60,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-013",
-    "paragraph_id": "PAR-01087"
+    "expected_background_asset_id": "AST-037"
   },
   {
     "index": 166,
@@ -3594,7 +3411,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 71,
-    "scene": "EXT. BETH\u2019S OFFICE - NIGHT",
+    "scene": "EXT. BETH'S OFFICE - NIGHT",
     "trigger": "Neil rides motorcycle up",
     "name": "Motorcycle Arrival Night",
     "category": "SFX",
@@ -3605,8 +3422,7 @@
     "volume": 70,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-013",
-    "paragraph_id": "PAR-01089"
+    "expected_background_asset_id": "AST-037"
   },
   {
     "index": 167,
@@ -3626,8 +3442,7 @@
     "fade": "In",
     "volume": 75,
     "notes": "Rushing water.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-01093"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 168,
@@ -3637,7 +3452,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 71,
-    "scene": "INT. BETH\u2019S OFFICE - NIGHT",
+    "scene": "INT. BETH'S OFFICE - NIGHT",
     "trigger": "The phone RINGS",
     "name": "Phone Ring SFX",
     "category": "SFX",
@@ -3648,8 +3463,7 @@
     "volume": 80,
     "notes": "Urgent ring.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-020",
-    "paragraph_id": "PAR-01100"
+    "expected_background_asset_id": "AST-020"
   },
   {
     "index": 169,
@@ -3659,7 +3473,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 71,
-    "scene": "INT. BETH\u2019S OFFICE - NIGHT",
+    "scene": "INT. BETH'S OFFICE - NIGHT",
     "trigger": "Paul traces call on devices",
     "name": "Retro Phone Trace Beeps",
     "category": "SFX",
@@ -3670,8 +3484,7 @@
     "volume": 55,
     "notes": "Comedy tech.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-020",
-    "paragraph_id": "PAR-01103"
+    "expected_background_asset_id": "AST-020"
   },
   {
     "index": 170,
@@ -3681,7 +3494,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 71,
-    "scene": "INT. BETH\u2019S OFFICE - NIGHT",
+    "scene": "INT. BETH'S OFFICE",
     "trigger": "He's calling from inside the camp!",
     "name": "Suspense Sting",
     "category": "Transition",
@@ -3692,62 +3505,17 @@
     "volume": 65,
     "notes": "Page coverage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-020",
-    "paragraph_id": "PAR-01103"
+    "expected_background_asset_id": "AST-020"
   },
   {
     "index": 171,
-    "id": "CUE-143",
-    "asset_id": "AST-025",
-    "asset_filename": "assets/generated/music_action_run_underscore.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
-    "page": 72,
-    "scene": "INT. BETH\u2019S OFFICE - NIGHT",
-    "trigger": "Music kicks in as Neil and Victor run off",
-    "name": "Action Run Underscore",
-    "category": "Music",
-    "priority": "Critical",
-    "duration": "Loop",
-    "loop": "Yes",
-    "fade": "In",
-    "volume": 80,
-    "notes": "Royalty-free hero run.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-023",
-    "paragraph_id": "PAR-01105"
-  },
-  {
-    "index": 172,
-    "id": "CUE-144",
-    "asset_id": "AST-070",
-    "asset_filename": "assets/sfx/running_footsteps.wav",
-    "playback_mode": "One Shot",
-    "suggested_volume": 85,
-    "page": 72,
-    "scene": "INT. BETH\u2019S OFFICE - NIGHT",
-    "trigger": "Victor and Neil running full speed",
-    "name": "Running Feet / Night Ambience",
-    "category": "SFX",
-    "priority": "High",
-    "duration": "Loop",
-    "loop": "Yes",
-    "fade": "Under",
-    "volume": 65,
-    "notes": "",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-023",
-    "paragraph_id": "PAR-01105"
-  },
-  {
-    "index": 173,
     "id": "CUE-140",
     "asset_id": "AST-061",
     "asset_filename": "assets/sfx/door.wav",
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 72,
-    "scene": "INT. INFIRMARY - SECONDS LATER - NIGHT",
+    "scene": "INT. INFIRMARY - NIGHT",
     "trigger": "Beth and Neil bust in, break stuff",
     "name": "Door Smash / Chaos SFX",
     "category": "SFX",
@@ -3758,11 +3526,10 @@
     "volume": 80,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-020",
-    "paragraph_id": "PAR-01113"
+    "expected_background_asset_id": "AST-020"
   },
   {
-    "index": 174,
+    "index": 172,
     "id": "CUE-141",
     "asset_id": "AST-023",
     "asset_filename": "assets/ambience/talent_show_audience.mp3",
@@ -3779,11 +3546,10 @@
     "fade": "In",
     "volume": 55,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-01121"
+    "cue_type": "BACKGROUND"
   },
   {
-    "index": 175,
+    "index": 173,
     "id": "CUE-142",
     "asset_id": "AST-086",
     "asset_filename": "assets/generated/silence_hold.mp3",
@@ -3801,30 +3567,69 @@
     "volume": 0,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-023",
-    "paragraph_id": "PAR-01122"
+    "expected_background_asset_id": "AST-023"
+  },
+  {
+    "index": 174,
+    "id": "CUE-143",
+    "asset_id": "AST-025",
+    "asset_filename": "assets/generated/music_action_run_underscore.mp3",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
+    "page": 72,
+    "scene": "EXT. REC HALL - NIGHT",
+    "trigger": "Music kicks in as Neil and Victor run off",
+    "name": "Action Run Underscore",
+    "category": "Ambience",
+    "priority": "Critical",
+    "duration": "Loop",
+    "loop": "Yes",
+    "fade": "In",
+    "volume": 80,
+    "notes": "Royalty-free hero run.",
+    "cue_type": "BACKGROUND"
+  },
+  {
+    "index": 175,
+    "id": "CUE-144",
+    "asset_id": "AST-070",
+    "asset_filename": "assets/sfx/running_footsteps.wav",
+    "playback_mode": "One Shot",
+    "suggested_volume": 85,
+    "page": 72,
+    "scene": "EXT. CAMP FIREWOOD SIGN - NIGHT",
+    "trigger": "Victor and Neil running full speed",
+    "name": "Running Feet / Night Ambience",
+    "category": "SFX",
+    "priority": "High",
+    "duration": "Loop",
+    "loop": "Yes",
+    "fade": "Under",
+    "volume": 65,
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-025"
   },
   {
     "index": 176,
-    "id": "CUE-228",
-    "asset_id": "AST-055",
-    "asset_filename": "assets/sfx/comedy_stinger.wav",
+    "id": "CUE-145",
+    "asset_id": "AST-059",
+    "asset_filename": "assets/sfx/scifi_device.wav",
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 73,
-    "scene": "EXT. REC HALL - NIGHT",
-    "trigger": "Victor finds Abby with Moose",
-    "name": "Comedy Shock Sting",
+    "scene": "EXT. PICNIC TABLE - NIGHT",
+    "trigger": "device sputters and pops",
+    "name": "Skylab Device Sputter SFX",
     "category": "SFX",
     "priority": "Medium",
-    "duration": "2s",
+    "duration": "4s",
     "loop": "No",
     "fade": "None",
     "volume": 60,
-    "notes": "Page coverage.",
+    "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-020",
-    "paragraph_id": "PAR-01125"
+    "expected_background_asset_id": "AST-025"
   },
   {
     "index": 177,
@@ -3844,30 +3649,28 @@
     "fade": "In",
     "volume": 85,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-01133"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 178,
-    "id": "CUE-145",
-    "asset_id": "AST-059",
-    "asset_filename": "assets/sfx/scifi_device.wav",
+    "id": "CUE-228",
+    "asset_id": "AST-055",
+    "asset_filename": "assets/sfx/comedy_stinger.wav",
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 73,
-    "scene": "EXT. REC HALL - NIGHT",
-    "trigger": "device sputters and pops",
-    "name": "Skylab Device Sputter SFX",
+    "scene": "EXT. REC HALL",
+    "trigger": "Victor finds Abby with Moose",
+    "name": "Comedy Shock Sting",
     "category": "SFX",
     "priority": "Medium",
-    "duration": "4s",
+    "duration": "2s",
     "loop": "No",
     "fade": "None",
     "volume": 60,
-    "notes": "",
+    "notes": "Page coverage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-023",
-    "paragraph_id": "PAR-01140"
+    "expected_background_asset_id": "AST-020"
   },
   {
     "index": 179,
@@ -3877,7 +3680,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 74,
-    "scene": "EXT. CAMP FIREWOOD SIGN - NIGHT",
+    "scene": "EXT. MOOSE RIVER - NIGHT",
     "trigger": "Victor saves campers (off-screen heroism)",
     "name": "Triumph Stinger SFX",
     "category": "SFX",
@@ -3888,8 +3691,7 @@
     "volume": 70,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-020",
-    "paragraph_id": "PAR-01142"
+    "expected_background_asset_id": "AST-020"
   },
   {
     "index": 180,
@@ -3909,8 +3711,7 @@
     "fade": "In",
     "volume": 40,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-01144"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 181,
@@ -3920,7 +3721,7 @@
     "playback_mode": "Silence",
     "suggested_volume": 0,
     "page": 74,
-    "scene": "EXT. MOOSE RIVER - NIGHT",
+    "scene": "EXT. PICNIC TABLE",
     "trigger": "Professor: Then all is lost",
     "name": "Dramatic Pause",
     "category": "Silence",
@@ -3931,18 +3732,37 @@
     "volume": 0,
     "notes": "Page coverage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01158"
+    "expected_background_asset_id": "AST-015"
   },
   {
     "index": 182,
+    "id": "CUE-149",
+    "asset_id": "AST-023",
+    "asset_filename": "assets/ambience/talent_show_audience.mp3",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
+    "page": 75,
+    "scene": "INT. REC HALL - NIGHT",
+    "trigger": "TALENT SHOW - Ben quiets everyone",
+    "name": "Talent Show Audience Settle",
+    "category": "Ambience",
+    "priority": "High",
+    "duration": "Loop",
+    "loop": "Yes",
+    "fade": "In",
+    "volume": 50,
+    "notes": "Pre-show hush.",
+    "cue_type": "BACKGROUND"
+  },
+  {
+    "index": 183,
     "id": "CUE-230",
     "asset_id": "AST-023",
     "asset_filename": "assets/ambience/talent_show_audience.mp3",
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 75,
-    "scene": "EXT. MOOSE RIVER - NIGHT",
+    "scene": "INT. REC HALL",
     "trigger": "Good evening Camp Firewood!",
     "name": "Talent Show Open Applause",
     "category": "SFX",
@@ -3953,76 +3773,10 @@
     "volume": 70,
     "notes": "Page coverage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-023",
-    "paragraph_id": "PAR-01166"
-  },
-  {
-    "index": 183,
-    "id": "CUE-149",
-    "asset_id": "AST-023",
-    "asset_filename": "assets/ambience/talent_show_audience.mp3",
-    "playback_mode": "Loop",
-    "suggested_volume": 30,
-    "page": 75,
-    "scene": "EXT. PICNIC TABLE - NIGHT",
-    "trigger": "TALENT SHOW - Ben quiets everyone",
-    "name": "Talent Show Audience Settle",
-    "category": "Ambience",
-    "priority": "High",
-    "duration": "Loop",
-    "loop": "Yes",
-    "fade": "In",
-    "volume": 50,
-    "notes": "Pre-show hush.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-01176"
+    "expected_background_asset_id": "AST-023"
   },
   {
     "index": 184,
-    "id": "CUE-153",
-    "asset_id": "AST-060",
-    "asset_filename": "assets/sfx/dice_roll.wav",
-    "playback_mode": "One Shot",
-    "suggested_volume": 85,
-    "page": 76,
-    "scene": "EXT. PICNIC TABLE - NIGHT",
-    "trigger": "Caped Boy rolls twenty sided die",
-    "name": "Dice Roll SFX",
-    "category": "SFX",
-    "priority": "Medium",
-    "duration": "1s",
-    "loop": "No",
-    "fade": "None",
-    "volume": 60,
-    "notes": "",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-023",
-    "paragraph_id": "PAR-01187"
-  },
-  {
-    "index": 185,
-    "id": "CUE-154",
-    "asset_id": "AST-042",
-    "asset_filename": "assets/generated/music_symphonic_hope_crescendo.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
-    "page": 76,
-    "scene": "EXT. PICNIC TABLE - NIGHT",
-    "trigger": "huge symphonic CRESCENDO",
-    "name": "Symphonic Hope Crescendo",
-    "category": "Music",
-    "priority": "High",
-    "duration": "8s",
-    "loop": "No",
-    "fade": "In/Out",
-    "volume": 75,
-    "notes": "Royalty-free orchestral.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-023",
-    "paragraph_id": "PAR-01188"
-  },
-  {
-    "index": 186,
     "id": "CUE-150",
     "asset_id": "AST-055",
     "asset_filename": "assets/sfx/comedy_stinger.wav",
@@ -4040,11 +3794,10 @@
     "volume": 55,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-023",
-    "paragraph_id": "PAR-01192"
+    "expected_background_asset_id": "AST-023"
   },
   {
-    "index": 187,
+    "index": 185,
     "id": "CUE-151",
     "asset_id": "AST-045",
     "asset_filename": "assets/sfx/applause_cheer.wav",
@@ -4062,11 +3815,10 @@
     "volume": 90,
     "notes": "Beatles-level chaos.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-023",
-    "paragraph_id": "PAR-01192"
+    "expected_background_asset_id": "AST-023"
   },
   {
-    "index": 188,
+    "index": 186,
     "id": "CUE-152",
     "asset_id": "AST-062",
     "asset_filename": "assets/sfx/dramatic_stinger.wav",
@@ -4084,40 +3836,58 @@
     "volume": 65,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-023",
-    "paragraph_id": "PAR-01192"
+    "expected_background_asset_id": "AST-023"
   },
   {
-    "index": 189,
-    "id": "CUE-231",
-    "asset_id": "AST-055",
-    "asset_filename": "assets/sfx/comedy_stinger.wav",
+    "index": 187,
+    "id": "CUE-153",
+    "asset_id": "AST-060",
+    "asset_filename": "assets/sfx/dice_roll.wav",
     "playback_mode": "One Shot",
     "suggested_volume": 85,
-    "page": 77,
-    "scene": "INT. REC HALL - NIGHT",
-    "trigger": "Shemper Stone Age routine",
-    "name": "Comedy Rimshot (Optional)",
-    "category": "Comedy",
-    "priority": "Optional",
+    "page": 76,
+    "scene": "EXT. PICNIC TABLE - NIGHT",
+    "trigger": "Caped Boy rolls twenty sided die",
+    "name": "Dice Roll SFX",
+    "category": "SFX",
+    "priority": "Medium",
     "duration": "1s",
     "loop": "No",
     "fade": "None",
-    "volume": 45,
-    "notes": "Page coverage.",
+    "volume": 60,
+    "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-023",
-    "paragraph_id": "PAR-01203"
+    "expected_background_asset_id": "AST-023"
   },
   {
-    "index": 190,
+    "index": 188,
+    "id": "CUE-154",
+    "asset_id": "AST-042",
+    "asset_filename": "assets/generated/music_symphonic_hope_crescendo.mp3",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
+    "page": 76,
+    "scene": "EXT. PICNIC TABLE - NIGHT",
+    "trigger": "huge symphonic CRESCENDO",
+    "name": "Symphonic Hope Crescendo",
+    "category": "Ambience",
+    "priority": "High",
+    "duration": "8s",
+    "loop": "No",
+    "fade": "In/Out",
+    "volume": 75,
+    "notes": "Royalty-free orchestral.",
+    "cue_type": "BACKGROUND"
+  },
+  {
+    "index": 189,
     "id": "CUE-155",
     "asset_id": "AST-086",
     "asset_filename": "assets/generated/silence_hold.mp3",
     "playback_mode": "Silence",
     "suggested_volume": 0,
     "page": 77,
-    "scene": "EXT. PATH TO PICNIC TABLE - NIGHT",
+    "scene": "INT. REC HALL - NIGHT",
     "trigger": "Roger balances broomstick",
     "name": "Awkward Talent Show Silence",
     "category": "Silence",
@@ -4128,39 +3898,38 @@
     "volume": 0,
     "notes": "Unimpressive act.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-023",
-    "paragraph_id": "PAR-01206"
+    "expected_background_asset_id": "AST-042"
+  },
+  {
+    "index": 190,
+    "id": "CUE-231",
+    "asset_id": "AST-055",
+    "asset_filename": "assets/sfx/comedy_stinger.wav",
+    "playback_mode": "One Shot",
+    "suggested_volume": 85,
+    "page": 77,
+    "scene": "INT. REC HALL",
+    "trigger": "Shemper Stone Age routine",
+    "name": "Comedy Rimshot (Optional)",
+    "category": "Comedy",
+    "priority": "Optional",
+    "duration": "1s",
+    "loop": "No",
+    "fade": "None",
+    "volume": 45,
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-042"
   },
   {
     "index": 191,
-    "id": "CUE-232",
-    "asset_id": "AST-015",
-    "asset_filename": "assets/ambience/night_exterior_camp.mp3",
-    "playback_mode": "Loop",
-    "suggested_volume": 30,
-    "page": 78,
-    "scene": "EXT. BEHIND THE REC HALL - NIGHT",
-    "trigger": "device setup behind rec hall",
-    "name": "Night Outdoor Work Ambience",
-    "category": "Ambience",
-    "priority": "Low",
-    "duration": "Loop",
-    "loop": "Yes",
-    "fade": "None",
-    "volume": 40,
-    "notes": "Page coverage.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-01219"
-  },
-  {
-    "index": 192,
     "id": "CUE-156",
     "asset_id": "AST-004",
     "asset_filename": "assets/ambience/camp_exterior_day.mp3",
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 78,
-    "scene": "EXT. BEHIND THE REC HALL - NIGHT",
+    "scene": "INT. REC HALL - NIGHT",
     "trigger": "They chat in Hebrew prayer",
     "name": "Quiet Prayer Murmur",
     "category": "Ambience",
@@ -4170,30 +3939,47 @@
     "fade": "None",
     "volume": 40,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-01220"
+    "cue_type": "BACKGROUND"
+  },
+  {
+    "index": 192,
+    "id": "CUE-232",
+    "asset_id": "AST-015",
+    "asset_filename": "assets/ambience/night_exterior_camp.mp3",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
+    "page": 78,
+    "scene": "EXT. BEHIND REC HALL",
+    "trigger": "device setup behind rec hall",
+    "name": "Night Outdoor Work Ambience",
+    "category": "Ambience",
+    "priority": "Low",
+    "duration": "Loop",
+    "loop": "Yes",
+    "fade": "None",
+    "volume": 40,
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 193,
     "id": "CUE-157",
     "asset_id": "AST-044",
     "asset_filename": "assets/generated/music_youve_got_a_friend_campers.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 79,
     "scene": "INT. REC HALL - NIGHT",
     "trigger": "Three girls sing You've Got a Friend",
     "name": "You've Got a Friend (Campers)",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "Critical",
     "duration": "Full",
     "loop": "No",
     "fade": "In/Out",
     "volume": 75,
     "notes": "Licensed. Bunk 7 dedication.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01224"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 194,
@@ -4203,7 +3989,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 79,
-    "scene": "EXT. BEHIND THE REC HALL - NIGHT",
+    "scene": "INT. REC HALL - NIGHT",
     "trigger": "Caped Boy rolls die - 18!",
     "name": "Dice Roll SFX",
     "category": "SFX",
@@ -4214,8 +4000,7 @@
     "volume": 55,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01227"
+    "expected_background_asset_id": "AST-044"
   },
   {
     "index": 195,
@@ -4236,8 +4021,7 @@
     "volume": 60,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01234"
+    "expected_background_asset_id": "AST-044"
   },
   {
     "index": 196,
@@ -4258,8 +4042,7 @@
     "volume": 80,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01237"
+    "expected_background_asset_id": "AST-044"
   },
   {
     "index": 197,
@@ -4280,8 +4063,7 @@
     "volume": 90,
     "notes": "Comedy centerpiece.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01238"
+    "expected_background_asset_id": "AST-044"
   },
   {
     "index": 198,
@@ -4302,8 +4084,7 @@
     "volume": 80,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01238"
+    "expected_background_asset_id": "AST-044"
   },
   {
     "index": 199,
@@ -4324,33 +4105,10 @@
     "volume": 55,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01239"
+    "expected_background_asset_id": "AST-044"
   },
   {
     "index": 200,
-    "id": "CUE-233",
-    "asset_id": "AST-086",
-    "asset_filename": "assets/generated/silence_hold.mp3",
-    "playback_mode": "Silence",
-    "suggested_volume": 0,
-    "page": 80,
-    "scene": "INT. REC HALL - NIGHT",
-    "trigger": "Gail defiant speech to Ron",
-    "name": "Dramatic Underscore Dip",
-    "category": "Silence",
-    "priority": "Medium",
-    "duration": "2s",
-    "loop": "No",
-    "fade": "Out",
-    "volume": 0,
-    "notes": "Page coverage.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01239"
-  },
-  {
-    "index": 201,
     "id": "CUE-164",
     "asset_id": "AST-045",
     "asset_filename": "assets/sfx/applause_cheer.wav",
@@ -4368,30 +4126,48 @@
     "volume": 65,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01245"
+    "expected_background_asset_id": "AST-044"
+  },
+  {
+    "index": 201,
+    "id": "CUE-233",
+    "asset_id": "AST-086",
+    "asset_filename": "assets/generated/silence_hold.mp3",
+    "playback_mode": "Silence",
+    "suggested_volume": 0,
+    "page": 80,
+    "scene": "INT. REC HALL",
+    "trigger": "Gail defiant speech to Ron",
+    "name": "Dramatic Underscore Dip",
+    "category": "Silence",
+    "priority": "Medium",
+    "duration": "2s",
+    "loop": "No",
+    "fade": "Out",
+    "volume": 0,
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-044"
   },
   {
     "index": 202,
     "id": "CUE-165",
     "asset_id": "AST-033",
     "asset_filename": "assets/generated/music_godspell_day_by_day.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 81,
     "scene": "INT. REC HALL - NIGHT",
     "trigger": "Day By Day from Godspell",
     "name": "Day By Day (Godspell)",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "Critical",
     "duration": "Full number",
     "loop": "No",
     "fade": "In/Out",
     "volume": 85,
     "notes": "Licensed. Broadway-quality read.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01255"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 203,
@@ -4412,8 +4188,7 @@
     "volume": 55,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01259"
+    "expected_background_asset_id": "AST-033"
   },
   {
     "index": 204,
@@ -4434,8 +4209,7 @@
     "volume": 80,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01260"
+    "expected_background_asset_id": "AST-033"
   },
   {
     "index": 205,
@@ -4456,8 +4230,7 @@
     "volume": 60,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01262"
+    "expected_background_asset_id": "AST-033"
   },
   {
     "index": 206,
@@ -4478,8 +4251,7 @@
     "volume": 70,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01268"
+    "expected_background_asset_id": "AST-033"
   },
   {
     "index": 207,
@@ -4500,8 +4272,7 @@
     "volume": 60,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01271"
+    "expected_background_asset_id": "AST-033"
   },
   {
     "index": 208,
@@ -4511,7 +4282,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 82,
-    "scene": "EXT. BEHIND THE REC HALL - NIGHT",
+    "scene": "EXT. BEHIND REC HALL",
     "trigger": "Beth: Hurry, see it coming",
     "name": "Urgent Clock Tick (Optional)",
     "category": "SFX",
@@ -4522,8 +4293,7 @@
     "volume": 45,
     "notes": "Page coverage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01283"
+    "expected_background_asset_id": "AST-033"
   },
   {
     "index": 209,
@@ -4544,8 +4314,7 @@
     "volume": 0,
     "notes": "Before Steve's act.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01288"
+    "expected_background_asset_id": "AST-033"
   },
   {
     "index": 210,
@@ -4566,8 +4335,7 @@
     "volume": 40,
     "notes": "Builds to wind.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01293"
+    "expected_background_asset_id": "AST-033"
   },
   {
     "index": 211,
@@ -4577,7 +4345,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 83,
-    "scene": "EXT. REC HALL - NIGHT",
+    "scene": "EXT. REC HALL",
     "trigger": "Katie chases Coop - COOP!",
     "name": "Night Exterior Running",
     "category": "SFX",
@@ -4588,8 +4356,7 @@
     "volume": 55,
     "notes": "Page coverage.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01299"
+    "expected_background_asset_id": "AST-033"
   },
   {
     "index": 212,
@@ -4599,7 +4366,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 84,
-    "scene": "INT. REC HALL - NIGHT",
+    "scene": "EXT. REC HALL - NIGHT",
     "trigger": "building shakes at foundations",
     "name": "Rumbling / Building Shake",
     "category": "SFX",
@@ -4610,8 +4377,7 @@
     "volume": 70,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01308"
+    "expected_background_asset_id": "AST-033"
   },
   {
     "index": 213,
@@ -4632,8 +4398,7 @@
     "volume": 85,
     "notes": "Steve's power moment.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01308"
+    "expected_background_asset_id": "AST-033"
   },
   {
     "index": 214,
@@ -4654,30 +4419,27 @@
     "volume": 75,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01309"
+    "expected_background_asset_id": "AST-033"
   },
   {
     "index": 215,
     "id": "CUE-236",
     "asset_id": "AST-029",
     "asset_filename": "assets/generated/music_emotional_swell.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 84,
-    "scene": "EXT. REC HALL - NIGHT",
+    "scene": "EXT. REC HALL",
     "trigger": "Katie: I love you Gerald Cooperberg!",
     "name": "Emotional Music Swell",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "High",
     "duration": "6s",
     "loop": "No",
     "fade": "In",
     "volume": 65,
     "notes": "Page coverage.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01315"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 216,
@@ -4687,7 +4449,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 85,
-    "scene": "EXT. BEHIND THE REC HALL - NIGHT",
+    "scene": "EXT. BEHIND REC HALL - NIGHT",
     "trigger": "machine vibrates - It's working!",
     "name": "Device Power-Up Hum",
     "category": "SFX",
@@ -4698,8 +4460,7 @@
     "volume": 55,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01320"
+    "expected_background_asset_id": "AST-029"
   },
   {
     "index": 217,
@@ -4709,7 +4470,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 85,
-    "scene": "EXT. BEHIND THE REC HALL - NIGHT",
+    "scene": "EXT. BEHIND REC HALL - NIGHT",
     "trigger": "HUGE GUST OF WIND / Skylab redirected",
     "name": "Massive Wind Gust",
     "category": "SFX",
@@ -4720,8 +4481,7 @@
     "volume": 90,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01322"
+    "expected_background_asset_id": "AST-029"
   },
   {
     "index": 218,
@@ -4731,7 +4491,7 @@
     "playback_mode": "One Shot",
     "suggested_volume": 85,
     "page": 85,
-    "scene": "EXT. BEHIND THE REC HALL - NIGHT",
+    "scene": "EXT. BEHIND REC HALL - NIGHT",
     "trigger": "CRASH! Skylab falls safely away",
     "name": "Skylab Crash Impact",
     "category": "SFX",
@@ -4742,8 +4502,7 @@
     "volume": 95,
     "notes": "Flaming metal debris.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01322"
+    "expected_background_asset_id": "AST-029"
   },
   {
     "index": 219,
@@ -4764,8 +4523,7 @@
     "volume": 0,
     "notes": "Hold before slow clap.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01329"
+    "expected_background_asset_id": "AST-029"
   },
   {
     "index": 220,
@@ -4786,33 +4544,51 @@
     "volume": 85,
     "notes": "Beatles concert level.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01330"
+    "expected_background_asset_id": "AST-029"
   },
   {
     "index": 221,
     "id": "CUE-181",
-    "asset_id": "AST-039",
-    "asset_filename": "assets/generated/music_romantic_kiss_stinger.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "asset_id": "AST-004",
+    "asset_filename": "assets/ambience/camp_exterior_day.mp3",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 85,
     "scene": "EXT. REC HALL - NIGHT",
     "trigger": "Katie and Coop KISS",
     "name": "Romantic Kiss Stinger",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "Medium",
     "duration": "4s",
     "loop": "No",
     "fade": "In/Out",
     "volume": 60,
     "notes": "Optional swoon.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01332"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 222,
+    "id": "CUE-182",
+    "asset_id": "AST-056",
+    "asset_filename": "assets/sfx/crash_impact_debris.wav",
+    "playback_mode": "One Shot",
+    "suggested_volume": 85,
+    "page": 85,
+    "scene": "EXT. REC HALL - NIGHT",
+    "trigger": "door flies off hinges at kiss",
+    "name": "Door Fly Off Hinges SFX",
+    "category": "SFX",
+    "priority": "High",
+    "duration": "2s",
+    "loop": "No",
+    "fade": "None",
+    "volume": 80,
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
+  },
+  {
+    "index": 223,
     "id": "CUE-183",
     "asset_id": "AST-075",
     "asset_filename": "assets/sfx/scene_transition_whoosh.wav",
@@ -4830,55 +4606,10 @@
     "volume": 50,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01333"
-  },
-  {
-    "index": 223,
-    "id": "CUE-182",
-    "asset_id": "AST-056",
-    "asset_filename": "assets/sfx/crash_impact_debris.wav",
-    "playback_mode": "One Shot",
-    "suggested_volume": 85,
-    "page": 85,
-    "scene": "EXT. PARKING AREA - MORNING",
-    "trigger": "door flies off hinges at kiss",
-    "name": "Door Fly Off Hinges SFX",
-    "category": "SFX",
-    "priority": "High",
-    "duration": "2s",
-    "loop": "No",
-    "fade": "None",
-    "volume": 80,
-    "notes": "",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-015",
-    "paragraph_id": "PAR-01336"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 224,
-    "id": "CUE-237",
-    "asset_id": "AST-043",
-    "asset_filename": "assets/generated/music_warm_morning_sting.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
-    "page": 86,
-    "scene": "EXT. PARKING AREA - MORNING",
-    "trigger": "Beth pregnant reveal hug",
-    "name": "Warm Morning Sting",
-    "category": "Music",
-    "priority": "Medium",
-    "duration": "5s",
-    "loop": "No",
-    "fade": "In/Out",
-    "volume": 50,
-    "notes": "Page coverage.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-01343"
-  },
-  {
-    "index": 225,
     "id": "CUE-184",
     "asset_id": "AST-004",
     "asset_filename": "assets/ambience/camp_exterior_day.mp3",
@@ -4895,11 +4626,10 @@
     "fade": "In",
     "volume": 55,
     "notes": "Buses, families.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-01349"
+    "cue_type": "BACKGROUND"
   },
   {
-    "index": 226,
+    "index": 225,
     "id": "CUE-185",
     "asset_id": "AST-047",
     "asset_filename": "assets/sfx/audience_laughter.wav",
@@ -4917,30 +4647,47 @@
     "volume": 60,
     "notes": "Shrimp cocktail joke.",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-01349"
+    "expected_background_asset_id": "AST-004"
+  },
+  {
+    "index": 226,
+    "id": "CUE-237",
+    "asset_id": "AST-043",
+    "asset_filename": "assets/generated/music_warm_morning_sting.mp3",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
+    "page": 86,
+    "scene": "EXT. PARKING AREA",
+    "trigger": "Beth pregnant reveal hug",
+    "name": "Warm Morning Sting",
+    "category": "Ambience",
+    "priority": "Medium",
+    "duration": "5s",
+    "loop": "No",
+    "fade": "In/Out",
+    "volume": 50,
+    "notes": "Page coverage.",
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 227,
     "id": "CUE-186",
     "asset_id": "AST-031",
     "asset_filename": "assets/generated/music_gentle_ending_bittersweet.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 87,
     "scene": "EXT. PARKING AREA - MORNING",
     "trigger": "Gene mouths thank you to Can of Vegetables",
     "name": "Sentimental Underscore (Optional)",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "Optional",
     "duration": "8s",
     "loop": "No",
     "fade": "In/Out",
     "volume": 45,
     "notes": "",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-01355"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 228,
@@ -4960,33 +4707,10 @@
     "fade": "None",
     "volume": 40,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-01358"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 229,
-    "id": "CUE-238",
-    "asset_id": "AST-055",
-    "asset_filename": "assets/sfx/comedy_stinger.wav",
-    "playback_mode": "One Shot",
-    "suggested_volume": 85,
-    "page": 88,
-    "scene": "EXT. REC HALL - MORNING",
-    "trigger": "Mork Guy: Nanoo-nanoo",
-    "name": "Comedy Alien Sting (Optional)",
-    "category": "Comedy",
-    "priority": "Optional",
-    "duration": "2s",
-    "loop": "No",
-    "fade": "None",
-    "volume": 40,
-    "notes": "Page coverage.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-01370"
-  },
-  {
-    "index": 230,
     "id": "CUE-188",
     "asset_id": "AST-004",
     "asset_filename": "assets/ambience/camp_exterior_day.mp3",
@@ -5003,8 +4727,28 @@
     "fade": "Under",
     "volume": 40,
     "notes": "",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-01373"
+    "cue_type": "BACKGROUND"
+  },
+  {
+    "index": 230,
+    "id": "CUE-238",
+    "asset_id": "AST-055",
+    "asset_filename": "assets/sfx/comedy_stinger.wav",
+    "playback_mode": "One Shot",
+    "suggested_volume": 85,
+    "page": 88,
+    "scene": "EXT. BUNK AREA",
+    "trigger": "Mork Guy: Nanoo-nanoo",
+    "name": "Comedy Alien Sting (Optional)",
+    "category": "Comedy",
+    "priority": "Optional",
+    "duration": "2s",
+    "loop": "No",
+    "fade": "None",
+    "volume": 40,
+    "notes": "Page coverage.",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 231,
@@ -5025,8 +4769,7 @@
     "volume": 55,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-01379"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 232,
@@ -5047,30 +4790,27 @@
     "volume": 0,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-01382"
+    "expected_background_asset_id": "AST-004"
   },
   {
     "index": 233,
     "id": "CUE-191",
     "asset_id": "AST-031",
     "asset_filename": "assets/generated/music_gentle_ending_bittersweet.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 89,
     "scene": "EXT. BUNK AREA - MORNING",
     "trigger": "Beth puts arm around Coop, walk off",
     "name": "Gentle Ending Underscore",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "High",
     "duration": "20s",
     "loop": "No",
     "fade": "In/Out",
     "volume": 55,
     "notes": "Royalty-free bittersweet.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-01385"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 234,
@@ -5091,40 +4831,17 @@
     "volume": 0,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-01386"
+    "expected_background_asset_id": "AST-031"
   },
   {
     "index": 235,
-    "id": "CUE-194",
-    "asset_id": "AST-076",
-    "asset_filename": "assets/sfx/vcr_projector_loop.wav",
-    "playback_mode": "Loop",
-    "suggested_volume": 30,
-    "page": 90,
-    "scene": "TITLE: \u201cTEN YEARS LATER - 9:30 AM\u201d",
-    "trigger": "Gary fiddling with giant VCR projector",
-    "name": "VCR Projector Whir",
-    "category": "SFX",
-    "priority": "Medium",
-    "duration": "Loop",
-    "loop": "Yes",
-    "fade": "In",
-    "volume": 50,
-    "notes": "",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-01393"
-  },
-  {
-    "index": 236,
     "id": "CUE-193",
     "asset_id": "AST-032",
     "asset_filename": "assets/generated/music_epilogue_title_sting.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 90,
-    "scene": "TITLE: \u201cTEN YEARS LATER - 9:30 AM\u201d",
+    "scene": "INT. BETH'S OFFICE - NIGHT",
     "trigger": "Ten Years Later - 9:30 AM",
     "name": "Epilogue Title Sting",
     "category": "Transition",
@@ -5135,8 +4852,28 @@
     "volume": 60,
     "notes": "",
     "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-004",
-    "paragraph_id": "PAR-01394"
+    "expected_background_asset_id": "AST-031"
+  },
+  {
+    "index": 236,
+    "id": "CUE-194",
+    "asset_id": "AST-076",
+    "asset_filename": "assets/sfx/vcr_projector_loop.wav",
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
+    "page": 90,
+    "scene": "INT. BETH'S OFFICE - NIGHT",
+    "trigger": "Gary fiddling with giant VCR projector",
+    "name": "VCR Projector Whir",
+    "category": "SFX",
+    "priority": "Medium",
+    "duration": "Loop",
+    "loop": "Yes",
+    "fade": "In",
+    "volume": 50,
+    "notes": "",
+    "cue_type": "FOREGROUND",
+    "expected_background_asset_id": "AST-031"
   },
   {
     "index": 237,
@@ -5146,7 +4883,7 @@
     "playback_mode": "Loop",
     "suggested_volume": 30,
     "page": 90,
-    "scene": "TITLE: \u201cTEN YEARS LATER - 9:30 AM\u201d",
+    "scene": "INT. BETH'S OFFICE - NIGHT",
     "trigger": "JJ: Sorry I'm late",
     "name": "Epilogue Room Tone / Laughter",
     "category": "Ambience",
@@ -5156,29 +4893,26 @@
     "fade": "None",
     "volume": 45,
     "notes": "End of show.",
-    "cue_type": "BACKGROUND",
-    "paragraph_id": "PAR-01394"
+    "cue_type": "BACKGROUND"
   },
   {
     "index": 238,
     "id": "CUE-196",
     "asset_id": "AST-030",
     "asset_filename": "assets/generated/music_end_credits.mp3",
-    "playback_mode": "Music",
-    "suggested_volume": 70,
+    "playback_mode": "Loop",
+    "suggested_volume": 30,
     "page": 90,
-    "scene": "TITLE: \u201cTEN YEARS LATER - 9:30 AM\u201d",
+    "scene": "END",
     "trigger": "CREDITS ROLL",
     "name": "End Credits Music (Optional)",
-    "category": "Music",
+    "category": "Ambience",
     "priority": "Optional",
     "duration": "60s",
     "loop": "No",
     "fade": "Out",
     "volume": 50,
     "notes": "Reprise Jane or original.",
-    "cue_type": "FOREGROUND",
-    "expected_background_asset_id": "AST-008",
-    "paragraph_id": "PAR-01396"
+    "cue_type": "BACKGROUND"
   }
 ]

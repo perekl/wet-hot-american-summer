@@ -48,8 +48,6 @@ def _marker_kind(cue: dict) -> str:
         if cue.get("category") == "Silence":
             return "BG_STOP"
         return "BG"
-    if cue.get("category") == "Music" or cue.get("playback_mode") == "Music":
-        return "MUSIC"
     return "FX"
 
 

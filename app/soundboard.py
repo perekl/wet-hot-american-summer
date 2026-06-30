@@ -24,7 +24,6 @@ from script_editor import (  # noqa: E402
     BG_COLOR,
     BG_STOP_COLOR,
     FX_COLOR,
-    MUSIC_COLOR,
     ScriptEditor,
     _marker_color,
     _marker_label,
@@ -51,7 +50,6 @@ def resolve_volume_from_cue(cue: dict) -> int:
 
 
 BROWSER_GROUPS = (
-    ("MUSIC", MUSIC_COLOR, "MUSIC"),
     ("FX", FX_COLOR, "SOUND EFFECTS"),
     ("BG", BG_COLOR, "BACKGROUND"),
     ("BG_STOP", BG_STOP_COLOR, "BACKGROUND STOP"),

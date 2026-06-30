@@ -13,21 +13,21 @@ CUES = [
     # PAGE 1
     cue("CUE-001", 1, "TITLE CARD", "Screenplay opens", "Pre-show Silence / House Lights", "Silence", "Critical", "5s", "No", "In", "0", "Hold black before titles."),
     # PAGE 2
-    cue("CUE-002", 2, "OPENING TITLES", '"Jane" by Jefferson Starship begins with opening TITLES over black', "Jane (Jefferson Starship) - Opening Titles", "Music", "Critical", "Full song excerpt", "No", "In", "85", "Licensed. Fade under first scene."),
+    cue("CUE-002", 2, "OPENING TITLES", '"Jane" by Jefferson Starship begins with opening TITLES over black', "Jane (Jefferson Starship) - Opening Titles", "Ambience", "Critical", "Full song excerpt", "Yes", "In", "85", "Licensed song bed. Fade under first scene."),
     cue("CUE-003", 2, "EXT. CAMPFIRE SITE - NIGHT", "CUT TO: EXT. CAMPFIRE SITE - NIGHT", "Scene Transition Stinger", "Transition", "High", "2s", "No", "None", "70", "Cut from black to campfire."),
     cue("CUE-004", 2, "EXT. CAMPFIRE SITE - NIGHT", "Music KICKS IN.", "Campfire Night Ambience", "Ambience", "High", "Loop", "Yes", "In", "60", "Crackling fire, distant crickets, counselors murmuring."),
     cue("CUE-005", 2, "EXT. CAMPFIRE SITE - NIGHT", "counselors dance and play guitar", "Acoustic Guitar Strumming (Diegetic)", "Ambience", "Medium", "Loop", "Yes", "In", "45", "Under Jane or post-title music."),
     cue("CUE-006", 2, "EXT. CAMPFIRE SITE - NIGHT", "TITLE: AUGUST 18, 1981", "Title Card Whoosh (Optional)", "Transition", "Optional", "1s", "No", "None", "55", "Comedy enhancement for date stamp."),
-    cue("CUE-007", 2, "EXT. CAMPFIRE SITE - NIGHT", "MUSIC / TITLES CONTINUE", "Jane / Title Music Continue", "Music", "Critical", "Loop", "Yes", "None", "80", "Maintain through dawn montage."),
+    cue("CUE-007", 2, "EXT. CAMPFIRE SITE - NIGHT", "MUSIC / TITLES CONTINUE", "Jane / Title Music Continue", "Ambience", "Critical", "Loop", "Yes", "None", "80", "Maintain through dawn montage."),
     cue("CUE-008", 2, "EXT. VARIOUS - DAWN", "The sun rises on a serene lake", "Dawn Lake Ambience", "Ambience", "High", "Loop", "Yes", "Crossfade", "55", "Birds, gentle water, rural New England morning."),
     cue("CUE-009", 2, "EXT. VARIOUS - DAWN", "GROUNDSKEEPER peels and eats a banana", "Banana Peel / Eating SFX", "SFX", "High", "3s", "No", "None", "70", "Comedy sound dissolves into next scene."),
     cue("CUE-010", 2, "INT. KATIE'S BUNK - DAWN", "banana-like sound of MAKING OUT", "Smooching / Making Out SFX", "SFX", "High", "Loop", "Yes", "In", "50", "Exaggerated comedy smooch layer."),
     cue("CUE-011", 2, "INT. KATIE'S BUNK - DAWN", "BUNK BOY emerges from under blanket", "Bunk Rustle / Blanket Movement", "SFX", "Medium", "2s", "No", "None", "55", ""),
     cue("CUE-012", 2, "INT. KATIE'S BUNK - DAWN", "They flip up their goods and DASH out", "Running Footsteps - Bunk Exit", "SFX", "Medium", "4s", "No", "Out", "65", ""),
-    cue("CUE-013", 2, "EXT. KATIE'S BUNK - DAWN", "Music and credits continue.", "Title Music Continue", "Music", "High", "Loop", "Yes", "None", "75", ""),
+    cue("CUE-013", 2, "EXT. KATIE'S BUNK - DAWN", "Music and credits continue.", "Title Music Continue", "Ambience", "High", "Loop", "Yes", "None", "75", ""),
     # PAGE 3
     cue("CUE-014", 3, "EXT. MAIN FIELD - DAWN", "Hundreds of sweat suited campers scurry about", "Camp Morning Bustle Ambience", "Ambience", "High", "Loop", "Yes", "In", "60", "Footsteps, whispers, hurried movement."),
-    cue("CUE-015", 3, "INT. COOP'S BUNK - DAWN", 'CAMPERS singing "Standing in the rain"', "Campers Acapella Rock Snippet", "Music", "Medium", "15s", "No", "In", "50", "Diegetic camper singing, not full track."),
+    cue("CUE-015", 3, "INT. COOP'S BUNK - DAWN", 'CAMPERS singing "Standing in the rain"', "Campers Acapella Rock Snippet", "Ambience", "Medium", "15s", "No", "In", "50", "Diegetic camper singing, not full track."),
     cue("CUE-016", 3, "INT. COOP'S BUNK - DAWN", "campers SCREAM, jump on top of Coop", "Kids Scream / Pile-On SFX", "SFX", "High", "5s", "No", "None", "75", "Badminton rackets and whiffle bats."),
     cue("CUE-017", 3, "INT. COOP'S BUNK - DAWN", "banging their feet and air-guitaring", "Racket / Bat Air-Guitar Bangs", "SFX", "Medium", "4s", "No", "None", "60", ""),
     # PAGE 4
@@ -52,7 +52,7 @@ CUES = [
     cue("CUE-031", 12, "INT. MESS HALL - MORNING", "Gene drops fried eggs platter with thud", "Metal Tray Thud SFX", "SFX", "Medium", "1s", "No", "None", "70", ""),
     cue("CUE-032", 13, "INT. MESS HALL (KITCHEN) - MORNING", "Gene and Gary argue", "Kitchen Backroom Ambience", "Ambience", "Low", "Loop", "Yes", "None", "45", "Pots, distant dining noise."),
     # PAGE 14-15
-    cue("CUE-033", 14, "INT. MESS HALL - MORNING", "musical number from Godspell for talent show", "Godspell Announcement Sting (Ref)", "Music", "Low", "5s", "No", "In", "40", "Tease only; full cue at talent show."),
+    cue("CUE-033", 14, "INT. MESS HALL - MORNING", "musical number from Godspell for talent show", "Godspell Announcement Sting (Ref)", "Ambience", "Low", "5s", "No", "In", "40", "Tease only; full cue at talent show."),
     cue("CUE-034", 15, "EXT. MESS HALL - MORNING", "Andy yells Hey JJ - save me a waffle", "Mess Hall Door / Exterior Ambience", "Ambience", "Low", "Loop", "Yes", "None", "40", ""),
   cue("CUE-035", 15, "EXT. MESS HALL / PARKING LOT - DAY", "Everyone leaves the mess hall", "Camp Exterior Day Ambience", "Ambience", "Medium", "Loop", "Yes", "Crossfade", "50", ""),
     # PAGE 16
@@ -91,7 +91,7 @@ CUES = [
     cue("CUE-060", 31, "EXT. RURAL HIGHWAY - DAY", "Felicia is THROWN out of the van", "Body Tumble / Road Roll SFX", "SFX", "High", "3s", "No", "None", "75", "Comedy beat."),
     # PAGE 32-33
     cue("CUE-061", 32, "EXT. PARKING AREA - DAY", "Beth drives pickup truck", "Truck Engine / Gravel SFX", "SFX", "Medium", "Loop", "Yes", "In", "55", ""),
-    cue("CUE-062", 33, "EXT. WATERVILLE - VARIOUS - DAY", "TRIP TO TOWN MONTAGE: Love is Alright Tonight plays", "Love Is Alright Tonight (Rick Springfield)", "Music", "Critical", "Montage length", "No", "In/Out", "85", "Licensed. Town trip montage."),
+    cue("CUE-062", 33, "EXT. WATERVILLE - VARIOUS - DAY", "TRIP TO TOWN MONTAGE: Love is Alright Tonight plays", "Love Is Alright Tonight (Rick Springfield)", "Ambience", "Critical", "Montage length", "No", "In/Out", "85", "Licensed. Town trip montage."),
     cue("CUE-063", 33, "EXT. WATERVILLE - VARIOUS - DAY", "library, ice cream, McDonald's", "Small Town Street Ambience", "Ambience", "Medium", "Loop", "Yes", "Under", "45", "Under montage music."),
     # PAGE 34
     cue("CUE-064", 34, "EXT. WATERVILLE - VARIOUS - DAY", "others cheer excitedly - beer", "Crowd Cheer SFX", "SFX", "Medium", "2s", "No", "None", "60", ""),
@@ -106,17 +106,17 @@ CUES = [
     # PAGE 38-39
     cue("CUE-071", 38, "INT. ARTS AND CRAFTS BUNK - DAY", "Gail Bursts into tears again", "Soft Crying Ambience", "Ambience", "Low", "Loop", "Yes", "In", "35", ""),
     cue("CUE-072", 39, "EXT. MOOSE RIVER CAMPSITE - DAY", "Victor screams - get out of van", "Victor Yelling / Van Doors SFX", "SFX", "High", "5s", "No", "None", "75", ""),
-    cue("CUE-073", 39, "EXT. COUNTRY ROAD - DAY", "sings Danny's Song by Loggins & Messina", "Danny's Song (Loggins & Messina)", "Music", "Critical", "Verse+", "No", "In", "80", "Licensed. Victor driving."),
+    cue("CUE-073", 39, "EXT. COUNTRY ROAD - DAY", "sings Danny's Song by Loggins & Messina", "Danny's Song (Loggins & Messina)", "Ambience", "Critical", "Verse+", "No", "In", "80", "Licensed. Victor driving."),
     cue("CUE-074", 39, "EXT. COUNTRY ROAD - DAY", "van CRASHES into a tree", "Van Crash Impact SFX", "SFX", "Critical", "4s", "No", "None", "90", "Hard cut music."),
     # PAGE 40
-    cue("CUE-075", 40, "INT. ABBY'S BUNK - DAY", "Danny's Song hums from tape player", "Danny's Song (Tape Player Underscore)", "Music", "High", "Loop", "Yes", "In", "50", "Licensed, lo-fi bedroom."),
+    cue("CUE-075", 40, "INT. ABBY'S BUNK - DAY", "Danny's Song hums from tape player", "Danny's Song (Tape Player Underscore)", "Ambience", "High", "Loop", "Yes", "In", "50", "Licensed, lo-fi bedroom."),
     cue("CUE-076", 40, "EXT. COUNTRY ROAD - DAY", "Victor walks barren road", "Lonely Road Wind Ambience", "Ambience", "Medium", "Loop", "Yes", "In", "45", ""),
     cue("CUE-077", 40, "INT. ABBY'S BUNK - DAY", "Abby and Gary making out", "Makeout Rustle (Low)", "SFX", "Low", "Loop", "Yes", "None", "30", ""),
     # PAGE 41-42
     cue("CUE-078", 41, "EXT. MOOSE RIVER - DAY", "campers in raft on river", "River / Raft Ambience", "Ambience", "High", "Loop", "Yes", "In", "55", "Gentle current."),
     cue("CUE-079", 41, "EXT. MOOSE RIVERBANK - DAY", "Neil jumps onto motorcycle and skids away", "Motorcycle Start / Skid SFX", "SFX", "High", "4s", "No", "None", "75", ""),
     cue("CUE-080", 42, "EXT. SMALL RURAL HIGHWAY - DAY", "Neil's motorcycle approaching", "Motorcycle Approach Loop", "SFX", "High", "Loop", "Yes", "In", "65", ""),
-    cue("CUE-081", 42, "EXT. SMALL RURAL HIGHWAY - DAY", "RUNNER VS. MOTORCYCLE CHASE", "Chase Sequence Underscore", "Music", "High", "Loop", "Yes", "In", "70", "Royalty-free action/comedy."),
+    cue("CUE-081", 42, "EXT. SMALL RURAL HIGHWAY - DAY", "RUNNER VS. MOTORCYCLE CHASE", "Chase Sequence Underscore", "Ambience", "High", "Loop", "Yes", "In", "70", "Royalty-free action/comedy."),
     cue("CUE-082", 42, "EXT. SMALL RURAL HIGHWAY - DAY", "Neil screeches to halt at hay bale", "Motorcycle Screech / Stop SFX", "SFX", "High", "2s", "No", "None", "80", ""),
     # PAGE 43-44
     cue("CUE-083", 43, "EXT. SWIMMING HOLE - DAY", "counselors skinny-dipping sneak", "Woods / Swimming Hole Ambience", "Ambience", "Medium", "Loop", "Yes", "In", "45", ""),
@@ -126,9 +126,9 @@ CUES = [
     cue("CUE-087", 45, "EXT. BASEBALL FIELD - DAY", "huge bus drives in - CAMP TIGER CLAW", "Bus Arrival / Diesel SFX", "SFX", "High", "6s", "No", "None", "70", ""),
     cue("CUE-088", 45, "EXT. BASEBALL FIELD - DAY", "coach gets back on bus and drives away", "Bus Departure SFX", "SFX", "Medium", "5s", "No", "Out", "60", ""),
     # PAGE 46-47
-    cue("CUE-089", 46, "EXT. FOREST LAKE - DAY", "Susie playing wooden flute", "Ceremony Flute Music", "Music", "High", "Loop", "Yes", "In", "60", "Original or royalty-free flute."),
+    cue("CUE-089", 46, "EXT. FOREST LAKE - DAY", "Susie playing wooden flute", "Ceremony Flute Music", "Ambience", "High", "Loop", "Yes", "In", "60", "Original or royalty-free flute."),
     cue("CUE-090", 47, "EXT. FOREST LAKE - DAY", "Ben and McKinley wedding ceremony", "Wedding Ceremony Ambience", "Ambience", "Medium", "Loop", "Yes", "Under", "45", "Under flute."),
-    cue("CUE-091", 47, "EXT. FOREST LAKE - DAY", "flute music continues as Ben and McKinley kiss", "Flute Music Continue", "Music", "Medium", "Loop", "Yes", "None", "55", ""),
+    cue("CUE-091", 47, "EXT. FOREST LAKE - DAY", "flute music continues as Ben and McKinley kiss", "Flute Music Continue", "Ambience", "Medium", "Loop", "Yes", "None", "55", ""),
     cue("CUE-092", 47, "EXT. BUNK AREA - DAY", "Moose belts CAPTURE THE FLAAAAAAG!", "Capture The Flag Call (Vocal)", "SFX", "High", "3s", "No", "None", "80", "Live read or recorded shout."),
     cue("CUE-093", 47, "EXT. BUNK AREA - DAY", "Someone blows whistle, game kicks off", "Whistle Blast + Game Start", "SFX", "Critical", "2s", "No", "None", "85", ""),
     cue("CUE-094", 47, "EXT. BUNK AREA - DAY", "staff chase and tagging", "Capture The Flag Game Ambience", "Ambience", "High", "Loop", "Yes", "In", "60", "Running, yelling."),
@@ -137,7 +137,7 @@ CUES = [
     cue("CUE-096", 49, "EXT. CAPTURE THE FLAG SIDELINES - DAY", "smells like the ribs are ready", "BBQ / Ribs Ready Ambience", "Ambience", "Medium", "Loop", "Yes", "None", "50", "Sizzling, crowd."),
     cue("CUE-097", 50, "EXT. SCIENCE CLEARING - DAY", "science group emotional huddle", "Emotional Group Ambience", "Ambience", "Low", "Loop", "Yes", "None", "40", ""),
     cue("CUE-098", 51, "EXT. BARBECUE PIT - DAY", "Lindsay face SLATHERED in barbecue sauce", "BBQ Pit Crowd Ambience", "Ambience", "Medium", "Loop", "Yes", "None", "50", ""),
-    cue("CUE-099", 54, "EXT. BUNK AREA - CAPTURE THE FLAG - DAY", "slo-mo chase sequence", "Slo-Mo Sports Underscore", "Music", "Medium", "30s", "No", "In/Out", "65", "Royalty-free inspirational."),
+    cue("CUE-099", 54, "EXT. BUNK AREA - CAPTURE THE FLAG - DAY", "slo-mo chase sequence", "Slo-Mo Sports Underscore", "Ambience", "Medium", "30s", "No", "In/Out", "65", "Royalty-free inspirational."),
     cue("CUE-100", 54, "EXT. WATERFRONT - DAY", "Lars dragged at top speed behind boat", "Water Ski Drag / Splash SFX", "SFX", "Critical", "6s", "No", "None", "80", ""),
     cue("CUE-101", 55, "EXT. RURAL HIGHWAY - DAY", "Freddy thrown out of van", "Body Tumble SFX (Repeat)", "SFX", "Medium", "3s", "No", "None", "70", ""),
     cue("CUE-102", 55, "EXT. CAMPFIRE SITE - DAY", "Coop and Katie in woods", "Woods Day Ambience", "Ambience", "Medium", "Loop", "Yes", "In", "45", "Birds, light wind."),
@@ -157,7 +157,7 @@ CUES = [
     cue("CUE-114", 60, "INT. KITCHEN - DAY", "Gene addresses Can of Vegetables", "Kitchen Backroom Quiet", "Ambience", "Low", "Loop", "Yes", "None", "40", ""),
     # PAGE 61-62
     cue("CUE-115", 61, "INT. RADIO STATION - DAY", "Arty cruising towards happy hour", "Radio Booth Ambience", "Ambience", "Medium", "Loop", "Yes", "None", "40", ""),
-    cue("CUE-116", 62, "INT. RADIO STATION - DAY", "Summer in the City starts", "Summer in the City (Lovin' Spoonful)", "Music", "Critical", "Full/skip", "No", "In", "85", "Licensed. Under mess hall scene."),
+    cue("CUE-116", 62, "INT. RADIO STATION - DAY", "Summer in the City starts", "Summer in the City (Lovin' Spoonful)", "Ambience", "Critical", "Full/skip", "No", "In", "85", "Licensed. Under mess hall scene."),
     cue("CUE-117", 62, "EXT. MESS HALL - DAY", "Coop sees Andy and Katie walking", "Exterior Lawn Under Music", "Ambience", "Low", "Loop", "Yes", "Under", "35", ""),
     # PAGE 63-65
     cue("CUE-118", 63, "EXT. MESS HALL - DAY", "Coop love speech to Katie", "Music Duck / Focus Dialogue", "Transition", "High", "Fade", "No", "Out", "20", "Pull Summer in the City down."),
@@ -169,17 +169,17 @@ CUES = [
     cue("CUE-124", 65, "INT. SHOWERS - DAY", "crowd cheers them on", "Victory Cheer SFX", "SFX", "Medium", "5s", "No", "Out", "70", ""),
     # PAGE 66-68
     cue("CUE-125", 66, "EXT. PATH TO PICNIC TABLE - DAY", "Beth and Professor walk by lake", "Lakeside Evening Ambience", "Ambience", "Medium", "Loop", "Yes", "In", "50", ""),
-    cue("CUE-126", 67, "EXT. PICNIC TABLE - DAY", "Skylab headed right for camp", "Ominous Drone Underscore", "Music", "High", "Loop", "Yes", "In", "55", "Tension bed."),
+    cue("CUE-126", 67, "EXT. PICNIC TABLE - DAY", "Skylab headed right for camp", "Ominous Drone Underscore", "Ambience", "High", "Loop", "Yes", "In", "55", "Tension bed."),
     cue("CUE-127", 68, "INT. ANDY'S BUNK - DAY", "Coop confronts Andy", "Bunk Interior Ambience", "Ambience", "Low", "Loop", "Yes", "None", "35", ""),
     # PAGE 69
     cue("CUE-128", 69, "EXT. ANDY'S BUNK - DAY", "steps on RAKE which hits head", "Slapstick Rake Bonk SFX", "SFX", "High", "1s", "No", "None", "80", ""),
     cue("CUE-129", 69, "EXT. ANDY'S BUNK - DAY", "steps on BANANA PEEL, falls in pool", "Banana Peel Slip / Splash SFX", "SFX", "High", "3s", "No", "None", "85", ""),
     cue("CUE-130", 69, "EXT. ANDY'S BUNK - DAY", "bucket lands on his head", "Bucket Clunk SFX", "SFX", "Medium", "1s", "No", "None", "70", "Optional sad trombone."),
     # PAGE 70
-    cue("CUE-131", 70, "EXT. FIELD, ETC. - MONTAGE, DUSK", "Coop's TRAINING MONTAGE", "80s Training Montage Music", "Music", "Critical", "Montage", "No", "In/Out", "80", "Royalty-free synth rock."),
+    cue("CUE-131", 70, "EXT. FIELD, ETC. - MONTAGE, DUSK", "Coop's TRAINING MONTAGE", "80s Training Montage Music", "Ambience", "Critical", "Montage", "No", "In/Out", "80", "Royalty-free synth rock."),
     cue("CUE-132", 70, "EXT. FIELD, ETC. - MONTAGE, DUSK", "SLO-MO race through field", "Running / Wind SFX", "SFX", "Medium", "Loop", "Yes", "Under", "45", ""),
     cue("CUE-133", 70, "EXT. FIELD, ETC. - MONTAGE, DUSK", "Coop breaks into tears in therapy", "Montage Music Dip", "Transition", "Medium", "3s", "No", "Out", "40", "Brief emotional beat."),
-    cue("CUE-134", 70, "EXT. FIELD, ETC. - MONTAGE, DUSK", "Coop finally NAILS the dance move", "Montage Music Swell", "Music", "High", "5s", "No", "In", "85", ""),
+    cue("CUE-134", 70, "EXT. FIELD, ETC. - MONTAGE, DUSK", "Coop finally NAILS the dance move", "Montage Music Swell", "Ambience", "High", "5s", "No", "In", "85", ""),
     # PAGE 71
     cue("CUE-135", 71, "EXT. CAMP FIREWOOD SIGN - NIGHT", "Victor runs up path, bloodied", "Night Forest Running / Panting", "SFX", "High", "Loop", "Yes", "In", "60", ""),
     cue("CUE-136", 71, "EXT. BETH'S OFFICE - NIGHT", "Neil rides motorcycle up", "Motorcycle Arrival Night", "SFX", "High", "4s", "No", "None", "70", ""),
@@ -190,7 +190,7 @@ CUES = [
     cue("CUE-140", 72, "INT. INFIRMARY - NIGHT", "Beth and Neil bust in, break stuff", "Door Smash / Chaos SFX", "SFX", "High", "6s", "No", "None", "80", ""),
     cue("CUE-141", 72, "EXT. REC HALL - NIGHT", "People filing in for talent show", "Rec Hall Crowd Murmur", "Ambience", "High", "Loop", "Yes", "In", "55", ""),
     cue("CUE-142", 72, "EXT. REC HALL - NIGHT", "A silent moment, then Victor: Let's go!", "Hero Beat Silence", "Silence", "High", "2s", "No", "Out", "0", ""),
-    cue("CUE-143", 72, "EXT. REC HALL - NIGHT", "Music kicks in as Neil and Victor run off", "Action Run Underscore", "Music", "Critical", "Loop", "Yes", "In", "80", "Royalty-free hero run."),
+    cue("CUE-143", 72, "EXT. REC HALL - NIGHT", "Music kicks in as Neil and Victor run off", "Action Run Underscore", "Ambience", "Critical", "Loop", "Yes", "In", "80", "Royalty-free hero run."),
     cue("CUE-144", 72, "EXT. CAMP FIREWOOD SIGN - NIGHT", "Victor and Neil running full speed", "Running Feet / Night Ambience", "SFX", "High", "Loop", "Yes", "Under", "65", ""),
     # PAGE 73-74
     cue("CUE-145", 73, "EXT. PICNIC TABLE - NIGHT", "device sputters and pops", "Skylab Device Sputter SFX", "SFX", "Medium", "4s", "No", "None", "60", ""),
@@ -203,11 +203,11 @@ CUES = [
     cue("CUE-151", 76, "INT. REC HALL - NIGHT", "Muppet-like screaming for Alan Shemper", "Wild Audience Scream / Applause", "SFX", "Critical", "10s", "No", "None", "90", "Beatles-level chaos."),
     cue("CUE-152", 76, "INT. REC HALL - NIGHT", "Alan Shemper takes the stage", "Showbiz Entrance Stinger", "Transition", "Medium", "3s", "No", "In", "65", ""),
     cue("CUE-153", 76, "EXT. PICNIC TABLE - NIGHT", "Caped Boy rolls twenty sided die", "Dice Roll SFX", "SFX", "Medium", "1s", "No", "None", "60", ""),
-    cue("CUE-154", 76, "EXT. PICNIC TABLE - NIGHT", "huge symphonic CRESCENDO", "Symphonic Hope Crescendo", "Music", "High", "8s", "No", "In/Out", "75", "Royalty-free orchestral."),
+    cue("CUE-154", 76, "EXT. PICNIC TABLE - NIGHT", "huge symphonic CRESCENDO", "Symphonic Hope Crescendo", "Ambience", "High", "8s", "No", "In/Out", "75", "Royalty-free orchestral."),
     # PAGE 77-78
     cue("CUE-155", 77, "INT. REC HALL - NIGHT", "Roger balances broomstick", "Awkward Talent Show Silence", "Silence", "Medium", "4s", "No", "In", "0", "Unimpressive act."),
     cue("CUE-156", 78, "INT. REC HALL - NIGHT", "They chat in Hebrew prayer", "Quiet Prayer Murmur", "Ambience", "Low", "3s", "No", "None", "40", ""),
-    cue("CUE-157", 79, "INT. REC HALL - NIGHT", "Three girls sing You've Got a Friend", "You've Got a Friend (Campers)", "Music", "Critical", "Full", "No", "In/Out", "75", "Licensed. Bunk 7 dedication."),
+    cue("CUE-157", 79, "INT. REC HALL - NIGHT", "Three girls sing You've Got a Friend", "You've Got a Friend (Campers)", "Ambience", "Critical", "Full", "No", "In/Out", "75", "Licensed. Bunk 7 dedication."),
     cue("CUE-158", 79, "INT. REC HALL - NIGHT", "Caped Boy rolls die - 18!", "Dice Roll SFX", "SFX", "Low", "1s", "No", "None", "55", ""),
     cue("CUE-159", 79, "INT. REC HALL - NIGHT", "Marty comedy impression - crowd eats it up", "Audience Laughter Loop", "SFX", "Medium", "Loop", "Yes", "None", "60", ""),
     # PAGE 80
@@ -217,7 +217,7 @@ CUES = [
     cue("CUE-163", 80, "INT. REC HALL - NIGHT", "Ron appears - Gail confrontation", "Dramatic Reveal Stinger", "Transition", "Medium", "2s", "No", "In", "55", ""),
     cue("CUE-164", 80, "INT. REC HALL - NIGHT", "campers applaud Gail", "Applause for Gail", "SFX", "Medium", "5s", "No", "None", "65", ""),
     # PAGE 81
-    cue("CUE-165", 81, "INT. REC HALL - NIGHT", "Day By Day from Godspell", "Day By Day (Godspell)", "Music", "Critical", "Full number", "No", "In/Out", "85", "Licensed. Broadway-quality read."),
+    cue("CUE-165", 81, "INT. REC HALL - NIGHT", "Day By Day from Godspell", "Day By Day (Godspell)", "Ambience", "Critical", "Full number", "No", "In/Out", "85", "Licensed. Broadway-quality read."),
     cue("CUE-166", 81, "INT. REC HALL - NIGHT", "crowd clapping along", "Rhythmic Audience Clap", "SFX", "Medium", "Loop", "Yes", "Under", "55", ""),
     cue("CUE-167", 81, "INT. REC HALL - NIGHT", "whole crowd collectively BOOS", "Audience Boo / Hiss", "SFX", "Critical", "6s", "No", "None", "80", ""),
     cue("CUE-168", 81, "EXT. PICNIC TABLE - NIGHT", "Caped Boy rolls die - 5!", "Urgent Dice Roll", "SFX", "Medium", "1s", "No", "None", "60", ""),
@@ -235,25 +235,25 @@ CUES = [
     cue("CUE-178", 85, "EXT. BEHIND REC HALL - NIGHT", "CRASH! Skylab falls safely away", "Skylab Crash Impact", "SFX", "Critical", "5s", "No", "None", "95", "Flaming metal debris."),
     cue("CUE-179", 85, "INT. REC HALL - NIGHT", "wind STOPS - Silence for long moment", "Post-Wind Dead Silence", "Silence", "Critical", "5s", "No", "Out", "0", "Hold before slow clap."),
     cue("CUE-180", 85, "INT. REC HALL - NIGHT", "JJ starts slow clap, standing ovation", "Slow Clap to Thunderous Ovation", "SFX", "Critical", "15s", "No", "In", "85", "Beatles concert level."),
-    cue("CUE-181", 85, "EXT. REC HALL - NIGHT", "Katie and Coop KISS", "Romantic Kiss Stinger", "Music", "Medium", "4s", "No", "In/Out", "60", "Optional swoon."),
+    cue("CUE-181", 85, "EXT. REC HALL - NIGHT", "Katie and Coop KISS", "Romantic Kiss Stinger", "Ambience", "Medium", "4s", "No", "In/Out", "60", "Optional swoon."),
     cue("CUE-182", 85, "EXT. REC HALL - NIGHT", "door flies off hinges at kiss", "Door Fly Off Hinges SFX", "SFX", "High", "2s", "No", "None", "80", ""),
     cue("CUE-183", 85, "EXT. REC HALL - NIGHT", "DISSOLVE TO morning", "Night to Morning Dissolve", "Transition", "Medium", "5s", "No", "Crossfade", "50", ""),
     # PAGE 86-87
     cue("CUE-184", 86, "EXT. PARKING AREA - MORNING", "Parents arriving, goodbyes", "Departure Day Ambience", "Ambience", "High", "Loop", "Yes", "In", "55", "Buses, families."),
     cue("CUE-185", 86, "EXT. PARKING AREA - MORNING", "HUGE laughter from all", "Group Laughter SFX", "SFX", "Medium", "4s", "No", "None", "60", "Shrimp cocktail joke."),
-    cue("CUE-186", 87, "EXT. PARKING AREA - MORNING", "Gene mouths thank you to Can of Vegetables", "Sentimental Underscore (Optional)", "Music", "Optional", "8s", "No", "In/Out", "45", ""),
+    cue("CUE-186", 87, "EXT. PARKING AREA - MORNING", "Gene mouths thank you to Can of Vegetables", "Sentimental Underscore (Optional)", "Ambience", "Optional", "8s", "No", "In/Out", "45", ""),
     cue("CUE-187", 87, "EXT. REC HALL - MORNING", "science kids at Skylab crash site", "Morning Birds / Field Ambience", "Ambience", "Low", "Loop", "Yes", "None", "40", ""),
     # PAGE 88-89
     cue("CUE-188", 88, "EXT. BUNK AREA - MORNING", "Katie's breakup speech to Coop", "Lonely Morning Ambience", "Ambience", "Medium", "Loop", "Yes", "Under", "40", ""),
     cue("CUE-189", 89, "EXT. BUNK AREA - MORNING", "station wagon drives off with Andy", "Car Drive Away SFX", "SFX", "Medium", "5s", "No", "Out", "55", ""),
     cue("CUE-190", 89, "EXT. BUNK AREA - MORNING", "Coop standing alone, last one left", "Melancholy Silence", "Silence", "High", "4s", "No", "Out", "0", ""),
-    cue("CUE-191", 89, "EXT. BUNK AREA - MORNING", "Beth puts arm around Coop, walk off", "Gentle Ending Underscore", "Music", "High", "20s", "No", "In/Out", "55", "Royalty-free bittersweet."),
+    cue("CUE-191", 89, "EXT. BUNK AREA - MORNING", "Beth puts arm around Coop, walk off", "Gentle Ending Underscore", "Ambience", "High", "20s", "No", "In/Out", "55", "Royalty-free bittersweet."),
     cue("CUE-192", 89, "EXT. BUNK AREA - MORNING", "FADE TO BLACK", "Fade to Black", "Transition", "Critical", "3s", "No", "Out", "0", ""),
     # PAGE 90
     cue("CUE-193", 90, "INT. BETH'S OFFICE - NIGHT", "Ten Years Later - 9:30 AM", "Epilogue Title Sting", "Transition", "High", "3s", "No", "In", "60", ""),
     cue("CUE-194", 90, "INT. BETH'S OFFICE - NIGHT", "Gary fiddling with giant VCR projector", "VCR Projector Whir", "SFX", "Medium", "Loop", "Yes", "In", "50", ""),
     cue("CUE-195", 90, "INT. BETH'S OFFICE - NIGHT", "JJ: Sorry I'm late", "Epilogue Room Tone / Laughter", "Ambience", "Medium", "Loop", "Yes", "None", "45", "End of show."),
-    cue("CUE-196", 90, "END", "CREDITS ROLL", "End Credits Music (Optional)", "Music", "Optional", "60s", "No", "Out", "50", "Reprise Jane or original."),
+    cue("CUE-196", 90, "END", "CREDITS ROLL", "End Credits Music (Optional)", "Ambience", "Optional", "60s", "No", "Out", "50", "Reprise Jane or original."),
 ]
 
 # Per-page coverage fill-ins for pages with lighter cue density
@@ -282,7 +282,7 @@ _PAGE_FILL = {
     53: [cue("CUE-218", 53, "EXT. WATERFRONT", "Lars waterskiing before fall", "Boat Engine Loop", "SFX", "Medium", "Loop", "Yes", "In", "55", "Page coverage.")],
     59: [cue("CUE-219", 59, "EXT. KATIE'S BUNK", "Coop finds Katie crying with Andy", "Emotional Door Creak", "SFX", "Low", "2s", "No", "None", "45", "Page coverage.")],
     61: [cue("CUE-220", 61, "INT. RADIO STATION", "Gary dinner interview silence", "Comedy Dead Air", "Silence", "Medium", "3s", "No", "Out", "0", "Beat before Gary speaks.")],
-    63: [cue("CUE-221", 63, "EXT. MESS HALL", "Katie rejects Coop", "Heartbreak Sting (Optional)", "Music", "Optional", "3s", "No", "In/Out", "40", "Page coverage.")],
+    63: [cue("CUE-221", 63, "EXT. MESS HALL", "Katie rejects Coop", "Heartbreak Sting (Optional)", "Ambience", "Optional", "3s", "No", "In/Out", "40", "Page coverage.")],
     64: [cue("CUE-222", 64, "INT. MESS HALL", "Gene military speech buildup", "Room Hush", "Silence", "Medium", "2s", "No", "Out", "0", "Page coverage.")],
     66: [cue("CUE-223", 66, "EXT. PATH TO PICNIC TABLE", "Professor distracted by sky", "Evening Lake Insects", "Ambience", "Low", "Loop", "Yes", "None", "40", "Page coverage.")],
     67: [cue("CUE-224", 67, "EXT. PICNIC TABLE", "Let's do it! science montage", "Science Montage Tick", "Transition", "Medium", "2s", "No", "In", "50", "Page coverage.")],
@@ -297,8 +297,8 @@ _PAGE_FILL = {
     80: [cue("CUE-233", 80, "INT. REC HALL", "Gail defiant speech to Ron", "Dramatic Underscore Dip", "Silence", "Medium", "2s", "No", "Out", "0", "Page coverage.")],
     82: [cue("CUE-234", 82, "EXT. BEHIND REC HALL", "Beth: Hurry, see it coming", "Urgent Clock Tick (Optional)", "SFX", "Optional", "Loop", "Yes", "None", "45", "Page coverage.")],
     83: [cue("CUE-235", 83, "EXT. REC HALL", "Katie chases Coop - COOP!", "Night Exterior Running", "SFX", "Medium", "Loop", "Yes", "In", "55", "Page coverage.")],
-    84: [cue("CUE-236", 84, "EXT. REC HALL", "Katie: I love you Gerald Cooperberg!", "Emotional Music Swell", "Music", "High", "6s", "No", "In", "65", "Page coverage.")],
-    86: [cue("CUE-237", 86, "EXT. PARKING AREA", "Beth pregnant reveal hug", "Warm Morning Sting", "Music", "Medium", "5s", "No", "In/Out", "50", "Page coverage.")],
+    84: [cue("CUE-236", 84, "EXT. REC HALL", "Katie: I love you Gerald Cooperberg!", "Emotional Music Swell", "Ambience", "High", "6s", "No", "In", "65", "Page coverage.")],
+    86: [cue("CUE-237", 86, "EXT. PARKING AREA", "Beth pregnant reveal hug", "Warm Morning Sting", "Ambience", "Medium", "5s", "No", "In/Out", "50", "Page coverage.")],
     88: [cue("CUE-238", 88, "EXT. BUNK AREA", "Mork Guy: Nanoo-nanoo", "Comedy Alien Sting (Optional)", "Comedy", "Optional", "2s", "No", "None", "40", "Page coverage.")],
     1: [cue("CUE-239", 1, "TITLE CARD", "Second Draft / February 2026", "Projector / Room Tone (Optional)", "Ambience", "Optional", "Loop", "Yes", "In", "25", "Pre-show optional.")],
 }

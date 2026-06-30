@@ -11,7 +11,6 @@ from script_model import ScriptProject, _marker_kind
 FX_COLOR = "#e94560"
 BG_COLOR = "#4a90d9"
 BG_STOP_COLOR = "#f5a623"
-MUSIC_COLOR = "#b57edc"
 PARA_SELECT_BG = "#1e3a5f"
 PAGE_COLOR = "#8090a8"
 SCENE_COLOR = "#a0d2ff"
@@ -23,8 +22,6 @@ def _marker_color(cue: dict) -> str:
         return BG_COLOR
     if kind == "BG_STOP":
         return BG_STOP_COLOR
-    if kind == "MUSIC":
-        return MUSIC_COLOR
     return FX_COLOR
 
 
@@ -33,8 +30,6 @@ def _marker_label(cue: dict) -> str:
     kind = _marker_kind(cue)
     if kind == "BG_STOP":
         return f"[BG STOP-{num}] {cue['name']}"
-    if kind == "MUSIC":
-        return f"[MUSIC-{num}] {cue['name']}"
     if kind == "BG":
         return f"[BG-{num}] {cue['name']}"
     return f"[FX-{num}] {cue['name']}"
@@ -138,7 +133,7 @@ class ScriptEditor(tk.Frame):
         legend = tk.Frame(header, bg="#0a0a12")
         legend.pack(side=tk.RIGHT)
         for label, color in (
-            ("FX", FX_COLOR), ("BG", BG_COLOR), ("BG STOP", BG_STOP_COLOR), ("MUSIC", MUSIC_COLOR)
+            ("FX", FX_COLOR), ("BG", BG_COLOR), ("BG STOP", BG_STOP_COLOR)
         ):
             tk.Label(legend, text=f"■ {label}", fg=color, bg="#0a0a12",
                      font=tkfont.Font(size=9)).pack(side=tk.LEFT, padx=5)
@@ -515,14 +510,12 @@ class ScriptEditor(tk.Frame):
         menu.add_separator()
         menu.add_command(label="Add Effect Cue on Line", command=lambda: self._add_cue(para_id, "FOREGROUND", "SFX"))
         menu.add_command(label="Add Background Cue on Line", command=lambda: self._add_cue(para_id, "BACKGROUND", "Ambience"))
-        menu.add_command(label="Add Music Cue on Line", command=lambda: self._add_cue(para_id, "FOREGROUND", "Music"))
         menu.tk_popup(event.x_root, event.y_root)
 
     def _show_paragraph_menu(self, event, para_id: str):
         menu = tk.Menu(self, tearoff=0, bg="#16213e", fg="white")
         menu.add_command(label="Add Effect Cue on Line", command=lambda: self._add_cue(para_id, "FOREGROUND", "SFX"))
         menu.add_command(label="Add Background Cue on Line", command=lambda: self._add_cue(para_id, "BACKGROUND", "Ambience"))
-        menu.add_command(label="Add Music Cue on Line", command=lambda: self._add_cue(para_id, "FOREGROUND", "Music"))
         menu.tk_popup(event.x_root, event.y_root)
 
     def _move_cue(self, cue_id: str, direction: int):

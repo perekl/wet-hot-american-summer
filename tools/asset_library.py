@@ -25,8 +25,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     # --- Music (licensed + royalty-free beds) ---
     "music_jane": {
         "name": "Jane (Jefferson Starship)",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_jane_jefferson_starship.mp3",
         "royalty_free": "No",
         "source": "Licensed - Jefferson Starship",
@@ -35,8 +35,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_danny_song": {
         "name": "Danny's Song (Loggins & Messina)",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_danny_song_loggins_messina.mp3",
         "royalty_free": "No",
         "source": "Licensed - Loggins & Messina",
@@ -45,8 +45,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_love_is_alright": {
         "name": "Love Is Alright Tonight (Rick Springfield)",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_love_is_alright_tonight.mp3",
         "royalty_free": "No",
         "source": "Licensed - Rick Springfield",
@@ -55,8 +55,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_summer_in_the_city": {
         "name": "Summer in the City (Lovin' Spoonful)",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_summer_in_the_city.mp3",
         "royalty_free": "No",
         "source": "Licensed - Lovin' Spoonful",
@@ -65,8 +65,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_godspell_day_by_day": {
         "name": "Day By Day (Godspell)",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_godspell_day_by_day.mp3",
         "royalty_free": "No",
         "source": "Licensed - Godspell",
@@ -75,8 +75,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_youve_got_a_friend": {
         "name": "You've Got a Friend (Campers)",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_youve_got_a_friend_campers.mp3",
         "royalty_free": "No",
         "source": "Licensed - Carole King",
@@ -85,8 +85,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_ceremony_flute": {
         "name": "Ceremony Flute",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_ceremony_flute.mp3",
         "royalty_free": "Yes",
         "source": "Royalty-free flute",
@@ -95,8 +95,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_montage_80s": {
         "name": "80s Training Montage",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_80s_training_montage.mp3",
         "royalty_free": "Yes",
         "source": "Royalty-free synth rock",
@@ -105,8 +105,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_action_run": {
         "name": "Action Run Underscore",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_action_run_underscore.mp3",
         "royalty_free": "Yes",
         "source": "Royalty-free",
@@ -115,8 +115,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_chase_comedy": {
         "name": "Chase Sequence Underscore",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_chase_comedy_underscore.mp3",
         "royalty_free": "Yes",
         "source": "Royalty-free",
@@ -125,8 +125,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_slo_mo_sports": {
         "name": "Slo-Mo Sports Underscore",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_slo_mo_sports.mp3",
         "royalty_free": "Yes",
         "source": "Royalty-free",
@@ -135,8 +135,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_symphonic_crescendo": {
         "name": "Symphonic Hope Crescendo",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_symphonic_hope_crescendo.mp3",
         "royalty_free": "Yes",
         "source": "Royalty-free orchestral",
@@ -145,8 +145,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_acapella_snippet": {
         "name": "Campers Acapella Rock Snippet",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_campers_acapella_snippet.mp3",
         "royalty_free": "Yes",
         "source": "Live table read / original",
@@ -155,8 +155,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_godspell_sting": {
         "name": "Godspell Announcement Sting",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_godspell_sting.mp3",
         "royalty_free": "No",
         "source": "Licensed - Godspell",
@@ -165,8 +165,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_paul_guitar": {
         "name": "Paul's Guitar (Diegetic)",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_paul_guitar_diegetic.mp3",
         "royalty_free": "Yes",
         "source": "Live / recorded guitar",
@@ -175,8 +175,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_ending_bittersweet": {
         "name": "Gentle Ending Underscore",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_gentle_ending_bittersweet.mp3",
         "royalty_free": "Yes",
         "source": "Royalty-free",
@@ -185,8 +185,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_emotional_swell": {
         "name": "Emotional Music Swell",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_emotional_swell.mp3",
         "royalty_free": "Yes",
         "source": "Royalty-free",
@@ -195,8 +195,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_romantic_stinger": {
         "name": "Romantic Kiss Stinger",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_romantic_kiss_stinger.mp3",
         "royalty_free": "Yes",
         "source": "Royalty-free",
@@ -205,8 +205,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_warm_morning": {
         "name": "Warm Morning Sting",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_warm_morning_sting.mp3",
         "royalty_free": "Yes",
         "source": "Royalty-free",
@@ -215,8 +215,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_epilogue_sting": {
         "name": "Epilogue Title Sting",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_epilogue_title_sting.mp3",
         "royalty_free": "Yes",
         "source": "Royalty-free",
@@ -225,8 +225,8 @@ CANONICAL_ASSETS: dict[str, dict] = {
     },
     "music_end_credits": {
         "name": "End Credits Music",
-        "category": "Music",
-        "playback_mode": "Music",
+        "category": "Ambience",
+        "playback_mode": "Loop",
         "filename": "assets/generated/music_end_credits.mp3",
         "royalty_free": "Yes",
         "source": "Royalty-free / Jane reprise",
@@ -908,7 +908,7 @@ def _build_rules():
     r(lambda c: "you've got a friend" in _name(c), "music_youve_got_a_friend")
     r(lambda c: "godspell" in _name(c) and "sting" in _name(c), "music_godspell_sting")
     r(lambda c: "ceremony flute" in _name(c) or ("flute" in _name(c) and "continue" in _name(c)), "music_ceremony_flute")
-    r(lambda c: "training montage" in _name(c) or "montage music" in _name(c) and c["Category"] == "Music", "music_montage_80s")
+    r(lambda c: "training montage" in _name(c) or "montage music" in _name(c) and c["Category"] == "Ambience" and "music" in _name(c), "music_montage_80s")
     r(lambda c: "montage music dip" in _name(c) or "montage music swell" in _name(c), "music_montage_80s")
     r(lambda c: "action run" in _name(c), "music_action_run")
     r(lambda c: "chase sequence" in _name(c), "music_chase_comedy")
@@ -918,16 +918,16 @@ def _build_rules():
     r(lambda c: "paul" in _name(c) and "guitar" in _name(c), "music_paul_guitar")
     r(lambda c: "ending underscore" in _name(c) or "gentle ending" in _name(c), "music_ending_bittersweet")
     r(lambda c: "emotional music swell" in _name(c), "music_emotional_swell")
-    r(lambda c: "romantic kiss stinger" in _name(c) and c["Category"] == "Music", "music_romantic_stinger")
+    r(lambda c: "romantic kiss stinger" in _name(c) and c["Category"] == "Ambience" and "music" in _name(c), "music_romantic_stinger")
     r(lambda c: "warm morning sting" in _name(c), "music_warm_morning")
     r(lambda c: "epilogue title" in _name(c), "music_epilogue_sting")
     r(lambda c: "end credits" in _name(c), "music_end_credits")
     r(lambda c: "title music continue" in _name(c) or "jane / title" in _name(c), "music_jane")
-    r(lambda c: "heartbreak" in _name(c) and c["Category"] == "Music", "music_romantic_stinger")
+    r(lambda c: "heartbreak" in _name(c) and c["Category"] == "Ambience" and "music" in _name(c), "music_romantic_stinger")
     r(lambda c: "sentimental underscore" in _name(c), "music_ending_bittersweet")
     r(lambda c: "fade out music" in _name(c), "music_love_is_alright")
     r(lambda c: "rehearsal piano" in _name(c), "amb_rehearsal_room")
-    r(lambda c: c["Category"] == "Music", "music_montage_80s")
+    r(lambda c: c["Category"] == "Ambience" and any(k in _name(c) for k in ("underscore", "montage", "credits", "jane", "flute")), "music_montage_80s")
 
     # Ambience pools
     r(lambda c: "campfire night" in _name(c), "amb_campfire_night")

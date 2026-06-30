@@ -243,16 +243,6 @@ class VLCPlaybackEngine:
         gain = self._fg_gain()
         loop = cue.get("loop") == "Yes" or mode == "Loop"
 
-        if mode == "Music" or category == "Music":
-            try:
-                pygame.mixer.music.load(str(path))
-            except pygame.error as exc:
-                return False, f"Could not load music: {exc}"
-            pygame.mixer.music.set_volume(gain)
-            pygame.mixer.music.play(-1 if loop else 0)
-            kind = "loop" if loop else "music"
-            return True, f"Playing {kind}: {path.name} @ {self._foreground_volume}"
-
         try:
             sound = pygame.mixer.Sound(str(path))
         except pygame.error as exc:

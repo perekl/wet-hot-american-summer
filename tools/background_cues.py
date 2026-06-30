@@ -47,7 +47,7 @@ def _is_background_silence(cue: dict) -> bool:
 
 def classify_cue_type(cue: dict) -> str:
     category = cue.get("Category", "")
-    if category == "Ambience":
+    if category in ("Ambience", "Music"):
         return CUE_TYPE_BACKGROUND
     if category == "Silence" and _is_background_silence(cue):
         return CUE_TYPE_BACKGROUND
