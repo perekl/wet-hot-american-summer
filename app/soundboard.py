@@ -56,6 +56,84 @@ BROWSER_GROUPS = (
 )
 
 
+class CueListScroller:
+    """Scrollable cue list with reliable mouse-wheel handling over child rows."""
+
+    def __init__(self, parent: tk.Frame):
+        self.section = parent
+        list_body = tk.Frame(parent, bg="#1a1a2e")
+        list_body.pack(fill=tk.BOTH, expand=True, padx=4, pady=(4, 0))
+
+        self.canvas = tk.Canvas(list_body, bg="#12121c", highlightthickness=0)
+        scrollbar = tk.Scrollbar(list_body, orient=tk.VERTICAL, command=self.canvas.yview)
+        self.canvas.configure(yscrollcommand=scrollbar.set)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+        self.inner = tk.Frame(self.canvas, bg="#12121c")
+        self._window = self.canvas.create_window((0, 0), window=self.inner, anchor="nw")
+        self.inner.bind("<Configure>", lambda _e: self.sync_scrollregion())
+        self.canvas.bind("<Configure>", lambda e: self.canvas.itemconfig(self._window, width=e.width))
+
+        self._wheel_active = False
+        for widget in (list_body, self.canvas, self.inner):
+            widget.bind("<Enter>", self._wheel_on)
+            widget.bind("<Leave>", self._wheel_off)
+
+    def sync_scrollregion(self):
+        self.inner.update_idletasks()
+        width = max(self.inner.winfo_reqwidth(), self.canvas.winfo_width(), 1)
+        height = max(self.inner.winfo_reqheight(), 1)
+        self.canvas.configure(scrollregion=(0, 0, width, height))
+
+    def clear(self):
+        for child in self.inner.winfo_children():
+            child.destroy()
+
+    def register_row(self, row: tk.Frame):
+        self._bind_wheel_target(row)
+        for child in row.winfo_children():
+            self._bind_wheel_target(child)
+
+    def _bind_wheel_target(self, widget):
+        widget.bind("<Enter>", self._wheel_on)
+        widget.bind("<Leave>", self._wheel_off)
+
+    def _wheel_on(self, _event=None):
+        if self._wheel_active:
+            return
+        self._wheel_active = True
+        self.canvas.bind_all("<MouseWheel>", self._on_wheel, add="+")
+        self.canvas.bind_all("<Button-4>", self._on_wheel, add="+")
+        self.canvas.bind_all("<Button-5>", self._on_wheel, add="+")
+
+    def _wheel_off(self, _event=None):
+        x, y = self.section.winfo_pointerx(), self.section.winfo_pointery()
+        widget = self.section.winfo_containing(x, y)
+        while widget is not None:
+            if widget == self.section:
+                return
+            widget = widget.master
+        if not self._wheel_active:
+            return
+        self._wheel_active = False
+        self.canvas.unbind_all("<MouseWheel>")
+        self.canvas.unbind_all("<Button-4>")
+        self.canvas.unbind_all("<Button-5>")
+
+    def _on_wheel(self, event):
+        if event.num == 5:
+            self.canvas.yview_scroll(3, "units")
+        elif event.num == 4:
+            self.canvas.yview_scroll(-3, "units")
+        else:
+            delta = event.delta
+            if delta:
+                steps = max(1, abs(delta) // 120)
+                self.canvas.yview_scroll(-steps if delta > 0 else steps, "units")
+        return "break"
+
+
 class SoundboardApp(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -85,9 +163,6 @@ class SoundboardApp(tk.Tk):
         self._active_cue_id: str | None = None
         self._browser_rows: dict[str, tk.Frame] = {}
         self._browser_filter = tk.StringVar(value="")
-        self._active_tab = "browser"
-        self._browser_canvas_width = 0
-        self._browser_resize_job: str | None = None
         self._now_playing_fg: dict | None = None
         self._now_playing_bg: dict | None = None
         self._syncing_volume = False
@@ -184,36 +259,35 @@ class SoundboardApp(tk.Tk):
             fg="#e94560", bg="#1a1a2e", wraplength=360,
         ).pack(pady=(10, 2), padx=12)
 
-        tab_bar = tk.Frame(left_host, bg="#1a1a2e")
-        tab_bar.pack(fill=tk.X, padx=12, pady=(4, 0))
-        self._tab_buttons: dict[str, tk.Button] = {}
-        for tab_id, label in (("browser", "Browser"), ("performance", "Performance")):
-            btn = tk.Button(
-                tab_bar, text=label, font=small_font, relief=tk.RAISED,
-                bg="#16213e", fg="white", activebackground="#0f3460",
-                padx=14, pady=4, command=lambda t=tab_id: self._show_tab(t),
-            )
-            btn.pack(side=tk.LEFT, padx=(0, 4))
-            self._tab_buttons[tab_id] = btn
+        filter_row = tk.Frame(left_host, bg="#1a1a2e")
+        filter_row.pack(fill=tk.X, padx=12, pady=(4, 4))
+        tk.Label(filter_row, text="Filter:", fg="#a0a0b0", bg="#1a1a2e",
+                 font=small_font).pack(side=tk.LEFT)
+        tk.Entry(
+            filter_row, textvariable=self._browser_filter, bg="#16213e", fg="white",
+            insertbackground="white", relief=tk.FLAT,
+        ).pack(side=tk.LEFT, padx=6, fill=tk.X, expand=True)
+        self._browser_filter.trace_add("write", lambda *_: self._rebuild_browser())
 
-        self.tab_content = tk.Frame(left_host, bg="#1a1a2e")
-        self.tab_content.pack(fill=tk.BOTH, expand=True)
+        bg_section = tk.Frame(left_host, bg="#1a1a2e")
+        bg_section.pack(fill=tk.BOTH, expand=True, padx=4, pady=(0, 4))
+        self._build_background_section(bg_section, small_font)
 
-        self.browser_tab = tk.Frame(self.tab_content, bg="#1a1a2e")
-        self.performance_tab = tk.Frame(self.tab_content, bg="#1a1a2e")
-
-        self._build_browser_tab(self.browser_tab, small_font)
-        self._build_performance_tab(self.performance_tab, small_font)
-        self.browser_tab.pack(fill=tk.BOTH, expand=True)
-        self.performance_tab.pack(fill=tk.BOTH, expand=True)
+        fg_section = tk.Frame(left_host, bg="#1a1a2e")
+        fg_section.pack(fill=tk.BOTH, expand=True, padx=4, pady=(0, 4))
+        self._build_effects_section(fg_section, small_font)
 
         self.status = tk.Label(
-            left_host, text="Click a cue in the script or browser to play.",
+            left_host, text="Click a cue in the script or list to play.",
             font=small_font, fg="#a0a0b0", bg="#1a1a2e", wraplength=360,
         )
-        self.status.pack(pady=(0, 8), padx=12)
+        self.status.pack(pady=(0, 4), padx=12)
 
-        self._show_tab("browser")
+        tk.Label(
+            left_host,
+            text="Space = next effect  |  Enter = GO  |  Esc = stop all",
+            font=small_font, fg="#a0a0b0", bg="#1a1a2e", wraplength=340,
+        ).pack(padx=12, pady=(0, 8))
 
         self.script_editor = ScriptEditor(
             script_host,
@@ -223,55 +297,14 @@ class SoundboardApp(tk.Tk):
         )
         self.script_editor.pack(fill=tk.BOTH, expand=True)
 
-    def _show_tab(self, tab_id: str):
-        self._active_tab = tab_id
-        if tab_id == "browser":
-            self.browser_tab.lift()
-        else:
-            self.performance_tab.lift()
-        for name, btn in self._tab_buttons.items():
-            btn.configure(relief=tk.SUNKEN if name == tab_id else tk.RAISED)
-        self.tab_content.update_idletasks()
-
-    def _build_browser_tab(self, parent, small_font):
-        filter_row = tk.Frame(parent, bg="#1a1a2e")
-        filter_row.pack(fill=tk.X, padx=4, pady=(6, 4))
-        tk.Label(filter_row, text="Filter:", fg="#a0a0b0", bg="#1a1a2e",
-                 font=small_font).pack(side=tk.LEFT)
-        ent = tk.Entry(
-            filter_row, textvariable=self._browser_filter, bg="#16213e", fg="white",
-            insertbackground="white", relief=tk.FLAT,
-        )
-        ent.pack(side=tk.LEFT, padx=6, fill=tk.X, expand=True)
-        self._browser_filter.trace_add("write", lambda *_: self._rebuild_browser())
-
-        list_body = tk.Frame(parent, bg="#1a1a2e")
-        list_body.pack(fill=tk.BOTH, expand=True, padx=4)
-
-        self.browser_canvas = tk.Canvas(list_body, bg="#12121c", highlightthickness=0)
-        browser_scroll = tk.Scrollbar(list_body, orient=tk.VERTICAL, command=self.browser_canvas.yview)
-        self.browser_canvas.configure(yscrollcommand=browser_scroll.set)
-        browser_scroll.pack(side=tk.RIGHT, fill=tk.Y)
-        self.browser_canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-
-        self.browser_inner = tk.Frame(self.browser_canvas, bg="#12121c")
-        self._browser_window = self.browser_canvas.create_window(
-            (0, 0), window=self.browser_inner, anchor="nw",
-        )
-        self.browser_inner.bind("<Configure>", self._on_browser_configure)
-        self.browser_canvas.bind("<Configure>", self._on_browser_canvas_configure)
-        self.browser_canvas.bind("<MouseWheel>", self._on_browser_mousewheel)
-        self.browser_canvas.bind("<Button-4>", self._on_browser_mousewheel)
-        self.browser_canvas.bind("<Button-5>", self._on_browser_mousewheel)
-
-    def _build_performance_tab(self, parent, small_font):
+    def _build_background_section(self, parent, small_font):
         btn_nav = {"font": small_font, "bg": "#16213e", "fg": "white",
                    "activebackground": "#1a1a2e", "relief": tk.FLAT, "padx": 8, "pady": 4}
         btn_go = {"bg": "#e94560", "fg": "white", "font": small_font, "relief": tk.FLAT,
                   "padx": 10, "pady": 4, "activebackground": "#c73652"}
 
         bg_panel = tk.Frame(parent, bg="#0f3460", padx=12, pady=10)
-        bg_panel.pack(fill=tk.X, padx=8, pady=(6, 0))
+        bg_panel.pack(fill=tk.X, padx=4, pady=(4, 0))
 
         tk.Label(bg_panel, text="BACKGROUND", font=tkfont.Font(size=11, weight="bold"),
                  fg="#a0d2ff", bg="#0f3460").grid(row=0, column=0, columnspan=4, sticky="w")
@@ -314,8 +347,16 @@ class SoundboardApp(tk.Tk):
         )
         self.bg_volume_scale.pack(side=tk.LEFT, padx=(6, 0))
 
+        self._bg_scroller = CueListScroller(parent)
+
+    def _build_effects_section(self, parent, small_font):
+        btn_nav = {"font": small_font, "bg": "#16213e", "fg": "white",
+                   "activebackground": "#1a1a2e", "relief": tk.FLAT, "padx": 8, "pady": 4}
+        btn_go = {"bg": "#e94560", "fg": "white", "font": small_font, "relief": tk.FLAT,
+                  "padx": 10, "pady": 4, "activebackground": "#c73652"}
+
         fg_panel = tk.Frame(parent, bg="#0f3460", padx=12, pady=10)
-        fg_panel.pack(fill=tk.X, padx=8, pady=(12, 0))
+        fg_panel.pack(fill=tk.X, padx=4, pady=(4, 0))
 
         tk.Label(fg_panel, text="EFFECTS", font=tkfont.Font(size=11, weight="bold"),
                  fg="#a0d2ff", bg="#0f3460").grid(row=0, column=0, columnspan=4, sticky="w")
@@ -358,38 +399,7 @@ class SoundboardApp(tk.Tk):
         )
         self.fg_volume_scale.pack(side=tk.LEFT, padx=(6, 0))
 
-        tk.Label(parent, text="Space = next effect  |  Enter = GO  |  Esc = stop all",
-                 font=small_font, fg="#a0a0b0", bg="#1a1a2e", wraplength=340).pack(
-            padx=12, pady=(12, 4))
-
-    def _on_browser_configure(self, event=None):
-        if event is not None:
-            self.browser_canvas.configure(scrollregion=(0, 0, event.width, max(event.height, 1)))
-
-    def _on_browser_canvas_configure(self, event):
-        new_width = event.width
-        if abs(new_width - self._browser_canvas_width) < 4:
-            return
-        self._browser_canvas_width = new_width
-        if self._browser_resize_job:
-            self.after_cancel(self._browser_resize_job)
-        self._browser_resize_job = self.after(80, lambda w=new_width: self._apply_browser_width(w))
-
-    def _apply_browser_width(self, width: int):
-        self._browser_resize_job = None
-        self.browser_canvas.itemconfig(self._browser_window, width=width)
-
-    def _on_browser_mousewheel(self, event):
-        if event.num == 5:
-            self.browser_canvas.yview_scroll(3, "units")
-        elif event.num == 4:
-            self.browser_canvas.yview_scroll(-3, "units")
-        else:
-            delta = event.delta
-            if delta:
-                steps = max(1, abs(delta) // 120)
-                self.browser_canvas.yview_scroll(-steps if delta > 0 else steps, "units")
-        return "break"
+        self._fg_scroller = CueListScroller(parent)
 
     def _cue_matches_filter(self, cue: dict, query: str) -> bool:
         if not query:
@@ -402,8 +412,8 @@ class SoundboardApp(tk.Tk):
         return query in hay
 
     def _rebuild_browser(self):
-        for child in self.browser_inner.winfo_children():
-            child.destroy()
+        self._bg_scroller.clear()
+        self._fg_scroller.clear()
         self._browser_rows.clear()
 
         query = self._browser_filter.get().strip().lower()
@@ -416,20 +426,24 @@ class SoundboardApp(tk.Tk):
             ]
             if not cues:
                 continue
-            tk.Label(
-                self.browser_inner, text=title, font=tkfont.Font(size=10, weight="bold"),
+            scroller = self._fg_scroller if kind == "FX" else self._bg_scroller
+            inner = scroller.inner
+            header = tk.Label(
+                inner, text=title, font=tkfont.Font(size=10, weight="bold"),
                 fg="#a0d2ff", bg="#12121c", anchor="w",
-            ).pack(fill=tk.X, padx=8, pady=(10, 4))
+            )
+            header.pack(fill=tk.X, padx=8, pady=(10, 4))
+            scroller._bind_wheel_target(header)
             for cue in cues:
-                self._add_browser_row(cue, small_font)
+                self._add_browser_row(cue, small_font, scroller)
 
-        self.browser_inner.update_idletasks()
-        self.browser_canvas.configure(scrollregion=self.browser_canvas.bbox("all"))
+        self._bg_scroller.sync_scrollregion()
+        self._fg_scroller.sync_scrollregion()
         self._highlight_browser_cue(self._active_cue_id)
 
-    def _add_browser_row(self, cue: dict, small_font):
+    def _add_browser_row(self, cue: dict, small_font, scroller: CueListScroller):
         color = _marker_color(cue)
-        row = tk.Frame(self.browser_inner, bg=color, cursor="hand2")
+        row = tk.Frame(scroller.inner, bg=color, cursor="hand2")
         row.pack(fill=tk.X, padx=8, pady=2)
         row._cue_id = cue["id"]  # type: ignore[attr-defined]
         row._base_color = color  # type: ignore[attr-defined]
@@ -448,6 +462,7 @@ class SoundboardApp(tk.Tk):
         for widget in row.winfo_children():
             widget.bind("<Button-1>", lambda e, c=cue: self._play_cue(c))
         row.bind("<Button-1>", lambda e, c=cue: self._play_cue(c))
+        scroller.register_row(row)
 
     def _highlight_browser_cue(self, cue_id: str | None):
         self._active_cue_id = cue_id
