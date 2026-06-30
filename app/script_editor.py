@@ -53,6 +53,20 @@ def _tokenize(text: str) -> list[tuple[str, int]]:
     return [(m.group(), m.start()) for m in re.finditer(r"\S+|\s+", text)]
 
 
+def _word_at_char_offset(para_text: str, offset: int) -> tuple[str, int] | None:
+    if not para_text.strip():
+        return None
+    offset = max(0, min(offset, len(para_text)))
+    last: tuple[str, int] | None = None
+    for match in re.finditer(r"\S+", para_text):
+        if match.start() <= offset <= match.end():
+            return match.group(), match.start()
+        if match.start() > offset:
+            return match.group(), match.start()
+        last = (match.group(), match.start())
+    return last
+
+
 class ScriptEditor(tk.Frame):
     """Scrollable screenplay editor with inline cue markers."""
 
@@ -188,6 +202,16 @@ class ScriptEditor(tk.Frame):
     def _apply_canvas_width(self, width: int):
         self._canvas_resize_job = None
         self.canvas.itemconfig(self.canvas_window, width=width)
+        self._reflow_text_heights()
+
+    def _reflow_text_heights(self):
+        for text in self._text_widgets.values():
+            try:
+                text.update_idletasks()
+                text.configure(height=self._text_display_lines(text))
+            except tk.TclError:
+                pass
+        self._update_scrollregion()
 
     def _on_inner_configure(self, event=None):
         if self._inner_configure_job:
@@ -299,7 +323,7 @@ class ScriptEditor(tk.Frame):
 
         frame.bind("<Button-1>", lambda e, pid=para.id: self._select_paragraph(pid))
         frame.bind("<ButtonRelease-1>", lambda e, pid=para.id: self._drop_on_paragraph(pid))
-        frame.bind("<Button-3>", lambda e, pid=para.id: self._show_paragraph_menu(e, pid))
+        frame.bind("<Button-3>", lambda e, pid=para.id: self._paragraph_context(e, pid))
 
         style = self._para_style(para.type)
         text_row = tk.Frame(frame, bg="#12121c")
@@ -376,19 +400,6 @@ class ScriptEditor(tk.Frame):
         return result
 
     def _build_text_row(self, parent, para, style: dict):
-        if not self.project._placements_for(para.id, inline=True):
-            tk.Label(
-                parent,
-                text=para.text or " ",
-                fg=style["fg"],
-                bg="#12121c",
-                font=style["font"],
-                wraplength=style.get("wraplength", 680),
-                justify=style.get("justify", "left"),
-                anchor=style.get("anchor", "w"),
-            ).pack(fill=tk.X)
-            return
-
         text = tk.Text(
             parent,
             wrap=tk.WORD,
@@ -406,10 +417,15 @@ class ScriptEditor(tk.Frame):
             spacing3=0,
             cursor="xterm",
         )
-        text.pack(fill=tk.X)
+        text.pack(fill=tk.BOTH, expand=True)
         self._text_widgets[para.id] = text
+        self._bind_readonly_text(text)
+        text.bind(
+            "<Button-3>",
+            lambda e, pid=para.id, pt=para.text: self._on_text_context(e, pid, pt, text),
+        )
 
-        tokens = _tokenize(para.text)
+        tokens = _tokenize(para.text or " ")
         if tokens:
             for token, start in tokens:
                 for cue in self._inline_cues_at(para.id, start):
@@ -421,18 +437,88 @@ class ScriptEditor(tk.Frame):
                     text.insert(tk.END, token, tag)
                     text.tag_configure(tag, foreground=style["fg"])
                     text.tag_bind(
-                        tag, "<Button-3>",
-                        lambda e, pid=para.id, pos=start, w=token: self._show_word_menu(e, pid, pos, w),
-                    )
-                    text.tag_bind(
                         tag, "<ButtonRelease-1>",
                         lambda e, pid=para.id, pos=start, w=token: self._drop_on_anchor(pid, pos, w),
                     )
 
         text.update_idletasks()
-        line_count = self._text_display_lines(text)
-        text.configure(height=line_count)
-        text.configure(state=tk.DISABLED)
+        text.configure(height=self._text_display_lines(text))
+
+    def _bind_readonly_text(self, text: tk.Text):
+        def block_edit(event):
+            if event.state & 0x4 and event.keysym.lower() in ("c", "a"):
+                return
+            if event.keysym in (
+                "Left", "Right", "Up", "Down", "Home", "End",
+                "Prior", "Next", "Shift_L", "Shift_R",
+            ):
+                return
+            return "break"
+
+        text.bind("<Key>", block_edit)
+
+    def _char_offset_at_click(self, text: tk.Text, event) -> int:
+        try:
+            idx = text.index(f"@{event.x},{event.y}")
+            count = text.count("1.0", idx, "chars")
+            if count:
+                return int(count[0] if isinstance(count, tuple) else count)
+        except tk.TclError:
+            pass
+        return -1
+
+    def _source_offset_at_click(
+        self, text: tk.Text, para_id: str, para_text: str, event,
+    ) -> int:
+        click_offset = self._char_offset_at_click(text, event)
+        if click_offset < 0:
+            return -1
+
+        display_pos = 0
+        tokens = _tokenize(para_text or " ")
+        if not tokens:
+            return 0
+
+        for token, start in tokens:
+            for cue in self._inline_cues_at(para_id, start):
+                label = f" {_marker_label(cue)} "
+                label_len = len(label)
+                if display_pos <= click_offset < display_pos + label_len:
+                    return start
+                display_pos += label_len
+            token_len = len(token)
+            if display_pos <= click_offset < display_pos + token_len:
+                if token.isspace():
+                    return start
+                return start + min(click_offset - display_pos, max(token_len - 1, 0))
+            display_pos += token_len
+        last_token, last_start = tokens[-1]
+        return last_start + max(0, len(last_token) - 1)
+
+    def _on_text_context(self, event, para_id: str, para_text: str, text: tk.Text):
+        source_offset = self._source_offset_at_click(text, para_id, para_text, event)
+        if source_offset < 0:
+            self._show_paragraph_menu(event, para_id)
+            return
+        found = _word_at_char_offset(para_text, source_offset)
+        if found:
+            word, start = found
+            self._show_word_menu(event, para_id, start, word)
+        else:
+            self._show_paragraph_menu(event, para_id)
+        return "break"
+
+    def _paragraph_context(self, event, para_id: str):
+        text = self._text_widgets.get(para_id)
+        para = self.project.paragraph(para_id)
+        if text and para:
+            x = event.x_root - text.winfo_rootx()
+            y = event.y_root - text.winfo_rooty()
+            if 0 <= x < text.winfo_width() and 0 <= y < text.winfo_height():
+                routed = type("Ev", (), {"x": x, "y": y, "x_root": event.x_root, "y_root": event.y_root})()
+                self._on_text_context(routed, para_id, para.text, text)
+                return
+        self._show_paragraph_menu(event, para_id)
 
     def _text_display_lines(self, text: tk.Text) -> int:
         try:
@@ -449,7 +535,7 @@ class ScriptEditor(tk.Frame):
         label = f" {_marker_label(cue)} "
         text.insert(tk.END, label, tag)
         text.tag_configure(tag, background=color, foreground="white")
-        text.tag_bind(tag, "<Button-3>", lambda e, c=cue: self._show_cue_menu(e, c))
+        text.tag_bind(tag, "<Button-3>", lambda e, c=cue: self._cue_tag_context(e, c))
         text.tag_bind(
             tag, "<ButtonRelease-1>",
             lambda e, c=cue: self._on_cue_release(c, para_id, e),
@@ -504,8 +590,7 @@ class ScriptEditor(tk.Frame):
         text = self._text_widgets.get(para_id)
         if text:
             try:
-                text.configure(state=tk.NORMAL, bg=bg)
-                text.configure(state=tk.DISABLED)
+                text.configure(bg=bg)
             except tk.TclError:
                 pass
         for child in frame.winfo_children():
@@ -522,13 +607,11 @@ class ScriptEditor(tk.Frame):
             if isinstance(widget, tuple):
                 text, tag, color = widget
                 try:
-                    text.configure(state=tk.NORMAL)
                     text.tag_configure(
                         tag,
                         background="#ffffff" if active else color,
                         foreground="#1a1a2e" if active else "white",
                     )
-                    text.configure(state=tk.DISABLED)
                 except tk.TclError:
                     pass
             else:
@@ -591,6 +674,10 @@ class ScriptEditor(tk.Frame):
         self.rebuild()
         if self.on_cues_changed:
             self.on_cues_changed()
+
+    def _cue_tag_context(self, event, cue: dict):
+        self._show_cue_menu(event, cue)
+        return "break"
 
     def _show_cue_menu(self, event, cue: dict):
         menu = tk.Menu(self, tearoff=0, bg="#16213e", fg="white")
