@@ -22,6 +22,25 @@ LABEL_FG = "#a0a0b0"
 ENTRY_FG = "white"
 
 
+def _bind_mousewheel(widget, callback):
+    widget.bind("<MouseWheel>", callback, add="+")
+    widget.bind("<Button-4>", callback, add="+")
+    widget.bind("<Button-5>", callback, add="+")
+
+
+def _scroll_canvas(canvas: tk.Canvas, event):
+    if event.num == 5:
+        canvas.yview_scroll(3, "units")
+    elif event.num == 4:
+        canvas.yview_scroll(-3, "units")
+    else:
+        delta = event.delta
+        if delta:
+            steps = max(1, abs(delta) // 120)
+            canvas.yview_scroll(-steps if delta > 0 else steps, "units")
+    return "break"
+
+
 def asset_display_label(asset_id: str, asset: dict) -> str:
     name = (asset.get("name") or "").strip()
     if name:
@@ -76,6 +95,14 @@ class CueFormDialog(tk.Toplevel):
         canvas.configure(yscrollcommand=scrollbar.set)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        wheel = lambda e: _scroll_canvas(canvas, e)
+        _bind_mousewheel(self, wheel)
+        _bind_mousewheel(container, wheel)
+        _bind_mousewheel(canvas, wheel)
+        _bind_mousewheel(body, wheel)
+
+        if hasattr(parent, "suspend_mousewheel"):
+            parent.suspend_mousewheel()
 
         self.vars = {
             "id": tk.StringVar(value=initial.get("id", "")),

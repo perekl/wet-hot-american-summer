@@ -229,7 +229,25 @@ class ScriptEditor(tk.Frame):
         if not self._sync_lock:
             self._schedule_scroll_notify()
 
+    def _should_handle_mousewheel(self, event) -> bool:
+        try:
+            if self.grab_current() is not None:
+                return False
+        except tk.TclError:
+            pass
+        try:
+            widget = self.winfo_containing(event.x_root, event.y_root)
+        except tk.TclError:
+            return False
+        while widget is not None:
+            if widget == self:
+                return True
+            widget = widget.master
+        return False
+
     def _on_mousewheel(self, event):
+        if not self._should_handle_mousewheel(event):
+            return
         if event.num == 5:
             self.canvas.yview_scroll(3, "units")
         elif event.num == 4:
@@ -243,6 +261,10 @@ class ScriptEditor(tk.Frame):
         if not self._sync_lock:
             self._schedule_scroll_notify()
         return "break"
+
+    def suspend_mousewheel(self):
+        """Release global wheel bindings while a modal child dialog is open."""
+        self._drop_mousewheel()
 
     def _schedule_scroll_notify(self):
         if self._scroll_job:
