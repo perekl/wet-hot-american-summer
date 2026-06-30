@@ -162,7 +162,7 @@ class SoundboardApp(tk.Tk):
         self._paned_split_retries = 0
         self._active_cue_id: str | None = None
         self._browser_rows: dict[str, tk.Frame] = {}
-        self._browser_filter = tk.StringVar(value="")
+        self._fx_filter = tk.StringVar(value="")
         self._now_playing_fg: dict | None = None
         self._now_playing_bg: dict | None = None
         self._syncing_volume = False
@@ -259,16 +259,6 @@ class SoundboardApp(tk.Tk):
             fg="#e94560", bg="#1a1a2e", wraplength=360,
         ).pack(pady=(10, 2), padx=12)
 
-        filter_row = tk.Frame(left_host, bg="#1a1a2e")
-        filter_row.pack(fill=tk.X, padx=12, pady=(4, 4))
-        tk.Label(filter_row, text="Filter:", fg="#a0a0b0", bg="#1a1a2e",
-                 font=small_font).pack(side=tk.LEFT)
-        tk.Entry(
-            filter_row, textvariable=self._browser_filter, bg="#16213e", fg="white",
-            insertbackground="white", relief=tk.FLAT,
-        ).pack(side=tk.LEFT, padx=6, fill=tk.X, expand=True)
-        self._browser_filter.trace_add("write", lambda *_: self._rebuild_browser())
-
         bg_section = tk.Frame(left_host, bg="#1a1a2e")
         bg_section.pack(fill=tk.BOTH, expand=True, padx=4, pady=(0, 4))
         self._build_background_section(bg_section, small_font)
@@ -278,7 +268,7 @@ class SoundboardApp(tk.Tk):
         self._build_effects_section(fg_section, small_font)
 
         self.status = tk.Label(
-            left_host, text="Click a cue in the script or list to play.",
+            left_host, text="Script / queue controls the read. SFX list below is on-demand only.",
             font=small_font, fg="#a0a0b0", bg="#1a1a2e", wraplength=360,
         )
         self.status.pack(pady=(0, 4), padx=12)
@@ -399,6 +389,17 @@ class SoundboardApp(tk.Tk):
         )
         self.fg_volume_scale.pack(side=tk.LEFT, padx=(6, 0))
 
+        fx_filter_row = tk.Frame(parent, bg="#1a1a2e")
+        fx_filter_row.pack(fill=tk.X, padx=8, pady=(6, 0))
+        tk.Label(
+            fx_filter_row, text="Find SFX:", fg="#a0a0b0", bg="#1a1a2e", font=small_font,
+        ).pack(side=tk.LEFT)
+        tk.Entry(
+            fx_filter_row, textvariable=self._fx_filter, bg="#16213e", fg="white",
+            insertbackground="white", relief=tk.FLAT,
+        ).pack(side=tk.LEFT, padx=6, fill=tk.X, expand=True)
+        self._fx_filter.trace_add("write", lambda *_: self._rebuild_fx_list())
+
         self._fg_scroller = CueListScroller(parent)
 
     def _cue_matches_filter(self, cue: dict, query: str) -> bool:
@@ -412,42 +413,68 @@ class SoundboardApp(tk.Tk):
         return query in hay
 
     def _rebuild_browser(self):
+        self._rebuild_bg_list()
+        self._rebuild_fx_list()
+
+    def _rebuild_bg_list(self):
+        for cid, row in list(self._browser_rows.items()):
+            if row.master is self._bg_scroller.inner:
+                del self._browser_rows[cid]
         self._bg_scroller.clear()
-        self._fg_scroller.clear()
-        self._browser_rows.clear()
-
-        query = self._browser_filter.get().strip().lower()
         small_font = tkfont.Font(family="Helvetica", size=9)
-
         for kind, _color, title in BROWSER_GROUPS:
-            cues = [
-                c for c in self.all_cues
-                if _marker_kind(c) == kind and self._cue_matches_filter(c, query)
-            ]
+            if kind == "FX":
+                continue
+            cues = [c for c in self.all_cues if _marker_kind(c) == kind]
             if not cues:
                 continue
-            scroller = self._fg_scroller if kind == "FX" else self._bg_scroller
-            inner = scroller.inner
-            header = tk.Label(
-                inner, text=title, font=tkfont.Font(size=10, weight="bold"),
-                fg="#a0d2ff", bg="#12121c", anchor="w",
-            )
-            header.pack(fill=tk.X, padx=8, pady=(10, 4))
-            scroller._bind_wheel_target(header)
-            for cue in cues:
-                self._add_browser_row(cue, small_font, scroller)
-
+            self._populate_list_section(self._bg_scroller, title, cues, small_font, on_demand=False)
         self._bg_scroller.sync_scrollregion()
-        self._fg_scroller.sync_scrollregion()
         self._highlight_browser_cue(self._active_cue_id)
 
-    def _add_browser_row(self, cue: dict, small_font, scroller: CueListScroller):
+    def _rebuild_fx_list(self):
+        for cid, row in list(self._browser_rows.items()):
+            if row.master is self._fg_scroller.inner:
+                del self._browser_rows[cid]
+        self._fg_scroller.clear()
+        query = self._fx_filter.get().strip().lower()
+        cues = [
+            c for c in self.all_cues
+            if _marker_kind(c) == "FX" and self._cue_matches_filter(c, query)
+        ]
+        small_font = tkfont.Font(family="Helvetica", size=9)
+        if cues:
+            self._populate_list_section(
+                self._fg_scroller, "SOUND EFFECTS", cues, small_font, on_demand=True,
+            )
+        self._fg_scroller.sync_scrollregion()
+
+    def _populate_list_section(
+        self,
+        scroller: CueListScroller,
+        title: str,
+        cues: list[dict],
+        small_font,
+        *,
+        on_demand: bool,
+    ):
+        header = tk.Label(
+            scroller.inner, text=title, font=tkfont.Font(size=10, weight="bold"),
+            fg="#a0d2ff", bg="#12121c", anchor="w",
+        )
+        header.pack(fill=tk.X, padx=8, pady=(10, 4))
+        scroller._bind_wheel_target(header)
+        for cue in cues:
+            self._add_browser_row(cue, small_font, scroller, on_demand=on_demand)
+
+    def _add_browser_row(self, cue: dict, small_font, scroller: CueListScroller, *, on_demand: bool):
         color = _marker_color(cue)
         row = tk.Frame(scroller.inner, bg=color, cursor="hand2")
         row.pack(fill=tk.X, padx=8, pady=2)
         row._cue_id = cue["id"]  # type: ignore[attr-defined]
         row._base_color = color  # type: ignore[attr-defined]
-        self._browser_rows[cue["id"]] = row
+        if not on_demand:
+            self._browser_rows[cue["id"]] = row
 
         asset_name = self._asset_label(cue.get("asset_id"))
         tk.Label(
@@ -459,9 +486,14 @@ class SoundboardApp(tk.Tk):
             font=small_font, fg="#f0f0f0", bg=color, anchor="w",
         ).pack(fill=tk.X, padx=8, pady=(0, 4))
 
+        handler = (
+            (lambda e, c=cue: self._play_on_demand_fx(c))
+            if on_demand
+            else (lambda e, c=cue: self._play_cue(c))
+        )
         for widget in row.winfo_children():
-            widget.bind("<Button-1>", lambda e, c=cue: self._play_cue(c))
-        row.bind("<Button-1>", lambda e, c=cue: self._play_cue(c))
+            widget.bind("<Button-1>", handler)
+        row.bind("<Button-1>", handler)
         scroller.register_row(row)
 
     def _highlight_browser_cue(self, cue_id: str | None):
@@ -593,6 +625,13 @@ class SoundboardApp(tk.Tk):
 
     def _on_script_cue_clicked(self, cue: dict):
         self._play_cue(cue)
+
+    def _play_on_demand_fx(self, cue: dict):
+        """Fire an SFX from the browser list without moving the script queue."""
+        if cue_type(cue) != "FOREGROUND":
+            return
+        self._execute_foreground_go(cue)
+        self.status.config(text=f"▶ On-demand SFX: {cue['id']} — {cue['name']}")
 
     def _play_cue(self, cue: dict):
         self._set_active_cue(cue)
