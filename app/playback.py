@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import sys
 import time
 from pathlib import Path
 
@@ -31,6 +32,13 @@ def _vlc_instance() -> vlc.Instance:
     args = ["--no-video", "--quiet"]
     if os.environ.get("VLC_DUMMY_AUDIO"):
         args.append("--aout=dummy")
+    else:
+        aout = os.environ.get("VLC_AOUT")
+        if aout:
+            args.append(f"--aout={aout}")
+        elif sys.platform == "win32":
+            # VLC 3.x MMDevice shares volume across players; DirectSound keeps beds/SFX independent.
+            args.append("--aout=directsound")
     return vlc.Instance(*args)
 
 
@@ -39,12 +47,13 @@ class VLCPlaybackEngine:
 
     def __init__(self, root: Path):
         self.root = root
-        # Separate VLC instances so per-channel volume sliders stay independent on Windows.
+        # One VLC instance per player — required for independent volume on Windows.
         self._bg_instance = _vlc_instance()
-        self._fg_instance = _vlc_instance()
+        self._sfx_instance = _vlc_instance()
+        self._music_instance = _vlc_instance()
         self._background = self._bg_instance.media_player_new()
-        self._sfx = self._fg_instance.media_player_new()
-        self._music = self._fg_instance.media_player_new()
+        self._sfx = self._sfx_instance.media_player_new()
+        self._music = self._music_instance.media_player_new()
         self._current_background_asset: str | None = None
         self._current_background_cue: dict | None = None
         self._background_volume = 30
@@ -62,10 +71,11 @@ class VLCPlaybackEngine:
     def _play(
         self, player: vlc.MediaPlayer, path: Path, volume: int, loop: bool, *, instance: vlc.Instance,
     ) -> None:
+        vol = _clamp_volume(volume)
         player.stop()
         player.set_media(self._media(path, loop, instance=instance))
-        player.audio_set_volume(_clamp_volume(volume))
         player.play()
+        player.audio_set_volume(vol)
 
     def _resolve_path(self, cue: dict) -> Path:
         return self.root / cue.get("asset_filename", "")
@@ -202,21 +212,21 @@ class VLCPlaybackEngine:
 
         if mode == "One Shot" or category in ("SFX", "Transition", "Comedy"):
             loop = cue.get("loop") == "Yes"
-            self._play(self._sfx, path, volume, loop=loop, instance=self._fg_instance)
+            self._play(self._sfx, path, volume, loop=loop, instance=self._sfx_instance)
             kind = "loop" if loop else "one-shot"
             return True, f"Playing SFX {kind}: {path.name} @ {volume}"
 
         if mode == "Music" or category == "Music":
             loop = cue.get("loop") == "Yes"
-            self._play(self._music, path, volume, loop=loop, instance=self._fg_instance)
+            self._play(self._music, path, volume, loop=loop, instance=self._music_instance)
             kind = "loop" if loop else "music"
             return True, f"Playing {kind}: {path.name} @ {volume}"
 
         if mode == "Loop":
-            self._play(self._sfx, path, volume, loop=True, instance=self._fg_instance)
+            self._play(self._sfx, path, volume, loop=True, instance=self._sfx_instance)
             return True, f"Playing loop: {path.name} @ {volume}"
 
-        self._play(self._sfx, path, volume, loop=False, instance=self._fg_instance)
+        self._play(self._sfx, path, volume, loop=False, instance=self._sfx_instance)
         return True, f"Playing: {path.name} @ {volume}"
 
     def play_cue(self, cue: dict) -> tuple[bool, str]:
